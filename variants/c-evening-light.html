@@ -501,7 +501,7 @@ h1.hero-line .w em{font-style:italic;padding-right:.06em}
 .stats-h span{opacity:.72}
 .stats-grid{
   position:relative;z-index:2;
-  display:grid;grid-template-columns:1fr 1fr;gap:clamp(26px,4vw,10px);
+  display:grid;grid-template-columns:1fr 1fr;gap:clamp(26px,4vw,38px);
 }
 .stat{position:relative;padding:6px 4px}
 .stat .halo{
@@ -886,6 +886,11 @@ body.has-cursor .cursor{display:flex}
 /* ============================================================
    RESPONSIVE
    ============================================================ */
+@media (max-width:400px){
+  /* keep the six-figure green-tea numeral inside its column */
+  .stat .num{font-size:40px}
+  .cline .who{min-width:100%}
+}
 @media (min-width:600px){
   .form-row{grid-template-columns:1fr 1fr}
   .roster ol{columns:2}
