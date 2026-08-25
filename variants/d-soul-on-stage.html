@@ -1,0 +1,1736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Soul Events — Bespoke Event Design, Bangalore</title>
+<meta name="description" content="Soul Events, Bangalore. Chelna Lekhi and Ramesh Sadhwani design weddings, sangeets, brunches and galas that are personal and bespoke. 300+ events. India and internationally.">
+<meta name="theme-color" content="#FAFAF7">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Soul Events">
+<meta property="og:title" content="Soul Events — Bespoke Event Design, Bangalore">
+<meta property="og:description" content="SOUL is not a company — that would mean we look at what we do as simply a job. Bespoke event design by Chelna Lekhi and Ramesh Sadhwani, Bangalore.">
+<meta property="og:url" content="https://souleventsindia.com/">
+<meta property="og:locale" content="en_IN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Soul Events — Bespoke Event Design, Bangalore">
+<meta name="twitter:description" content="Occasions that are personal and bespoke. 300+ events, 0 boring ones. Bangalore → Bahamas.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "@id": "https://souleventsindia.com/#business",
+  "name": "Soul Events",
+  "alternateName": "Soul Events India",
+  "description": "Bespoke event design and planning — weddings, sangeets, birthdays, brunches and corporate galas — based in Bangalore, working across India and internationally.",
+  "url": "https://souleventsindia.com/",
+  "email": "souleventsindia@gmail.com",
+  "telephone": ["+919342283539", "+919845054881", "+919886329400"],
+  "founder": [
+    { "@type": "Person", "name": "Chelna Lekhi", "jobTitle": "Event Designer and Planner", "telephone": "+919342283539" },
+    { "@type": "Person", "name": "Ramesh Sadhwani", "jobTitle": "Compere and Event Host", "telephone": "+919845054881" }
+  ],
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Bella Vista, 66, Lavelle Road",
+    "addressLocality": "Bangalore",
+    "postalCode": "560001",
+    "addressRegion": "Karnataka",
+    "addressCountry": "IN"
+  },
+  "areaServed": ["Bangalore", "India", "Worldwide"],
+  "sameAs": [
+    "https://www.instagram.com/souleventsindia",
+    "https://facebook.com/pages/Soul-Events/1654430458123769",
+    "https://www.youtube.com/channel/UC1Z_ibAYVkYGPvLVtaoBUNA"
+  ],
+  "knowsAbout": ["Weddings", "Sangeets", "Anniversaries", "Birthdays", "Brunches", "Corporate Events", "Destination Weddings"]
+}
+</script>
+
+<style>
+/* ============================================================
+   SOUL ON STAGE — variant D
+   Swiss grid structure, candy-pastel choreography, mono marquees
+   ============================================================ */
+
+:root{
+  --chalk:#FAFAF7;
+  --ink:#121211;
+  --soft:#5F5F58;
+  --hair:#E5E5DE;
+
+  --pistachio:#D6E8C4;
+  --bubblegum:#FFD3E2;
+  --sky:#C9E2FF;
+  --butter:#FFECB8;
+
+  --pop:#FF5A36;
+  /* AA-safe sibling of the pop, for small text on light grounds (4.9:1 on chalk) */
+  --pop-ink:#C43F1E;
+
+  /* per-section tokens, re-declared on each band */
+  --ground:var(--chalk);
+  --type:var(--ink);
+  --type-soft:var(--soft);
+  --rule:var(--hair);
+
+  --ease:cubic-bezier(.2,.8,.2,1);
+  --dur:320ms;
+
+  --gutter:clamp(18px,5vw,64px);
+  --maxw:1440px;
+
+  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+}
+
+*,*::before,*::after{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+html:focus-within{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--chalk);
+  color:var(--ink);
+  font-family:"Bricolage Grotesque","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-weight:400;
+  font-size:clamp(16px,1.02vw,18px);
+  line-height:1.5;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+img,svg{max-width:100%;display:block;}
+a{color:inherit;}
+button{font:inherit;color:inherit;}
+
+::selection{background:var(--pop);color:#fff;}
+
+/* ---------- focus ---------- */
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible,[tabindex]:focus-visible{
+  outline:3px solid var(--pop);
+  outline-offset:3px;
+  border-radius:2px;
+}
+
+.skip{
+  position:absolute;left:-9999px;top:0;z-index:200;
+  background:var(--ink);color:var(--chalk);
+  padding:14px 20px;font-family:"JetBrains Mono",monospace;font-size:12px;
+  text-transform:uppercase;letter-spacing:.1em;text-decoration:none;
+}
+.skip:focus{left:12px;top:12px;}
+
+/* ---------- primitives ---------- */
+.band{
+  background:var(--ground);
+  color:var(--type);
+  position:relative;
+  padding:clamp(72px,10vw,148px) 0;
+  isolation:isolate;
+}
+.band--pistachio{--ground:var(--pistachio);--rule:rgba(18,18,17,.16);--type-soft:#4A5540;}
+.band--bubblegum{--ground:var(--bubblegum);--rule:rgba(18,18,17,.16);--type-soft:#6B4756;}
+.band--sky{--ground:var(--sky);--rule:rgba(18,18,17,.16);--type-soft:#3F5570;}
+.band--butter{--ground:var(--butter);--rule:rgba(18,18,17,.16);--type-soft:#6B5A2A;}
+.band--ink{--ground:var(--ink);--type:var(--chalk);--type-soft:#A3A39B;--rule:rgba(250,250,247,.2);}
+
+.wrap{
+  max-width:var(--maxw);
+  margin:0 auto;
+  padding:0 var(--gutter);
+}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(12,minmax(0,1fr));
+  gap:clamp(16px,2.2vw,32px);
+}
+
+/* ---------- type ---------- */
+.mono{
+  font-family:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-size:clamp(10.5px,.78vw,12.5px);
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  font-weight:500;
+}
+.serif{font-family:"Instrument Serif",Georgia,"Times New Roman",serif;font-style:italic;font-weight:400;letter-spacing:-.01em;}
+
+h1,h2,h3,h4{margin:0;font-weight:600;letter-spacing:-.03em;line-height:.94;}
+.d1{font-size:clamp(52px,10.6vw,166px);font-weight:600;}
+.d2{font-size:clamp(38px,6.4vw,104px);}
+.d3{font-size:clamp(28px,3.5vw,52px);letter-spacing:-.028em;line-height:1.02;}
+.d4{font-size:clamp(21px,1.9vw,30px);letter-spacing:-.02em;line-height:1.1;}
+p{margin:0 0 1.1em;}
+.lede{font-size:clamp(19px,1.85vw,29px);line-height:1.32;letter-spacing:-.018em;font-weight:400;}
+.body{font-size:clamp(15.5px,1.05vw,18px);line-height:1.62;color:var(--type-soft);font-weight:400;}
+.body strong{color:var(--type);font-weight:600;}
+
+.section-tag{
+  display:flex;align-items:baseline;gap:14px;
+  padding-bottom:14px;margin-bottom:clamp(28px,4vw,56px);
+  border-bottom:1px solid var(--rule);
+  color:var(--type-soft);
+}
+.section-tag .idx{color:var(--pop-ink);}
+.section-tag .grow{flex:1;height:1px;}
+
+.u-pop{
+  position:relative;
+  color:inherit;
+  white-space:nowrap;
+}
+.u-pop::after{
+  content:"";position:absolute;left:0;right:0;bottom:.06em;
+  height:.085em;background:var(--pop);border-radius:99px;
+  transform-origin:left;
+}
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:15px 26px;border-radius:999px;
+  background:var(--pop);color:var(--ink);
+  font-family:"JetBrains Mono",monospace;font-size:12px;font-weight:500;
+  letter-spacing:.11em;text-transform:uppercase;text-decoration:none;
+  border:1px solid var(--pop);
+  transition:transform var(--dur) var(--ease),box-shadow var(--dur) var(--ease),background var(--dur) var(--ease);
+  will-change:transform;
+}
+.btn:hover{transform:translateY(-3px);box-shadow:0 10px 0 -4px rgba(255,90,54,.35);}
+.btn:active{transform:translateY(-1px);}
+.btn--ghost{
+  background:transparent;color:var(--type);border:1px solid var(--rule);
+}
+.btn--ghost:hover{background:var(--type);color:var(--ground);border-color:var(--type);box-shadow:none;}
+.btn--chalk{background:var(--chalk);color:var(--ink);border-color:var(--chalk);}
+.btn--chalk:hover{box-shadow:0 10px 0 -4px rgba(250,250,247,.28);}
+.btn .arw{transition:transform var(--dur) var(--ease);}
+.btn:hover .arw{transform:translateX(4px);}
+
+/* ---------- lotus sticker ---------- */
+.lotus{display:block;width:100%;height:100%;overflow:visible;}
+.lotus path{transition:transform var(--dur) var(--ease);transform-origin:50% 78%;}
+.sticker{
+  width:clamp(56px,6vw,92px);height:clamp(56px,6vw,92px);
+  transform:rotate(-5deg);
+  transition:transform 420ms var(--ease);
+}
+.sticker:hover{transform:rotate(3deg) scale(1.06);}
+.sticker--r4{transform:rotate(4deg);}
+.sticker--r4:hover{transform:rotate(-3deg) scale(1.06);}
+
+/* ============================================================
+   NAV
+   ============================================================ */
+.nav{
+  position:fixed;inset:12px 12px auto 12px;z-index:120;
+  display:flex;align-items:center;gap:18px;
+  padding:10px 10px 10px 18px;
+  border:1px solid var(--hair);
+  border-radius:999px;
+  background:rgba(250,250,247,.82);
+  backdrop-filter:blur(14px) saturate(1.4);
+  -webkit-backdrop-filter:blur(14px) saturate(1.4);
+  transition:padding var(--dur) var(--ease),box-shadow var(--dur) var(--ease),transform var(--dur) var(--ease);
+}
+.nav.is-stuck{box-shadow:0 6px 26px rgba(18,18,17,.09);padding-top:7px;padding-bottom:7px;}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;flex:0 0 auto;}
+.brand-lotus{width:26px;height:26px;flex:0 0 26px;}
+.brand-name{font-weight:700;letter-spacing:-.045em;font-size:20px;line-height:1;}
+.brand-name span{font-weight:300;letter-spacing:-.02em;}
+.nav-links{
+  display:flex;align-items:center;gap:clamp(10px,1.5vw,24px);
+  margin-left:auto;list-style:none;padding:0;margin-block:0;
+}
+.nav-links a{
+  text-decoration:none;color:var(--soft);
+  font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.11em;text-transform:uppercase;
+  padding:6px 2px;position:relative;
+  transition:color var(--dur) var(--ease);
+}
+.nav-links a::after{
+  content:"";position:absolute;left:0;right:100%;bottom:2px;height:2px;background:var(--pop);
+  transition:right var(--dur) var(--ease);
+}
+.nav-links a:hover{color:var(--ink);}
+.nav-links a:hover::after{right:0;}
+.nav-cta{flex:0 0 auto;padding:11px 20px;}
+.nav-toggle{
+  display:none;margin-left:auto;
+  width:44px;height:44px;border-radius:999px;border:1px solid var(--hair);
+  background:transparent;cursor:pointer;align-items:center;justify-content:center;
+}
+.nav-toggle span{display:block;width:18px;height:1.5px;background:var(--ink);position:relative;transition:background 160ms linear;}
+.nav-toggle span::before,.nav-toggle span::after{
+  content:"";position:absolute;left:0;width:18px;height:1.5px;background:var(--ink);
+  transition:transform var(--dur) var(--ease);
+}
+.nav-toggle span::before{top:-6px;}
+.nav-toggle span::after{top:6px;}
+.nav[data-open="true"] .nav-toggle span{background:transparent;}
+.nav[data-open="true"] .nav-toggle span::before{transform:translateY(6px) rotate(45deg);}
+.nav[data-open="true"] .nav-toggle span::after{transform:translateY(-6px) rotate(-45deg);}
+
+.nav-panel{
+  position:fixed;inset:76px 12px auto 12px;z-index:119;
+  background:var(--chalk);border:1px solid var(--hair);border-radius:22px;
+  padding:10px;
+  display:none;
+}
+.nav-panel[data-open="true"]{display:block;}
+.nav-panel ul{list-style:none;margin:0;padding:0;}
+.nav-panel a{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:15px 14px;text-decoration:none;
+  border-bottom:1px solid var(--hair);
+  font-size:19px;letter-spacing:-.02em;font-weight:500;
+}
+.nav-panel li:last-child a{border-bottom:0;}
+.nav-panel a i{font-style:normal;font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--pop-ink);letter-spacing:.1em;}
+
+@media (max-width:900px){
+  .nav-links,.nav-cta{display:none;}
+  .nav-toggle{display:flex;}
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{
+  background:var(--chalk);
+  padding:clamp(112px,15vh,170px) 0 clamp(40px,6vw,72px);
+  position:relative;overflow:hidden;
+}
+.hero-top{
+  display:flex;flex-wrap:wrap;gap:14px 28px;align-items:baseline;
+  color:var(--soft);border-bottom:1px solid var(--hair);
+  padding-bottom:16px;margin-bottom:clamp(26px,4.5vw,54px);
+}
+.hero-top .dot{color:var(--pop);}
+.hero-h{
+  font-size:clamp(46px,10.2vw,158px);
+  line-height:.9;letter-spacing:-.035em;font-weight:600;
+  margin:0 0 clamp(28px,4vw,52px);
+  max-width:15ch;
+}
+.hero-h .serif{font-size:1.06em;line-height:.9;letter-spacing:-.02em;}
+.hero-lower{
+  display:grid;grid-template-columns:repeat(12,minmax(0,1fr));
+  gap:clamp(18px,2.4vw,34px);align-items:end;
+}
+.hero-sub{grid-column:1 / span 6;max-width:52ch;color:var(--soft);line-height:1.7;}
+.hero-actions{grid-column:8 / span 5;display:flex;flex-wrap:wrap;gap:12px;justify-content:flex-end;}
+.hero-sticker{
+  position:absolute;right:clamp(14px,5vw,86px);top:clamp(104px,15vh,180px);
+  width:clamp(74px,9vw,132px);height:clamp(74px,9vw,132px);
+  opacity:.95;pointer-events:auto;
+}
+.scrollcue{
+  display:inline-flex;align-items:center;gap:12px;margin-top:clamp(38px,6vw,74px);
+  color:var(--soft);text-decoration:none;
+}
+.scrollcue .arrowbox{
+  width:38px;height:38px;border:1px solid var(--hair);border-radius:999px;
+  display:grid;place-items:center;
+  transition:transform var(--dur) var(--ease),border-color var(--dur) var(--ease);
+}
+.scrollcue:hover .arrowbox{transform:translateY(4px);border-color:var(--pop);}
+.scrollcue svg{stroke:var(--pop);}
+
+@media (max-width:820px){
+  .hero-sub{grid-column:1 / -1;}
+  .hero-actions{grid-column:1 / -1;justify-content:flex-start;margin-top:6px;}
+  .hero-h{max-width:none;}
+  .hero-sticker{top:auto;bottom:-6px;right:8px;opacity:.9;}
+}
+
+/* ============================================================
+   MARQUEE
+   ============================================================ */
+.marq{
+  border-top:1px solid var(--rule);
+  border-bottom:1px solid var(--rule);
+  background:var(--ground);
+  color:var(--type);
+  overflow:hidden;
+  padding:clamp(11px,1.1vw,16px) 0;
+  --speed:34s;
+}
+.marq-track{
+  display:flex;width:max-content;
+  animation:marq var(--speed) linear infinite;
+}
+.marq--rev .marq-track{animation-direction:reverse;}
+.marq:hover .marq-track{animation-play-state:paused;}
+.marq-seq{
+  display:flex;align-items:center;gap:0;flex:0 0 auto;
+  font-family:"JetBrains Mono",monospace;
+  font-size:clamp(11px,1.05vw,14px);
+  letter-spacing:.16em;text-transform:uppercase;font-weight:500;
+}
+.marq-seq b{font-weight:500;padding:0 clamp(16px,2vw,30px);white-space:nowrap;}
+.marq-seq b.hi{color:var(--pop-ink);}
+.marq-seq i{font-style:normal;color:var(--pop-ink);opacity:.75;}
+@keyframes marq{from{transform:translate3d(0,0,0);}to{transform:translate3d(-50%,0,0);}}
+
+.marq--tall{padding:clamp(16px,2vw,26px) 0;}
+.marq--tall .marq-seq{font-size:clamp(13px,1.5vw,19px);letter-spacing:.1em;}
+
+/* ============================================================
+   ABOUT — pistachio
+   ============================================================ */
+.about-grid{align-items:start;}
+.about-lede{grid-column:1 / span 7;}
+.about-lede .lede{margin-bottom:1em;}
+.about-body{grid-column:8 / span 5;padding-top:clamp(4px,1.4vw,16px);}
+.about-sig{
+  margin-top:clamp(26px,3.4vw,44px);
+  display:flex;align-items:center;gap:18px;flex-wrap:wrap;
+}
+.about-sig .name{font-family:"Instrument Serif",Georgia,serif;font-style:italic;font-size:clamp(24px,2.6vw,38px);letter-spacing:-.01em;}
+.about-strip{
+  margin-top:clamp(40px,5vw,72px);
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+  border-top:1px solid var(--rule);
+}
+.about-strip div{
+  padding:18px 14px 0 0;border-right:1px solid var(--rule);
+}
+.about-strip div:last-child{border-right:0;}
+.about-strip .k{display:block;color:var(--type-soft);margin-bottom:6px;}
+.about-strip .v{font-size:clamp(15px,1.15vw,19px);letter-spacing:-.02em;font-weight:500;}
+@media (max-width:900px){
+  .about-lede,.about-body{grid-column:1 / -1;}
+  .about-strip{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .about-strip div{border-bottom:1px solid var(--rule);padding-bottom:16px;}
+  .about-strip div:nth-child(2n){border-right:0;}
+}
+
+/* ============================================================
+   STATS — chalk
+   ============================================================ */
+.stats{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+  border-top:1px solid var(--rule);border-left:1px solid var(--rule);
+}
+.stat{
+  border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);
+  padding:clamp(22px,2.6vw,38px) clamp(16px,1.8vw,28px) clamp(26px,3vw,42px);
+  display:flex;flex-direction:column;gap:10px;
+  transition:background var(--dur) var(--ease);
+}
+.stat:hover{background:rgba(255,90,54,.05);}
+.stat .num{
+  font-size:clamp(44px,6.4vw,104px);line-height:.86;letter-spacing:-.045em;font-weight:600;
+  font-variant-numeric:tabular-nums;
+}
+.stat .lbl{color:var(--type-soft);}
+.stat--gag .num{color:var(--pop);}
+.stat--gag .note{
+  font-family:"Instrument Serif",Georgia,serif;font-style:italic;
+  font-size:clamp(16px,1.3vw,21px);color:var(--type-soft);line-height:1.25;margin-top:auto;
+}
+@media (max-width:820px){
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr));}
+}
+
+/* ============================================================
+   FOUNDERS — bubblegum
+   ============================================================ */
+.founders{gap:clamp(20px,3vw,44px);}
+.founder{
+  grid-column:span 6;
+  background:var(--chalk);
+  border:1px solid rgba(18,18,17,.1);
+  border-radius:4px;
+  padding:clamp(20px,2.2vw,32px);
+  display:flex;flex-direction:column;
+  position:relative;
+  transition:transform var(--dur) var(--ease),box-shadow var(--dur) var(--ease);
+}
+.founder:hover{transform:translateY(-5px);box-shadow:0 18px 0 -8px rgba(18,18,17,.14);}
+.founder-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:18px;}
+.founder-name{font-size:clamp(34px,4.4vw,68px);letter-spacing:-.04em;line-height:.9;}
+.founder-role{color:var(--soft);margin-top:10px;display:block;}
+.founder-role b{color:var(--pop-ink);font-weight:500;}
+.founder-sticker{width:clamp(40px,3.4vw,56px);height:clamp(40px,3.4vw,56px);flex:0 0 auto;}
+.founder-quote{
+  font-size:clamp(17px,1.42vw,23px);line-height:1.42;letter-spacing:-.015em;
+  color:var(--ink);margin:0 0 20px;
+}
+.founder-quote::before{content:"“";color:var(--pop);}
+.founder-quote::after{content:"”";color:var(--pop);}
+.founder-attr{
+  margin-top:auto;padding-top:18px;border-top:1px solid var(--hair);
+  display:flex;justify-content:space-between;align-items:baseline;gap:12px;color:var(--soft);
+}
+.founder-attr .who{font-family:"Instrument Serif",Georgia,serif;font-style:italic;font-size:clamp(18px,1.6vw,24px);color:var(--ink);letter-spacing:-.01em;text-transform:none;}
+.founder-shot{
+  height:clamp(150px,17vw,230px);margin-bottom:20px;border-radius:3px;
+}
+@media (max-width:860px){.founder{grid-column:1 / -1;}}
+
+/* ============================================================
+   PLACEHOLDER MEDIA
+   ============================================================ */
+.ph{
+  position:relative;overflow:hidden;
+  background:linear-gradient(140deg,var(--c1),var(--c2) 55%,var(--c3));
+  --c1:#EADFD1;--c2:#D9E4CE;--c3:#C9D6E4;
+  display:flex;align-items:flex-end;
+  isolation:isolate;
+}
+.ph::before{
+  content:"";position:absolute;inset:-20%;z-index:1;
+  background-image:var(--grain);
+  opacity:.28;mix-blend-mode:multiply;pointer-events:none;
+}
+.ph::after{
+  content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:radial-gradient(120% 90% at 22% 12%,rgba(255,255,255,.5),transparent 58%);
+}
+.ph-cap{
+  position:relative;z-index:2;
+  margin:12px;padding:8px 12px;
+  background:rgba(250,250,247,.9);
+  border:1px solid rgba(18,18,17,.1);
+  color:var(--ink);
+  font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.08em;
+  text-transform:uppercase;line-height:1.35;
+  border-radius:2px;
+  max-width:calc(100% - 24px);
+}
+.ph-cap em{font-style:normal;color:var(--ink);font-weight:700;}
+.ph-cap em::before{content:"";display:inline-block;width:6px;height:6px;border-radius:999px;background:var(--pop);margin-right:7px;vertical-align:middle;}
+
+/* ============================================================
+   PROCESS — chalk
+   ============================================================ */
+.steps{border-top:1px solid var(--rule);}
+.step{
+  display:grid;grid-template-columns:auto minmax(0,4fr) minmax(0,6fr);
+  gap:clamp(16px,2.6vw,44px);
+  padding:clamp(26px,3.4vw,50px) 0;
+  border-bottom:1px solid var(--rule);
+  align-items:start;
+}
+.step-num{
+  width:clamp(46px,3.6vw,58px);height:clamp(46px,3.6vw,58px);
+  border:1.5px solid var(--ink);border-radius:999px;
+  display:grid;place-items:center;flex:0 0 auto;
+  font-family:"JetBrains Mono",monospace;font-size:13px;font-weight:700;letter-spacing:.02em;
+  transition:transform var(--dur) var(--ease),background var(--dur) var(--ease),color var(--dur) var(--ease),border-color var(--dur) var(--ease);
+}
+.step:hover .step-num{transform:rotate(-9deg) scale(1.05);background:var(--pop);border-color:var(--pop);color:#fff;}
+.step-title{font-size:clamp(26px,3.1vw,48px);letter-spacing:-.035em;line-height:.98;}
+.step-title small{display:block;margin-top:12px;color:var(--type-soft);letter-spacing:.14em;font-size:11px;font-family:"JetBrains Mono",monospace;text-transform:uppercase;font-weight:500;}
+.step-body p{margin-bottom:.9em;}
+.aside{
+  display:flex;gap:12px;align-items:flex-start;
+  margin-top:18px;padding-top:16px;border-top:1px dashed var(--rule);
+}
+.aside .ast{
+  color:var(--pop);font-family:"JetBrains Mono",monospace;font-size:20px;line-height:1;flex:0 0 auto;
+  transform:translateY(4px);
+}
+.aside .txt{
+  font-family:"Instrument Serif",Georgia,serif;font-style:italic;
+  font-size:clamp(19px,1.85vw,29px);line-height:1.22;letter-spacing:-.012em;color:var(--ink);
+}
+@media (max-width:820px){
+  .step{grid-template-columns:auto minmax(0,1fr);}
+  .step-body{grid-column:2 / -1;}
+}
+@media (max-width:520px){
+  .step{grid-template-columns:1fr;gap:14px;}
+  .step-body{grid-column:1 / -1;}
+}
+
+/* ============================================================
+   SERVICES — sky
+   ============================================================ */
+.svc-intro{grid-column:1 / span 7;}
+.svc-note{grid-column:9 / span 4;align-self:end;}
+.svc-list{
+  margin-top:clamp(38px,5vw,68px);
+  border-top:1px solid var(--rule);
+}
+.svc{
+  display:flex;align-items:baseline;gap:clamp(14px,2vw,32px);
+  padding:clamp(15px,1.8vw,26px) clamp(4px,1vw,14px);
+  border-bottom:1px solid var(--rule);
+  text-decoration:none;
+  transition:padding-left var(--dur) var(--ease),background var(--dur) var(--ease);
+}
+.svc:hover{padding-left:clamp(14px,2.4vw,34px);background:rgba(18,18,17,.045);}
+.svc .i{color:var(--pop-ink);flex:0 0 auto;}
+.svc .n{
+  font-size:clamp(23px,3.1vw,46px);letter-spacing:-.035em;line-height:1;font-weight:500;flex:1;
+}
+.svc .plus{
+  flex:0 0 auto;color:var(--type-soft);
+  transition:transform var(--dur) var(--ease),color var(--dur) var(--ease);
+  font-family:"JetBrains Mono",monospace;font-size:16px;
+}
+.svc:hover .plus{transform:rotate(90deg);color:var(--type);}
+@media (max-width:900px){.svc-intro,.svc-note{grid-column:1 / -1;}}
+
+/* ============================================================
+   GALLERY — chalk
+   ============================================================ */
+.gal{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:clamp(14px,1.8vw,26px);
+}
+.tile{
+  text-decoration:none;color:inherit;display:block;
+  transition:transform var(--dur) var(--ease);
+}
+.tile:hover{transform:translateY(-6px);}
+.tile .ph{height:clamp(200px,22vw,320px);border-radius:3px;}
+.tile-meta{
+  display:flex;justify-content:space-between;align-items:baseline;gap:12px;
+  padding:14px 2px 0;border-top:1px solid transparent;
+}
+.tile-meta .t{font-size:clamp(19px,1.7vw,27px);letter-spacing:-.03em;font-weight:500;}
+.tile-meta .c{color:var(--soft);transition:color var(--dur) var(--ease);}
+.tile:hover .tile-meta .c{color:var(--pop-ink);}
+@media (max-width:900px){.gal{grid-template-columns:repeat(2,minmax(0,1fr));}}
+@media (max-width:560px){.gal{grid-template-columns:1fr;}}
+
+/* ============================================================
+   TESTIMONIALS — butter
+   ============================================================ */
+.tm-rows{margin-top:clamp(28px,3.6vw,48px);}
+.tm-row{overflow:hidden;padding:clamp(7px,.8vw,12px) 0;--speed:78s;}
+.tm-row--b{--speed:96s;}
+.tm-track{display:flex;width:max-content;animation:marq var(--speed) linear infinite;}
+.tm-row--b .tm-track{animation-direction:reverse;}
+.tm-row:hover .tm-track,.tm-row:focus-within .tm-track{animation-play-state:paused;}
+.tm-seq{display:flex;gap:clamp(14px,1.6vw,24px);flex:0 0 auto;padding-right:clamp(14px,1.6vw,24px);}
+.card{
+  flex:0 0 auto;width:clamp(280px,29vw,400px);
+  background:var(--chalk);border:1px solid rgba(18,18,17,.12);border-radius:4px;
+  padding:clamp(20px,1.9vw,28px);
+  display:flex;flex-direction:column;gap:14px;
+  transition:transform var(--dur) var(--ease),box-shadow var(--dur) var(--ease);
+}
+.card:hover{transform:translateY(-4px);box-shadow:0 14px 0 -7px rgba(18,18,17,.14);}
+.card q{
+  quotes:"“" "”";font-size:clamp(15px,1.06vw,17.5px);line-height:1.5;color:var(--ink);letter-spacing:-.008em;
+}
+.card .by{margin-top:auto;padding-top:12px;border-top:1px solid var(--hair);color:var(--soft);}
+.card .by b{color:var(--ink);font-weight:500;}
+.card--feat{
+  width:clamp(300px,34vw,480px);
+  background:var(--ink);border-color:var(--ink);
+}
+.card--feat q{color:var(--chalk);font-size:clamp(19px,1.7vw,27px);line-height:1.28;letter-spacing:-.022em;}
+.card--feat .kicker{
+  font-family:"Instrument Serif",Georgia,serif;font-style:italic;color:var(--pop);
+  font-size:clamp(26px,2.4vw,38px);line-height:1;letter-spacing:-.01em;
+}
+.card--feat .by{border-top-color:rgba(250,250,247,.22);color:#A3A39B;}
+.card--feat .by b{color:var(--chalk);}
+.tm-static{display:none;}
+
+/* ============================================================
+   CLIENTS — chalk
+   ============================================================ */
+.cred{
+  display:grid;grid-template-columns:repeat(5,minmax(0,1fr));
+  border-top:1px solid var(--rule);border-left:1px solid var(--rule);
+}
+.cred div{
+  border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);
+  padding:clamp(18px,2vw,28px) clamp(12px,1.2vw,18px);
+  font-size:clamp(15px,1.28vw,21px);letter-spacing:-.025em;font-weight:500;line-height:1.12;
+  display:flex;align-items:flex-end;min-height:clamp(84px,8vw,120px);
+  transition:background var(--dur) var(--ease),color var(--dur) var(--ease);
+}
+.cred div:hover{background:var(--ink);color:var(--chalk);}
+@media (max-width:900px){.cred{grid-template-columns:repeat(2,minmax(0,1fr));}}
+
+.roster-toggle{
+  margin-top:clamp(26px,3vw,40px);
+  display:inline-flex;align-items:center;gap:12px;
+  background:transparent;border:1px solid var(--rule);border-radius:999px;
+  padding:14px 24px;cursor:pointer;
+  font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.11em;text-transform:uppercase;
+  transition:background var(--dur) var(--ease),color var(--dur) var(--ease),border-color var(--dur) var(--ease);
+}
+.roster-toggle:hover{background:var(--ink);color:var(--chalk);border-color:var(--ink);}
+.roster-toggle .sign{color:var(--pop-ink);font-size:15px;line-height:1;transition:transform var(--dur) var(--ease);}
+.roster-toggle:hover .sign{color:inherit;}
+.roster-toggle[aria-expanded="true"] .sign{transform:rotate(45deg);}
+.roster{
+  overflow:hidden;max-height:0;
+  transition:max-height 460ms var(--ease),opacity 300ms var(--ease);
+  opacity:0;
+}
+.roster[data-open="true"]{opacity:1;}
+.roster-inner{
+  padding-top:clamp(26px,3vw,42px);
+  columns:3;column-gap:clamp(22px,2.6vw,44px);
+}
+.roster-inner li{
+  break-inside:avoid;list-style:none;
+  padding:8px 0;border-bottom:1px solid var(--rule);
+  font-size:15px;line-height:1.35;color:var(--soft);letter-spacing:-.01em;
+}
+.roster-inner li b{color:var(--ink);font-weight:500;}
+.roster-inner ul{margin:0;padding:0;}
+@media (max-width:900px){.roster-inner{columns:2;}}
+@media (max-width:560px){.roster-inner{columns:1;}}
+
+/* ============================================================
+   CONTACT — ink inversion
+   ============================================================ */
+.contact-h{
+  font-size:clamp(38px,7.6vw,124px);line-height:.9;letter-spacing:-.038em;
+  max-width:16ch;margin-bottom:clamp(30px,4vw,56px);
+}
+.contact-grid{align-items:start;gap:clamp(24px,3vw,48px);}
+.contact-left{grid-column:1 / span 5;}
+.contact-right{grid-column:7 / span 6;}
+.dial{
+  display:flex;justify-content:space-between;align-items:baseline;gap:14px;
+  padding:16px 0;border-bottom:1px solid var(--rule);text-decoration:none;
+  transition:padding-left var(--dur) var(--ease);
+}
+.dial:hover{padding-left:10px;}
+.dial .who{font-size:clamp(18px,1.5vw,24px);letter-spacing:-.028em;font-weight:500;}
+.dial .who small{display:block;color:var(--type-soft);font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;margin-top:6px;font-weight:500;}
+.dial .no{font-family:"JetBrains Mono",monospace;font-size:clamp(12px,1.05vw,15px);letter-spacing:.04em;color:var(--chalk);white-space:nowrap;}
+.dial:hover .no{color:var(--pop);}
+.contact-cta{display:flex;flex-wrap:wrap;gap:12px;margin:clamp(26px,3vw,38px) 0;}
+.addr{color:var(--type-soft);line-height:1.6;font-size:15.5px;}
+.addr a{color:var(--chalk);text-decoration:none;border-bottom:1px solid var(--rule);}
+.addr a:hover{border-color:var(--pop);color:var(--pop);}
+
+.form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(12px,1.4vw,20px);}
+.field{display:flex;flex-direction:column;gap:8px;}
+.field--full{grid-column:1 / -1;}
+.field label{color:var(--type-soft);}
+.field input,.field select,.field textarea{
+  background:transparent;border:0;border-bottom:1px solid var(--rule);
+  color:var(--chalk);font-family:inherit;font-size:17px;letter-spacing:-.015em;
+  padding:11px 2px;border-radius:0;
+  transition:border-color var(--dur) var(--ease);
+  width:100%;
+}
+.field textarea{resize:vertical;min-height:92px;}
+.field select{appearance:none;cursor:pointer;}
+.field select option{background:#121211;color:#FAFAF7;}
+.field input::placeholder,.field textarea::placeholder{color:#6E6E66;}
+.field input:hover,.field select:hover,.field textarea:hover{border-color:#8A8A80;}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--pop);outline-offset:6px;}
+.form-foot{grid-column:1 / -1;display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;margin-top:8px;}
+.form-note{color:var(--type-soft);max-width:34ch;line-height:1.5;text-transform:none;letter-spacing:.02em;}
+@media (max-width:900px){
+  .contact-left,.contact-right{grid-column:1 / -1;}
+  .contact-right{margin-top:clamp(30px,5vw,50px);}
+}
+@media (max-width:560px){.form{grid-template-columns:1fr;}}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.foot{
+  background:var(--ink);color:var(--chalk);
+  border-top:1px solid rgba(250,250,247,.2);
+  padding:clamp(38px,4.5vw,64px) 0 clamp(28px,3.4vw,44px);
+}
+.foot-grid{display:flex;flex-wrap:wrap;gap:26px 40px;align-items:flex-start;justify-content:space-between;}
+.foot-brand{display:flex;align-items:center;gap:12px;}
+.foot-brand .brand-name{color:var(--chalk);font-size:26px;}
+.foot-links{display:flex;flex-wrap:wrap;gap:8px 22px;list-style:none;margin:0;padding:0;}
+.foot-links a{color:#A3A39B;text-decoration:none;transition:color var(--dur) var(--ease);}
+.foot-links a:hover{color:var(--pop);}
+.foot-bottom{
+  margin-top:clamp(30px,3.6vw,48px);padding-top:20px;
+  border-top:1px solid rgba(250,250,247,.16);
+  display:flex;flex-wrap:wrap;gap:10px 26px;justify-content:space-between;color:#8A8A80;
+}
+.foot-tag{font-family:"Instrument Serif",Georgia,serif;font-style:italic;font-size:clamp(19px,2vw,30px);color:var(--chalk);letter-spacing:-.01em;max-width:22ch;line-height:1.15;text-transform:none;}
+
+/* ============================================================
+   REVEALS
+   ============================================================ */
+.rv{opacity:0;transform:translateY(22px);transition:opacity 520ms var(--ease),transform 520ms var(--ease);}
+.rv.in{opacity:1;transform:none;}
+.rv-d1{transition-delay:70ms;}
+.rv-d2{transition-delay:140ms;}
+.rv-d3{transition-delay:210ms;}
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+@media (prefers-reduced-motion:reduce){
+  html:focus-within{scroll-behavior:auto;}
+  *,*::before,*::after{
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;
+  }
+  .rv{transform:none;opacity:0;transition:opacity 300ms linear !important;}
+  .rv.in{opacity:1;}
+  .btn:hover,.tile:hover,.founder:hover,.card:hover{transform:none;box-shadow:none;}
+  .step:hover .step-num,.sticker:hover,.svc:hover .plus,.roster-toggle[aria-expanded="true"] .sign{transform:none;}
+  .marq-track,.tm-track{animation:none !important;transform:none !important;}
+  .marq-seq:nth-child(2){display:none;}
+  .marq{overflow-x:auto;}
+  .tm-rows{display:none;}
+  .tm-static{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:clamp(14px,1.6vw,24px);margin-top:clamp(28px,3.6vw,48px);
+  }
+  .tm-static .card{width:auto;}
+  .tm-static .card--feat{width:auto;}
+  .roster{transition:none;}
+}
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ===== SVG SYMBOL: 5-petal geometric lotus ===== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="lotus" viewBox="0 0 100 100">
+    <g class="petals">
+      <path d="M50 8 C60 26 63 40 50 58 C37 40 40 26 50 8 Z"/>
+      <path d="M18 24 C36 32 47 42 50 61 C31 58 21 46 18 24 Z"/>
+      <path d="M82 24 C79 46 69 58 50 61 C53 42 64 32 82 24 Z"/>
+      <path d="M4 58 C24 54 38 57 49 70 C32 79 16 74 4 58 Z"/>
+      <path d="M96 58 C84 74 68 79 51 70 C62 57 76 54 96 58 Z"/>
+    </g>
+    <path d="M22 74 C34 88 66 88 78 74 C72 90 28 90 22 74 Z" opacity=".55"/>
+  </symbol>
+</svg>
+
+<!-- ===== NAV ===== -->
+<nav class="nav" id="nav" aria-label="Primary">
+  <a class="brand" href="#top" aria-label="Soul Events — home">
+    <span class="brand-lotus" aria-hidden="true"><svg class="lotus" viewBox="0 0 100 100"><use href="#lotus" fill="#69bd45"/></svg></span>
+    <span class="brand-name">SOUL<span> events</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#founders">Founders</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#words">Words</a></li>
+    <li><a href="#clients">Clients</a></li>
+  </ul>
+  <a class="btn nav-cta" href="#contact">Let's talk <span class="arw" aria-hidden="true">→</span></a>
+  <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navPanel" aria-label="Open menu"><span></span></button>
+</nav>
+<div class="nav-panel" id="navPanel" data-open="false">
+  <ul>
+    <li><a href="#about">About <i>01</i></a></li>
+    <li><a href="#founders">Founders <i>02</i></a></li>
+    <li><a href="#process">Process <i>03</i></a></li>
+    <li><a href="#services">Services <i>04</i></a></li>
+    <li><a href="#gallery">Gallery <i>05</i></a></li>
+    <li><a href="#words">Words <i>06</i></a></li>
+    <li><a href="#clients">Clients <i>07</i></a></li>
+    <li><a href="#contact">Contact <i>08</i></a></li>
+  </ul>
+</div>
+
+<main id="main">
+<span id="top"></span>
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-top mono rv">
+      <span>Soul Events · Bangalore</span>
+      <span class="dot">●</span>
+      <span>Bespoke event design</span>
+      <span class="dot">●</span>
+      <span>India &amp; internationally</span>
+    </div>
+
+    <h1 class="hero-h rv rv-d1">Occasions that are personal, bespoke and entirely <span class="serif u-pop">yours</span>.</h1>
+
+    <div class="hero-lower">
+      <p class="hero-sub lede rv rv-d2">Pouring our Heart &amp; Soul into turning your dreams to reality ✨ Curating bespoke experiences in India &amp; Internationally</p>
+      <div class="hero-actions rv rv-d3">
+        <a class="btn" href="#contact">Start a conversation <span class="arw" aria-hidden="true">→</span></a>
+        <a class="btn btn--ghost" href="#gallery">See the work</a>
+      </div>
+    </div>
+
+    <a class="scrollcue mono rv rv-d3" href="#about">
+      <span class="arrowbox" aria-hidden="true">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 2v10M3 8.5 7 12.5l4-4"/></svg>
+      </span>
+      <span>Scroll — the good bit starts here</span>
+    </a>
+  </div>
+
+  <span class="sticker hero-sticker" aria-hidden="true"><svg class="lotus" viewBox="0 0 100 100"><use href="#lotus" fill="#FFD3E2"/></svg></span>
+</header>
+
+<!-- ===== MARQUEE 01 ===== -->
+<div class="marq marq--tall" aria-hidden="true" data-marq>
+  <div class="marq-track">
+    <div class="marq-seq">
+      <b>300+ events</b><i>·</i><b class="hi">0 boring ones</b><i>·</i><b>300+ events</b><i>·</i><b class="hi">0 boring ones</b><i>·</i><b>300+ events</b><i>·</i><b class="hi">0 boring ones</b><i>·</i><b>300+ events</b><i>·</i><b class="hi">0 boring ones</b><i>·</i>
+    </div>
+    <div class="marq-seq">
+      <b>300+ events</b><i>·</i><b class="hi">0 boring ones</b><i>·</i><b>300+ events</b><i>·</i><b class="hi">0 boring ones</b><i>·</i><b>300+ events</b><i>·</i><b class="hi">0 boring ones</b><i>·</i><b>300+ events</b><i>·</i><b class="hi">0 boring ones</b><i>·</i>
+    </div>
+  </div>
+</div>
+
+<!-- ===== ABOUT — pistachio ===== -->
+<section class="band band--pistachio" id="about" aria-labelledby="about-h">
+  <div class="wrap">
+    <div class="section-tag mono rv">
+      <span class="idx">01</span><span id="about-h">About</span><span class="grow"></span><span>Est. Bangalore</span>
+    </div>
+
+    <div class="grid about-grid">
+      <div class="about-lede">
+        <p class="lede rv">One part exciting, two parts soulful, three quarters funny, and very many portions of creative flair. SOUL, born of our overwhelming passion for tasteful event design, is synonymous with <span class="serif">occasions</span> that are personal and bespoke.</p>
+        <p class="lede rv rv-d1">SOUL is not a company – that would mean we look at what we do as simply a job. SOUL is our <span class="serif u-pop">passion</span>.</p>
+      </div>
+      <div class="about-body">
+        <p class="body rv rv-d1">That we have flourished on goodwill alone goes to show how much heart goes into every occasion. We love what we do and cherish every single event we plan and execute.</p>
+        <p class="body rv rv-d2">Whether you want to throw an intimate baby shower at your farmhouse, a destination wedding in the Bahamas, a quaint birthday party for someone dear or a year-end corporate gala – we've done it all. <strong>Sit back, relax, and let us step in.</strong></p>
+        <div class="about-sig rv rv-d2">
+          <span class="sticker sticker--r4" aria-hidden="true"><svg class="lotus" viewBox="0 0 100 100"><use href="#lotus" fill="#FF5A36"/></svg></span>
+          <span class="name">— Ramesh and Chelna</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-strip rv rv-d2">
+      <div><span class="k mono">Based</span><span class="v">Bangalore</span></div>
+      <div><span class="k mono">Reach</span><span class="v">India &amp; internationally</span></div>
+      <div><span class="k mono">Grown on</span><span class="v">Goodwill alone</span></div>
+      <div><span class="k mono">Your job</span><span class="v">Show up</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STATS — chalk ===== -->
+<section class="band" id="stats" aria-labelledby="stats-h">
+  <div class="wrap">
+    <div class="section-tag mono rv">
+      <span class="idx">02</span><span id="stats-h">By the numbers</span><span class="grow"></span><span>Three real · one true</span>
+    </div>
+
+    <div class="stats rv">
+      <div class="stat">
+        <span class="num" data-count="15">0</span>
+        <span class="lbl mono">Years since formation</span>
+      </div>
+      <div class="stat">
+        <span class="num" data-count="300" data-suffix=" +">0</span>
+        <span class="lbl mono">Events executed</span>
+      </div>
+      <div class="stat">
+        <span class="num" data-count="47">0</span>
+        <span class="lbl mono">Years of collective experience</span>
+      </div>
+      <div class="stat stat--gag">
+        <span class="num" data-count="36678" data-group="1">0</span>
+        <span class="lbl mono">Cups of green tea consumed</span>
+        <span class="note">Yes, we counted.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MARQUEE 02 ===== -->
+<div class="marq marq--rev" aria-hidden="true" data-marq>
+  <div class="marq-track">
+    <div class="marq-seq">
+      <b>weddings</b><i>·</i><b>sangeets</b><i>·</i><b class="hi">brunches</b><i>·</i><b>galas</b><i>·</i><b>anniversaries</b><i>·</i><b>birthdays</b><i>·</i><b class="hi">mehendis</b><i>·</i><b>baby showers</b><i>·</i><b>weddings</b><i>·</i><b>sangeets</b><i>·</i><b class="hi">brunches</b><i>·</i><b>galas</b><i>·</i>
+    </div>
+    <div class="marq-seq">
+      <b>weddings</b><i>·</i><b>sangeets</b><i>·</i><b class="hi">brunches</b><i>·</i><b>galas</b><i>·</i><b>anniversaries</b><i>·</i><b>birthdays</b><i>·</i><b class="hi">mehendis</b><i>·</i><b>baby showers</b><i>·</i><b>weddings</b><i>·</i><b>sangeets</b><i>·</i><b class="hi">brunches</b><i>·</i><b>galas</b><i>·</i>
+    </div>
+  </div>
+</div>
+
+<!-- ===== FOUNDERS — bubblegum ===== -->
+<section class="band band--bubblegum" id="founders" aria-labelledby="founders-h">
+  <div class="wrap">
+    <div class="section-tag mono rv">
+      <span class="idx">03</span><span id="founders-h">The founders</span><span class="grow"></span><span>Each described by the other</span>
+    </div>
+
+    <div class="grid founders">
+      <article class="founder rv">
+        <div class="ph founder-shot" style="--c1:#F3E2C7;--c2:#E7D2DE;--c3:#CFE0D0;" role="img" aria-label="Placeholder for a portrait of Chelna Lekhi on site at a decor install">
+          <span class="ph-cap"><em>Photo →</em> Chelna mid-install · marigold puja styling</span>
+        </div>
+        <div class="founder-head">
+          <div>
+            <h3 class="founder-name">Chelna<br>Lekhi</h3>
+            <span class="founder-role mono">Designer &amp; planner — <b>the magician</b></span>
+          </div>
+          <span class="sticker founder-sticker" aria-hidden="true"><svg class="lotus" viewBox="0 0 100 100"><use href="#lotus" fill="#69bd45"/></svg></span>
+        </div>
+        <p class="founder-quote">Chelna is a magician. She easily understands what people want and is an expert in transforming their dreams and desires into reality. In short, she makes things happen. Sincere, hardworking, and honest, I have never seen her fail a client. If you trust her, you can be sure that she will completely blow your mind.</p>
+        <div class="founder-attr">
+          <span class="mono">As told by</span>
+          <span class="who">— Ramesh</span>
+        </div>
+      </article>
+
+      <article class="founder rv rv-d1">
+        <div class="ph founder-shot" style="--c1:#DCE8F5;--c2:#F2DCE4;--c3:#E9E2CB;" role="img" aria-label="Placeholder for a portrait of Ramesh Sadhwani hosting on stage">
+          <span class="ph-cap"><em>Photo →</em> Ramesh on the mic · sangeet night</span>
+        </div>
+        <div class="founder-head">
+          <div>
+            <h3 class="founder-name">Ramesh<br>Sadhwani</h3>
+            <span class="founder-role mono">Compere — <b>the Event Energizer</b></span>
+          </div>
+          <span class="sticker founder-sticker sticker--r4" aria-hidden="true"><svg class="lotus" viewBox="0 0 100 100"><use href="#lotus" fill="#5cc6cd"/></svg></span>
+        </div>
+        <p class="founder-quote">Ramesh is a people's person; always fun, often witty, and never dull. He is a go-to guy, a pillar of support, for anyone who approaches him – whoever they are, whatever they may need. It speaks volumes about his ability that even after compering over a thousand events, he still manages to surprise his audience and is as entertaining as ever.</p>
+        <div class="founder-attr">
+          <span class="mono">As told by</span>
+          <span class="who">— Chelna</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROCESS — chalk ===== -->
+<section class="band" id="process" aria-labelledby="process-h">
+  <div class="wrap">
+    <div class="section-tag mono rv">
+      <span class="idx">04</span><span id="process-h">Our process</span><span class="grow"></span><span>Five steps · five winks</span>
+    </div>
+
+    <h2 class="d2 rv" style="max-width:14ch;margin-bottom:clamp(30px,4vw,56px);">From first look to <span class="serif u-pop">D-Day</span>.</h2>
+
+    <div class="steps">
+      <article class="step rv">
+        <span class="step-num">01</span>
+        <h3 class="step-title">Site Mapping<small>Step one</small></h3>
+        <div class="step-body">
+          <p class="body">Every venue has its own strengths and weaknesses. Visiting the venue is essential and helps us better visualise and integrate the natural environment into our design and execution.</p>
+          <div class="aside"><span class="ast" aria-hidden="true">✳</span><span class="txt">Also, plan that grand entrance you always wanted. *wink wink*</span></div>
+        </div>
+      </article>
+
+      <article class="step rv">
+        <span class="step-num">02</span>
+        <h3 class="step-title">First Cut<small>Step two</small></h3>
+        <div class="step-body">
+          <p class="body">We consider the nuances of an occasion and sketch out an initial blueprint – the requirements of a corporate gala dinner are dramatically different from anniversary gatherings. The layout is discussed and modified to suit you better – cost estimates* included.</p>
+          <div class="aside"><span class="ast" aria-hidden="true">✳</span><span class="txt">*Still more accurate than the weather.</span></div>
+        </div>
+      </article>
+
+      <article class="step rv">
+        <span class="step-num">03</span>
+        <h3 class="step-title">Master Plan<small>Step three</small></h3>
+        <div class="step-body">
+          <p class="body">Celebrations are times when people come together. The entire venue is laid out to be interactive, ensuring that every guest has a wholesome experience and is within reach of all the excitement – whether old or young.</p>
+          <div class="aside"><span class="ast" aria-hidden="true">✳</span><span class="txt">Don't fret, it will be completely stiletto- and mojari-friendly.</span></div>
+        </div>
+      </article>
+
+      <article class="step rv">
+        <span class="step-num">04</span>
+        <h3 class="step-title">Money Wise<small>Step four</small></h3>
+        <div class="step-body">
+          <p class="body">We believe in transparent dealings so you know exactly where your money is going. Everything you may require is listed, approximated, and discussed before execution. There is no budget too big or too small as the event is tailored according to your specific needs.</p>
+          <div class="aside"><span class="ast" aria-hidden="true">✳</span><span class="txt">However, remember that the best things in life aren't free :P</span></div>
+        </div>
+      </article>
+
+      <article class="step rv">
+        <span class="step-num">05</span>
+        <h3 class="step-title">Full-speed Ahead<small>Step five</small></h3>
+        <div class="step-body">
+          <p class="body">It's D-Day. All you have to do is show up. Rest assured, we will coordinate every element to perfection. And, of course, be present through the entire event.</p>
+          <div class="aside"><span class="ast" aria-hidden="true">✳</span><span class="txt">No really. Just show up.</span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MARQUEE 03 ===== -->
+<div class="marq" aria-hidden="true" data-marq>
+  <div class="marq-track">
+    <div class="marq-seq">
+      <b>36,678 cups of green tea</b><i>·</i><b class="hi">and counting</b><i>·</i><b>36,678 cups of green tea</b><i>·</i><b class="hi">and counting</b><i>·</i><b>36,678 cups of green tea</b><i>·</i><b class="hi">and counting</b><i>·</i>
+    </div>
+    <div class="marq-seq">
+      <b>36,678 cups of green tea</b><i>·</i><b class="hi">and counting</b><i>·</i><b>36,678 cups of green tea</b><i>·</i><b class="hi">and counting</b><i>·</i><b>36,678 cups of green tea</b><i>·</i><b class="hi">and counting</b><i>·</i>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SERVICES — sky ===== -->
+<section class="band band--sky" id="services" aria-labelledby="services-h">
+  <div class="wrap">
+    <div class="section-tag mono rv">
+      <span class="idx">05</span><span id="services-h">Services</span><span class="grow"></span><span>Eight ways in</span>
+    </div>
+
+    <div class="grid">
+      <div class="svc-intro">
+        <p class="lede rv">We will handle every single aspect of your event -- no two ways about it. From music for the road to exclusive handmade garlands to personalised gifts, -- we've got you <span class="serif u-pop">covered</span>.</p>
+      </div>
+      <div class="svc-note">
+        <p class="body rv rv-d1">And what's more, if you can't find something you like, we're more than ready (and capable, mind you) to make it for you.</p>
+      </div>
+    </div>
+
+    <div class="svc-list rv rv-d1">
+      <a class="svc" href="#contact"><span class="i mono">01</span><span class="n">Transport</span><span class="plus" aria-hidden="true">+</span></a>
+      <a class="svc" href="#contact"><span class="i mono">02</span><span class="n">Music and Entertainment</span><span class="plus" aria-hidden="true">+</span></a>
+      <a class="svc" href="#contact"><span class="i mono">03</span><span class="n">Décor and Furniture</span><span class="plus" aria-hidden="true">+</span></a>
+      <a class="svc" href="#contact"><span class="i mono">04</span><span class="n">Personalised Invitations and Mementos</span><span class="plus" aria-hidden="true">+</span></a>
+      <a class="svc" href="#contact"><span class="i mono">05</span><span class="n">Makeup and Dressing</span><span class="plus" aria-hidden="true">+</span></a>
+      <a class="svc" href="#contact"><span class="i mono">06</span><span class="n">End-to-end Event Coordination</span><span class="plus" aria-hidden="true">+</span></a>
+      <a class="svc" href="#contact"><span class="i mono">07</span><span class="n">Destinations</span><span class="plus" aria-hidden="true">+</span></a>
+      <a class="svc" href="#contact"><span class="i mono">08</span><span class="n">Videography and Photography</span><span class="plus" aria-hidden="true">+</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== GALLERY — chalk ===== -->
+<section class="band" id="gallery" aria-labelledby="gallery-h">
+  <div class="wrap">
+    <div class="section-tag mono rv">
+      <span class="idx">06</span><span id="gallery-h">Gallery</span><span class="grow"></span><span>Photography pending · captions describe intent</span>
+    </div>
+
+    <h2 class="d2 rv" style="max-width:13ch;margin-bottom:clamp(30px,4vw,56px);">Six kinds of <span class="serif u-pop">good</span> day.</h2>
+
+    <div class="gal">
+      <a class="tile rv" href="#">
+        <div class="ph" style="--c1:#F0E3CE;--c2:#E4D3E0;--c3:#CBDDD3;" role="img" aria-label="Placeholder image: cream paper parasols with pastel tassels at an anniversary">
+          <span class="ph-cap"><em>Photo →</em> Cream paper parasols, pastel tassels · anniversary lunch</span>
+        </div>
+        <div class="tile-meta"><span class="t">Anniversaries</span><span class="c mono">View →</span></div>
+      </a>
+
+      <a class="tile rv rv-d1" href="#">
+        <div class="ph" style="--c1:#E7DCC6;--c2:#D6E3CC;--c3:#DCD2E6;" role="img" aria-label="Placeholder image: sage and rattan rooftop birthday dinner">
+          <span class="ph-cap"><em>Photo →</em> Sage-and-rattan rooftop dinner · milestone birthday</span>
+        </div>
+        <div class="tile-meta"><span class="t">Birthdays</span><span class="c mono">View →</span></div>
+      </a>
+
+      <a class="tile rv rv-d2" href="#">
+        <div class="ph" style="--c1:#EFE6D4;--c2:#D5E4EC;--c3:#E9D8DC;" role="img" aria-label="Placeholder image: embroidery-hoop and dreamcatcher garden brunch">
+          <span class="ph-cap"><em>Photo →</em> Embroidery hoops &amp; dreamcatchers · garden brunch</span>
+        </div>
+        <div class="tile-meta"><span class="t">Brunches</span><span class="c mono">View →</span></div>
+      </a>
+
+      <a class="tile rv" href="#">
+        <div class="ph" style="--c1:#F2D9C2;--c2:#EFC9D6;--c3:#E0D2A8;" role="img" aria-label="Placeholder image: leheriya orange and pink drapes with embellished umbrellas at a sangeet">
+          <span class="ph-cap"><em>Photo →</em> Leheriya orange-pink drapes, embellished umbrellas · sangeet</span>
+        </div>
+        <div class="tile-meta"><span class="t">Sangeets</span><span class="c mono">View →</span></div>
+      </a>
+
+      <a class="tile rv rv-d1" href="#">
+        <div class="ph" style="--c1:#E6EDD8;--c2:#DDE7F1;--c3:#F1DFD2;" role="img" aria-label="Placeholder image: custom bridge built over a resort swimming pool for a jaimala at Golden Palms">
+          <span class="ph-cap"><em>Photo →</em> Pool-bridge jaimala · Golden Palms, Bangalore</span>
+        </div>
+        <div class="tile-meta"><span class="t">Weddings</span><span class="c mono">View →</span></div>
+      </a>
+
+      <a class="tile rv rv-d2" href="#">
+        <div class="ph" style="--c1:#DEE6EF;--c2:#E9E4D6;--c3:#D3DFD8;" role="img" aria-label="Placeholder image: year-end corporate gala stage and dinner styling">
+          <span class="ph-cap"><em>Photo →</em> Year-end gala stage &amp; dinner styling · corporate</span>
+        </div>
+        <div class="tile-meta"><span class="t">Corporate Events</span><span class="c mono">View →</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TESTIMONIALS — butter ===== -->
+<section class="band band--butter" id="words" aria-labelledby="words-h">
+  <div class="wrap">
+    <div class="section-tag mono rv">
+      <span class="idx">07</span><span id="words-h">In their words</span><span class="grow"></span><span>Hover to pause</span>
+    </div>
+    <h2 class="d2 rv" style="max-width:15ch;margin-bottom:.2em;">What people say <span class="serif u-pop">afterwards</span>.</h2>
+  </div>
+
+  <div class="tm-rows">
+    <div class="tm-row">
+      <div class="tm-track">
+        <div class="tm-seq">
+          <article class="card card--feat">
+            <span class="kicker">“Magician”</span>
+            <q>One word to describe you, 'Magician'. Art comes naturally to some and some like you are blessed with being able to innovate and create time and again. You always create larger than life sets and provide charm to the location.</q>
+            <span class="by mono"><b>Kushali &amp; Kunal Bhandari</b></span>
+          </article>
+          <article class="card">
+            <q>A book launch is the culmination of a multi-year effort. Ramesh, as compeer, provided the ideal frame to showcase its public unveiling. He heightened and sharpened the audience's mood to make them more receptive to a serious message.</q>
+            <span class="by mono"><b>Shankar Jagarnathan</b> — Author: Corporate Disclosures</span>
+          </article>
+          <article class="card">
+            <q>By the end of any show they host, every soul leaves with a smile, every adult feels respected, outstation guests feel elevated, and friends feel warm. Ramesh Uncle's personality will instantly boost anyone's morale and Chelna Aunty's arrangements leave butterflies in the stomach, goose bumps on your skin, and delight on your countenance.</q>
+            <span class="by mono"><b>Avnika and Karan Bhandari</b></span>
+          </article>
+          <article class="card">
+            <q>Chelna! Do I need to say anything at all? As rightly said by Sadwani, you are a magician. You made a dead location so lively and swanky that even the owner was awestruck with the ambience and decor. Everybody was talking about the party which lasted till 6 in the morning!!!</q>
+            <span class="by mono"><b>Anand Jain</b></span>
+          </article>
+          <article class="card">
+            <q>There are no words that can express the depth of appreciation for all your hard work... YOU ARE A ROCK STAR! I truly do not believe that we would have been able to pull off this magical, joyous, love-filled, beautiful sangeet without you.</q>
+            <span class="by mono"><b>Rumana</b></span>
+          </article>
+          <article class="card">
+            <q>Since ours was an inter-caste wedding, we are glad they left no stone unturned in ensuring that both ceremonies went on smoothly and with precision. From beginning to end, they took meticulous care of each and every detail. Our wedding day was virtually stress-free. A bride and groom couldn't ask for more!</q>
+            <span class="by mono"><b>Arjun and Vishakha</b> — groom and bride</span>
+          </article>
+          <article class="card">
+            <q>The decor, the musicians, performers, flowers, the minute detailing, the sangeet, the doli, and the vidai were all picture perfect. You have done everything as though it was a wedding from your own family.</q>
+            <span class="by mono"><b>Kalpana Rao</b></span>
+          </article>
+        </div>
+        <div class="tm-seq" aria-hidden="true">
+          <article class="card card--feat">
+            <span class="kicker">“Magician”</span>
+            <q>One word to describe you, 'Magician'. Art comes naturally to some and some like you are blessed with being able to innovate and create time and again. You always create larger than life sets and provide charm to the location.</q>
+            <span class="by mono"><b>Kushali &amp; Kunal Bhandari</b></span>
+          </article>
+          <article class="card">
+            <q>A book launch is the culmination of a multi-year effort. Ramesh, as compeer, provided the ideal frame to showcase its public unveiling. He heightened and sharpened the audience's mood to make them more receptive to a serious message.</q>
+            <span class="by mono"><b>Shankar Jagarnathan</b> — Author: Corporate Disclosures</span>
+          </article>
+          <article class="card">
+            <q>By the end of any show they host, every soul leaves with a smile, every adult feels respected, outstation guests feel elevated, and friends feel warm. Ramesh Uncle's personality will instantly boost anyone's morale and Chelna Aunty's arrangements leave butterflies in the stomach, goose bumps on your skin, and delight on your countenance.</q>
+            <span class="by mono"><b>Avnika and Karan Bhandari</b></span>
+          </article>
+          <article class="card">
+            <q>Chelna! Do I need to say anything at all? As rightly said by Sadwani, you are a magician. You made a dead location so lively and swanky that even the owner was awestruck with the ambience and decor. Everybody was talking about the party which lasted till 6 in the morning!!!</q>
+            <span class="by mono"><b>Anand Jain</b></span>
+          </article>
+          <article class="card">
+            <q>There are no words that can express the depth of appreciation for all your hard work... YOU ARE A ROCK STAR! I truly do not believe that we would have been able to pull off this magical, joyous, love-filled, beautiful sangeet without you.</q>
+            <span class="by mono"><b>Rumana</b></span>
+          </article>
+          <article class="card">
+            <q>Since ours was an inter-caste wedding, we are glad they left no stone unturned in ensuring that both ceremonies went on smoothly and with precision. From beginning to end, they took meticulous care of each and every detail. Our wedding day was virtually stress-free. A bride and groom couldn't ask for more!</q>
+            <span class="by mono"><b>Arjun and Vishakha</b> — groom and bride</span>
+          </article>
+          <article class="card">
+            <q>The decor, the musicians, performers, flowers, the minute detailing, the sangeet, the doli, and the vidai were all picture perfect. You have done everything as though it was a wedding from your own family.</q>
+            <span class="by mono"><b>Kalpana Rao</b></span>
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="tm-row tm-row--b">
+      <div class="tm-track">
+        <div class="tm-seq">
+          <article class="card card--feat">
+            <span class="kicker">“Event Energizer”</span>
+            <q>He is not an event planner, he is an 'Event Energizer'. He infuses life in any given situation. As he says, 'It's not the age, it's the mileage'.</q>
+            <span class="by mono"><b>Kushali and Kunal Bhandari</b> — on Ramesh</span>
+          </article>
+          <article class="card">
+            <q>Ramesh Sadhwani a born legend and is admired by one and all for his impeccable performance on the stage. His greatest asset being the golden voice apart from the command in communication skills which has attracted many.</q>
+            <span class="by mono"><b>Shashidhar Patil</b></span>
+          </article>
+          <article class="card">
+            <q>Our heart-felt gratitude for conceptualising the décor and design and turning the venue into paradise. We were so relaxed with you around.</q>
+            <span class="by mono"><b>Kunal Bhandari</b></span>
+          </article>
+          <article class="card">
+            <q>This was the best event of my life. My friends and family recollect it even to this day. Thank you for giving us some of the best moments of our lives.</q>
+            <span class="by mono"><b>Shubham Chaudhry</b></span>
+          </article>
+          <article class="card">
+            <q>Thank you for the super evening. We had a wonderful time thanks to Chelna and Ramesh. The decor was just fabulous.</q>
+            <span class="by mono"><b>Sunetra</b></span>
+          </article>
+          <article class="card">
+            <q>Ramesh, Chelna and their team did an excellent job in organizing our wedding beyond our expectations… easy going, hard-working and pleasant to work with… well organized with everything under control.</q>
+            <span class="by mono"><b>Vartika</b> — WedMeGood</span>
+          </article>
+          <article class="card">
+            <q>We loved the cute and quirky décor which gave both a modern and traditional feel to the occasion.</q>
+            <span class="by mono"><b>WedMeGood review</b></span>
+          </article>
+        </div>
+        <div class="tm-seq" aria-hidden="true">
+          <article class="card card--feat">
+            <span class="kicker">“Event Energizer”</span>
+            <q>He is not an event planner, he is an 'Event Energizer'. He infuses life in any given situation. As he says, 'It's not the age, it's the mileage'.</q>
+            <span class="by mono"><b>Kushali and Kunal Bhandari</b> — on Ramesh</span>
+          </article>
+          <article class="card">
+            <q>Ramesh Sadhwani a born legend and is admired by one and all for his impeccable performance on the stage. His greatest asset being the golden voice apart from the command in communication skills which has attracted many.</q>
+            <span class="by mono"><b>Shashidhar Patil</b></span>
+          </article>
+          <article class="card">
+            <q>Our heart-felt gratitude for conceptualising the décor and design and turning the venue into paradise. We were so relaxed with you around.</q>
+            <span class="by mono"><b>Kunal Bhandari</b></span>
+          </article>
+          <article class="card">
+            <q>This was the best event of my life. My friends and family recollect it even to this day. Thank you for giving us some of the best moments of our lives.</q>
+            <span class="by mono"><b>Shubham Chaudhry</b></span>
+          </article>
+          <article class="card">
+            <q>Thank you for the super evening. We had a wonderful time thanks to Chelna and Ramesh. The decor was just fabulous.</q>
+            <span class="by mono"><b>Sunetra</b></span>
+          </article>
+          <article class="card">
+            <q>Ramesh, Chelna and their team did an excellent job in organizing our wedding beyond our expectations… easy going, hard-working and pleasant to work with… well organized with everything under control.</q>
+            <span class="by mono"><b>Vartika</b> — WedMeGood</span>
+          </article>
+          <article class="card">
+            <q>We loved the cute and quirky décor which gave both a modern and traditional feel to the occasion.</q>
+            <span class="by mono"><b>WedMeGood review</b></span>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- reduced-motion fallback -->
+  <div class="wrap">
+    <div class="tm-static">
+      <article class="card card--feat">
+        <span class="kicker">“Magician”</span>
+        <q>One word to describe you, 'Magician'. Art comes naturally to some and some like you are blessed with being able to innovate and create time and again. You always create larger than life sets and provide charm to the location.</q>
+        <span class="by mono"><b>Kushali &amp; Kunal Bhandari</b></span>
+      </article>
+      <article class="card card--feat">
+        <span class="kicker">“Event Energizer”</span>
+        <q>He is not an event planner, he is an 'Event Energizer'. He infuses life in any given situation. As he says, 'It's not the age, it's the mileage'.</q>
+        <span class="by mono"><b>Kushali and Kunal Bhandari</b> — on Ramesh</span>
+      </article>
+      <article class="card">
+        <q>A book launch is the culmination of a multi-year effort. Ramesh, as compeer, provided the ideal frame to showcase its public unveiling. He heightened and sharpened the audience's mood to make them more receptive to a serious message.</q>
+        <span class="by mono"><b>Shankar Jagarnathan</b> — Author: Corporate Disclosures</span>
+      </article>
+      <article class="card">
+        <q>By the end of any show they host, every soul leaves with a smile, every adult feels respected, outstation guests feel elevated, and friends feel warm. Ramesh Uncle's personality will instantly boost anyone's morale and Chelna Aunty's arrangements leave butterflies in the stomach, goose bumps on your skin, and delight on your countenance.</q>
+        <span class="by mono"><b>Avnika and Karan Bhandari</b></span>
+      </article>
+      <article class="card">
+        <q>Chelna! Do I need to say anything at all? As rightly said by Sadwani, you are a magician. You made a dead location so lively and swanky that even the owner was awestruck with the ambience and decor. Everybody was talking about the party which lasted till 6 in the morning!!!</q>
+        <span class="by mono"><b>Anand Jain</b></span>
+      </article>
+      <article class="card">
+        <q>There are no words that can express the depth of appreciation for all your hard work... YOU ARE A ROCK STAR! I truly do not believe that we would have been able to pull off this magical, joyous, love-filled, beautiful sangeet without you.</q>
+        <span class="by mono"><b>Rumana</b></span>
+      </article>
+      <article class="card">
+        <q>Since ours was an inter-caste wedding, we are glad they left no stone unturned in ensuring that both ceremonies went on smoothly and with precision. From beginning to end, they took meticulous care of each and every detail. Our wedding day was virtually stress-free. A bride and groom couldn't ask for more!</q>
+        <span class="by mono"><b>Arjun and Vishakha</b> — groom and bride</span>
+      </article>
+      <article class="card">
+        <q>The decor, the musicians, performers, flowers, the minute detailing, the sangeet, the doli, and the vidai were all picture perfect. You have done everything as though it was a wedding from your own family.</q>
+        <span class="by mono"><b>Kalpana Rao</b></span>
+      </article>
+      <article class="card">
+        <q>Ramesh Sadhwani a born legend and is admired by one and all for his impeccable performance on the stage. His greatest asset being the golden voice apart from the command in communication skills which has attracted many.</q>
+        <span class="by mono"><b>Shashidhar Patil</b></span>
+      </article>
+      <article class="card">
+        <q>Our heart-felt gratitude for conceptualising the décor and design and turning the venue into paradise. We were so relaxed with you around.</q>
+        <span class="by mono"><b>Kunal Bhandari</b></span>
+      </article>
+      <article class="card">
+        <q>This was the best event of my life. My friends and family recollect it even to this day. Thank you for giving us some of the best moments of our lives.</q>
+        <span class="by mono"><b>Shubham Chaudhry</b></span>
+      </article>
+      <article class="card">
+        <q>Thank you for the super evening. We had a wonderful time thanks to Chelna and Ramesh. The decor was just fabulous.</q>
+        <span class="by mono"><b>Sunetra</b></span>
+      </article>
+      <article class="card">
+        <q>Ramesh, Chelna and their team did an excellent job in organizing our wedding beyond our expectations… easy going, hard-working and pleasant to work with… well organized with everything under control.</q>
+        <span class="by mono"><b>Vartika</b> — WedMeGood</span>
+      </article>
+      <article class="card">
+        <q>We loved the cute and quirky décor which gave both a modern and traditional feel to the occasion.</q>
+        <span class="by mono"><b>WedMeGood review</b></span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CLIENTS — chalk ===== -->
+<section class="band" id="clients" aria-labelledby="clients-h">
+  <div class="wrap">
+    <div class="section-tag mono rv">
+      <span class="idx">08</span><span id="clients-h">Clients</span><span class="grow"></span><span>57 on the record</span>
+    </div>
+
+    <h2 class="d2 rv" style="max-width:15ch;margin-bottom:clamp(30px,4vw,52px);">Boardrooms and <span class="serif u-pop">baraats</span>, equally.</h2>
+
+    <div class="cred rv">
+      <div>McKinsey</div>
+      <div>Bank of Baroda</div>
+      <div>Prestige Estates &amp; Projects</div>
+      <div>RMZ Galleria</div>
+      <div>Zespri</div>
+      <div>Rotary Club of Bangalore</div>
+      <div>YPO</div>
+      <div>EO</div>
+      <div>Atria Hotel</div>
+      <div>Anand Sweets</div>
+    </div>
+
+    <button class="roster-toggle" id="rosterBtn" aria-expanded="false" aria-controls="roster">
+      <span class="sign" aria-hidden="true">+</span>
+      <span id="rosterLabel">See all 57 clients</span>
+    </button>
+
+    <div class="roster" id="roster" data-open="false">
+      <div class="roster-inner">
+        <ul>
+          <li><b>Kalpana Rao</b>, Dubai</li>
+          <li><b>Anil Jain</b>, Nagaland</li>
+          <li><b>Jayalakshmi</b> — Kochi, Trichy, and Trivandrum</li>
+          <li><b>Esteem Developers</b>, Bangalore</li>
+          <li><b>Rotary Club of Bangalore</b></li>
+          <li><b>Shyam Sunder Goenka</b> — Gogo Apparels</li>
+          <li><b>CMS College fest</b></li>
+          <li><b>Stag</b>, Bangalore</li>
+          <li><b>Asha Bros</b>, Bangalore</li>
+          <li><b>Sindhu Developers</b></li>
+          <li><b>Prestige Estates &amp; Projects Ltd</b></li>
+          <li><b>K R Pradeep</b></li>
+          <li><b>Nemchand Jhaveri</b>, Mumbai</li>
+          <li><b>Lambert Jackson</b>, Dubai and Toronto</li>
+          <li><b>Kynkyny Art</b></li>
+          <li><b>Bank of Baroda</b></li>
+          <li><b>Zafran Store Launch</b></li>
+          <li><b>Kaushal Mehta</b>, Shan Parts, Mumbai</li>
+          <li><b>Rajesh Rajaram</b> — 13th floor &amp; Ebony Restaurant</li>
+          <li><b>Pavan Kapoor</b> — IIGM Bangalore, Delhi and Jaipur</li>
+          <li><b>Ratan Bagrodia</b>, Assam</li>
+          <li><b>Rumana Ahmed</b>, Bangalore</li>
+          <li><b>Vijay Gems</b>, Bangalore and Dubai</li>
+          <li><b>Parimal Mandir</b> — Agarbathi exporters</li>
+          <li><b>Anand Sweets</b>, Bangalore</li>
+          <li><b>Maanglika</b></li>
+          <li><b>Vaishnavi builders</b>, Bangalore</li>
+          <li><b>Kamal Bhandari</b> — Bhandari industries</li>
+          <li><b>Aashirwad Aggarwal</b> — Triveni steel</li>
+          <li><b>Ashish Vaswani</b> — Win India Exports, Chennai</li>
+          <li><b>Rakesh Sharma</b> — International Stones Pvt Ltd</li>
+          <li><b>Asmita Foundation</b>, Mumbai</li>
+          <li><b>Prestige, The Man store</b>, Chennai</li>
+          <li><b>Life is forever</b>, Bangalore</li>
+          <li><b>EO</b></li>
+          <li><b>Minnie Menon</b>, Chennai</li>
+          <li><b>The Label Bazaar</b>, Anam Mirza</li>
+          <li><b>Shanghvi family</b>, Hubli</li>
+          <li><b>Ajit Nebhwani</b>, Madrid, Spain</li>
+          <li><b>Raju Baradia</b>, Chennai</li>
+          <li><b>N.K. Rathi</b> — Rathi Silks, Bangalore</li>
+          <li><b>RYA</b>, Bangalore</li>
+          <li><b>Haresh Gokaldas</b>, Nairobi, Kenya</li>
+          <li><b>Atria Hotel</b>, Bangalore</li>
+          <li><b>YPO</b>, Bangalore</li>
+          <li><b>Kejriwal family</b>, Bangalore</li>
+          <li><b>Zarine and Nozer Kharas</b> — Daddy's Deli</li>
+          <li><b>McKinsey</b></li>
+          <li><b>Ashok Tekwani</b> — Vineet Enterprises</li>
+          <li><b>Ritesh Goel</b> — Architect</li>
+          <li><b>Harishankar Bhavsingka</b>, Erode</li>
+          <li><b>Zespri kiwifruits India</b></li>
+          <li><b>Mysore saree udhyog</b>, Bangalore</li>
+          <li><b>Arun Chamaria</b> — Nandi Cards</li>
+          <li><b>Control S</b></li>
+          <li><b>RMZ Galleria</b> — Standard Brick &amp; Tile Company</li>
+          <li><b>Mythili Iyer and Udayan Mittal</b>, USA</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MARQUEE 04 ===== -->
+<div class="marq marq--rev marq--tall" aria-hidden="true" data-marq>
+  <div class="marq-track">
+    <div class="marq-seq">
+      <b>Bangalore</b><i>→</i><b class="hi">Bahamas</b><i>·</i><b>Dubai</b><i>·</i><b>Toronto</b><i>·</i><b>Madrid</b><i>·</i><b>Nairobi</b><i>·</i><b>Bangalore</b><i>→</i><b class="hi">Bahamas</b><i>·</i><b>Dubai</b><i>·</i><b>Toronto</b><i>·</i><b>Madrid</b><i>·</i><b>Nairobi</b><i>·</i>
+    </div>
+    <div class="marq-seq">
+      <b>Bangalore</b><i>→</i><b class="hi">Bahamas</b><i>·</i><b>Dubai</b><i>·</i><b>Toronto</b><i>·</i><b>Madrid</b><i>·</i><b>Nairobi</b><i>·</i><b>Bangalore</b><i>→</i><b class="hi">Bahamas</b><i>·</i><b>Dubai</b><i>·</i><b>Toronto</b><i>·</i><b>Madrid</b><i>·</i><b>Nairobi</b><i>·</i>
+    </div>
+  </div>
+</div>
+
+<!-- ===== CONTACT — ink inversion ===== -->
+<section class="band band--ink" id="contact" aria-labelledby="contact-h">
+  <div class="wrap">
+    <div class="section-tag mono rv">
+      <span class="idx" style="color:var(--pop)">09</span><span id="contact-h">Contact</span><span class="grow"></span><span>Bella Vista, Lavelle Road</span>
+    </div>
+
+    <h2 class="contact-h rv">Let's make something you'll actually <span class="serif u-pop">remember</span>.</h2>
+
+    <div class="grid contact-grid">
+      <div class="contact-left rv rv-d1">
+        <a class="dial" href="tel:+919342283539">
+          <span class="who">Chelna Lekhi<small>Design &amp; planning</small></span>
+          <span class="no">+91 93422 83539</span>
+        </a>
+        <a class="dial" href="tel:+919845054881">
+          <span class="who">Ramesh Sadhwani<small>Compere &amp; hosting</small></span>
+          <span class="no">+91 98450 54881</span>
+        </a>
+        <a class="dial" href="tel:+919886329400">
+          <span class="who">Ramesh Sadhwani<small>Alternate line</small></span>
+          <span class="no">+91 98863 29400</span>
+        </a>
+
+        <div class="contact-cta">
+          <a class="btn" href="https://wa.me/919342283539" target="_blank" rel="noopener">WhatsApp us <span class="arw" aria-hidden="true">→</span></a>
+          <a class="btn btn--chalk" href="mailto:souleventsindia@gmail.com">Email us</a>
+        </div>
+
+        <p class="addr">
+          Bella Vista, 66, Lavelle Road,<br>Bangalore – 560001<br>
+          <a href="mailto:souleventsindia@gmail.com">souleventsindia@gmail.com</a>
+        </p>
+      </div>
+
+      <div class="contact-right rv rv-d2">
+        <form class="form" id="soulForm" action="mailto:souleventsindia@gmail.com" method="post" enctype="text/plain">
+          <div class="field">
+            <label class="mono" for="f-name">Name</label>
+            <input id="f-name" name="name" type="text" autocomplete="name" placeholder="Your name" required>
+          </div>
+          <div class="field">
+            <label class="mono" for="f-email">Email</label>
+            <input id="f-email" name="email" type="email" autocomplete="email" placeholder="you@email.com" required>
+          </div>
+          <div class="field">
+            <label class="mono" for="f-phone">Phone</label>
+            <input id="f-phone" name="phone" type="tel" autocomplete="tel" placeholder="+91">
+          </div>
+          <div class="field">
+            <label class="mono" for="f-type">Event type</label>
+            <select id="f-type" name="event_type">
+              <option>Wedding</option>
+              <option>Sangeet / Mehendi</option>
+              <option>Anniversary</option>
+              <option>Birthday</option>
+              <option>Brunch</option>
+              <option>Corporate event</option>
+              <option>Destination event</option>
+              <option>Something else entirely</option>
+            </select>
+          </div>
+          <div class="field field--full">
+            <label class="mono" for="f-msg">Message</label>
+            <textarea id="f-msg" name="message" rows="4" placeholder="Tell us what you're dreaming up — dates, city, guest count, mood."></textarea>
+          </div>
+          <div class="form-foot">
+            <p class="form-note mono" id="formNote">Prototype form — opens your mail app. Wiring comes later.</p>
+            <button class="btn" type="submit">Send it over <span class="arw" aria-hidden="true">→</span></button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <span class="brand-lotus" aria-hidden="true"><svg class="lotus" viewBox="0 0 100 100"><use href="#lotus" fill="#69bd45"/></svg></span>
+        <span class="brand-name">SOUL<span> events</span></span>
+      </div>
+      <p class="foot-tag">All you have to do is show up.</p>
+      <ul class="foot-links mono">
+        <li><a href="#about">About</a></li>
+        <li><a href="#process">Process</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#clients">Clients</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="https://www.instagram.com/souleventsindia" target="_blank" rel="noopener">Instagram ↗</a></li>
+        <li><a href="https://facebook.com/pages/Soul-Events/1654430458123769" target="_blank" rel="noopener">Facebook ↗</a></li>
+        <li><a href="https://www.youtube.com/channel/UC1Z_ibAYVkYGPvLVtaoBUNA" target="_blank" rel="noopener">YouTube ↗</a></li>
+      </ul>
+    </div>
+    <div class="foot-bottom mono">
+      <span>© <span id="yr">2026</span> Soul Events · Bella Vista, 66, Lavelle Road, Bangalore 560001</span>
+      <span>Design review prototype — Variant D “Soul on Stage”</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- mobile nav ---------- */
+  var nav = document.getElementById('nav');
+  var toggle = document.getElementById('navToggle');
+  var panel = document.getElementById('navPanel');
+
+  function setNav(open){
+    nav.setAttribute('data-open', open ? 'true' : 'false');
+    panel.setAttribute('data-open', open ? 'true' : 'false');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  }
+  toggle.addEventListener('click', function(){
+    setNav(toggle.getAttribute('aria-expanded') !== 'true');
+  });
+  panel.addEventListener('click', function(e){
+    if (e.target.closest('a')) setNav(false);
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true'){
+      setNav(false); toggle.focus();
+    }
+  });
+
+  /* ---------- nav condense on scroll ---------- */
+  var lastY = -1, ticking = false;
+  function onScroll(){
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(function(){
+      var y = window.pageYOffset || document.documentElement.scrollTop;
+      if ((y > 24) !== (lastY > 24)) nav.classList.toggle('is-stuck', y > 24);
+      lastY = y;
+      ticking = false;
+    });
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  /* ---------- smooth anchor scrolling ---------- */
+  document.addEventListener('click', function(e){
+    var a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+    var id = a.getAttribute('href');
+    if (!id || id === '#') return;
+    var target = document.querySelector(id);
+    if (!target) return;
+    e.preventDefault();
+    var top = target.getBoundingClientRect().top + (window.pageYOffset||0) - 78;
+    try { window.scrollTo({top: top, behavior: reduce ? 'auto' : 'smooth'}); }
+    catch(err){ window.scrollTo(0, top); }
+    if (history.replaceState) history.replaceState(null, '', id);
+  });
+
+  /* ---------- reveals ---------- */
+  var revealables = [].slice.call(document.querySelectorAll('.rv'));
+  if (!('IntersectionObserver' in window)){
+    revealables.forEach(function(el){ el.classList.add('in'); });
+  } else {
+    var ro = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting){ en.target.classList.add('in'); ro.unobserve(en.target); }
+      });
+    }, {rootMargin:'0px 0px -8% 0px', threshold:0.08});
+    revealables.forEach(function(el){ ro.observe(el); });
+  }
+
+  /* ---------- count-up (runs once) ---------- */
+  var counters = [].slice.call(document.querySelectorAll('[data-count]'));
+  function fmt(n, group){
+    return group ? n.toLocaleString('en-IN').replace(/,/g, ',') : String(n);
+  }
+  function run(el){
+    var target = parseInt(el.getAttribute('data-count'), 10) || 0;
+    var suffix = el.getAttribute('data-suffix') || '';
+    var group = el.getAttribute('data-group') === '1';
+    if (reduce){ el.textContent = fmt(target, group) + suffix; return; }
+    var dur = 1500, t0 = null;
+    function step(ts){
+      if (t0 === null) t0 = ts;
+      var p = Math.min((ts - t0) / dur, 1);
+      var eased = 1 - Math.pow(1 - p, 4);
+      el.textContent = fmt(Math.round(target * eased), group) + suffix;
+      if (p < 1) window.requestAnimationFrame(step);
+      else el.textContent = fmt(target, group) + suffix;
+    }
+    window.requestAnimationFrame(step);
+  }
+  if (!('IntersectionObserver' in window)){
+    counters.forEach(run);
+  } else {
+    var co = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting){ co.unobserve(en.target); run(en.target); }
+      });
+    }, {threshold:0.4});
+    counters.forEach(function(el){ co.observe(el); });
+  }
+
+  /* ---------- client roster expand ---------- */
+  var btn = document.getElementById('rosterBtn');
+  var roster = document.getElementById('roster');
+  var label = document.getElementById('rosterLabel');
+  btn.addEventListener('click', function(){
+    var open = btn.getAttribute('aria-expanded') === 'true';
+    if (open){
+      roster.style.maxHeight = '0px';
+      roster.setAttribute('data-open','false');
+      btn.setAttribute('aria-expanded','false');
+      label.textContent = 'See all 57 clients';
+    } else {
+      roster.setAttribute('data-open','true');
+      roster.style.maxHeight = roster.scrollHeight + 'px';
+      btn.setAttribute('aria-expanded','true');
+      label.textContent = 'Close the roster';
+    }
+  });
+  window.addEventListener('resize', function(){
+    if (btn.getAttribute('aria-expanded') === 'true') roster.style.maxHeight = roster.scrollHeight + 'px';
+  }, {passive:true});
+
+  /* ---------- marquee: match duration to content width ---------- */
+  if (!reduce){
+    [].slice.call(document.querySelectorAll('[data-marq]')).forEach(function(m){
+      var seq = m.querySelector('.marq-seq');
+      if (!seq) return;
+      var w = seq.getBoundingClientRect().width;
+      if (w > 0) m.style.setProperty('--speed', Math.max(18, Math.round(w / 46)) + 's');
+    });
+  }
+
+  /* ---------- form: friendly note ---------- */
+  var form = document.getElementById('soulForm');
+  var note = document.getElementById('formNote');
+  form.addEventListener('submit', function(){
+    note.textContent = 'Opening your mail app — or just call us, we pick up.';
+  });
+
+  /* ---------- year ---------- */
+  document.getElementById('yr').textContent = new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
