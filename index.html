@@ -166,7 +166,8 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 .sect + .sect{border-top:1px solid var(--hair)}
 .marq + .sect{border-top:0}
 
-/* ABOUT — warm blush, the loudest of the light sections */
+/* ABOUT — warm blush. The pink wash is deliberately rationed: only About,
+   Founders and Testimonials carry it, so it reads as accent, not wallpaper. */
 #about{--wash:
   radial-gradient(78% 62% at 12% 6%, rgba(var(--blush),.70) 0%, rgba(var(--blush),0) 64%),
   radial-gradient(58% 50% at 92% 26%, rgba(var(--butter),.46) 0%, rgba(var(--butter),0) 68%),
@@ -180,30 +181,22 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   radial-gradient(62% 52% at 96% 62%, rgba(var(--lilac),.62) 0%, rgba(var(--lilac),0) 66%),
   radial-gradient(80% 40% at 50% 100%, rgba(var(--blush),.34) 0%, rgba(var(--blush),0) 68%);
 }
-/* PROCESS — mist, cool enough to make the teal spine sing */
-#process{--wash:
-  radial-gradient(70% 58% at 90% 6%, rgba(var(--mist),.72) 0%, rgba(var(--mist),0) 64%),
-  radial-gradient(58% 48% at 4% 58%, rgba(var(--blush),.40) 0%, rgba(var(--blush),0) 66%);
+/* PROCESS — plain porcelain; the teal spine is the only colour here */
+#process{--wash:none; --grain-o:.14;
 }
-/* SERVICES — faint butter with a blush corner */
-#services{--wash:
-  radial-gradient(64% 54% at 96% 10%, rgba(var(--butter),.60) 0%, rgba(var(--butter),0) 66%),
-  radial-gradient(66% 52% at 6% 88%, rgba(var(--blush),.44) 0%, rgba(var(--blush),0) 64%);
+/* SERVICES — plain porcelain, so the icon grid stays crisp */
+#services{--wash:none; --grain-o:.14;
 }
-/* GALLERY — porcelain, so the tiles pop off the page */
-#gallery{--wash:
-  radial-gradient(90% 34% at 50% 0%, rgba(var(--rose),.26) 0%, rgba(var(--rose),0) 70%);
-  --grain-o:.22;
+/* GALLERY — plain porcelain, so the photography carries the colour */
+#gallery{--wash:none; --grain-o:.14;
 }
 /* TESTIMONIALS — blush again, the warmest note before the ink */
 #voices{--wash:
   radial-gradient(72% 60% at 14% 8%, rgba(var(--blush),.66) 0%, rgba(var(--blush),0) 62%),
   radial-gradient(66% 56% at 88% 78%, rgba(var(--rose),.56) 0%, rgba(var(--rose),0) 66%);
 }
-/* CLIENTS — near-porcelain; the logo wall needs a clean ground */
-#clients{--wash:
-  radial-gradient(80% 40% at 92% 0%, rgba(var(--mist),.30) 0%, rgba(var(--mist),0) 70%);
-  --grain-o:.20;
+/* CLIENTS — plain porcelain; the logo wall needs a clean ground */
+#clients{--wash:none; --grain-o:.14;
 }
 /* CONTACT — ink inversion with a pink-teal aurora along the top edge */
 #contact{--wash:
@@ -477,12 +470,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 /* ============================================================
    ABOUT  (01)  — label 1–2 / body 4–12
    ============================================================ */
-#about .about-label{grid-column:1 / span 2}
-#about .about-body{grid-column:4 / span 9}
-#about .about-body .big{
-  font-family:var(--display); font-size:clamp(1.45rem,3.1vw,2.6rem); line-height:1.2;
-  letter-spacing:.004em; margin-bottom:.7em; max-width:26ch;
-}
+#about .about-body{grid-column:1 / span 9}
 #about .about-body .lede{max-width:52ch}
 #about .signoff{
   margin-top:1.5em; padding-top:14px; border-top:1px solid var(--hair);
@@ -1097,7 +1085,6 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
    RESPONSIVE
    ============================================================ */
 @media (max-width:1080px){
-  #about .about-label{grid-column:1 / -1; margin-bottom:20px}
   #about .about-body{grid-column:1 / -1}
   #process .p-intro{grid-column:1 / -1; margin-bottom:26px}
   #process .p-list{grid-column:1 / -1}
@@ -1110,6 +1097,13 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   .c-wall{grid-template-columns:repeat(4,minmax(0,1fr))}
 }
 @media (max-width:900px){
+  /* On a phone the hero no longer forces a full viewport: the headline and the
+     CTAs were being pushed to opposite ends with a dead gap between them.
+     Let the section size to its content instead. */
+  .hero{min-height:0; padding-top:clamp(96px,16vh,150px); padding-bottom:clamp(26px,4vh,40px)}
+  .hero-inner{flex:0 1 auto}
+  .hero h1{margin-top:0; margin-bottom:clamp(26px,5vh,44px)}
+  .hero-foot{margin-top:clamp(26px,5vh,44px)}
   .nav-links,.nav > .nav-cta{display:none}
   .nav-toggle{display:inline-flex; min-height:44px}
   .g-tile:nth-child(n){grid-column:1 / -1}
@@ -1417,15 +1411,11 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   </div>
 </section>
 
-<!-- ============ MARQUEE · the count ============ -->
+<!-- ============ MARQUEE · the occasions ============ -->
 <div class="marq marq--tall" aria-hidden="true" data-marq>
   <div class="marq-track">
-    <div class="marq-seq">
-      <b>300+ events</b><i>·</i><b class="hi">0 boring ones</b><i>·</i><b>300+ events</b><i>·</i><b class="hi">0 boring ones</b><i>·</i><b>300+ events</b><i>·</i><b class="hi">0 boring ones</b><i>·</i><b>300+ events</b><i>·</i><b class="hi">0 boring ones</b><i>·</i>
-    </div>
-    <div class="marq-seq">
-      <b>300+ events</b><i>·</i><b class="hi">0 boring ones</b><i>·</i><b>300+ events</b><i>·</i><b class="hi">0 boring ones</b><i>·</i><b>300+ events</b><i>·</i><b class="hi">0 boring ones</b><i>·</i><b>300+ events</b><i>·</i><b class="hi">0 boring ones</b><i>·</i>
-    </div>
+    <div class="marq-seq"><b>weddings</b><i>·</i><b class="hi">sangeets</b><i>·</i><b>mehendis</b><i>·</i><b>receptions</b><i>·</i><b>engagements</b><i>·</i><b>anniversaries</b><i>·</i><b>birthdays</b><i>·</i><b>baby showers</b><i>·</i><b class="hi">brunches</b><i>·</i><b>corporate galas</b><i>·</i><b>product launches</b><i>·</i><b class="hi">destination weddings</b><i>·</i><b>weddings</b><i>·</i><b class="hi">sangeets</b><i>·</i><b>mehendis</b><i>·</i><b>receptions</b><i>·</i><b>engagements</b><i>·</i><b>anniversaries</b><i>·</i><b>birthdays</b><i>·</i><b>baby showers</b><i>·</i><b class="hi">brunches</b><i>·</i><b>corporate galas</b><i>·</i><b>product launches</b><i>·</i><b class="hi">destination weddings</b><i>·</i></div>
+    <div class="marq-seq"><b>weddings</b><i>·</i><b class="hi">sangeets</b><i>·</i><b>mehendis</b><i>·</i><b>receptions</b><i>·</i><b>engagements</b><i>·</i><b>anniversaries</b><i>·</i><b>birthdays</b><i>·</i><b>baby showers</b><i>·</i><b class="hi">brunches</b><i>·</i><b>corporate galas</b><i>·</i><b>product launches</b><i>·</i><b class="hi">destination weddings</b><i>·</i><b>weddings</b><i>·</i><b class="hi">sangeets</b><i>·</i><b>mehendis</b><i>·</i><b>receptions</b><i>·</i><b>engagements</b><i>·</i><b>anniversaries</b><i>·</i><b>birthdays</b><i>·</i><b>baby showers</b><i>·</i><b class="hi">brunches</b><i>·</i><b>corporate galas</b><i>·</i><b>product launches</b><i>·</i><b class="hi">destination weddings</b><i>·</i></div>
   </div>
 </div>
 
@@ -1438,15 +1428,8 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   </div>
 
   <div class="grid">
-    <div class="about-label">
-      <p class="mono rev-l">Who we are</p>
-    </div>
-
     <div class="about-body">
-      <p class="big rev-l">
-        One part exciting, two parts soulful, three quarters funny, and very many portions of <span class="em uline keep">creative flair.</span>
-      </p>
-      <p class="lede rev-l" style="--d:110ms">
+      <p class="lede rev-l">
         SOUL is not a company – that would mean we look at what we do as simply a job. <em class="soul-em">SOUL is our passion.</em>
       </p>
       <p class="signoff rev-l" style="--d:180ms">
@@ -1689,15 +1672,11 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   </div>
 </section>
 
-<!-- ============ MARQUEE · the occasions ============ -->
+<!-- ============ MARQUEE · the count ============ -->
 <div class="marq marq--rev" aria-hidden="true" data-marq>
   <div class="marq-track">
-    <div class="marq-seq">
-      <b>weddings</b><i>·</i><b>sangeets</b><i>·</i><b class="hi">brunches</b><i>·</i><b>galas</b><i>·</i><b>anniversaries</b><i>·</i><b>birthdays</b><i>·</i><b class="hi">mehendis</b><i>·</i><b>baby showers</b><i>·</i><b>weddings</b><i>·</i><b>sangeets</b><i>·</i><b class="hi">brunches</b><i>·</i><b>galas</b><i>·</i>
-    </div>
-    <div class="marq-seq">
-      <b>weddings</b><i>·</i><b>sangeets</b><i>·</i><b class="hi">brunches</b><i>·</i><b>galas</b><i>·</i><b>anniversaries</b><i>·</i><b>birthdays</b><i>·</i><b class="hi">mehendis</b><i>·</i><b>baby showers</b><i>·</i><b>weddings</b><i>·</i><b>sangeets</b><i>·</i><b class="hi">brunches</b><i>·</i><b>galas</b><i>·</i>
-    </div>
+    <div class="marq-seq"><b>300+ events</b><i>·</i><b class="hi">0 boring ones</b><i>·</i><b>300+ events</b><i>·</i><b class="hi">0 boring ones</b><i>·</i><b>300+ events</b><i>·</i><b class="hi">0 boring ones</b><i>·</i><b>300+ events</b><i>·</i><b class="hi">0 boring ones</b><i>·</i></div>
+    <div class="marq-seq"><b>300+ events</b><i>·</i><b class="hi">0 boring ones</b><i>·</i><b>300+ events</b><i>·</i><b class="hi">0 boring ones</b><i>·</i><b>300+ events</b><i>·</i><b class="hi">0 boring ones</b><i>·</i><b>300+ events</b><i>·</i><b class="hi">0 boring ones</b><i>·</i></div>
   </div>
 </div>
 
