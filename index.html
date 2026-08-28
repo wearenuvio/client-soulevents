@@ -4,16 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Soul Events</title>
-<meta name="description" content="Soul Events — bespoke event design by Chelna Lekhi and Ramesh Sadhwani. Weddings, sangeets, brunches, birthdays and corporate galas in Bangalore, across India and internationally. 300+ events, 47 years of collective experience.">
+<meta name="description" content="Soul Events, bespoke event design by Chelna Lekhi and Ramesh Sadhwani. Weddings, sangeets, brunches, birthdays and corporate galas in Bangalore, across India and internationally. 300+ events, 47 years of collective experience.">
 <meta name="theme-color" content="#F8F7F4">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Soul Events">
-<meta property="og:title" content="Soul Events — Bespoke Event Design, Bangalore">
+<meta property="og:title" content="Soul Events, Bespoke Event Design in Bangalore">
 <meta property="og:description" content="SOUL is not a company – that would mean we look at what we do as simply a job. SOUL is our passion. Bespoke event design in Bangalore and internationally.">
 <meta property="og:locale" content="en_IN">
 <meta property="og:url" content="https://souleventsindia.com/">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Soul Events — Bespoke Event Design, Bangalore">
+<meta name="twitter:title" content="Soul Events, Bespoke Event Design in Bangalore">
 <meta name="twitter:description" content="Occasions that are personal and bespoke. Event design by Chelna Lekhi and Ramesh Sadhwani, Bangalore.">
 <link rel="canonical" href="https://souleventsindia.com/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -181,7 +181,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   radial-gradient(62% 52% at 96% 62%, rgba(var(--lilac),.62) 0%, rgba(var(--lilac),0) 66%),
   radial-gradient(80% 40% at 50% 100%, rgba(var(--blush),.34) 0%, rgba(var(--blush),0) 68%);
 }
-/* PROCESS — plain porcelain; the teal spine is the only colour here */
+/* PROCESS — plain porcelain; the ledger hairlines carry the structure */
 #process{--wash:none; --grain-o:.14;
 }
 /* SERVICES — plain porcelain, so the icon grid stays crisp */
@@ -555,76 +555,65 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 }
 
 /* ============================================================
-   PROCESS (04)
+   PROCESS (04) — "the running order"
+   Five stages laid out as a hairline ledger: the 1px grid gaps ARE
+   the rules, so the steps sit in a table of hairlines rather than
+   hanging off a lonely spine. One photograph closes the top row.
+   Every step is fully legible at all times — nothing is dimmed.
    ============================================================ */
-#process .p-intro{grid-column:1 / span 4}
-#process .p-list{
-  grid-column:5 / span 8;
-  position:relative;
-  --spine-pad:clamp(26px,2.8vw,44px);
-  --step-pad:clamp(18px,2.4vw,32px);
-  padding-left:var(--spine-pad);
+#process .p-lede{grid-column:1 / span 7}
+#process .p-lede h2{
+  font-family:var(--display); font-weight:400;
+  font-size:clamp(1.75rem,3.9vw,2.9rem); line-height:1.08; letter-spacing:.006em;
+  max-width:20ch;
 }
+#process .p-meta{grid-column:9 / span 4; align-self:end; text-align:right; padding-bottom:.35em}
+.p-meta span{display:block}
+.p-meta span + span{margin-top:7px}
 
-/* the vertical progress spine: hairline track + teal line drawn by scroll */
-.p-spine{
-  position:absolute; left:0; top:0; bottom:0; width:1px;
-  background:var(--hair); overflow:visible; pointer-events:none;
+/* the ledger. Pulled out sideways by exactly one cell's padding so the
+   type inside still aligns to the page gutter, and the rules read as a
+   full-bleed table edge. */
+.p-ledger{
+  grid-column:1 / -1;
+  --cell-x:clamp(14px,1.5vw,22px);
+  --cell-y:clamp(22px,2.3vw,32px);
+  margin-top:clamp(30px,4vw,54px);
+  margin-inline:calc(-1 * var(--cell-x));
+  display:grid; grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:1px; background:var(--hair);
+  border-top:1px solid var(--hair); border-bottom:1px solid var(--hair);
 }
-.p-spine i{
-  position:absolute; left:-1px; top:0; width:3px; height:0;   /* JS writes the height */
-  background:linear-gradient(180deg, var(--accent) 0%, var(--accent-deep) 100%);
-  border-radius:2px;
-}
-
-.step{
-  position:relative;
-  display:grid; grid-template-columns:auto 1fr; gap:clamp(14px,2.4vw,40px);
-  padding-block:var(--step-pad); border-top:1px solid var(--hair);
-  transition:border-color 500ms var(--ease),
+.p-cell{
+  position:relative; background:var(--ground);
+  padding:var(--cell-y) var(--cell-x);
+  display:flex; flex-direction:column;
+  transition:background 420ms var(--ease),
              opacity 620ms var(--ease) var(--d,0ms),
              translate 620ms var(--ease) var(--d,0ms);
 }
-.step:last-child{border-bottom:1px solid var(--hair)}
-.step:hover{border-top-color:var(--accent)}
-.step-dot{
-  position:absolute; left:calc(-1 * var(--spine-pad)); top:calc(var(--step-pad) + .5em);
-  width:9px; height:9px; border-radius:50%;
-  transform:translateX(calc(-50% + .5px));
-  background:var(--ground); border:1px solid var(--hair);
-  transition:background 420ms var(--ease), border-color 420ms var(--ease), box-shadow 420ms var(--ease);
+.p-cell:hover{background:rgba(92,198,205,.055)}
+/* index row: mono numeral + a rule that runs out to the cell edge,
+   echoing the section header's own index tick */
+.p-idx{display:flex; align-items:center; gap:12px; margin-bottom:clamp(12px,1.4vw,18px)}
+.p-idx b{
+  font-family:var(--mono); font-weight:400; font-size:11px;
+  letter-spacing:.16em; color:var(--accent-deep);
 }
-.step.active .step-dot{
-  background:var(--accent-deep); border-color:var(--accent-deep);
-  box-shadow:0 0 0 4px rgba(92,198,205,.20);
-}
-.step-n{
-  font-family:var(--mono); font-size:11px; letter-spacing:.14em;
-  color:var(--ink-soft); padding-top:.7em;
-  transition:color 420ms var(--ease);
-}
-.step.active .step-n{color:var(--accent-deep)}
-.step h3{
+.p-idx i{flex:1; height:1px; background:var(--hair); transition:background 420ms var(--ease)}
+.p-cell:hover .p-idx i{background:var(--accent)}
+.p-cell h3{
   font-family:var(--display); font-weight:400;
-  font-size:clamp(1.35rem,2.5vw,2rem); line-height:1.1; letter-spacing:.008em; margin-bottom:.42em;
+  font-size:clamp(1.3rem,1.95vw,1.72rem); line-height:1.12; letter-spacing:.008em;
+  margin-bottom:.5em;
 }
-.step p{max-width:var(--measure)}
-.step .aside{
-  margin-top:14px; padding-left:14px; border-left:1px solid var(--accent);
-  font-family:var(--serif); font-style:italic; font-size:clamp(1rem,1.45vw,1.22rem);
-  line-height:1.42; color:var(--ink);
-}
-/* the dim/settle only exists once JS is driving the spine */
-.p-list.spine-on .step .step-body{
-  opacity:.45; transform:translateY(12px);
-  transition:opacity 640ms var(--ease), transform 640ms var(--ease);
-}
-.p-list.spine-on .step.active .step-body{opacity:1; transform:none}
-#process .p-intro .sticky{position:sticky; top:104px}
-#process .p-intro h2{
-  font-family:var(--display); font-weight:400;
-  font-size:clamp(1.75rem,3.6vw,2.8rem); line-height:1.08; letter-spacing:.006em;
-}
+.p-copy{max-width:var(--measure); color:var(--ink)}
+/* the asides bottom-align across each row, so the five winks read as one
+   italic register running under the ledger — punctuation, not afterthought */
+/* the photograph cell: no padding, the plate fills the row it sits in */
+.p-cell--shot{padding:0; overflow:hidden; min-height:210px}
+.p-cell--shot:hover{background:var(--ground)}
+.p-cell--shot .plate{position:absolute; inset:0; border:0}
 
 /* ============================================================
    SERVICES (05)
@@ -1086,9 +1075,11 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
    ============================================================ */
 @media (max-width:1080px){
   #about .about-body{grid-column:1 / -1}
-  #process .p-intro{grid-column:1 / -1; margin-bottom:26px}
-  #process .p-list{grid-column:1 / -1}
-  #process .p-intro .sticky{position:static}
+  #process .p-lede{grid-column:1 / -1}
+  #process .p-meta{grid-column:1 / -1; align-self:start; text-align:left; padding-bottom:0; margin-top:14px}
+  .p-meta span{display:inline}
+  .p-meta span + span{margin-top:0; margin-left:14px}
+  .p-ledger{grid-template-columns:repeat(2,minmax(0,1fr))}
   #voices .v-head{grid-column:1 / -1}
   #voices .v-aside{grid-column:1 / -1; margin-top:18px}
   #contact .k-lead{grid-column:1 / -1}
@@ -1097,11 +1088,11 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   .c-wall{grid-template-columns:repeat(4,minmax(0,1fr))}
 }
 @media (max-width:900px){
-  /* On a phone the hero no longer forces a full viewport: the headline and the
-     CTAs were being pushed to opposite ends with a dead gap between them.
-     Let the section size to its content instead. */
-  .hero{min-height:0; padding-top:clamp(96px,16vh,150px); padding-bottom:clamp(26px,4vh,40px)}
-  .hero-inner{flex:0 1 auto}
+  /* The hero spans the viewport on phones too. The content sits as one centred
+     group rather than being split top-and-bottom, which is what left a dead gap
+     between the headline and the CTAs. */
+  .hero{min-height:100svh; padding-top:clamp(92px,15vh,140px); padding-bottom:clamp(26px,4vh,40px)}
+  .hero-inner{flex:1; justify-content:center}
   .hero h1{margin-top:0; margin-bottom:clamp(26px,5vh,44px)}
   .hero-foot{margin-top:clamp(26px,5vh,44px)}
   .nav-links,.nav > .nav-cta{display:none}
@@ -1121,11 +1112,10 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   .c-logo{min-height:104px}
 }
 @media (max-width:720px){
-  /* the spine moves to the left edge of the stacked steps */
-  #process .p-list{--spine-pad:22px; --step-pad:20px}
-  .step{grid-template-columns:1fr; gap:6px}
-  .step-n{padding-top:0}
-  .step-dot{top:calc(var(--step-pad) + .18em)}
+  /* the ledger stacks into a single ruled column; the photograph keeps
+     its own ratio instead of borrowing a row's height */
+  .p-ledger{grid-template-columns:minmax(0,1fr)}
+  .p-cell--shot{aspect-ratio:16 / 10; min-height:0}
   .c-roster ol{columns:1}
   .k-line .who{min-width:0; width:100%}
   .nav-sheet a{padding-block:12px}
@@ -1184,10 +1174,9 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   .lb-panel{transform:none !important; transition:none !important}
   .lb-cell:hover,.lb-cell:focus-visible{transform:none !important; transition:none !important}
 
-  /* process spine: drawn full and static; steps get a plain opacity fade */
-  .p-spine i{height:100% !important; transition:none !important}
-  .step-dot{transition:none !important}
-  .p-list.spine-on .step .step-body{opacity:1 !important; transform:none !important; transition:none !important}
+  /* process ledger: the index tick's colour shift settles instantly. The
+     cells themselves keep the generic .rev-l opacity fade, nothing moves. */
+  .p-idx i{transition:none !important}
 
   /* marquees: animation off, duplicate sequence hidden. The strip stays
      overflow:hidden — it is aria-hidden decoration, and a scrollable box
@@ -1241,7 +1230,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   </symbol>
 
   <!-- ============================================================
-       SERVICE ICONS — hand-drawn minimal line marks, stroke currentColor
+       SERVICE ICONS · hand-drawn minimal line marks, stroke currentColor
        ============================================================ -->
   <g id="ic-defs">
     <symbol id="ic-car" viewBox="0 0 32 32">
@@ -1311,7 +1300,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   </g>
 
   <!-- ============================================================
-       SOCIAL GLYPHS — monochrome, stroke/fill currentColor, drawn on a
+       SOCIAL GLYPHS · monochrome, stroke/fill currentColor, drawn on a
        24px grid so they sit at the same weight as the mono type beside them.
        ============================================================ -->
   <symbol id="ic-instagram" viewBox="0 0 24 24">
@@ -1344,7 +1333,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 
 <!-- ============ NAV ============ -->
 <header class="nav" id="nav">
-  <a class="brand" href="#top" aria-label="Soul Events — home">
+  <a class="brand" href="#top" aria-label="Soul Events, home">
     <svg class="mark-brand" aria-hidden="true"><use href="#soulmark"></use></svg>
     <span class="brand-word"><b>Soul</b><span>events</span></span>
   </a>
@@ -1434,7 +1423,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
       </p>
       <p class="signoff rev-l" style="--d:180ms">
         <svg class="lotus" aria-hidden="true" style="font-size:15px"><use href="#lotus"></use></svg>
-        <span class="mono mono--ink">— Ramesh and Chelna</span>
+        <span class="mono mono--ink">Ramesh and Chelna</span>
       </p>
     </div>
 
@@ -1490,7 +1479,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   </div>
 
   <div class="grid">
-    <p class="f-device rev-l">We found it easier to introduce each other than ourselves.</p>
+    <h2 class="f-device rev-l">We found it easier to introduce each other than ourselves.</h2>
 
     <article class="founder">
       <figure class="plate f-plate wipe">
@@ -1511,7 +1500,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
         </blockquote>
         <p class="f-attrib rev-l" style="--d:200ms">
           <svg class="lotus" aria-hidden="true" style="font-size:13px"><use href="#lotus"></use></svg>
-          <em>— Ramesh</em>
+          <em>Ramesh</em>
         </p>
       </div>
     </article>
@@ -1536,7 +1525,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
         </blockquote>
         <p class="f-attrib rev-l" style="--d:200ms">
           <svg class="lotus" aria-hidden="true" style="font-size:13px"><use href="#lotus"></use></svg>
-          <em>— Chelna</em>
+          <em>Chelna</em>
         </p>
       </div>
     </article>
@@ -1552,63 +1541,51 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   </div>
 
   <div class="grid">
-    <div class="p-intro">
-      <div class="sticky">
-        <h2 class="rev-l">How an occasion <span class="em uline keep">comes together.</span></h2>
-      </div>
+    <div class="p-lede">
+      <h2 class="rev-l">How an occasion <span class="em uline keep">comes together.</span></h2>
     </div>
+    <p class="p-meta mono rev-l" style="--d:120ms">
+      <span>Five stages</span><span>01 to 05</span>
+    </p>
 
-    <div class="p-list" id="pList">
-      <span class="p-spine" aria-hidden="true"><i id="pFill"></i></span>
-
-      <article class="step rev-l">
-        <span class="step-dot" aria-hidden="true"></span>
-        <p class="step-n">01</p>
-        <div class="step-body">
-          <h3>Site Mapping</h3>
-          <p>Every venue has its strengths and weaknesses — we walk yours, then design around them.</p>
-          <p class="aside">Also, plan that grand entrance you always wanted. *wink wink*</p>
-        </div>
+    <div class="p-ledger">
+      <article class="p-cell rev-l">
+        <p class="p-idx"><b>01</b><i aria-hidden="true"></i></p>
+        <h3>Site Mapping</h3>
+        <p class="p-copy">Every venue has its strengths and weaknesses. We walk yours, then design around them.</p>
       </article>
 
-      <article class="step rev-l">
-        <span class="step-dot" aria-hidden="true"></span>
-        <p class="step-n">02</p>
-        <div class="step-body">
-          <h3>First Cut</h3>
-          <p>We sketch an initial blueprint for your occasion and shape it to suit you — cost estimates* included.</p>
-          <p class="aside">*Still more accurate than the weather.</p>
-        </div>
+      <article class="p-cell rev-l" style="--d:90ms">
+        <p class="p-idx"><b>02</b><i aria-hidden="true"></i></p>
+        <h3>First Cut</h3>
+        <p class="p-copy">We sketch an initial blueprint for your occasion and shape it to suit you, cost estimates included.</p>
       </article>
 
-      <article class="step rev-l">
-        <span class="step-dot" aria-hidden="true"></span>
-        <p class="step-n">03</p>
-        <div class="step-body">
-          <h3>Master Plan</h3>
-          <p>The whole venue is laid out to be interactive, so every guest is within reach of the excitement.</p>
-          <p class="aside">Don’t fret, it will be completely stiletto- and mojari-friendly.</p>
-        </div>
+      <div class="p-cell p-cell--shot rev-l" style="--d:180ms">
+        <figure class="plate wipe">
+          <img class="shot" src="assets/samples/anniv-02.jpg" width="900" height="600" loading="lazy" decoding="async"
+               alt="Sample photograph: a long dining table laid out for a dinner party with flowers and candles">
+          <span class="plate-grain" aria-hidden="true"></span>
+          <figcaption class="plate-cap" style="--tint:#69BD45"><span class="dot" aria-hidden="true"></span>Layout &middot; sample</figcaption>
+        </figure>
+      </div>
+
+      <article class="p-cell rev-l">
+        <p class="p-idx"><b>03</b><i aria-hidden="true"></i></p>
+        <h3>Master Plan</h3>
+        <p class="p-copy">The whole venue is laid out to be interactive, so every guest is within reach of the excitement.</p>
       </article>
 
-      <article class="step rev-l">
-        <span class="step-dot" aria-hidden="true"></span>
-        <p class="step-n">04</p>
-        <div class="step-body">
-          <h3>Money Wise</h3>
-          <p>Everything is listed, approximated and discussed before execution — no budget too big or too small.</p>
-          <p class="aside">However, remember that the best things in life aren’t free :P</p>
-        </div>
+      <article class="p-cell rev-l" style="--d:90ms">
+        <p class="p-idx"><b>04</b><i aria-hidden="true"></i></p>
+        <h3>Money Wise</h3>
+        <p class="p-copy">Everything is listed, approximated and discussed before execution. No budget is too big or too small.</p>
       </article>
 
-      <article class="step rev-l">
-        <span class="step-dot" aria-hidden="true"></span>
-        <p class="step-n">05</p>
-        <div class="step-body">
-          <h3>Full-speed Ahead</h3>
-          <p>It’s D-Day. We coordinate every element to perfection and stay through the whole event.</p>
-          <p class="aside">No really. Just show up.</p>
-        </div>
+      <article class="p-cell rev-l" style="--d:180ms">
+        <p class="p-idx"><b>05</b><i aria-hidden="true"></i></p>
+        <h3>Full-speed Ahead</h3>
+        <p class="p-copy">It&rsquo;s D-Day. We coordinate every element to perfection and stay through the whole event.</p>
       </article>
     </div>
   </div>
@@ -1624,7 +1601,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 
   <div class="grid">
     <div class="s-intro">
-      <p class="s-lede rev-l">Every single aspect of your event — <span class="em uline">no two ways about it.</span></p>
+      <p class="s-lede rev-l">Every single aspect of your event, <span class="em uline">no two ways about it.</span></p>
     </div>
 
     <ul class="s-grid">
@@ -1692,7 +1669,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
     <div class="g-tiles">
 
       <!-- Each tile opens the popup on its own category. The visible
-           "View →" is the real control (a button — there is no page to go to
+           "View →" is the real control (a button, there is no page to go to
            yet), so the h3 stays a heading and the markup stays valid; the
            whole tile is click-through to that same button for pointer users. -->
       <div class="g-tile rev-l" style="--tint:#4E9BA1" data-cat="wed" data-name="Weddings">
@@ -1803,7 +1780,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   </div>
 
   <div class="tm-rows">
-    <!-- row 1 — travels left; leads with "Magician" -->
+    <!-- row 1 · travels left; leads with "Magician" -->
     <div class="tm-row">
       <div class="tm-track">
         <div class="tm-seq">
@@ -1813,8 +1790,8 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
             <span class="by"><b>Kushali &amp; Kunal Bhandari</b></span>
           </article>
           <article class="card">
-            <q>Ramesh, as compere, gave our book launch the ideal frame — he sharpened the audience’s mood to receive a serious message.</q>
-            <span class="by"><b>Shankar Jagarnathan</b> — Author: Corporate Disclosures</span>
+            <q>Ramesh, as compere, gave our book launch the ideal frame. He sharpened the audience’s mood to receive a serious message.</q>
+            <span class="by"><b>Shankar Jagarnathan</b>, Author: Corporate Disclosures</span>
           </article>
           <article class="card">
             <q>By the end of any show they host, every soul leaves with a smile, every adult feels respected, and friends feel warm.</q>
@@ -1832,8 +1809,8 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
             <span class="by"><b>Kushali &amp; Kunal Bhandari</b></span>
           </article>
           <article class="card">
-            <q>Ramesh, as compere, gave our book launch the ideal frame — he sharpened the audience’s mood to receive a serious message.</q>
-            <span class="by"><b>Shankar Jagarnathan</b> — Author: Corporate Disclosures</span>
+            <q>Ramesh, as compere, gave our book launch the ideal frame. He sharpened the audience’s mood to receive a serious message.</q>
+            <span class="by"><b>Shankar Jagarnathan</b>, Author: Corporate Disclosures</span>
           </article>
           <article class="card">
             <q>By the end of any show they host, every soul leaves with a smile, every adult feels respected, and friends feel warm.</q>
@@ -1847,7 +1824,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
       </div>
     </div>
 
-    <!-- row 2 — counter-rotates; leads with "Event Energizer" -->
+    <!-- row 2 · counter-rotates; leads with "Event Energizer" -->
     <div class="tm-row tm-row--rev">
       <div class="tm-track">
         <div class="tm-seq">
@@ -1862,10 +1839,10 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
           </article>
           <article class="card">
             <q>From beginning to end, they took meticulous care of every detail. Our wedding day was virtually stress-free.</q>
-            <span class="by"><b>Arjun and Vishakha</b> — groom and bride</span>
+            <span class="by"><b>Arjun and Vishakha</b>, groom and bride</span>
           </article>
           <article class="card">
-            <q>The decor, the sangeet, the doli, the vidai — all picture perfect. As though it were a wedding from your own family.</q>
+            <q>The decor, the sangeet, the doli, the vidai: all picture perfect. As though it were a wedding from your own family.</q>
             <span class="by"><b>Kalpana Rao</b></span>
           </article>
         </div>
@@ -1881,10 +1858,10 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
           </article>
           <article class="card">
             <q>From beginning to end, they took meticulous care of every detail. Our wedding day was virtually stress-free.</q>
-            <span class="by"><b>Arjun and Vishakha</b> — groom and bride</span>
+            <span class="by"><b>Arjun and Vishakha</b>, groom and bride</span>
           </article>
           <article class="card">
-            <q>The decor, the sangeet, the doli, the vidai — all picture perfect. As though it were a wedding from your own family.</q>
+            <q>The decor, the sangeet, the doli, the vidai: all picture perfect. As though it were a wedding from your own family.</q>
             <span class="by"><b>Kalpana Rao</b></span>
           </article>
         </div>
@@ -1901,8 +1878,8 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
         <span class="by"><b>Kushali &amp; Kunal Bhandari</b></span>
       </article>
       <article class="card">
-        <q>Ramesh, as compere, gave our book launch the ideal frame — he sharpened the audience’s mood to receive a serious message.</q>
-        <span class="by"><b>Shankar Jagarnathan</b> — Author: Corporate Disclosures</span>
+        <q>Ramesh, as compere, gave our book launch the ideal frame. He sharpened the audience’s mood to receive a serious message.</q>
+        <span class="by"><b>Shankar Jagarnathan</b>, Author: Corporate Disclosures</span>
       </article>
       <article class="card">
         <q>By the end of any show they host, every soul leaves with a smile, every adult feels respected, and friends feel warm.</q>
@@ -1923,10 +1900,10 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
       </article>
       <article class="card">
         <q>From beginning to end, they took meticulous care of every detail. Our wedding day was virtually stress-free.</q>
-        <span class="by"><b>Arjun and Vishakha</b> — groom and bride</span>
+        <span class="by"><b>Arjun and Vishakha</b>, groom and bride</span>
       </article>
       <article class="card">
-        <q>The decor, the sangeet, the doli, the vidai — all picture perfect. As though it were a wedding from your own family.</q>
+        <q>The decor, the sangeet, the doli, the vidai: all picture perfect. As though it were a wedding from your own family.</q>
         <span class="by"><b>Kalpana Rao</b></span>
       </article>
     </div>
@@ -1947,7 +1924,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
     </div>
 
     <!-- ============================================================
-         LOGO WALL — TYPOGRAPHIC PLACEHOLDERS.
+         LOGO WALL · TYPOGRAPHIC PLACEHOLDERS.
          These are NOT the clients' logos. Each name is set as a
          distinct type treatment in the page's own three families so
          the wall reads like a logo strip without reproducing any
@@ -1997,7 +1974,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
     <div class="c-toggle-row">
       <button class="c-toggle rev-l" id="rosterToggle" aria-expanded="false" aria-controls="roster">
         <span class="pm" aria-hidden="true"></span>
-        <span id="rosterLabel">The full roster — 57 names</span>
+        <span id="rosterLabel">The full roster, 57 names</span>
       </button>
     </div>
 
@@ -2127,7 +2104,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   <div class="wrap">
 
     <div class="foot-brand">
-      <a class="brand" href="#top" aria-label="Soul Events — back to top">
+      <a class="brand" href="#top" aria-label="Soul Events, back to top">
         <svg class="mark-brand" aria-hidden="true"><use href="#soulmark"></use></svg>
         <span class="brand-word"><b>Soul</b><span>events</span></span>
       </a>
@@ -2283,36 +2260,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   var yr = document.getElementById("yr");
   if (yr) yr.textContent = String(new Date().getFullYear());
 
-  /* ---------- process spine: a teal line drawn by scroll progress ----------
-     Hairline track + fill whose height tracks how far an anchor line (62% down
-     the viewport) has travelled through the steps list. Each step lights up as
-     the fill passes its node. Under reduced motion the line is simply full and
-     every step is active, so nothing depends on movement. */
-  var pList = document.getElementById("pList");
-  var pFill = document.getElementById("pFill");
-  var pSteps = pList ? pList.querySelectorAll(".step") : [];
-  function setStepsActive(on){
-    Array.prototype.forEach.call(pSteps, function(s){ s.classList.toggle("active", on); });
-  }
-  function drawSpine(){
-    if (!pList || !pFill) return;
-    var r = pList.getBoundingClientRect();
-    var h = r.height || 1;
-    var anchor = window.innerHeight * 0.62;
-    var p = (anchor - r.top) / h;
-    if (p < 0) p = 0; else if (p > 1) p = 1;
-    pFill.style.height = (p * 100).toFixed(2) + "%";
-    var reached = p * h;
-    Array.prototype.forEach.call(pSteps, function(s){
-      s.classList.toggle("active", reached >= s.offsetTop + 10);
-    });
-  }
-  if (pList && pFill) {
-    if (reduce) { pFill.style.height = "100%"; setStepsActive(true); }
-    else { pList.classList.add("spine-on"); }
-  }
-
-  /* ---------- nav: condense on scroll + hero parallax + spine ---------- */
+  /* ---------- nav: condense on scroll + hero parallax ---------- */
   var nav = document.getElementById("nav");
   var wash = document.getElementById("heroWash");
   var ticking = false;
@@ -2324,7 +2272,6 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
       var t = Math.min(y * 0.10, max);
       wash.style.transform = "translate3d(0," + t.toFixed(2) + "px,0)";
     }
-    if (!reduce) drawSpine();
     ticking = false;
   }
   window.addEventListener("scroll", function(){
@@ -2399,7 +2346,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   /* ---------- reveal observer ---------- */
   var revealables = document.querySelectorAll(".rev, .rev-l, .wipe");
   if ("IntersectionObserver" in window) {
-    /* A .wipe starts at clip-path:inset(100% 0 0) — zero visible area — and
+    /* A .wipe starts at clip-path:inset(100% 0 0), zero visible area, and
        Chrome reports a fully clipped element as never intersecting. Observing
        it directly is a deadlock: it can only be revealed once it is visible,
        and it is only visible once revealed. So watch an unclipped ancestor and
@@ -2420,7 +2367,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
     watch.forEach(function(_els, target){ io.observe(target); });
     /* Safety net. An IntersectionObserver delivers nothing while the document is
        hidden (page opened in a background tab), and every revealable starts at
-       opacity:0 / clipped — so content could sit invisible indefinitely. If
+       opacity:0 / clipped, so content could sit invisible indefinitely. If
        NOTHING has revealed by the time the page has settled, reveal everything;
        a normal visible load always trips the observer first and keeps its
        scroll choreography untouched. */
@@ -2489,13 +2436,13 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
     });
   }
   if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(function(){ tuneMarquees(); if (!reduce) drawSpine(); });
+    document.fonts.ready.then(function(){ tuneMarquees(); });
   }
   tuneMarquees();
   var rzt;
   window.addEventListener("resize", function(){
     window.clearTimeout(rzt);
-    rzt = window.setTimeout(function(){ tuneMarquees(); if (!reduce) drawSpine(); }, 220);
+    rzt = window.setTimeout(function(){ tuneMarquees(); }, 220);
   }, {passive:true});
 
   /* ---------- clients roster ---------- */
@@ -2507,7 +2454,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
       var open = rt.getAttribute("aria-expanded") === "true";
       rt.setAttribute("aria-expanded", open ? "false" : "true");
       roster.classList.toggle("open", !open);
-      if (rl) rl.textContent = open ? "The full roster — 57 names" : "Close the roster";
+      if (rl) rl.textContent = open ? "The full roster, 57 names" : "Close the roster";
     });
   }
 
