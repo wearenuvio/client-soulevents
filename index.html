@@ -34,12 +34,23 @@
   --ground:#F8F7F4;
   --raised:#FFFFFF;
   --ink:#1A1A22;
-  --ink-soft:#6E6B75;
+  --ink-soft:#63606B;      /* AA on porcelain (5.7:1) and on the pastel washes (4.8:1) */
+  --ink-mute:#6A6A6E;      /* the logo wall's single muted tone — reads as ~64% ink, still 5:1 */
   --hair:#E7E5E0;
+  --hair-warm:#E6D8DA;     /* hairline that sits on the blush washes */
   --accent:#5CC6CD;
-  --accent-deep:#1F7078;   /* AA-safe teal for small text on porcelain (5.4:1) */
+  --accent-deep:#1C666D;   /* AA-safe teal for small text on porcelain (6.2:1) and on washes (5.1:1) */
   --leaf:#69BD45;          /* logo green — decorative only */
   --swoosh:#6D7585;        /* logo brush grey-blue */
+
+  /* ---- pastel wash palette (RGB channels; always used at low alpha) ----
+     Blush leads. Everything is de-saturated enough that porcelain text
+     contrast never drops below AA. */
+  --blush:246,220,227;     /* #F6DCE3 */
+  --rose:243,226,225;      /* #F3E2E1 */
+  --lilac:233,227,240;     /* #E9E3F0 */
+  --mist:224,237,239;      /* #E0EDEF */
+  --butter:246,238,220;    /* #F6EEDC */
 
   --display:"Marcellus", "Trajan Pro", Constantia, Georgia, "Times New Roman", serif;
   --serif:"Instrument Serif", Georgia, "Times New Roman", Times, serif;
@@ -48,7 +59,9 @@
 
   --gutter:clamp(20px, 5.4vw, 92px);
   --gap:clamp(14px, 2.1vw, 30px);
-  --sect:clamp(60px, 9vw, 128px);
+  --sect:clamp(66px, 9vw, 128px);
+  --measure:60ch;          /* one reading measure for every body paragraph */
+  --head-gap:clamp(26px, 3.4vw, 48px);
 
   --ease:cubic-bezier(.16,1,.3,1);
   --dur:700ms;
@@ -109,12 +122,72 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
   line-height:1.58; color:var(--ink);
 }
 
-/* section index + hairline header */
-.sect{position:relative; padding-block:var(--sect)}
+/* ---------- section washes ----------
+   Each section carries a large, soft pastel wash behind its content and the
+   shared grain over the top of it. Both live on pseudo-elements at z-index:-1
+   inside an isolated stacking context, so nothing ever paints over text. */
+.sect{position:relative; padding-block:var(--sect); isolation:isolate}
+.sect::before,.sect::after{
+  content:""; position:absolute; inset:0; z-index:-1; pointer-events:none;
+}
+.sect::before{background-image:var(--wash,none); background-repeat:no-repeat}
+.sect::after{
+  background-image:var(--grain); background-size:160px 160px;
+  opacity:var(--grain-o,.30); mix-blend-mode:multiply;
+}
 .sect + .sect{border-top:1px solid var(--hair)}
+
+/* ABOUT — warm blush, the loudest of the light sections */
+#about{--wash:
+  radial-gradient(78% 62% at 12% 6%, rgba(var(--blush),.70) 0%, rgba(var(--blush),0) 64%),
+  radial-gradient(58% 50% at 92% 26%, rgba(var(--butter),.46) 0%, rgba(var(--butter),0) 68%),
+  radial-gradient(64% 46% at 62% 104%, rgba(var(--rose),.44) 0%, rgba(var(--rose),0) 66%);
+}
+/* STATS — stays raised white so the numerals read as a ledger */
+#stats{--wash:none; --grain-o:.16}
+/* FOUNDERS — soft rose drifting to lilac */
+#founders{--wash:
+  radial-gradient(66% 54% at 8% 14%, rgba(var(--rose),.66) 0%, rgba(var(--rose),0) 62%),
+  radial-gradient(62% 52% at 96% 62%, rgba(var(--lilac),.62) 0%, rgba(var(--lilac),0) 66%),
+  radial-gradient(80% 40% at 50% 100%, rgba(var(--blush),.34) 0%, rgba(var(--blush),0) 68%);
+}
+/* PROCESS — mist, cool enough to make the teal spine sing */
+#process{--wash:
+  radial-gradient(70% 58% at 90% 6%, rgba(var(--mist),.72) 0%, rgba(var(--mist),0) 64%),
+  radial-gradient(58% 48% at 4% 58%, rgba(var(--blush),.40) 0%, rgba(var(--blush),0) 66%);
+}
+/* SERVICES — faint butter with a blush corner */
+#services{--wash:
+  radial-gradient(64% 54% at 96% 10%, rgba(var(--butter),.60) 0%, rgba(var(--butter),0) 66%),
+  radial-gradient(66% 52% at 6% 88%, rgba(var(--blush),.44) 0%, rgba(var(--blush),0) 64%);
+}
+/* GALLERY — porcelain, so the tiles pop off the page */
+#gallery{--wash:
+  radial-gradient(90% 34% at 50% 0%, rgba(var(--rose),.26) 0%, rgba(var(--rose),0) 70%);
+  --grain-o:.22;
+}
+/* TESTIMONIALS — blush again, the warmest note before the ink */
+#voices{--wash:
+  radial-gradient(72% 60% at 14% 8%, rgba(var(--blush),.66) 0%, rgba(var(--blush),0) 62%),
+  radial-gradient(66% 56% at 88% 78%, rgba(var(--rose),.56) 0%, rgba(var(--rose),0) 66%);
+}
+/* CLIENTS — near-porcelain; the logo wall needs a clean ground */
+#clients{--wash:
+  radial-gradient(80% 40% at 92% 0%, rgba(var(--mist),.30) 0%, rgba(var(--mist),0) 70%);
+  --grain-o:.20;
+}
+/* CONTACT — ink inversion with a pink-teal aurora along the top edge */
+#contact{--wash:
+  radial-gradient(72% 40% at 24% -4%, rgba(246,196,214,.20) 0%, rgba(246,196,214,0) 62%),
+  radial-gradient(64% 36% at 78% -2%, rgba(92,198,205,.17) 0%, rgba(92,198,205,0) 64%),
+  radial-gradient(120% 24% at 50% 0%, rgba(233,227,240,.10) 0%, rgba(233,227,240,0) 70%);
+}
+#contact::after{mix-blend-mode:screen; opacity:.14}
+
+/* section index + hairline header */
 .sect-head{
   display:flex; align-items:baseline; gap:10px 14px; flex-wrap:wrap;
-  padding-bottom:14px; margin-bottom:clamp(26px,3.4vw,48px);
+  padding-bottom:14px; margin-bottom:var(--head-gap);
   border-bottom:1px solid var(--hair);
 }
 .soul-em{font-family:var(--serif); font-style:italic; font-size:1.22em; letter-spacing:0}
@@ -133,12 +206,6 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
   background-repeat:no-repeat; background-position:0 92%;
   background-size:100% .10em; padding-bottom:.04em;
 }
-.kick{
-  font-family:var(--mono); font-size:10px; letter-spacing:.16em; text-transform:uppercase;
-  color:var(--accent-deep); display:inline-flex; align-items:center; gap:8px;
-}
-.kick::before{content:""; width:6px; height:6px; border-radius:50%; background:var(--leaf)}
-
 /* ---------- lotus marks ---------- */
 .lotus{width:1em; height:1em; display:inline-block; color:var(--accent); flex:none}
 .mark-brand{width:1em; height:1em; display:block; flex:none}
@@ -160,7 +227,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
   backdrop-filter:blur(14px) saturate(1.1);
   border-bottom-color:var(--hair);
 }
-.brand{display:flex; align-items:center; gap:11px; text-decoration:none; line-height:1}
+.brand{display:flex; align-items:center; gap:11px; text-decoration:none; line-height:1; min-height:44px}
 .brand .mark-brand{font-size:30px}
 .brand-word{display:flex; align-items:baseline; gap:7px}
 .brand-word b{
@@ -183,13 +250,13 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
 .nav-links a:hover{color:var(--ink)}
 .nav-links a:hover::after{transform:scaleX(1)}
 .nav-cta{
+  display:inline-flex; align-items:center; min-height:44px;
   font-family:var(--mono); font-size:11px; letter-spacing:.13em; text-transform:uppercase;
   text-decoration:none; color:var(--accent-deep); border:1px solid var(--accent);
   padding:11px 18px; border-radius:999px;
   transition:background 400ms var(--ease), color 400ms var(--ease), border-color 400ms var(--ease);
 }
 .nav-cta:hover{background:var(--accent); border-color:var(--accent); color:#0F2E31}
-.nav-cta{display:inline-flex; align-items:center; min-height:44px}
 
 .nav-toggle{display:none; align-items:center; gap:9px; padding:8px 4px}
 .nav-toggle .bars{width:22px; height:9px; position:relative; display:block}
@@ -203,7 +270,10 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
   position:fixed; inset:0; z-index:99;
   background:var(--ground);
   padding:calc(var(--gutter) + 44px) var(--gutter) var(--gutter);
-  display:flex; flex-direction:column; justify-content:center; gap:6px;
+  display:flex; flex-direction:column; gap:6px;
+  /* "safe" so a tall sheet on a short phone never centres its top out of reach */
+  justify-content:center;
+  justify-content:safe center;
   opacity:0; visibility:hidden; transition:opacity 500ms var(--ease), visibility 500ms;
   overflow-y:auto;
 }
@@ -217,7 +287,11 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
 }
 .nav-sheet a em{font-family:var(--mono); font-style:normal; font-size:11px; letter-spacing:.16em; color:var(--accent-deep)}
 .nav-sheet .sheet-foot{margin-top:26px; display:flex; flex-wrap:wrap; gap:8px 20px}
-.nav-sheet .sheet-foot a{font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; border:0; padding:0; color:var(--ink-soft)}
+.nav-sheet .sheet-foot a{
+  font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+  border:0; padding:0; color:var(--ink-soft);
+  display:inline-flex; align-items:center; min-height:44px;
+}
 
 /* ============================================================
    SAMPLE-IMAGE PLATES — inline SVG scenes + grain
@@ -231,7 +305,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
   display:block; max-width:none;
 }
 .plate-grain{
-  content:""; position:absolute; inset:-8%; z-index:1;
+  position:absolute; inset:-8%; z-index:1;
   background-image:var(--grain); background-size:160px 160px;
   opacity:.42; mix-blend-mode:multiply; pointer-events:none;
 }
@@ -251,11 +325,14 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
 .wipe{clip-path:inset(100% 0 0 0); transition:clip-path 800ms var(--ease)}
 .wipe.in{clip-path:inset(0 0 0 0)}
 
-/* generic reveal */
-.rev{opacity:0; transform:translateY(22px); transition:opacity 700ms var(--ease), transform 700ms var(--ease); transition-delay:var(--d,0ms)}
-.rev.in{opacity:1; transform:none}
-.rev-l{opacity:0; transform:translateY(14px); transition:opacity 620ms var(--ease), transform 620ms var(--ease); transition-delay:var(--d,0ms)}
-.rev-l.in{opacity:1; transform:none}
+/* generic reveal
+   Uses the independent `translate` property, not `transform`, so a component
+   that owns `transform` for hover (cards, tiles) can list the reveal in its own
+   transition without inheriting the reveal's stagger delay. */
+.rev{opacity:0; translate:0 22px; transition:opacity 700ms var(--ease), translate 700ms var(--ease); transition-delay:var(--d,0ms)}
+.rev.in{opacity:1; translate:none}
+.rev-l{opacity:0; translate:0 14px; transition:opacity 620ms var(--ease), translate 620ms var(--ease); transition-delay:var(--d,0ms)}
+.rev-l.in{opacity:1; translate:none}
 
 /* ============================================================
    HERO
@@ -269,9 +346,11 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
 .hero-wash{
   position:absolute; inset:-14% -6% -6%; z-index:0; pointer-events:none;
   background:
-    radial-gradient(58% 46% at 74% 16%, rgba(92,198,205,.14) 0%, transparent 64%),
-    radial-gradient(52% 42% at 12% 30%, rgba(224,196,178,.20) 0%, transparent 66%),
-    radial-gradient(70% 50% at 46% 96%, rgba(105,189,69,.075) 0%, transparent 62%);
+    radial-gradient(66% 52% at 16% 12%, rgba(var(--blush),.86) 0%, rgba(var(--blush),0) 64%),
+    radial-gradient(58% 46% at 78% 20%, rgba(92,198,205,.15) 0%, transparent 64%),
+    radial-gradient(56% 46% at 94% 74%, rgba(var(--rose),.70) 0%, rgba(var(--rose),0) 66%),
+    radial-gradient(64% 44% at 44% 100%, rgba(var(--lilac),.56) 0%, rgba(var(--lilac),0) 66%),
+    radial-gradient(70% 50% at 46% 96%, rgba(105,189,69,.06) 0%, transparent 62%);
   will-change:transform;
 }
 .hero-wash::after{
@@ -308,7 +387,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
 }
 .hero-foot p{max-width:46ch; color:var(--ink); font-size:clamp(.95rem,1.15vw,1.08rem)}
 .scroll-cue{
-  display:inline-flex; align-items:center; gap:10px; text-decoration:none;
+  display:inline-flex; align-items:center; gap:10px; text-decoration:none; min-height:44px;
   font-family:var(--mono); font-size:10.5px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-soft);
 }
 .scroll-cue .stem{width:1px; height:34px; background:var(--hair); position:relative; overflow:hidden}
@@ -348,18 +427,18 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
 .marq--tall .marq-seq{font-size:clamp(12px,1.35vw,17px); letter-spacing:.14em}
 
 /* ============================================================
-   ABOUT  (01)  — label 1–3 / body 4–11
+   ABOUT  (01)  — label 1–2 / body 4–12
    ============================================================ */
 #about .about-label{grid-column:1 / span 2}
 #about .about-body{grid-column:4 / span 9}
 #about .about-body .big{
   font-family:var(--display); font-size:clamp(1.45rem,3.1vw,2.6rem); line-height:1.2;
-  letter-spacing:.004em; margin-bottom:.85em;
+  letter-spacing:.004em; margin-bottom:.7em; max-width:26ch;
 }
 #about .about-body .lede{max-width:52ch}
 #about .signoff{
-  margin-top:1.6em; padding-top:14px; border-top:1px solid var(--hair);
-  display:flex; align-items:center; gap:10px;
+  margin-top:1.5em; padding-top:14px; border-top:1px solid var(--hair);
+  display:flex; align-items:center; gap:10px; max-width:52ch;
 }
 #about .about-plate{grid-column:1 / -1; margin-top:clamp(34px,4.6vw,68px)}
 #about .about-plate .plate-ratio{aspect-ratio:16 / 6.4}
@@ -367,7 +446,9 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
 /* ============================================================
    STATS (02) — bordered cell grid (from "Soul on Stage")
    ============================================================ */
-#stats{background:var(--raised); border-top:1px solid var(--hair); border-bottom:1px solid var(--hair)}
+/* no border-bottom here: the next .sect already draws its own border-top,
+   and the two together made a 2px rule between stats and founders */
+#stats{background:var(--raised); border-top:1px solid var(--hair)}
 .stats-row{
   grid-column:1 / -1;
   display:grid; grid-template-columns:repeat(4,minmax(0,1fr));
@@ -378,7 +459,10 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
   border-right:1px solid var(--hair); border-bottom:1px solid var(--hair);
   padding:clamp(18px,2.2vw,32px) clamp(14px,1.6vw,24px) clamp(20px,2.4vw,34px);
   display:flex; flex-direction:column; gap:10px;
-  transition:background 520ms var(--ease);
+  /* the reveal's opacity/translate ride along, or this shorthand would cancel them */
+  transition:background 520ms var(--ease),
+             opacity 620ms var(--ease) var(--d,0ms),
+             translate 620ms var(--ease) var(--d,0ms);
 }
 .stat::before{
   content:""; position:absolute; top:-1px; left:0; width:34px; height:2px;
@@ -426,9 +510,9 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
 }
 .f-quote{
   font-family:var(--display); font-size:clamp(1.16rem,1.95vw,1.6rem); line-height:1.44; letter-spacing:.004em;
-  color:var(--ink);
+  color:var(--ink); max-width:34ch;
 }
-.f-attrib{margin-top:20px; padding-top:14px; border-top:1px solid var(--hair); display:flex; align-items:center; gap:9px}
+.f-attrib{margin-top:20px; padding-top:14px; border-top:1px solid var(--hair); display:flex; align-items:center; gap:9px; max-width:34ch}
 .f-attrib em{font-style:normal; font-family:var(--mono); font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-soft)}
 .f-device{
   grid-column:1 / -1; margin-bottom:clamp(26px,3.4vw,48px);
@@ -441,25 +525,68 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
    PROCESS (04)
    ============================================================ */
 #process .p-intro{grid-column:1 / span 4}
-#process .p-list{grid-column:5 / span 8}
+#process .p-list{
+  grid-column:5 / span 8;
+  position:relative;
+  --spine-pad:clamp(26px,2.8vw,44px);
+  --step-pad:clamp(18px,2.4vw,32px);
+  padding-left:var(--spine-pad);
+}
+
+/* the vertical progress spine: hairline track + teal line drawn by scroll */
+.p-spine{
+  position:absolute; left:0; top:0; bottom:0; width:1px;
+  background:var(--hair); overflow:visible; pointer-events:none;
+}
+.p-spine i{
+  position:absolute; left:-1px; top:0; width:3px; height:0;   /* JS writes the height */
+  background:linear-gradient(180deg, var(--accent) 0%, var(--accent-deep) 100%);
+  border-radius:2px;
+}
+
 .step{
+  position:relative;
   display:grid; grid-template-columns:auto 1fr; gap:clamp(14px,2.4vw,40px);
-  padding-block:clamp(18px,2.4vw,32px); border-top:1px solid var(--hair);
-  transition:border-color 500ms var(--ease);
+  padding-block:var(--step-pad); border-top:1px solid var(--hair);
+  transition:border-color 500ms var(--ease),
+             opacity 620ms var(--ease) var(--d,0ms),
+             translate 620ms var(--ease) var(--d,0ms);
 }
 .step:last-child{border-bottom:1px solid var(--hair)}
 .step:hover{border-top-color:var(--accent)}
-.step-n{font-family:var(--mono); font-size:11px; letter-spacing:.14em; color:var(--accent-deep); padding-top:.7em}
+.step-dot{
+  position:absolute; left:calc(-1 * var(--spine-pad)); top:calc(var(--step-pad) + .5em);
+  width:9px; height:9px; border-radius:50%;
+  transform:translateX(calc(-50% + .5px));
+  background:var(--ground); border:1px solid var(--hair);
+  transition:background 420ms var(--ease), border-color 420ms var(--ease), box-shadow 420ms var(--ease);
+}
+.step.active .step-dot{
+  background:var(--accent-deep); border-color:var(--accent-deep);
+  box-shadow:0 0 0 4px rgba(92,198,205,.20);
+}
+.step-n{
+  font-family:var(--mono); font-size:11px; letter-spacing:.14em;
+  color:var(--ink-soft); padding-top:.7em;
+  transition:color 420ms var(--ease);
+}
+.step.active .step-n{color:var(--accent-deep)}
 .step h3{
   font-family:var(--display); font-weight:400;
-  font-size:clamp(1.35rem,2.5vw,2rem); line-height:1.1; letter-spacing:.008em; margin-bottom:.4em;
+  font-size:clamp(1.35rem,2.5vw,2rem); line-height:1.1; letter-spacing:.008em; margin-bottom:.42em;
 }
-.step p{max-width:52ch}
+.step p{max-width:var(--measure)}
 .step .aside{
-  margin-top:12px; padding-left:14px; border-left:1px solid var(--accent);
+  margin-top:14px; padding-left:14px; border-left:1px solid var(--accent);
   font-family:var(--serif); font-style:italic; font-size:clamp(1rem,1.45vw,1.22rem);
-  line-height:1.4; color:var(--ink);
+  line-height:1.42; color:var(--ink);
 }
+/* the dim/settle only exists once JS is driving the spine */
+.p-list.spine-on .step .step-body{
+  opacity:.45; transform:translateY(12px);
+  transition:opacity 640ms var(--ease), transform 640ms var(--ease);
+}
+.p-list.spine-on .step.active .step-body{opacity:1; transform:none}
 #process .p-intro .sticky{position:sticky; top:104px}
 #process .p-intro h2{
   font-family:var(--display); font-weight:400;
@@ -488,7 +615,9 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
   padding:clamp(14px,1.6vw,24px);
   background:var(--raised); border:1px solid var(--hair);
   transition:transform 560ms var(--ease), border-color 420ms var(--ease),
-             background 420ms var(--ease), box-shadow 560ms var(--ease);
+             background 420ms var(--ease), box-shadow 560ms var(--ease),
+             opacity 620ms var(--ease) var(--d,0ms),
+             translate 620ms var(--ease) var(--d,0ms);
 }
 .s-card:hover{
   transform:translateY(-4px);
@@ -544,7 +673,9 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
 .g-meta .lotus{font-size:.74em; color:var(--tint)}
 .g-meta .view{font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-soft); white-space:nowrap; transition:color 400ms var(--ease)}
 .g-tile:hover .view{color:var(--accent-deep)}
-.g-tile .plate{transition:transform 700ms var(--ease)}
+/* clip-path listed here too: this rule outranks .wipe and would otherwise
+   cancel the gallery plates' reveal wipe */
+.g-tile .plate{transition:transform 700ms var(--ease), clip-path 800ms var(--ease)}
 .g-tile:hover .plate{transform:translateY(-6px)}
 
 /* ============================================================
@@ -562,25 +693,35 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
   font-size:clamp(1.15rem,2vw,1.55rem); line-height:1.34; max-width:28ch;
 }
 
-.tm-rows{margin-top:clamp(24px,3vw,42px)}
-.tm-row{overflow:hidden; padding:clamp(6px,.7vw,10px) 0; --speed:78s}
+.tm-rows{margin-top:clamp(26px,3vw,42px)}
+.tm-row{overflow:hidden; padding:clamp(7px,.8vw,11px) 0; --speed:78s}
+.tm-row + .tm-row{padding-top:clamp(10px,1.1vw,16px)}
 .tm-track{display:flex; width:max-content; animation:marq var(--speed) linear infinite}
+.tm-row--rev .tm-track{animation-direction:reverse}
 .tm-row:hover .tm-track,.tm-row:focus-within .tm-track{animation-play-state:paused}
 .tm-seq{display:flex; gap:clamp(14px,1.6vw,24px); flex:0 0 auto; padding-right:clamp(14px,1.6vw,24px)}
 .card{
+  position:relative;
   flex:0 0 auto; width:clamp(276px,28vw,392px);
-  background:var(--raised); border:1px solid var(--hair);
-  padding:clamp(20px,1.9vw,28px);
-  display:flex; flex-direction:column; gap:14px;
-  transition:transform 620ms var(--ease), border-color 620ms var(--ease);
+  background:var(--raised); border:1px solid var(--hair-warm); border-radius:3px;
+  padding:clamp(22px,2vw,30px);
+  display:flex; flex-direction:column; gap:15px;
+  transition:transform 620ms var(--ease), border-color 620ms var(--ease), box-shadow 620ms var(--ease);
 }
-.card:hover{transform:translateY(-5px); border-color:#D6D3CC}
+.card:hover{transform:translateY(-5px); border-color:#DCC6CB; box-shadow:0 18px 38px -30px rgba(90,52,62,.55)}
+/* quote-mark ornament */
+.card::before{
+  content:"\201C";
+  font-family:var(--display); font-size:2.6rem; line-height:1;
+  color:var(--accent-deep); opacity:.9;
+  display:block; height:.46em; margin-bottom:-2px;
+}
 .card q{
   quotes:"\201C" "\201D";
-  font-size:clamp(14.5px,1.02vw,16.5px); line-height:1.56; color:var(--ink); letter-spacing:.002em;
+  font-size:clamp(14.5px,1.02vw,16.5px); line-height:1.62; color:var(--ink); letter-spacing:.002em;
 }
 .card .by{
-  margin-top:auto; padding-top:12px; border-top:1px solid var(--hair);
+  margin-top:auto; padding-top:15px; border-top:1px solid var(--hair-warm);
   font-family:var(--mono); font-size:10px; letter-spacing:.13em; text-transform:uppercase;
   color:var(--ink-soft); line-height:1.7;
 }
@@ -589,12 +730,14 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
   width:clamp(292px,32vw,462px);
   background:var(--ink); border-color:var(--ink);
 }
-.card--feat q{color:#F4F2ED; font-size:clamp(17px,1.5vw,24px); line-height:1.34; letter-spacing:-.004em}
+.card--feat::before{display:none}
+.card--feat q{color:#F4F2ED; font-size:clamp(17px,1.5vw,24px); line-height:1.38; letter-spacing:-.004em}
 .card--feat .kicker{
   font-family:var(--serif); font-style:italic; color:var(--accent);
-  font-size:clamp(1.6rem,2.3vw,2.35rem); line-height:1; letter-spacing:0;
+  font-size:clamp(1.6rem,2.3vw,2.35rem); line-height:1.05; letter-spacing:0;
+  display:block;
 }
-.card--feat .by{border-top-color:#33323C; color:#A8A5B0}
+.card--feat .by{border-top-color:#3A3944; color:#B4B1BC}
 .card--feat .by b{color:#F4F2ED}
 .tm-static{display:none}
 
@@ -602,20 +745,54 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
    CLIENTS (08)
    ============================================================ */
 #clients .c-head{grid-column:1 / span 12}
-#clients .c-strip{grid-column:1 / -1; margin-block:clamp(10px,1.8vw,24px) clamp(28px,3.6vw,52px)}
-.c-strip ul{display:flex; flex-wrap:wrap; gap:0}
-.c-strip li{
-  font-family:var(--display); font-size:clamp(1.1rem,2.15vw,1.75rem); line-height:1.34; letter-spacing:.008em;
-  display:flex; align-items:center; gap:clamp(14px,2vw,28px); padding-right:clamp(14px,2vw,28px);
+
+/* ---------- monochrome logo wall ----------
+   Typographic wordmarks, hairline-separated like the stats grid. */
+.c-wall{
+  grid-column:1 / -1;
+  display:grid; grid-template-columns:repeat(5,minmax(0,1fr));
+  border-top:1px solid var(--hair); border-left:1px solid var(--hair);
+  margin-block:clamp(12px,1.8vw,24px) clamp(28px,3.6vw,52px);
 }
-.c-strip li .sep{color:var(--accent); font-size:.44em; translate:0 -.08em}
-.c-strip li:last-child .sep{display:none}
+.c-logo{
+  border-right:1px solid var(--hair); border-bottom:1px solid var(--hair);
+  min-height:clamp(96px,9.4vw,128px);
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:6px; padding:clamp(16px,1.8vw,24px) clamp(10px,1.2vw,16px);
+  text-align:center;
+  /* one muted ink tone for the whole wall — a colour, not an opacity, so the
+     reveal animation can own opacity and contrast stays predictable */
+  color:var(--ink-mute);
+  transition:background 420ms var(--ease), color 420ms var(--ease), box-shadow 420ms var(--ease),
+             opacity 620ms var(--ease) var(--d,0ms),
+             translate 620ms var(--ease) var(--d,0ms);
+}
+.c-logo:hover,.c-logo:focus-within{
+  color:var(--ink); background:rgba(92,198,205,.07);
+  box-shadow:inset 0 -2px 0 rgba(92,198,205,.55);
+}
+.c-logo:hover .wm-dot,.c-logo:hover .wm-rule{background:var(--accent-deep)}
+.c-logo:hover .wm-ring{border-color:var(--accent-deep)}
+
+/* wordmark type treatments — deliberately varied so the wall reads as logos */
+.wm-caps{font-family:var(--display); font-size:clamp(15px,1.5vw,19px); letter-spacing:.30em; text-transform:uppercase; text-indent:.30em; line-height:1.1}
+.wm-stack{font-family:var(--sans); font-weight:500; font-size:clamp(13px,1.25vw,15.5px); letter-spacing:.20em; text-transform:uppercase; line-height:1.44; margin-right:-.20em}
+.wm-serif{font-family:var(--display); font-size:clamp(16px,1.6vw,21px); letter-spacing:.03em; line-height:1.15}
+.wm-ital{font-family:var(--serif); font-style:italic; font-size:clamp(19px,2vw,26px); letter-spacing:-.01em; line-height:1.05}
+.wm-mono{font-family:var(--mono); font-weight:700; font-size:clamp(12.5px,1.2vw,15px); letter-spacing:.22em; text-transform:uppercase; text-indent:.22em; line-height:1.3}
+.wm-sub{font-family:var(--mono); font-size:10px; letter-spacing:.18em; text-transform:uppercase; line-height:1.5; text-indent:.18em}
+.wm-wide{font-family:var(--display); font-size:clamp(17px,1.9vw,24px); letter-spacing:.42em; text-transform:uppercase; text-indent:.42em; line-height:1}
+.wm-dot{width:5px; height:5px; border-radius:50%; background:currentColor; display:block; flex:none; transition:background 420ms var(--ease)}
+.wm-rule{width:26px; height:1px; background:currentColor; display:block; flex:none; transition:background 420ms var(--ease)}
+.wm-ring{width:13px; height:13px; border-radius:50%; border:1px solid currentColor; display:block; flex:none; transition:border-color 420ms var(--ease)}
 #clients .c-toggle-row{grid-column:1 / -1; display:flex; align-items:center; gap:16px; border-top:1px solid var(--hair); padding-top:18px}
 .c-toggle{
   display:inline-flex; align-items:center; gap:12px;
   font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink);
   border:1px solid var(--hair); border-radius:999px; padding:13px 22px; min-height:44px;
-  transition:background 420ms var(--ease), color 420ms var(--ease), border-color 420ms var(--ease);
+  transition:background 420ms var(--ease), color 420ms var(--ease), border-color 420ms var(--ease),
+             opacity 620ms var(--ease) var(--d,0ms),
+             translate 620ms var(--ease) var(--d,0ms);
 }
 .c-toggle:hover{background:rgba(92,198,205,.08); border-color:var(--accent); color:var(--accent-deep)}
 .c-toggle .pm{width:11px; height:11px; position:relative; flex:none}
@@ -655,7 +832,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
 #contact .k-left > p{max-width:36ch; color:#EFEDE8}
 .k-block{margin-top:clamp(28px,3.6vw,48px)}
 .k-block h3{font-family:var(--mono); font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-soft); font-weight:700; padding-bottom:10px; border-bottom:1px solid var(--hair); margin-bottom:14px}
-.k-line{display:flex; flex-wrap:wrap; align-items:baseline; gap:6px 14px; padding-block:9px}
+.k-line{display:flex; flex-wrap:wrap; align-items:center; gap:6px 14px}
 .k-line .who{font-family:var(--display); font-size:clamp(1.05rem,1.7vw,1.35rem); letter-spacing:.01em; min-width:9.5em}
 .k-line a{
   font-family:var(--mono); font-size:12px; letter-spacing:.09em; text-decoration:none;
@@ -665,7 +842,6 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
   transition:color 380ms var(--ease);
 }
 .k-line a:hover{color:var(--accent)}
-.k-line{align-items:center; padding-block:0}
 .k-actions{display:flex; flex-wrap:wrap; gap:10px; margin-top:22px}
 .btn{
   display:inline-flex; align-items:center; gap:10px; text-decoration:none;
@@ -682,7 +858,8 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
 .field label{
   position:absolute; top:22px; left:0; font-family:var(--mono); font-size:11px;
   letter-spacing:.14em; text-transform:uppercase; color:var(--ink-soft);
-  transition:transform 460ms var(--ease), font-size 460ms var(--ease), color 460ms var(--ease);
+  /* the label is scaled, not resized — no font-size transition to run */
+  transition:transform 460ms var(--ease), color 460ms var(--ease);
   transform-origin:left top; pointer-events:none;
 }
 .field input,.field textarea,.field select{
@@ -690,9 +867,15 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
   font-family:var(--sans); font-size:1rem; line-height:1.5; padding:2px 0 12px;
   border-radius:0;
 }
+/* 44px minimum touch target on every single-line control */
+.field input,.field select{min-height:44px}
 .field textarea{resize:vertical; min-height:84px}
 .field select option{color:#1A1A22}
 .field input:focus,.field textarea:focus,.field select:focus{outline:none}
+/* …but keyboard focus still needs a real indicator, not just a 1px underline */
+.field input:focus-visible,.field textarea:focus-visible,.field select:focus-visible{
+  outline:2px solid var(--accent); outline-offset:2px;
+}
 .field:focus-within{border-bottom-color:var(--accent)}
 .field:focus-within label,.field.filled label{transform:translateY(-20px) scale(.86); color:var(--accent)}
 .field select{color:#F8F7F4; appearance:none}
@@ -709,27 +892,27 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
 /* ============================================================
    FOOTER
    ============================================================ */
-.foot{background:#1A1A22; color:#F4F2ED; --ink:#F4F2ED; --hair:#33323C; --ink-soft:#A8A5B0; padding-bottom:clamp(22px,3vw,40px)}
-.foot-top{
-  border-top:1px solid var(--hair); padding-top:clamp(24px,3vw,40px);
-  display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); gap:var(--gap); align-items:center;
+.foot{
+  background:#1A1A22; color:#F4F2ED;
+  --ink:#F4F2ED; --hair:#33323C; --ink-soft:#A8A5B0;
+  padding-block:clamp(24px,3vw,38px) clamp(18px,2.2vw,28px);
 }
-.foot-brand{grid-column:1 / span 3}
+.foot-top{
+  display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between;
+  gap:8px clamp(20px,3vw,44px);
+}
 .foot-brand .brand-word b{color:#F8F7F4}
 .foot-brand .brand-word span{color:var(--accent)}
-.foot-nav{grid-column:4 / span 6; display:flex; flex-wrap:wrap; gap:4px clamp(14px,1.9vw,26px)}
-.foot-social{grid-column:10 / span 3; display:flex; flex-wrap:wrap; gap:4px clamp(12px,1.4vw,20px); justify-content:flex-end}
-.foot-nav a,.foot-social a{
+.foot-social{display:flex; flex-wrap:wrap; gap:0 clamp(14px,1.8vw,26px)}
+.foot-social a{
   text-decoration:none; color:#EFEDE8;
   font-family:var(--mono); font-size:10.5px; letter-spacing:.14em; text-transform:uppercase;
   display:inline-flex; align-items:center; min-height:44px;
   transition:color 380ms var(--ease);
 }
-.foot-nav a:hover,.foot-social a:hover{color:var(--accent)}
-.foot-social a{color:var(--ink-soft)}
+.foot-social a:hover{color:var(--accent)}
 .foot-bar{
-  margin-top:clamp(20px,2.6vw,34px); padding-top:16px; border-top:1px solid var(--hair);
-  display:flex; flex-wrap:wrap; gap:10px 24px; justify-content:space-between; align-items:center;
+  margin-top:clamp(14px,1.8vw,22px); padding-top:14px; border-top:1px solid var(--hair);
 }
 .foot-bar .mono{color:var(--ink-soft)}
 
@@ -747,9 +930,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
   #contact .k-left{grid-column:1 / -1}
   #contact .k-right{grid-column:1 / -1; margin-top:44px}
   .c-roster ol{columns:2}
-  .foot-brand{grid-column:1 / -1}
-  .foot-nav{grid-column:1 / -1; margin-top:26px}
-  .foot-social{grid-column:1 / -1; margin-top:18px}
+  .c-wall{grid-template-columns:repeat(4,minmax(0,1fr))}
 }
 @media (max-width:900px){
   .nav-links,.nav > .nav-cta{display:none}
@@ -759,22 +940,42 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
   .founder,.founder--b{grid-template-columns:repeat(12,minmax(0,1fr))}
   .f-plate,.founder--b .f-plate{grid-column:1 / -1; order:1; max-width:min(100%,420px)}
   .f-body,.founder--b .f-body{grid-column:1 / -1; order:2; margin-top:22px}
+  .c-wall{grid-template-columns:repeat(3,minmax(0,1fr))}
 }
 @media (max-width:820px){
   .stats-row{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
+@media (max-width:760px){
+  .c-wall{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .c-logo{min-height:104px}
+}
 @media (max-width:720px){
-  .step{grid-template-columns:1fr; gap:8px}
+  /* the spine moves to the left edge of the stacked steps */
+  #process .p-list{--spine-pad:22px; --step-pad:20px}
+  .step{grid-template-columns:1fr; gap:6px}
   .step-n{padding-top:0}
+  .step-dot{top:calc(var(--step-pad) + .18em)}
   .c-roster ol{columns:1}
   .hero-top{flex-direction:column; gap:10px}
   .hero-top .right{text-align:left}
   .k-line .who{min-width:0; width:100%}
   .nav-sheet a{padding-block:12px}
 }
+@media (max-width:560px){
+  /* quote cards read as one-per-screen on phones */
+  .card{width:85vw; padding:22px}
+  .card--feat{width:87vw}
+  .card::before{font-size:2.2rem}
+}
 @media (max-width:420px){
   .brand-word span{display:none}
   .s-card{min-height:120px}
+  /* keep "36,678" on one line inside a half-width cell */
+  .stat .num{font-size:1.86rem}
+  .stat{padding:16px 12px 20px}
+  .wm-caps,.wm-wide{letter-spacing:.22em; text-indent:.22em}
+  .wm-sub{letter-spacing:.12em; text-indent:.12em}
+  .wm-stack{letter-spacing:.14em; margin-right:-.14em}
 }
 
 /* Reduced motion: no transforms, no wipes, no marquees, no parallax —
@@ -786,7 +987,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
     animation-iteration-count:1 !important;
     animation-delay:0ms !important;
   }
-  .rev,.rev-l{opacity:0; transform:none !important; transition:opacity 420ms linear !important}
+  .rev,.rev-l{opacity:0; translate:none !important; transform:none !important; transition:opacity 420ms linear !important}
   .rev.in,.rev-l.in{opacity:1}
   .line > span{transform:none !important; opacity:0; transition:opacity 420ms linear !important}
   .loaded .line > span{opacity:1}
@@ -803,9 +1004,15 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
   #clients .c-roster{transition:none !important}
   .scroll-cue .stem::after{display:none}
 
-  /* marquees: animation off, scroll instead, duplicate sequence hidden */
+  /* process spine: drawn full and static; steps get a plain opacity fade */
+  .p-spine i{height:100% !important; transition:none !important}
+  .step-dot{transition:none !important}
+  .p-list.spine-on .step .step-body{opacity:1 !important; transform:none !important; transition:none !important}
+
+  /* marquees: animation off, duplicate sequence hidden. The strip stays
+     overflow:hidden — it is aria-hidden decoration, and a scrollable box
+     inside aria-hidden content would be a keyboard trap for no benefit. */
   .marq-track,.tm-track{animation:none !important; transform:none !important}
-  .marq{overflow-x:auto}
   .marq-seq:nth-child(2){display:none}
   .tm-rows{display:none}
   .tm-static{
@@ -822,6 +1029,31 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
 
 <!-- ============ SVG SPRITE ============ -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <!-- ============================================================
+       PHOTOGRAPHIC DEFS — shared by every sample scene.
+       Depth is faked with three cheap tricks: blurred background
+       bokeh, a warm/pink light pass, and an edge vignette.
+       ============================================================ -->
+  <defs>
+    <filter id="fBlurM" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="2.4"/></filter>
+    <filter id="fBlurL" x="-35%" y="-35%" width="170%" height="170%"><feGaussianBlur stdDeviation="4.6"/></filter>
+    <!-- objectBoundingBox units, so one gradient serves every viewBox -->
+    <radialGradient id="vig" cx=".5" cy=".46" r=".74">
+      <stop offset=".5" stop-color="#2B1F26" stop-opacity="0"/>
+      <stop offset=".82" stop-color="#2B1F26" stop-opacity=".10"/>
+      <stop offset="1" stop-color="#2B1F26" stop-opacity=".28"/>
+    </radialGradient>
+    <linearGradient id="warmLight" x1="0" y1="0" x2=".45" y2="1">
+      <stop offset="0" stop-color="#FFD6E1" stop-opacity=".34"/>
+      <stop offset=".48" stop-color="#FFE3D2" stop-opacity=".14"/>
+      <stop offset="1" stop-color="#E6C4D2" stop-opacity=".26"/>
+    </linearGradient>
+    <linearGradient id="fgShade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4A3641" stop-opacity="0"/>
+      <stop offset="1" stop-color="#4A3641" stop-opacity=".34"/>
+    </linearGradient>
+  </defs>
+
   <!-- simple single-hue lotus: recolourable per gallery category / service hover -->
   <symbol id="lotus" viewBox="0 0 24 24">
     <g fill="currentColor">
@@ -940,6 +1172,13 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
       <stop offset="0" stop-color="#EBE4D9"/><stop offset="1" stop-color="#DCD3C4"/>
     </linearGradient>
     <rect width="160" height="100" fill="url(#wedSky)"/>
+    <!-- background: blurred bokeh lights -->
+    <g filter="url(#fBlurL)" opacity=".5">
+      <circle cx="22" cy="20" r="7" fill="#FBD8D2"/><circle cx="41" cy="12" r="4.6" fill="#FCE6D0"/>
+      <circle cx="132" cy="16" r="8" fill="#F6D3DE"/><circle cx="114" cy="26" r="4.4" fill="#FCE6D0"/>
+      <circle cx="72" cy="14" r="5" fill="#EEDCEC"/><circle cx="150" cy="34" r="5.4" fill="#FBD8D2"/>
+      <circle cx="10" cy="40" r="5" fill="#F6D3DE"/>
+    </g>
     <circle cx="80" cy="66" r="42" fill="url(#wedSun)"/>
     <circle cx="80" cy="70" r="11" fill="#F7D5B9" opacity=".85"/>
     <path d="M0 74Q10 63 20 73 30 61 41 72 50 65 60 73L60 79 0 79Z" fill="#C4CFC6" opacity=".6"/>
@@ -961,6 +1200,14 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
     <ellipse cx="70" cy="32.6" rx="4" ry="4.6" fill="#FCF1E2" stroke="#E3CEB5" stroke-width=".7"/>
     <ellipse cx="90" cy="35.4" rx="3.2" ry="3.7" fill="#FCF1E2" stroke="#E3CEB5" stroke-width=".7"/>
     <g fill="#E2B07E" opacity=".65"><circle cx="70" cy="93" r="1.1"/><circle cx="90" cy="93" r="1.1"/><circle cx="74" cy="84" r=".9"/><circle cx="86" cy="84" r=".9"/><circle cx="67.5" cy="98" r=".9"/><circle cx="92.5" cy="98" r=".9"/></g>
+    <!-- foreground: out-of-focus foliage shot through -->
+    <g filter="url(#fBlurM)" opacity=".5">
+      <path d="M-4 100q10-22 4-34 14 8 16 34z" fill="#7E8C77"/>
+      <path d="M164 100q-12-20-6-32-14 8-18 32z" fill="#7E8C77"/>
+      <ellipse cx="14" cy="96" rx="12" ry="7" fill="#8E9A86"/>
+    </g>
+    <rect width="160" height="100" fill="url(#warmLight)"/>
+    <rect width="160" height="100" fill="url(#vig)"/>
   </symbol>
 
   <!-- SANGEETS · hanging paper parasols with tassels -->
@@ -973,6 +1220,11 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
     </radialGradient>
     <rect width="100" height="125" fill="url(#sgBg)"/>
     <rect width="100" height="125" fill="url(#sgGlow)"/>
+    <g filter="url(#fBlurL)" opacity=".46">
+      <circle cx="14" cy="22" r="7" fill="#F5CBD6"/><circle cx="86" cy="14" r="6" fill="#FBE0CB"/>
+      <circle cx="92" cy="52" r="8" fill="#F0D8E6"/><circle cx="8" cy="70" r="6.4" fill="#F5CBD6"/>
+      <circle cx="50" cy="8" r="5" fill="#FBE0CB"/><circle cx="70" cy="104" r="7" fill="#EFD6DD"/>
+    </g>
     <g stroke="#DCC7B3" stroke-width=".45" fill="none">
       <path d="M22 0v33"/><path d="M50 0v20"/><path d="M76 0v44"/><path d="M36 0v63"/><path d="M64 0v77"/>
     </g>
@@ -1002,6 +1254,14 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
     <path d="M0 108q26-6 50 0t50-3v20H0z" fill="#E8D5C3" opacity=".55"/>
     <g fill="#5CC6CD" opacity=".45"><circle cx="14" cy="98" r="1.3"/><circle cx="88" cy="88" r="1.3"/><circle cx="46" cy="112" r="1.1"/></g>
     <g fill="#69BD45" opacity=".4"><circle cx="30" cy="106" r="1.2"/><circle cx="82" cy="110" r="1"/></g>
+    <!-- foreground: a near parasol, thrown out of focus -->
+    <g filter="url(#fBlurM)" opacity=".42">
+      <path d="M-8 118a20 16 0 0 1 40 0z" fill="#E8B7B0"/>
+      <path d="M12 118v10" stroke="#D8A79F" stroke-width="1.6" fill="none"/>
+      <path d="M78 125a16 13 0 0 1 32 0z" fill="#D9C1B0"/>
+    </g>
+    <rect width="100" height="125" fill="url(#warmLight)"/>
+    <rect width="100" height="125" fill="url(#vig)"/>
   </symbol>
 
   <!-- ANNIVERSARIES · laid table, candles and foliage -->
@@ -1016,6 +1276,11 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
       <stop offset="0" stop-color="#FCF8F2"/><stop offset="1" stop-color="#E9DDCE"/>
     </linearGradient>
     <rect width="120" height="120" fill="url(#anBg)"/>
+    <g filter="url(#fBlurL)" opacity=".5">
+      <circle cx="16" cy="18" r="7.5" fill="#F6CFD6"/><circle cx="36" cy="10" r="5" fill="#FBE2CC"/>
+      <circle cx="104" cy="16" r="8" fill="#F2D4E0"/><circle cx="88" cy="8" r="4.6" fill="#FBE2CC"/>
+      <circle cx="112" cy="44" r="6" fill="#F6CFD6"/><circle cx="8" cy="46" r="6.4" fill="#EFD8E4"/>
+    </g>
     <path d="M28 78V38a32 32 0 0 1 64 0v40z" fill="#EFE3DC" opacity=".7"/>
     <path d="M28 78V38a32 32 0 0 1 64 0v40" fill="none" stroke="#DCCBC1" stroke-width=".8"/>
     <circle cx="60" cy="62" r="46" fill="url(#anWarm)"/>
@@ -1047,6 +1312,14 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
     <g fill="none" stroke="#5CC6CD" stroke-width=".8" opacity=".85">
       <path d="M50 78v-5a4 4 0 0 1 8 0v5"/><path d="M62 78v-5a4 4 0 0 1 8 0v5"/>
     </g>
+    <!-- foreground: a near glass and a chair back, softened -->
+    <g filter="url(#fBlurM)" opacity=".45">
+      <path d="M2 120V96a9 9 0 0 1 18 0v24z" fill="#7A5F63"/>
+      <path d="M104 120v-18a8 8 0 0 1 16 0v18z" fill="#7A5F63"/>
+    </g>
+    <rect width="120" height="120" fill="url(#fgShade)" opacity=".5"/>
+    <rect width="120" height="120" fill="url(#warmLight)"/>
+    <rect width="120" height="120" fill="url(#vig)"/>
   </symbol>
 
   <!-- CORPORATE · stage, microphone, spotlight -->
@@ -1058,6 +1331,11 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
       <stop offset="0" stop-color="#FFFFFF" stop-opacity=".9"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
     </linearGradient>
     <rect width="160" height="80" fill="url(#cpBg)"/>
+    <g filter="url(#fBlurL)" opacity=".42">
+      <circle cx="18" cy="14" r="7" fill="#E8D2DE"/><circle cx="38" cy="8" r="4.4" fill="#D9E6EC"/>
+      <circle cx="142" cy="12" r="7.5" fill="#E8D2DE"/><circle cx="122" cy="7" r="4.2" fill="#D9E6EC"/>
+      <circle cx="80" cy="6" r="5" fill="#F2DCE2"/>
+    </g>
     <g stroke="#D6DAE2" stroke-width=".7" fill="none" opacity=".9">
       <path d="M24 0v54M40 0v54M56 0v54M104 0v54M120 0v54M136 0v54"/>
     </g>
@@ -1079,6 +1357,13 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
       <path d="M66 21a13 13 0 0 0 0 14"/><path d="M60 16a20 20 0 0 0 0 24"/>
     </g>
     <path d="M0 62h160" stroke="#5CC6CD" stroke-width=".8" opacity=".55"/>
+    <!-- foreground: the backs of an audience, thrown out of focus -->
+    <g filter="url(#fBlurM)" opacity=".5" fill="#4E4A57">
+      <path d="M-2 80V72a8 8 0 0 1 16 0v8z"/><path d="M20 80v-6a7 7 0 0 1 14 0v6z"/>
+      <path d="M126 80v-7a7.5 7.5 0 0 1 15 0v7z"/><path d="M148 80v-9a8 8 0 0 1 16 0v9z"/>
+    </g>
+    <rect width="160" height="80" fill="url(#warmLight)" opacity=".7"/>
+    <rect width="160" height="80" fill="url(#vig)"/>
   </symbol>
 
   <!-- BIRTHDAYS · string lights and bunting over a garden -->
@@ -1091,6 +1376,11 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
     </radialGradient>
     <rect width="150" height="120" fill="url(#bdSky)"/>
     <circle cx="108" cy="24" r="40" fill="url(#bdSun)"/>
+    <g filter="url(#fBlurL)" opacity=".44">
+      <circle cx="16" cy="14" r="7" fill="#F3CFD9"/><circle cx="36" cy="8" r="4.6" fill="#FBE6CC"/>
+      <circle cx="132" cy="10" r="6.6" fill="#F3CFD9"/><circle cx="66" cy="6" r="4.4" fill="#DCEAE6"/>
+      <circle cx="6" cy="34" r="5.6" fill="#EFD8E2"/>
+    </g>
     <path d="M0 20q75 34 150 2" fill="none" stroke="#C9BCA8" stroke-width=".6"/>
     <path d="M0 38q75 32 150 4" fill="none" stroke="#C9BCA8" stroke-width=".6"/>
     <g stroke="#C9BCA8" stroke-width=".5">
@@ -1114,6 +1404,14 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
     <path d="M66 95h18" stroke="#F0C9C4" stroke-width="1.4"/>
     <g stroke="#5CC6CD" stroke-width="1" stroke-linecap="round"><path d="M71 90v-5M75 90v-6.5M79 90v-5"/></g>
     <g fill="#F2B96B"><ellipse cx="71" cy="84" rx="1" ry="1.8"/><ellipse cx="75" cy="82.5" rx="1" ry="1.8"/><ellipse cx="79" cy="84" rx="1" ry="1.8"/></g>
+    <!-- foreground: near planting, out of focus -->
+    <g filter="url(#fBlurM)" opacity=".46">
+      <ellipse cx="8" cy="116" rx="20" ry="13" fill="#7F9273"/>
+      <ellipse cx="142" cy="118" rx="18" ry="12" fill="#7F9273"/>
+      <ellipse cx="34" cy="122" rx="14" ry="9" fill="#8FA083"/>
+    </g>
+    <rect width="150" height="120" fill="url(#warmLight)"/>
+    <rect width="150" height="120" fill="url(#vig)"/>
   </symbol>
 
   <!-- BRUNCHES · dessert table with coastal props -->
@@ -1128,6 +1426,11 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
       <stop offset="0" stop-color="#FCFAF4"/><stop offset="1" stop-color="#EADFCC"/>
     </linearGradient>
     <rect width="160" height="110" fill="url(#brSky)"/>
+    <g filter="url(#fBlurL)" opacity=".42">
+      <circle cx="18" cy="16" r="7.5" fill="#F5D2DA"/><circle cx="40" cy="9" r="4.6" fill="#FBE7CE"/>
+      <circle cx="146" cy="14" r="7" fill="#F5D2DA"/><circle cx="76" cy="8" r="5" fill="#DCEBEC"/>
+      <circle cx="8" cy="36" r="5.6" fill="#EFD9E1"/>
+    </g>
     <circle cx="120" cy="26" r="13" fill="#FBF0DC" opacity=".85"/>
     <rect y="42" width="160" height="18" fill="url(#brSea)"/>
     <path d="M0 42h160" stroke="#BCD8DB" stroke-width=".7"/>
@@ -1164,6 +1467,13 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
     <g fill="none" stroke="#8FAE86" stroke-width=".85" stroke-linecap="round"><path d="M54 69q-6-4-10-9"/><path d="M132 70q5-4 8-9"/></g>
     <g fill="#A3C29A"><ellipse cx="47" cy="64" rx="2.4" ry="1.4" transform="rotate(-28 47 64)"/><ellipse cx="137" cy="64" rx="2.4" ry="1.4" transform="rotate(28 137 64)"/></g>
     <g fill="#5CC6CD" opacity=".5"><circle cx="78" cy="68" r="1.6"/><circle cx="83" cy="69" r="1.2"/></g>
+    <!-- foreground: near stems and a glass rim, softened -->
+    <g filter="url(#fBlurM)" opacity=".42">
+      <path d="M-4 110V88a10 10 0 0 1 20 0v22z" fill="#8A9B85"/>
+      <ellipse cx="152" cy="104" rx="16" ry="11" fill="#C9A9A2"/>
+    </g>
+    <rect width="160" height="110" fill="url(#warmLight)"/>
+    <rect width="160" height="110" fill="url(#vig)"/>
   </symbol>
 
   <!-- ABOUT · marigold strands and a diya, studio detail -->
@@ -1176,6 +1486,12 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
       <stop offset="0" stop-color="#FDECCF" stop-opacity=".85"/><stop offset="1" stop-color="#FDECCF" stop-opacity="0"/>
     </radialGradient>
     <rect width="200" height="80" fill="url(#abGlow)"/>
+    <g filter="url(#fBlurL)" opacity=".42">
+      <circle cx="24" cy="10" r="7" fill="#F6CFD8"/><circle cx="52" cy="6" r="4.6" fill="#FBE5CB"/>
+      <circle cx="176" cy="9" r="7" fill="#F6CFD8"/><circle cx="148" cy="5" r="4.4" fill="#FBE5CB"/>
+      <circle cx="100" cy="4" r="5" fill="#EFD8E4"/><circle cx="6" cy="30" r="6" fill="#F2D6DE"/>
+      <circle cx="194" cy="32" r="6" fill="#F2D6DE"/>
+    </g>
     <g fill="none" stroke="#DEC7A9" stroke-width=".6">
       <path d="M0 6q28 30 56 0"/><path d="M56 6q28 34 56 0"/><path d="M112 6q28 30 56 0"/><path d="M168 6q20 24 32 6"/>
     </g>
@@ -1203,6 +1519,13 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
     <g fill="#A3C29A"><ellipse cx="30" cy="55" rx="3" ry="1.7" transform="rotate(-30 30 55)"/><ellipse cx="170" cy="55" rx="3" ry="1.7" transform="rotate(30 170 55)"/></g>
     <g fill="#5CC6CD" opacity=".45"><circle cx="52" cy="64" r="1.6"/><circle cx="150" cy="65" r="1.4"/></g>
     <g fill="#69BD45" opacity=".35"><circle cx="120" cy="67" r="1.5"/><circle cx="74" cy="68" r="1.2"/></g>
+    <!-- foreground: near marigolds falling out of focus -->
+    <g filter="url(#fBlurM)" opacity=".46">
+      <circle cx="10" cy="74" r="8" fill="#E0A059"/><circle cx="26" cy="79" r="6" fill="#E9B472"/>
+      <circle cx="190" cy="74" r="8" fill="#E0A059"/><circle cx="174" cy="79" r="6" fill="#E9B472"/>
+    </g>
+    <rect width="200" height="80" fill="url(#warmLight)"/>
+    <rect width="200" height="80" fill="url(#vig)"/>
   </symbol>
 
   <!-- CHELNA · planner at the board, flowers to hand -->
@@ -1211,6 +1534,11 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
       <stop offset="0" stop-color="#F7EFEF"/><stop offset=".6" stop-color="#F4E7E4"/><stop offset="1" stop-color="#EAD5D0"/>
     </linearGradient>
     <rect width="100" height="125" fill="url(#chBg)"/>
+    <g filter="url(#fBlurL)" opacity=".46">
+      <circle cx="12" cy="16" r="7" fill="#F2C6D2"/><circle cx="88" cy="12" r="6.4" fill="#FADFCE"/>
+      <circle cx="94" cy="46" r="7" fill="#EFCFDE"/><circle cx="6" cy="52" r="6" fill="#F2C6D2"/>
+      <circle cx="50" cy="6" r="5" fill="#F6DCE3"/>
+    </g>
     <path d="M18 125V44a32 32 0 0 1 64 0v81z" fill="#FBF4F2" opacity=".75"/>
     <path d="M18 125V44a32 32 0 0 1 64 0v81" fill="none" stroke="#E2CDC8" stroke-width=".8"/>
     <g>
@@ -1235,6 +1563,13 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
       <path d="M45 68l-4 12h8z" fill="#5CC6CD" opacity=".65"/>
     </g>
     <path d="M0 118q30-6 52 0t48-3v10H0z" fill="#E4CFC9" opacity=".55"/>
+    <!-- foreground: blooms carried past the lens -->
+    <g filter="url(#fBlurM)" opacity=".44">
+      <circle cx="6" cy="112" r="10" fill="#DFA0A8"/><circle cx="20" cy="122" r="8" fill="#E8B4B8"/>
+      <circle cx="96" cy="118" r="9" fill="#DFA0A8"/>
+    </g>
+    <rect width="100" height="125" fill="url(#warmLight)"/>
+    <rect width="100" height="125" fill="url(#vig)"/>
   </symbol>
 
   <!-- RAMESH · mic in hand, mid-show -->
@@ -1246,6 +1581,11 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
       <stop offset="0" stop-color="#FFFFFF" stop-opacity=".85"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
     </radialGradient>
     <rect width="100" height="125" fill="url(#raBg)"/>
+    <g filter="url(#fBlurL)" opacity=".44">
+      <circle cx="12" cy="14" r="7" fill="#EFC9D4"/><circle cx="88" cy="10" r="6" fill="#F8DFCC"/>
+      <circle cx="94" cy="44" r="7.4" fill="#D8E6E4"/><circle cx="6" cy="48" r="6.4" fill="#EFC9D4"/>
+      <circle cx="50" cy="4" r="5" fill="#F6DCE3"/>
+    </g>
     <path d="M38 0h24l26 82H12z" fill="url(#raSpot)"/>
     <circle cx="50" cy="38" r="30" fill="#FFFFFF" opacity=".35"/>
     <g fill="none" stroke="#5CC6CD" stroke-width=".9" stroke-linecap="round" opacity=".75">
@@ -1268,6 +1608,14 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
       <rect x="76.4" y="52" width="3.2" height="12" rx="1.4" fill="#5F6775"/>
     </g>
     <path d="M0 116q30-6 50 0t50-3v12H0z" fill="#C8DAD6" opacity=".6"/>
+    <!-- foreground: the heads of a near audience row -->
+    <g filter="url(#fBlurM)" opacity=".46" fill="#4B4652">
+      <path d="M-6 125v-12a11 11 0 0 1 22 0v12z"/>
+      <path d="M78 125v-14a12 12 0 0 1 24 0v14z"/>
+      <path d="M36 125v-8a9 9 0 0 1 18 0v8z"/>
+    </g>
+    <rect width="100" height="125" fill="url(#warmLight)" opacity=".85"/>
+    <rect width="100" height="125" fill="url(#vig)"/>
   </symbol>
 </svg>
 
@@ -1286,7 +1634,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
     <a href="#voices">Voices</a>
     <a href="#clients">Clients</a>
   </nav>
-  <a class="nav-cta" href="#contact">Let's talk</a>
+  <a class="nav-cta" href="#contact">Let’s talk</a>
   <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navSheet">
     <span class="mono mono--ink" id="navToggleLabel">Menu</span>
     <span class="bars" aria-hidden="true"><i></i><i></i></span>
@@ -1294,14 +1642,15 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
 </header>
 
 <div class="nav-sheet" id="navSheet" hidden>
+  <!-- indices match each section's own printed index, not menu order -->
   <a href="#about"><em>01</em>About</a>
-  <a href="#founders"><em>02</em>Founders</a>
-  <a href="#process"><em>03</em>Process</a>
-  <a href="#services"><em>04</em>Services</a>
-  <a href="#gallery"><em>05</em>Gallery</a>
-  <a href="#voices"><em>06</em>Voices</a>
-  <a href="#clients"><em>07</em>Clients</a>
-  <a href="#contact"><em>08</em>Contact</a>
+  <a href="#founders"><em>03</em>Founders</a>
+  <a href="#process"><em>04</em>Process</a>
+  <a href="#services"><em>05</em>Services</a>
+  <a href="#gallery"><em>06</em>Gallery</a>
+  <a href="#voices"><em>07</em>Voices</a>
+  <a href="#clients"><em>08</em>Clients</a>
+  <a href="#contact"><em>09</em>Contact</a>
   <div class="sheet-foot">
     <a href="tel:+919342283539">+91 93422 83539</a>
     <a href="https://wa.me/919342283539" target="_blank" rel="noopener">WhatsApp</a>
@@ -1400,7 +1749,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
         <p class="cap">Years since formation</p>
       </div>
       <div class="stat rev-l" style="--d:110ms">
-        <p class="num"><span class="count" data-target="300" aria-hidden="true">0</span><sup aria-hidden="true">+</sup><span class="vh">300 +</span></p>
+        <p class="num"><span class="count" data-target="300" aria-hidden="true">0</span><sup aria-hidden="true">+</sup><span class="vh">300+</span></p>
         <p class="cap">Events executed</p>
       </div>
       <div class="stat rev-l" style="--d:220ms">
@@ -1491,10 +1840,13 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
       </div>
     </div>
 
-    <div class="p-list">
+    <div class="p-list" id="pList">
+      <span class="p-spine" aria-hidden="true"><i id="pFill"></i></span>
+
       <article class="step rev-l">
+        <span class="step-dot" aria-hidden="true"></span>
         <p class="step-n">01</p>
-        <div>
+        <div class="step-body">
           <h3>Site Mapping</h3>
           <p>Every venue has its strengths and weaknesses — we walk yours, then design around them.</p>
           <p class="aside">Also, plan that grand entrance you always wanted. *wink wink*</p>
@@ -1502,8 +1854,9 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
       </article>
 
       <article class="step rev-l">
+        <span class="step-dot" aria-hidden="true"></span>
         <p class="step-n">02</p>
-        <div>
+        <div class="step-body">
           <h3>First Cut</h3>
           <p>We sketch an initial blueprint for your occasion and shape it to suit you — cost estimates* included.</p>
           <p class="aside">*Still more accurate than the weather.</p>
@@ -1511,28 +1864,31 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
       </article>
 
       <article class="step rev-l">
+        <span class="step-dot" aria-hidden="true"></span>
         <p class="step-n">03</p>
-        <div>
+        <div class="step-body">
           <h3>Master Plan</h3>
           <p>The whole venue is laid out to be interactive, so every guest is within reach of the excitement.</p>
-          <p class="aside">Don't fret, it will be completely stiletto- and mojari-friendly.</p>
+          <p class="aside">Don’t fret, it will be completely stiletto- and mojari-friendly.</p>
         </div>
       </article>
 
       <article class="step rev-l">
+        <span class="step-dot" aria-hidden="true"></span>
         <p class="step-n">04</p>
-        <div>
+        <div class="step-body">
           <h3>Money Wise</h3>
           <p>Everything is listed, approximated and discussed before execution — no budget too big or too small.</p>
-          <p class="aside">However, remember that the best things in life aren't free :P</p>
+          <p class="aside">However, remember that the best things in life aren’t free :P</p>
         </div>
       </article>
 
       <article class="step rev-l">
+        <span class="step-dot" aria-hidden="true"></span>
         <p class="step-n">05</p>
-        <div>
+        <div class="step-body">
           <h3>Full-speed Ahead</h3>
-          <p>It's D-Day. We coordinate every element to perfection and stay through the whole event.</p>
+          <p>It’s D-Day. We coordinate every element to perfection and stay through the whole event.</p>
           <p class="aside">No really. Just show up.</p>
         </div>
       </article>
@@ -1723,6 +2079,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
   </div>
 
   <div class="tm-rows">
+    <!-- row 1 — travels left; leads with "Magician" -->
     <div class="tm-row">
       <div class="tm-track">
         <div class="tm-seq">
@@ -1732,7 +2089,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
             <span class="by"><b>Kushali &amp; Kunal Bhandari</b></span>
           </article>
           <article class="card">
-            <q>Ramesh, as compeer, gave our book launch the ideal frame — he sharpened the audience's mood to receive a serious message.</q>
+            <q>Ramesh, as compere, gave our book launch the ideal frame — he sharpened the audience’s mood to receive a serious message.</q>
             <span class="by"><b>Shankar Jagarnathan</b> — Author: Corporate Disclosures</span>
           </article>
           <article class="card">
@@ -1743,6 +2100,33 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
             <q>You made a dead location so lively and swanky that even the owner was awestruck. The party lasted till 6 in the morning!</q>
             <span class="by"><b>Anand Jain</b></span>
           </article>
+        </div>
+        <div class="tm-seq" aria-hidden="true">
+          <article class="card card--feat">
+            <span class="kicker">“Magician”</span>
+            <q>Art comes naturally to some, and some like you are blessed with being able to innovate and create time and again.</q>
+            <span class="by"><b>Kushali &amp; Kunal Bhandari</b></span>
+          </article>
+          <article class="card">
+            <q>Ramesh, as compere, gave our book launch the ideal frame — he sharpened the audience’s mood to receive a serious message.</q>
+            <span class="by"><b>Shankar Jagarnathan</b> — Author: Corporate Disclosures</span>
+          </article>
+          <article class="card">
+            <q>By the end of any show they host, every soul leaves with a smile, every adult feels respected, and friends feel warm.</q>
+            <span class="by"><b>Avnika and Karan Bhandari</b></span>
+          </article>
+          <article class="card">
+            <q>You made a dead location so lively and swanky that even the owner was awestruck. The party lasted till 6 in the morning!</q>
+            <span class="by"><b>Anand Jain</b></span>
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <!-- row 2 — counter-rotates; leads with "Event Energizer" -->
+    <div class="tm-row tm-row--rev">
+      <div class="tm-track">
+        <div class="tm-seq">
           <article class="card card--feat">
             <span class="kicker">“Event Energizer”</span>
             <q>He is not an event planner, he is an ‘Event Energizer’. He infuses life in any given situation.</q>
@@ -1762,23 +2146,6 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
           </article>
         </div>
         <div class="tm-seq" aria-hidden="true">
-          <article class="card card--feat">
-            <span class="kicker">“Magician”</span>
-            <q>Art comes naturally to some, and some like you are blessed with being able to innovate and create time and again.</q>
-            <span class="by"><b>Kushali &amp; Kunal Bhandari</b></span>
-          </article>
-          <article class="card">
-            <q>Ramesh, as compeer, gave our book launch the ideal frame — he sharpened the audience's mood to receive a serious message.</q>
-            <span class="by"><b>Shankar Jagarnathan</b> — Author: Corporate Disclosures</span>
-          </article>
-          <article class="card">
-            <q>By the end of any show they host, every soul leaves with a smile, every adult feels respected, and friends feel warm.</q>
-            <span class="by"><b>Avnika and Karan Bhandari</b></span>
-          </article>
-          <article class="card">
-            <q>You made a dead location so lively and swanky that even the owner was awestruck. The party lasted till 6 in the morning!</q>
-            <span class="by"><b>Anand Jain</b></span>
-          </article>
           <article class="card card--feat">
             <span class="kicker">“Event Energizer”</span>
             <q>He is not an event planner, he is an ‘Event Energizer’. He infuses life in any given situation.</q>
@@ -1810,7 +2177,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
         <span class="by"><b>Kushali &amp; Kunal Bhandari</b></span>
       </article>
       <article class="card">
-        <q>Ramesh, as compeer, gave our book launch the ideal frame — he sharpened the audience's mood to receive a serious message.</q>
+        <q>Ramesh, as compere, gave our book launch the ideal frame — he sharpened the audience’s mood to receive a serious message.</q>
         <span class="by"><b>Shankar Jagarnathan</b> — Author: Corporate Disclosures</span>
       </article>
       <article class="card">
@@ -1855,20 +2222,53 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
       <p class="mono rev-l">Trusted by</p>
     </div>
 
-    <div class="c-strip">
-      <ul>
-        <li class="rev-l">McKinsey<span class="sep" aria-hidden="true">◆</span></li>
-        <li class="rev-l" style="--d:40ms">Bank of Baroda<span class="sep" aria-hidden="true">◆</span></li>
-        <li class="rev-l" style="--d:80ms">Prestige Estates &amp; Projects<span class="sep" aria-hidden="true">◆</span></li>
-        <li class="rev-l" style="--d:120ms">RMZ Galleria<span class="sep" aria-hidden="true">◆</span></li>
-        <li class="rev-l" style="--d:160ms">Zespri<span class="sep" aria-hidden="true">◆</span></li>
-        <li class="rev-l" style="--d:200ms">Rotary Club of Bangalore<span class="sep" aria-hidden="true">◆</span></li>
-        <li class="rev-l" style="--d:240ms">YPO<span class="sep" aria-hidden="true">◆</span></li>
-        <li class="rev-l" style="--d:280ms">EO<span class="sep" aria-hidden="true">◆</span></li>
-        <li class="rev-l" style="--d:320ms">Atria Hotel<span class="sep" aria-hidden="true">◆</span></li>
-        <li class="rev-l" style="--d:360ms">Anand Sweets<span class="sep" aria-hidden="true">◆</span></li>
-      </ul>
-    </div>
+    <!-- ============================================================
+         LOGO WALL — TYPOGRAPHIC PLACEHOLDERS.
+         These are NOT the clients' logos. Each name is set as a
+         distinct type treatment in the page's own three families so
+         the wall reads like a logo strip without reproducing any
+         trademark. Swap each cell for the licensed SVG logo once
+         the client supplies artwork and permission to use it.
+         ============================================================ -->
+    <ul class="c-wall">
+      <li class="c-logo rev-l"><span class="wm-caps">McKinsey</span></li>
+      <li class="c-logo rev-l" style="--d:40ms">
+        <span class="wm-stack">Bank of<br>Baroda</span>
+      </li>
+      <li class="c-logo rev-l" style="--d:80ms">
+        <span class="wm-serif">Prestige</span>
+        <span class="wm-sub">Estates &amp; Projects</span>
+      </li>
+      <li class="c-logo rev-l" style="--d:120ms">
+        <span class="wm-mono">RMZ</span>
+        <span class="wm-rule" aria-hidden="true"></span>
+        <span class="wm-sub">Galleria</span>
+      </li>
+      <li class="c-logo rev-l" style="--d:160ms">
+        <span class="wm-ital">Zespri</span>
+        <span class="wm-dot" aria-hidden="true"></span>
+      </li>
+      <li class="c-logo rev-l" style="--d:200ms">
+        <span class="wm-ring" aria-hidden="true"></span>
+        <span class="wm-stack">Rotary Club<br>of Bangalore</span>
+      </li>
+      <li class="c-logo rev-l" style="--d:240ms">
+        <span class="wm-wide">YPO</span>
+        <span class="wm-rule" aria-hidden="true"></span>
+      </li>
+      <li class="c-logo rev-l" style="--d:280ms">
+        <span class="wm-mono">EO</span>
+        <span class="wm-ring" aria-hidden="true"></span>
+      </li>
+      <li class="c-logo rev-l" style="--d:320ms">
+        <span class="wm-serif">Atria</span>
+        <span class="wm-sub">Hotel</span>
+      </li>
+      <li class="c-logo rev-l" style="--d:360ms">
+        <span class="wm-ital">Anand</span>
+        <span class="wm-sub">Sweets</span>
+      </li>
+    </ul>
 
     <div class="c-toggle-row">
       <button class="c-toggle rev-l" id="rosterToggle" aria-expanded="false" aria-controls="roster">
@@ -1926,7 +2326,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
           <li><span class="rn">44</span>Atria Hotel, Bangalore</li>
           <li><span class="rn">45</span>YPO, Bangalore</li>
           <li><span class="rn">46</span>Kejriwal family, Bangalore</li>
-          <li><span class="rn">47</span>Zarine and Nozer Kharas - Daddy's Deli</li>
+          <li><span class="rn">47</span>Zarine and Nozer Kharas - Daddy’s Deli</li>
           <li><span class="rn">48</span>McKinsey</li>
           <li><span class="rn">49</span>Ashok Tekwani - Vineet Enterprises</li>
           <li><span class="rn">50</span>Ritesh Goel - Architect</li>
@@ -2042,28 +2442,16 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
       </a>
     </div>
 
-    <nav class="foot-nav" aria-label="Footer">
-      <a href="#about">About</a>
-      <a href="#founders">Founders</a>
-      <a href="#process">Process</a>
-      <a href="#services">Services</a>
-      <a href="#gallery">Gallery</a>
-      <a href="#voices">Voices</a>
-      <a href="#clients">Clients</a>
-      <a href="#contact">Contact</a>
-    </nav>
-
-    <div class="foot-social">
+    <nav class="foot-social" aria-label="Social">
       <a href="https://www.instagram.com/souleventsindia/" target="_blank" rel="noopener">Instagram</a>
       <a href="https://www.facebook.com/pages/Soul-Events/1654430458123769" target="_blank" rel="noopener">Facebook</a>
       <a href="https://www.youtube.com/channel/UC1Z_ibAYVkYGPvLVtaoBUNA" target="_blank" rel="noopener">YouTube</a>
       <a href="https://wa.me/919342283539" target="_blank" rel="noopener">WhatsApp</a>
-    </div>
+    </nav>
   </div>
 
   <div class="foot-bar">
     <span class="mono">© <span id="yr">2026</span> Soul Events · Bangalore</span>
-    <span class="mono">Bella Vista, 66, Lavelle Road, Bangalore – 560001</span>
   </div>
 </footer>
 
@@ -2127,7 +2515,36 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
   var yr = document.getElementById("yr");
   if (yr) yr.textContent = String(new Date().getFullYear());
 
-  /* ---------- nav: condense on scroll + hero parallax ---------- */
+  /* ---------- process spine: a teal line drawn by scroll progress ----------
+     Hairline track + fill whose height tracks how far an anchor line (62% down
+     the viewport) has travelled through the steps list. Each step lights up as
+     the fill passes its node. Under reduced motion the line is simply full and
+     every step is active, so nothing depends on movement. */
+  var pList = document.getElementById("pList");
+  var pFill = document.getElementById("pFill");
+  var pSteps = pList ? pList.querySelectorAll(".step") : [];
+  function setStepsActive(on){
+    Array.prototype.forEach.call(pSteps, function(s){ s.classList.toggle("active", on); });
+  }
+  function drawSpine(){
+    if (!pList || !pFill) return;
+    var r = pList.getBoundingClientRect();
+    var h = r.height || 1;
+    var anchor = window.innerHeight * 0.62;
+    var p = (anchor - r.top) / h;
+    if (p < 0) p = 0; else if (p > 1) p = 1;
+    pFill.style.height = (p * 100).toFixed(2) + "%";
+    var reached = p * h;
+    Array.prototype.forEach.call(pSteps, function(s){
+      s.classList.toggle("active", reached >= s.offsetTop + 10);
+    });
+  }
+  if (pList && pFill) {
+    if (reduce) { pFill.style.height = "100%"; setStepsActive(true); }
+    else { pList.classList.add("spine-on"); }
+  }
+
+  /* ---------- nav: condense on scroll + hero parallax + spine ---------- */
   var nav = document.getElementById("nav");
   var wash = document.getElementById("heroWash");
   var ticking = false;
@@ -2139,6 +2556,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
       var t = Math.min(y * 0.10, max);
       wash.style.transform = "translate3d(0," + t.toFixed(2) + "px,0)";
     }
+    if (!reduce) drawSpine();
     ticking = false;
   }
   window.addEventListener("scroll", function(){
@@ -2267,13 +2685,13 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
     });
   }
   if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(tuneMarquees);
+    document.fonts.ready.then(function(){ tuneMarquees(); if (!reduce) drawSpine(); });
   }
   tuneMarquees();
   var rzt;
   window.addEventListener("resize", function(){
     window.clearTimeout(rzt);
-    rzt = window.setTimeout(tuneMarquees, 220);
+    rzt = window.setTimeout(function(){ tuneMarquees(); if (!reduce) drawSpine(); }, 220);
   }, {passive:true});
 
   /* ---------- clients roster ---------- */
