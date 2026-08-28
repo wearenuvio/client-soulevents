@@ -551,7 +551,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   grid-column:1 / -1; margin-bottom:clamp(26px,3.4vw,48px);
   font-family:var(--serif); font-style:italic; font-size:clamp(1.15rem,2.1vw,1.6rem);
   line-height:1.3; letter-spacing:0;
-  color:var(--ink); max-width:30ch;
+  color:var(--ink); max-width:none;   /* one line: the sentence is the whole device */
 }
 
 /* ============================================================
@@ -666,18 +666,23 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
    ============================================================ */
 .g-tile{display:block; position:relative; cursor:pointer}
 .g-tile:nth-child(1){grid-column:1 / span 7}
-.g-tile:nth-child(2){grid-column:8 / span 5; align-self:end}
+.g-tile:nth-child(2){grid-column:8 / span 5}
 .g-tile:nth-child(3){grid-column:1 / span 4}
 .g-tile:nth-child(4){grid-column:5 / span 8}
 .g-tile:nth-child(5){grid-column:1 / span 6}
-.g-tile:nth-child(6){grid-column:7 / span 6; align-self:start}
-.g-tile:nth-child(1) .plate-ratio{aspect-ratio:16/10}
-.g-tile:nth-child(2) .plate-ratio{aspect-ratio:3/4}
-.g-tile:nth-child(3) .plate-ratio{aspect-ratio:1/1}
-.g-tile:nth-child(4) .plate-ratio{aspect-ratio:16/8}
-.g-tile:nth-child(5) .plate-ratio{aspect-ratio:5/4}
-.g-tile:nth-child(6) .plate-ratio{aspect-ratio:16/11}
-.g-tiles{grid-column:1 / -1; display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); gap:var(--gap); row-gap:clamp(22px,3.2vw,56px)}
+.g-tile:nth-child(6){grid-column:7 / span 6}
+.g-tiles{
+  grid-column:1 / -1; display:grid;
+  grid-template-columns:repeat(12,minmax(0,1fr));
+  /* the rows carry the height, so paired tiles always end level and no tile
+     is left with a pocket of white beneath it */
+  grid-template-rows:clamp(240px,29vw,430px) clamp(210px,25vw,350px) clamp(220px,27vw,390px);
+  gap:var(--gap); row-gap:clamp(22px,3.2vw,56px);
+  align-items:stretch;
+}
+.g-tile{display:flex; flex-direction:column}
+.g-tile .plate{flex:1 1 auto; min-height:0}
+.g-tile .plate-ratio{height:100%; aspect-ratio:auto}
 .g-meta{
   display:flex; align-items:center; justify-content:space-between; gap:12px;
   margin-top:12px; padding-top:6px; border-top:1px solid var(--hair);
@@ -945,6 +950,11 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 .foot-social a .lbl{letter-spacing:.14em; text-transform:uppercase; font-size:10.5px}
 .foot-bar{
   margin-top:clamp(30px,3.6vw,48px); padding-top:16px; border-top:1px solid var(--hair);
+  display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:8px 22px;
+}
+.foot-wink{
+  font-family:var(--serif); font-style:italic; font-size:clamp(1rem,1.5vw,1.22rem);
+  color:#EFEDE8; margin-left:auto; text-align:right;
 }
 .foot-bar .mono{color:var(--ink-soft)}
 
@@ -1096,6 +1106,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   .nav-links,.nav > .nav-cta{display:none}
   .nav-toggle{display:inline-flex; min-height:44px}
   .g-tile:nth-child(n){grid-column:1 / -1}
+  .g-tiles{grid-template-rows:none; grid-auto-rows:clamp(240px,58vw,340px)}
   .g-tiles{row-gap:clamp(26px,5vw,46px)}
   .founder,.founder--b{grid-template-columns:repeat(12,minmax(0,1fr))}
   .f-plate,.founder--b .f-plate{grid-column:1 / -1; order:1; max-width:min(100%,420px)}
@@ -1477,7 +1488,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   </div>
 
   <div class="grid">
-    <h2 class="f-device rev-l">We found it easier to introduce each other than ourselves.</h2>
+    <p class="f-device rev-l">We found it easier to introduce each other than ourselves.</p>
 
     <article class="founder">
       <figure class="plate f-plate wipe">
@@ -2064,7 +2075,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 
   <div class="grid">
     <div class="k-lead">
-      <h2 class="rev-l">Sit back, relax, and <span class="ital keep">let us step in.</span></h2>
+      <h2 class="rev-l">Just <span class="ital keep">let us step in.</span></h2>
       <p class="k-sub rev-l" style="--d:90ms">Tell us the date, the city and the feeling you are after. A phone call is usually the fastest way to begin.</p>
 
       <div class="k-actions rev-l" style="--d:150ms">
@@ -2147,6 +2158,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 
     <div class="foot-bar">
       <span class="mono">© <span id="yr">2026</span> Soul Events · Bangalore</span>
+      <span class="foot-wink">Also, plan that grand entrance you always wanted. *wink wink*</span>
     </div>
 
   </div>
