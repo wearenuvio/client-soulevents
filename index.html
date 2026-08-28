@@ -2399,12 +2399,25 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   /* ---------- reveal observer ---------- */
   var revealables = document.querySelectorAll(".rev, .rev-l, .wipe");
   if ("IntersectionObserver" in window) {
+    /* A .wipe starts at clip-path:inset(100% 0 0) — zero visible area — and
+       Chrome reports a fully clipped element as never intersecting. Observing
+       it directly is a deadlock: it can only be revealed once it is visible,
+       and it is only visible once revealed. So watch an unclipped ancestor and
+       reveal the clipped element when that ancestor comes into view. */
+    var watch = new Map();
+    Array.prototype.forEach.call(revealables, function(el){
+      var target = el.classList.contains("wipe") ? (el.parentElement || el) : el;
+      if (!watch.has(target)) watch.set(target, []);
+      watch.get(target).push(el);
+    });
     var io = new IntersectionObserver(function(entries){
       entries.forEach(function(en){
-        if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); }
+        if (!en.isIntersecting) return;
+        (watch.get(en.target) || []).forEach(function(el){ el.classList.add("in"); });
+        io.unobserve(en.target);
       });
     }, {threshold:0.12, rootMargin:"0px 0px -8% 0px"});
-    Array.prototype.forEach.call(revealables, function(el){ io.observe(el); });
+    watch.forEach(function(_els, target){ io.observe(target); });
     /* Safety net. An IntersectionObserver delivers nothing while the document is
        hidden (page opened in a background tab), and every revealable starts at
        opacity:0 / clipped — so content could sit invisible indefinitely. If
@@ -2417,9 +2430,8 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
         if (el.classList.contains("in")) anyShown = true;
       });
       if (anyShown) return;
-      Array.prototype.forEach.call(revealables, function(el){
-        el.classList.add("in"); io.unobserve(el);
-      });
+      Array.prototype.forEach.call(revealables, function(el){ el.classList.add("in"); });
+      io.disconnect();
     }, 1600);
   } else {
     Array.prototype.forEach.call(revealables, function(el){ el.classList.add("in"); });
