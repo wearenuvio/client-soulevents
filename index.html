@@ -61,7 +61,7 @@
   --gap:clamp(14px, 2.1vw, 30px);
   --sect:clamp(52px, 7.4vw, 100px);
   --measure:60ch;          /* one reading measure for every body paragraph */
-  --head-gap:clamp(26px, 3.4vw, 48px);
+  --head-gap:clamp(20px, 2.6vw, 36px);
 
   --ease:cubic-bezier(.16,1,.3,1);
   --dur:700ms;
@@ -217,7 +217,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 /* one line, always: the index and the label sit side by side and never wrap */
 .sect-head{
   display:flex; align-items:baseline; gap:14px; flex-wrap:nowrap;
-  padding-bottom:14px; margin-bottom:var(--head-gap);
+  padding-bottom:11px; margin-bottom:var(--head-gap);
   border-bottom:1px solid var(--hair);
 }
 .soul-em{font-family:var(--serif); font-style:italic; font-size:1.22em; letter-spacing:0}
@@ -227,7 +227,9 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 }
 .sect-idx::after{content:""; width:14px; height:1px; background:var(--accent)}
 .sect-name{font-family:var(--mono); font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--ink-soft); white-space:nowrap}
-.sect-head .rule{flex:1; height:1px; background:var(--hair); transform:translateY(-4px)}
+.sect-head .rule{flex:1}   /* spacer only — the header's border-bottom is the
+                              single hairline; this span used to draw a second
+                              one ~18px above it, which read as a double rule */
 
 /* teal highlight primitives — the accent language of the page */
 .em{font-family:var(--serif); font-style:italic; color:var(--accent-deep); letter-spacing:-.006em}
