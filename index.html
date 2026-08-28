@@ -59,7 +59,7 @@
 
   --gutter:clamp(20px, 5.4vw, 92px);
   --gap:clamp(14px, 2.1vw, 30px);
-  --sect:clamp(66px, 9vw, 128px);
+  --sect:clamp(52px, 7.4vw, 100px);
   --measure:60ch;          /* one reading measure for every body paragraph */
   --head-gap:clamp(26px, 3.4vw, 48px);
 
@@ -214,8 +214,9 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 #contact::after{mix-blend-mode:screen; opacity:.14}
 
 /* section index + hairline header */
+/* one line, always: the index and the label sit side by side and never wrap */
 .sect-head{
-  display:flex; align-items:baseline; gap:10px 14px; flex-wrap:wrap;
+  display:flex; align-items:baseline; gap:14px; flex-wrap:nowrap;
   padding-bottom:14px; margin-bottom:var(--head-gap);
   border-bottom:1px solid var(--hair);
 }
@@ -225,7 +226,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   display:inline-flex; align-items:center; gap:8px;
 }
 .sect-idx::after{content:""; width:14px; height:1px; background:var(--accent)}
-.sect-name{font-family:var(--mono); font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--ink-soft)}
+.sect-name{font-family:var(--mono); font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--ink-soft); white-space:nowrap}
 .sect-head .rule{flex:1; height:1px; background:var(--hair); transform:translateY(-4px)}
 
 /* teal highlight primitives — the accent language of the page */
@@ -493,7 +494,9 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 /* no borders of its own at all — #about above draws nothing on its bottom
    edge and .sect + .sect already gives #stats its top hairline, while
    #founders below draws its own. Adding any here made 2px rules. */
-#stats{background:var(--raised)}
+/* a short band: four cells and nothing else, so it carries less padding
+   than a full section — this is what closes the gap around it */
+#stats{background:var(--raised); --sect:clamp(38px, 5.2vw, 68px)}
 .stats-row{
   grid-column:1 / -1;
   display:grid; grid-template-columns:repeat(4,minmax(0,1fr));
@@ -1983,7 +1986,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 <section class="sect wrap" id="founders" aria-labelledby="founders-h">
   <div class="sect-head">
     <span class="sect-idx">03</span>
-    <span class="sect-name" id="founders-h">The two of us — each described by the other</span>
+    <span class="sect-name" id="founders-h">The two of us</span>
     <span class="rule" aria-hidden="true"></span>
   </div>
 
