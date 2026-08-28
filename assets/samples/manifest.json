@@ -1,0 +1,328 @@
+{
+ "categories": {
+  "wed": {
+   "label": "Weddings",
+   "images": [
+    {
+     "file": "wed-01.jpg",
+     "alt": "A couple in traditional wedding attire sitting under a floral canopy during a ceremony",
+     "credit": "AMISH THAKKAR / Unsplash",
+     "src": "https://unsplash.com/photos/wedding-ceremony-under-floral-canopy-7O422yG_b80"
+    },
+    {
+     "file": "wed-02.jpg",
+     "alt": "A couple's hands tied together during a ceremony",
+     "credit": "Sushanta Rokka / Unsplash",
+     "src": "https://unsplash.com/photos/a-couples-hands-tied-together-during-a-ceremony-kQxp2SE-P68"
+    },
+    {
+     "file": "wed-03.jpg",
+     "alt": "A couple participating in a traditional indian wedding ceremony",
+     "credit": "Sushanta Rokka / Unsplash",
+     "src": "https://unsplash.com/photos/a-couple-participating-in-a-traditional-indian-wedding-ceremony-GOALmjrhcFo"
+    },
+    {
+     "file": "wed-04.jpg",
+     "alt": "Couple participating in a traditional indian wedding ceremony",
+     "credit": "Sushanta Rokka / Unsplash",
+     "src": "https://unsplash.com/photos/couple-participating-in-a-traditional-indian-wedding-ceremony-DGbYxcBebk8"
+    },
+    {
+     "file": "wed-05.jpg",
+     "alt": "Decorated wedding arch with floral aisle and seating",
+     "credit": "Vidit Goswami / Unsplash",
+     "src": "https://unsplash.com/photos/decorated-wedding-arch-with-floral-aisle-and-seating-XGeKyTG6U6A"
+    },
+    {
+     "file": "wed-06.jpg",
+     "alt": "Hands exchanging rings during a traditional ceremony",
+     "credit": "Sushanta Rokka / Unsplash",
+     "src": "https://unsplash.com/photos/hands-exchanging-rings-during-a-traditional-ceremony-j5yIy5VMl-Y"
+    }
+   ]
+  },
+  "sangeet": {
+   "label": "Sangeets",
+   "images": [
+    {
+     "file": "sangeet-01.jpg",
+     "alt": "A close up of a person walking on a red carpet",
+     "credit": "Arun Prakash / Unsplash",
+     "src": "https://unsplash.com/photos/a-close-up-of-a-person-walking-on-a-red-carpet-xvi1aDlz1T0"
+    },
+    {
+     "file": "sangeet-02.jpg",
+     "alt": "Three woman performing traditional dance",
+     "credit": "pavan gupta / Unsplash",
+     "src": "https://unsplash.com/photos/three-woman-performing-traditional-dance-_HzlOHmboSk"
+    },
+    {
+     "file": "sangeet-03.jpg",
+     "alt": "People in red and yellow long sleeve shirt dancing",
+     "credit": "bhupesh pal / Unsplash",
+     "src": "https://unsplash.com/photos/people-in-red-and-yellow-long-sleeve-shirt-dancing-Jg-qfCz0hoU"
+    },
+    {
+     "file": "sangeet-04.jpg",
+     "alt": "A crowd of people standing under a colorful canopy",
+     "credit": "vinay manda / Unsplash",
+     "src": "https://unsplash.com/photos/a-crowd-of-people-standing-under-a-colorful-canopy-QmsOdBXr1Zs"
+    },
+    {
+     "file": "sangeet-05.jpg",
+     "alt": "Five dancers in colorful traditional costumes pose outdoors",
+     "credit": "Prithvi Raj / Unsplash",
+     "src": "https://unsplash.com/photos/five-dancers-in-colorful-traditional-costumes-pose-outdoors-Ivfh1T5Xonw"
+    },
+    {
+     "file": "sangeet-06.jpg",
+     "alt": "Two women dressed in traditional indian garb dancing",
+     "credit": "Sooraj Perambra / Unsplash",
+     "src": "https://unsplash.com/photos/two-women-dressed-in-traditional-indian-garb-dancing-uv4h7wIQcHQ"
+    }
+   ]
+  },
+  "anniv": {
+   "label": "Anniversaries",
+   "images": [
+    {
+     "file": "anniv-01.jpg",
+     "alt": "A long dining table set with white plates, candles, and glass bottles",
+     "credit": "Nadia Valko / Unsplash",
+     "src": "https://unsplash.com/photos/dining-table-set-with-candles-0hAdietsUrE"
+    },
+    {
+     "file": "anniv-02.jpg",
+     "alt": "A long dining table set for a dinner party with flowers and candles",
+     "credit": "M F / Unsplash",
+     "src": "https://unsplash.com/photos/long-dining-table-with-festive-flowers-fb0_wj2MZk4"
+    },
+    {
+     "file": "anniv-03.jpg",
+     "alt": "A close up of a candle on a table",
+     "credit": "Charlotte Wurch / Unsplash",
+     "src": "https://unsplash.com/photos/a-close-up-of-a-candle-on-a-table-u6tLbM18-eI"
+    },
+    {
+     "file": "anniv-04.jpg",
+     "alt": "White ceramic plate",
+     "credit": "Anthony Cantin / Unsplash",
+     "src": "https://unsplash.com/photos/white-ceramic-plate-JOow1_Wsn-k"
+    },
+    {
+     "file": "anniv-05.jpg",
+     "alt": "Lighted candles on brown wooden table",
+     "credit": "Faizan / Unsplash",
+     "src": "https://unsplash.com/photos/lighted-candles-on-brown-wooden-table-OdyMB4IZt3w"
+    },
+    {
+     "file": "anniv-06.jpg",
+     "alt": "A dining room table is set with wine glasses and place settings",
+     "credit": "Patrick Pahlke / Unsplash",
+     "src": "https://unsplash.com/photos/a-dining-room-table-is-set-with-wine-glasses-and-place-settings-bj3fW8xuZ28"
+    }
+   ]
+  },
+  "bday": {
+   "label": "Birthdays",
+   "images": [
+    {
+     "file": "bday-01.jpg",
+     "alt": "Person holding balloons",
+     "credit": "Gaelle Marcel / Unsplash",
+     "src": "https://unsplash.com/photos/person-holding-balloons-vrkSVpOwchk"
+    },
+    {
+     "file": "bday-02.jpg",
+     "alt": "A festive birthday celebration decorated with balloons",
+     "credit": "Onkar Singh / Unsplash",
+     "src": "https://unsplash.com/photos/a-festive-birthday-celebration-decorated-with-balloons-D31ZvQgI9z8"
+    },
+    {
+     "file": "bday-03.jpg",
+     "alt": "A happy birthday banner with balloons and streamers",
+     "credit": "Fujiphilm / Unsplash",
+     "src": "https://unsplash.com/photos/a-happy-birthday-banner-with-balloons-and-streamers-KMNZgMsedE0"
+    },
+    {
+     "file": "bday-04.jpg",
+     "alt": "Yellow and white balloons on table",
+     "credit": "Lucas Law / Unsplash",
+     "src": "https://unsplash.com/photos/yellow-and-white-balloons-on-table-MTFqQH1trsA"
+    },
+    {
+     "file": "bday-05.jpg",
+     "alt": "Silver letter b wall decor",
+     "credit": "Adam Kring / Unsplash",
+     "src": "https://unsplash.com/photos/silver-letter-b-wall-decor-1pMRoKhF84k"
+    },
+    {
+     "file": "bday-06.jpg",
+     "alt": "Illuminated number 18 with balloon decorations",
+     "credit": "Gabriel Tudor / Unsplash",
+     "src": "https://unsplash.com/photos/illuminated-number-18-with-balloon-decorations-V-yhwaT6JrY"
+    }
+   ]
+  },
+  "brunch": {
+   "label": "Brunches",
+   "images": [
+    {
+     "file": "brunch-01.jpg",
+     "alt": "Sliced bread with green vegetable and meat on white ceramic plate",
+     "credit": "Colin Michel / Unsplash",
+     "src": "https://unsplash.com/photos/sliced-bread-with-green-vegetable-and-meat-on-white-ceramic-plate-rMXsuun3CuQ"
+    },
+    {
+     "file": "brunch-02.jpg",
+     "alt": "Brown and white pastry on white ceramic plate",
+     "credit": "Colin Michel / Unsplash",
+     "src": "https://unsplash.com/photos/brown-and-white-pastry-on-white-ceramic-plate-fKRGi5AnR3Y"
+    },
+    {
+     "file": "brunch-03.jpg",
+     "alt": "A woman cutting up a platter of food on a table",
+     "credit": "Priscilla Du Preez 🇨🇦 / Unsplash",
+     "src": "https://unsplash.com/photos/a-woman-cutting-up-a-platter-of-food-on-a-table-rv28_ZcoLpE"
+    },
+    {
+     "file": "brunch-04.jpg",
+     "alt": "A person enjoys a breakfast spread with various foods",
+     "credit": "Antonio Araujo / Unsplash",
+     "src": "https://unsplash.com/photos/a-person-enjoys-a-breakfast-spread-with-various-foods-LYuuZT8fszM"
+    },
+    {
+     "file": "brunch-05.jpg",
+     "alt": "A white table topped with plates of fruit and pastries",
+     "credit": "Iason Raissis / Unsplash",
+     "src": "https://unsplash.com/photos/a-white-table-topped-with-plates-of-fruit-and-pastries-jLxPs1kBmZI"
+    },
+    {
+     "file": "brunch-06.jpg",
+     "alt": "A white table topped with plates of food and drinks",
+     "credit": "Priscilla Du Preez 🇨🇦 / Unsplash",
+     "src": "https://unsplash.com/photos/a-white-table-topped-with-plates-of-food-and-drinks-8xRZbNlUI1k"
+    }
+   ]
+  },
+  "corp": {
+   "label": "Corporate Events",
+   "images": [
+    {
+     "file": "corp-01.jpg",
+     "alt": "Crowd of people sitting on chairs inside room",
+     "credit": "Headway / Unsplash",
+     "src": "https://unsplash.com/photos/crowd-of-people-sitting-on-chairs-inside-room-F2KRf_QfCqw"
+    },
+    {
+     "file": "corp-02.jpg",
+     "alt": "Speaker on stage addressing large audience",
+     "credit": "Alexandre Pellaes / Unsplash",
+     "src": "https://unsplash.com/photos/speaker-on-stage-addressing-large-audience-6vAjp0pscX0"
+    },
+    {
+     "file": "corp-03.jpg",
+     "alt": "People watching concert during night time",
+     "credit": "Terren Hurst / Unsplash",
+     "src": "https://unsplash.com/photos/people-watching-concert-during-night-time-blgOFmPIlr0"
+    },
+    {
+     "file": "corp-04.jpg",
+     "alt": "People sitting on chair inside room",
+     "credit": "Wan San Yip / Unsplash",
+     "src": "https://unsplash.com/photos/people-sitting-on-chair-inside-room-ID1yWa1Wpx0"
+    },
+    {
+     "file": "corp-05.jpg",
+     "alt": "An audience watching a speaker on a bright screen in a dark room",
+     "credit": "Kevin Gonzalez / Unsplash",
+     "src": "https://unsplash.com/photos/audience-watching-speaker-on-bright-screen--NXNaE9lu6w"
+    },
+    {
+     "file": "corp-06.jpg",
+     "alt": "Man speaking in front of crowd",
+     "credit": "Miguel Henriques / Unsplash",
+     "src": "https://unsplash.com/photos/man-speaking-in-front-of-crowd-RfiBK6Y_upQ"
+    }
+   ]
+  }
+ },
+ "founders": {
+  "chelna": [
+   {
+    "file": "chelna-01.jpg",
+    "alt": "Woman in brown long sleeve shirt holding white flower",
+    "credit": "cal gao / Unsplash",
+    "src": "https://unsplash.com/photos/woman-in-brown-long-sleeve-shirt-holding-white-flower-iUPjdtWk6dI"
+   },
+   {
+    "file": "chelna-02.jpg",
+    "alt": "Woman arranging assorted-color flowers",
+    "credit": "Artsy Vibes / Unsplash",
+    "src": "https://unsplash.com/photos/woman-arranging-assorted-color-flowers-5yYuBoXpBUI"
+   },
+   {
+    "file": "chelna-03.jpg",
+    "alt": "A flower shop owner smiles while working",
+    "credit": "Matthew Stephenson / Unsplash",
+    "src": "https://unsplash.com/photos/a-flower-shop-owner-smiles-while-working-wKpEdUazY18"
+   },
+   {
+    "file": "chelna-04.jpg",
+    "alt": "A woman arranging sunflowers and other flowers in a market",
+    "credit": "Lok Kwan / Unsplash",
+    "src": "https://unsplash.com/photos/a-woman-arranging-sunflowers-and-other-flowers-in-a-market-Ddgq_sJusao"
+   },
+   {
+    "file": "chelna-05.jpg",
+    "alt": "Woman admires flowers of various colors",
+    "credit": "Asal Mshk / Unsplash",
+    "src": "https://unsplash.com/photos/woman-admires-flowers-of-various-colors-JvpMTyIpK4c"
+   },
+   {
+    "file": "chelna-06.jpg",
+    "alt": "A woman arranging flowers in a flower shop",
+    "credit": "Maxim Tolchinskiy / Unsplash",
+    "src": "https://unsplash.com/photos/a-woman-arranging-flowers-in-a-flower-shop-7FQV_6DPaLk"
+   }
+  ],
+  "ramesh": [
+   {
+    "file": "ramesh-01.jpg",
+    "alt": "Silver corded microphone in shallow focus photography",
+    "credit": "Kane Reinholdtsen / Unsplash",
+    "src": "https://unsplash.com/photos/silver-corded-microphone-in-shallow-focus-photography-LETdkk7wHQk"
+   },
+   {
+    "file": "ramesh-02.jpg",
+    "alt": "A man in a suit speaking into a microphone",
+    "credit": "Ali Khadem / Unsplash",
+    "src": "https://unsplash.com/photos/a-man-in-a-suit-speaking-into-a-microphone-Qn8b112WIoU"
+   },
+   {
+    "file": "ramesh-03.jpg",
+    "alt": "A man speaking into a microphone on a stage",
+    "credit": "Jametlene Reskp / Unsplash",
+    "src": "https://unsplash.com/photos/a-man-speaking-into-a-microphone-on-a-stage-8gKowHXXRsQ"
+   },
+   {
+    "file": "ramesh-04.jpg",
+    "alt": "A man in a light blue shirt speaking into a microphone on stage",
+    "credit": "AMONWAT DUMKRUT / Unsplash",
+    "src": "https://unsplash.com/photos/man-speaking-into-microphone-on-stage-4D0_Tu2AEY8"
+   },
+   {
+    "file": "ramesh-05.jpg",
+    "alt": "Man wearing blue shirt",
+    "credit": "Product School / Unsplash",
+    "src": "https://unsplash.com/photos/man-wearing-blue-shirt-vsUU5NCssns"
+   },
+   {
+    "file": "ramesh-06.jpg",
+    "alt": "Man in blue suit speaking into a microphone",
+    "credit": "Kauê Martins Bergamasco / Unsplash",
+    "src": "https://unsplash.com/photos/man-in-blue-suit-speaking-into-a-microphone-V_HzrRfcw0Y"
+   }
+  ]
+ }
+}

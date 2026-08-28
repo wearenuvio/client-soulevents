@@ -131,7 +131,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
    short accented phrase (the teal-underlined italic) from ever splitting. */
 h1,h2,h3,h4,
 .display,.big,.s-lede,.f-device,.f-quote,.stat .cap,.g-meta h3,
-.story-title,.foot-tag{text-wrap:balance}
+.lb-title,.foot-tag{text-wrap:balance}
 p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 .keep{white-space:nowrap}
 
@@ -326,15 +326,16 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 }
 
 /* ============================================================
-   SAMPLE-IMAGE PLATES — inline SVG scenes + grain
+   SAMPLE-IMAGE PLATES — photograph + hairline frame + grain
    ============================================================ */
 .plate{
   position:relative; overflow:hidden; isolation:isolate;
   background:var(--raised); border:1px solid var(--hair);
 }
-.scene{
+/* the photograph itself — cover-cropped into the plate's aspect box */
+.shot{
   position:absolute; inset:0; width:100%; height:100%;
-  display:block; max-width:none;
+  display:block; max-width:none; object-fit:cover;
 }
 .plate-grain{
   position:absolute; inset:-8%; z-index:1;
@@ -498,7 +499,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
    #founders below draws its own. Adding any here made 2px rules. */
 /* a short band: four cells and nothing else, so it carries less padding
    than a full section — this is what closes the gap around it */
-#stats{background:var(--raised); --sect:clamp(38px, 5.2vw, 68px)}
+#stats{background:var(--raised); --sect:clamp(38px, 5.2vw, 68px); --head-gap:clamp(30px, 3.6vw, 46px)}
 .stats-row{
   grid-column:1 / -1;
   display:grid; grid-template-columns:repeat(4,minmax(0,1fr));
@@ -539,7 +540,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 .f-body{grid-column:7 / span 6; padding-bottom:6px}
 .founder--b .f-plate{grid-column:8 / span 5; order:2}
 .founder--b .f-body{grid-column:1 / span 6; order:1}
-.f-plate .plate-ratio{aspect-ratio:4 / 5}
+.f-plate .plate-ratio{aspect-ratio:1 / 1}
 .f-role .tag{transition:border-color 420ms var(--ease), color 420ms var(--ease)}
 .f-role .tag:last-child{border-color:var(--accent); color:var(--accent-deep)}
 .f-name{
@@ -696,7 +697,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 .g-tile:nth-child(5){grid-column:1 / span 6}
 .g-tile:nth-child(6){grid-column:7 / span 6; align-self:start}
 .g-tile:nth-child(1) .plate-ratio{aspect-ratio:16/10}
-.g-tile:nth-child(2) .plate-ratio{aspect-ratio:4/5}
+.g-tile:nth-child(2) .plate-ratio{aspect-ratio:3/4}
 .g-tile:nth-child(3) .plate-ratio{aspect-ratio:1/1}
 .g-tile:nth-child(4) .plate-ratio{aspect-ratio:16/8}
 .g-tile:nth-child(5) .plate-ratio{aspect-ratio:5/4}
@@ -973,125 +974,124 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 .foot-bar .mono{color:var(--ink-soft)}
 
 /* ============================================================
-   STORY VIEWER — fullscreen category browser opened from the tiles
+   GALLERY POPUP — a scrollable grid of one category's photographs,
+   with an inline expanded view for a single frame.
    ============================================================ */
-.story{
+.lb{
   position:fixed; inset:0; z-index:200;
   display:flex; align-items:center; justify-content:center;
-  opacity:0; transition:opacity 300ms var(--ease);
+  padding:clamp(0px,2.2vw,40px);
+  opacity:0; transition:opacity 260ms var(--ease);
 }
-.story[hidden]{display:none}
-.story.open{opacity:1}
-.story-scrim{position:absolute; inset:0; background:rgba(16,16,22,.72); -webkit-backdrop-filter:blur(3px); backdrop-filter:blur(3px)}
-.story-panel{
-  position:relative; z-index:1; overflow:hidden;
-  width:100%; height:100%;
-  background:var(--ground);
-  transform:scale(.97); transition:transform 300ms var(--ease);
+.lb[hidden]{display:none}
+.lb.open{opacity:1}
+.lb-scrim{
+  position:absolute; inset:0; background:rgba(16,16,22,.66);
+  -webkit-backdrop-filter:blur(3px); backdrop-filter:blur(3px);
 }
-.story.open .story-panel{transform:none}
-/* The portrait card only makes sense when there is height to cut it from:
-   on a short window (a landscape phone, a half-height desktop window) a
-   9/16 card would collapse to a sliver, so the panel stays fullscreen. */
-@media (min-width:760px) and (min-height:600px){
-  .story{padding:clamp(16px,2.4vw,40px)}
-  /* a portrait story card, sized off the available height */
-  .story-panel{
-    height:100%; width:auto; aspect-ratio:9 / 16;
-    max-width:100%; max-height:100%;
-    border-radius:6px; box-shadow:0 40px 90px -40px rgba(0,0,0,.7);
+.lb-panel{
+  position:relative; z-index:1;
+  display:flex; flex-direction:column;
+  width:min(1120px,100%); height:100%; max-height:100%;
+  background:var(--ground); border:1px solid var(--hair);
+  transform:translateY(12px); transition:transform 260ms var(--ease);
+}
+.lb.open .lb-panel{transform:none}
+/* off the phone the panel becomes a card that only grows to its content */
+@media (min-width:760px){
+  .lb-panel{
+    height:auto; border-radius:4px;
+    box-shadow:0 40px 90px -40px rgba(0,0,0,.62);
   }
 }
-.story-figure{position:absolute; inset:0; margin:0; overflow:hidden}
-.story-scene{position:absolute; inset:0; width:100%; height:100%; display:block; max-width:none}
-.story-grain{
-  position:absolute; inset:-6%; background-image:var(--grain); background-size:160px 160px;
-  opacity:.30; mix-blend-mode:multiply; pointer-events:none;
+.lb-head{
+  flex:none; display:flex; align-items:flex-start; justify-content:space-between; gap:16px;
+  padding:clamp(16px,2.2vw,26px) clamp(16px,2.4vw,30px) clamp(12px,1.5vw,16px);
+  border-bottom:1px solid var(--hair);
 }
-/* legibility scrims — the sample scenes are pale, so ink type wins */
-.story-panel::before,.story-panel::after{
-  content:""; position:absolute; left:0; right:0; z-index:2; pointer-events:none;
-}
-.story-panel::before{top:0; height:34%; background:linear-gradient(rgba(248,247,244,.94), rgba(248,247,244,0))}
-.story-panel::after{bottom:0; height:56%; background:linear-gradient(rgba(248,247,244,0), rgba(248,247,244,.90) 46%, rgba(248,247,244,.97))}
-
-/* story-style progress segments */
-.story-bars{
-  position:absolute; z-index:4; top:14px; left:14px; right:14px;
-  display:grid; grid-auto-flow:column; grid-auto-columns:1fr; gap:5px;
-}
-.story-bars i{height:3px; border-radius:2px; background:rgba(26,26,34,.20); display:block; overflow:hidden}
-.story-bars i.on{background:var(--accent-deep)}
-.story-bars i.done{background:rgba(28,102,109,.42)}
-
-.story-caption{
-  position:absolute; z-index:4; left:0; right:0; bottom:0;
-  padding:0 clamp(18px,4.4vw,34px) clamp(22px,4.6vw,34px);
-  display:flex; flex-direction:column; align-items:flex-start; gap:9px;
-}
-.story-idx{color:var(--ink-soft)}
-.story-title{
+.lb-title{
   font-family:var(--display); font-weight:400;
-  font-size:clamp(2rem,7.6vw,3.1rem); line-height:1.04; letter-spacing:.01em;
+  font-size:clamp(1.44rem,3.2vw,2.2rem); line-height:1.06; letter-spacing:.01em;
   display:flex; align-items:center; gap:12px;
 }
-.story-title .lotus{font-size:.62em; color:var(--tint,var(--accent-deep)); flex:none}
-.story-line{
-  font-family:var(--serif); font-style:italic;
-  font-size:clamp(1.06rem,3.6vw,1.34rem); line-height:1.34; color:var(--ink);
-  max-width:32ch;
+.lb-title .lotus{font-size:.6em; color:var(--tint,var(--accent-deep)); flex:none}
+.lb-count{
+  margin-top:8px; color:var(--ink-soft);
+  font-size:10px; letter-spacing:.15em; text-transform:uppercase;
 }
-.story-chip{
-  margin-top:4px;
-  display:inline-flex; align-items:center; gap:8px;
-  font-family:var(--mono); font-size:9.5px; letter-spacing:.15em; text-transform:uppercase;
-  color:var(--accent-deep); border:1px solid var(--accent); border-radius:999px;
-  padding:7px 13px; background:rgba(255,255,255,.6);
-}
-.story-chip .dot{width:5px; height:5px; border-radius:50%; background:var(--accent); flex:none}
-
-/* controls — all ≥44px */
-.story-nav,.story-close{
-  position:absolute; z-index:5;
-  width:46px; height:46px; border-radius:50%;
+.lb-close{
+  flex:none; width:44px; height:44px; margin:-4px -6px 0 0; border-radius:50%;
   display:inline-flex; align-items:center; justify-content:center;
-  background:rgba(248,247,244,.86); color:var(--ink);
-  border:1px solid rgba(26,26,34,.10);
-  -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px);
-  transition:background 360ms var(--ease), color 360ms var(--ease), border-color 360ms var(--ease);
+  font-size:22px; line-height:1; color:var(--ink);
+  border:1px solid var(--hair); background:var(--raised);
+  transition:background 320ms var(--ease), color 320ms var(--ease), border-color 320ms var(--ease);
 }
-.story-nav:hover,.story-close:hover{background:var(--accent); border-color:var(--accent); color:#0F2E31}
-.story-nav svg{width:17px; height:17px; display:block}
-.story-prev{left:clamp(10px,2.4vw,18px); top:50%; margin-top:-23px}
-.story-next{right:clamp(10px,2.4vw,18px); top:50%; margin-top:-23px}
-.story-close{top:clamp(28px,3.4vw,34px); right:clamp(10px,2.4vw,18px); font-size:20px; line-height:1}
-.story-close span{display:block; margin-top:-2px}
+.lb-close span{display:block; margin-top:-3px}
+.lb-close:hover{background:var(--accent); border-color:var(--accent); color:#0F2E31}
 
-/* On the portrait card the panel's width is derived from viewport HEIGHT, so
-   its type has to be too: vw would set a ~50px title inside a 354px-wide card
-   at 1440×700 and push "Anniversaries" straight through the clipped edge.
-   (Declared after the base caption rules so it actually wins the cascade.) */
-@media (min-width:760px) and (min-height:600px){
-  .story-caption{padding:0 clamp(18px,2.6vh,32px) clamp(20px,3.4vh,34px)}
-  .story-title{font-size:clamp(1.6rem,4.6vh,3.1rem)}
-  .story-line{font-size:clamp(1rem,1.9vh,1.3rem)}
+/* the one scroll container; the page behind is locked by .lb-open */
+.lb-body{
+  flex:1 1 auto; min-height:0;
+  overflow-y:auto; overscroll-behavior:contain; -webkit-overflow-scrolling:touch;
+  padding:clamp(16px,2.4vw,30px);
 }
+@media (min-width:760px){ .lb-body{max-height:min(74vh,720px)} }
 
-/* Landscape phones and short windows: the panel is wide and shallow, so the
-   side arrows sit level with the caption. Inset the text past them, shorten
-   the type, and lengthen the bottom scrim so the words stay on porcelain. */
-@media (orientation:landscape) and (max-height:560px){
-  .story-caption{
-    padding:0 72px clamp(12px,3.2vh,22px);
-    gap:5px;
-  }
-  .story-title{font-size:clamp(1.35rem,5.4vh,2rem)}
-  .story-line{font-size:1rem; line-height:1.3; max-width:56ch}
-  .story-panel::after{height:76%}
-  .story-panel::before{height:26%}
+.lb-grid{display:grid; grid-template-columns:minmax(0,1fr); gap:clamp(12px,1.6vw,20px)}
+.lb-grid[hidden]{display:none}
+@media (min-width:600px){ .lb-grid{grid-template-columns:repeat(2,minmax(0,1fr))} }
+@media (min-width:1000px){ .lb-grid{grid-template-columns:repeat(3,minmax(0,1fr))} }
+.lb-cell{
+  display:block; width:100%; position:relative; overflow:hidden; padding:0;
+  border:1px solid var(--hair); border-radius:3px; background:var(--raised);
+  transition:transform 460ms var(--ease), border-color 460ms var(--ease), box-shadow 460ms var(--ease);
+}
+/* width/height on the img plus this ratio box: the grid never reflows on load */
+.lb-cell img{display:block; width:100%; height:auto; aspect-ratio:3 / 2; object-fit:cover}
+.lb-cell:hover,.lb-cell:focus-visible{
+  transform:translateY(-4px); border-color:var(--accent);
+  box-shadow:0 16px 28px -20px rgba(0,0,0,.55);
 }
 
-.story-open{overflow:hidden}
+/* inline expanded frame — same dialog, same scroll box */
+.lb-solo[hidden]{display:none}
+.lb-back{
+  display:inline-flex; align-items:center; gap:9px; min-height:44px;
+  font-family:var(--mono); font-size:10px; letter-spacing:.15em; text-transform:uppercase;
+  color:var(--ink-soft); padding-inline:6px; margin-left:-6px;
+  transition:color 380ms var(--ease);
+}
+.lb-back:hover{color:var(--accent-deep)}
+.lb-figure{margin:6px 0 0}
+/* width and height must BOTH be auto here — the width/height attributes set
+   on this img are presentational hints, and a definite width would let the
+   58vh cap clamp only the height and squash the frame. With both auto the
+   browser keeps the intrinsic ratio and never upscales past the source. */
+.lb-figure img{
+  display:block; margin-inline:auto; width:auto; height:auto; max-width:100%; max-height:58vh;
+  border:1px solid var(--hair); border-radius:3px; background:var(--raised);
+}
+.lb-cap{
+  font-family:var(--serif); font-style:italic; line-height:1.34;
+  font-size:clamp(1.04rem,2.1vw,1.3rem); color:var(--ink);
+  max-width:56ch; margin-top:16px;
+}
+.lb-credit{margin-top:7px; color:var(--ink-soft); font-size:10px; letter-spacing:.13em; text-transform:uppercase}
+.lb-solo-nav{
+  display:flex; align-items:center; gap:14px;
+  margin-top:18px; padding-top:14px; border-top:1px solid var(--hair);
+}
+.lb-nav{
+  width:44px; height:44px; border-radius:50%; flex:none;
+  display:inline-flex; align-items:center; justify-content:center;
+  color:var(--ink); border:1px solid var(--hair); background:var(--raised);
+  transition:background 320ms var(--ease), color 320ms var(--ease), border-color 320ms var(--ease);
+}
+.lb-nav:hover{background:var(--accent); border-color:var(--accent); color:#0F2E31}
+.lb-nav svg{width:17px; height:17px; display:block}
+.lb-idx{color:var(--ink-soft); font-size:10.5px; letter-spacing:.15em}
+
+.lb-open{overflow:hidden}
 
 /* ============================================================
    RESPONSIVE
@@ -1185,9 +1185,10 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   .scroll-cue .stem::after{display:none}
   .hbtn .arw,.btn .arw,.g-meta .view .arw{transition:none !important; transform:none !important}
 
-  /* story viewer: appears and changes slide instantly, no fade or scale */
-  .story{transition:none !important; opacity:1}
-  .story-panel{transform:none !important; transition:none !important}
+  /* gallery popup: appears instantly, no fade, scale or hover lift */
+  .lb{transition:none !important; opacity:1}
+  .lb-panel{transform:none !important; transition:none !important}
+  .lb-cell:hover,.lb-cell:focus-visible{transform:none !important; transition:none !important}
 
   /* process spine: drawn full and static; steps get a plain opacity fade */
   .p-spine i{height:100% !important; transition:none !important}
@@ -1207,6 +1208,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   .tm-static .card,.tm-static .card--feat{width:auto}
 }
 </style>
+<noscript><style>.rev,.rev-l{opacity:1!important;translate:none!important}.wipe{clip-path:none!important}</style></noscript>
 </head>
 <body>
 
@@ -1214,31 +1216,6 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 
 <!-- ============ SVG SPRITE ============ -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
-  <!-- ============================================================
-       PHOTOGRAPHIC DEFS — shared by every sample scene.
-       Depth is faked with three cheap tricks: blurred background
-       bokeh, a warm/pink light pass, and an edge vignette.
-       ============================================================ -->
-  <defs>
-    <filter id="fBlurM" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="2.4"/></filter>
-    <filter id="fBlurL" x="-35%" y="-35%" width="170%" height="170%"><feGaussianBlur stdDeviation="4.6"/></filter>
-    <!-- objectBoundingBox units, so one gradient serves every viewBox -->
-    <radialGradient id="vig" cx=".5" cy=".46" r=".74">
-      <stop offset=".5" stop-color="#2B1F26" stop-opacity="0"/>
-      <stop offset=".82" stop-color="#2B1F26" stop-opacity=".10"/>
-      <stop offset="1" stop-color="#2B1F26" stop-opacity=".28"/>
-    </radialGradient>
-    <linearGradient id="warmLight" x1="0" y1="0" x2=".45" y2="1">
-      <stop offset="0" stop-color="#FFD6E1" stop-opacity=".34"/>
-      <stop offset=".48" stop-color="#FFE3D2" stop-opacity=".14"/>
-      <stop offset="1" stop-color="#E6C4D2" stop-opacity=".26"/>
-    </linearGradient>
-    <linearGradient id="fgShade" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#4A3641" stop-opacity="0"/>
-      <stop offset="1" stop-color="#4A3641" stop-opacity=".34"/>
-    </linearGradient>
-  </defs>
-
   <!-- simple single-hue lotus: recolourable per gallery category / service hover -->
   <symbol id="lotus" viewBox="0 0 24 24">
     <g fill="currentColor">
@@ -1369,470 +1346,6 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
       <path d="M9.15 8.95c.3-.1.6.02.75.3l.75 1.3c.12.22.1.5-.05.7l-.5.62c-.14.18-.16.42-.04.62a6.2 6.2 0 0 0 2.42 2.13c.2.1.44.05.6-.11l.6-.6c.18-.18.46-.22.68-.1l1.3.72c.28.15.4.48.3.78a2.25 2.25 0 0 1-2.06 1.44c-2.63 0-5.98-3.35-5.98-5.98 0-.92.53-1.6 1.23-1.82Z"/>
     </g>
   </symbol>
-
-  <!-- ============================================================
-       SAMPLE SCENES — art-directed abstract compositions.
-       Placeholders for the client's photography; each reads as an
-       image, not a swatch. Palettes stay inside the porcelain system.
-       ============================================================ -->
-
-  <!-- WEDDINGS · mandap arch with garlands at dusk -->
-  <symbol id="sc-wed" viewBox="0 0 160 100">
-    <linearGradient id="wedSky" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#EAE4EE"/><stop offset=".46" stop-color="#F5E7E1"/><stop offset="1" stop-color="#F8DFD0"/>
-    </linearGradient>
-    <radialGradient id="wedSun" cx=".5" cy=".5" r=".5">
-      <stop offset="0" stop-color="#FDEBD8" stop-opacity=".95"/><stop offset="1" stop-color="#FDEBD8" stop-opacity="0"/>
-    </radialGradient>
-    <linearGradient id="wedGround" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#EBE4D9"/><stop offset="1" stop-color="#DCD3C4"/>
-    </linearGradient>
-    <rect width="160" height="100" fill="url(#wedSky)"/>
-    <!-- background: blurred bokeh lights -->
-    <g filter="url(#fBlurL)" opacity=".5">
-      <circle cx="22" cy="20" r="7" fill="#FBD8D2"/><circle cx="41" cy="12" r="4.6" fill="#FCE6D0"/>
-      <circle cx="132" cy="16" r="8" fill="#F6D3DE"/><circle cx="114" cy="26" r="4.4" fill="#FCE6D0"/>
-      <circle cx="72" cy="14" r="5" fill="#EEDCEC"/><circle cx="150" cy="34" r="5.4" fill="#FBD8D2"/>
-      <circle cx="10" cy="40" r="5" fill="#F6D3DE"/>
-    </g>
-    <circle cx="80" cy="66" r="42" fill="url(#wedSun)"/>
-    <circle cx="80" cy="70" r="11" fill="#F7D5B9" opacity=".85"/>
-    <path d="M0 74Q10 63 20 73 30 61 41 72 50 65 60 73L60 79 0 79Z" fill="#C4CFC6" opacity=".6"/>
-    <path d="M160 74Q150 63 140 73 130 61 119 72 110 65 100 73L100 79 160 79Z" fill="#C4CFC6" opacity=".6"/>
-    <rect y="76" width="160" height="24" fill="url(#wedGround)"/>
-    <path d="M0 76h160" stroke="#D3C9B9" stroke-width=".7"/>
-    <path d="M66 100L74 77h12l8 23z" fill="#F4EEE4"/>
-    <g fill="#C7B3A1">
-      <rect x="45" y="42" width="2.4" height="34"/><rect x="60.4" y="42" width="2.4" height="34"/>
-      <rect x="97.2" y="42" width="2.4" height="34"/><rect x="112.6" y="42" width="2.4" height="34"/>
-    </g>
-    <path d="M42 46Q80 12 118 46" fill="none" stroke="#BBA592" stroke-width="2.6" stroke-linecap="round"/>
-    <path d="M46.5 47.4Q80 18 113.5 47.4" fill="none" stroke="#5CC6CD" stroke-width="1.1" opacity=".8"/>
-    <g fill="none" stroke="#E8B98C" stroke-width="1.5" stroke-linecap="round">
-      <path d="M46.2 48Q54 58.5 61.6 48"/><path d="M98.4 48Q106 58.5 113.8 48"/><path d="M63 44.5Q80 57 97 44.5"/>
-    </g>
-    <g fill="#69BD45" opacity=".5"><circle cx="53.9" cy="55.6" r="1.5"/><circle cx="106.1" cy="55.6" r="1.5"/><circle cx="80" cy="52" r="1.7"/></g>
-    <g stroke="#C7B3A1" stroke-width=".55"><path d="M70 18v11"/><path d="M90 22v10"/></g>
-    <ellipse cx="70" cy="32.6" rx="4" ry="4.6" fill="#FCF1E2" stroke="#E3CEB5" stroke-width=".7"/>
-    <ellipse cx="90" cy="35.4" rx="3.2" ry="3.7" fill="#FCF1E2" stroke="#E3CEB5" stroke-width=".7"/>
-    <g fill="#E2B07E" opacity=".65"><circle cx="70" cy="93" r="1.1"/><circle cx="90" cy="93" r="1.1"/><circle cx="74" cy="84" r=".9"/><circle cx="86" cy="84" r=".9"/><circle cx="67.5" cy="98" r=".9"/><circle cx="92.5" cy="98" r=".9"/></g>
-    <!-- foreground: out-of-focus foliage shot through -->
-    <g filter="url(#fBlurM)" opacity=".5">
-      <path d="M-4 100q10-22 4-34 14 8 16 34z" fill="#7E8C77"/>
-      <path d="M164 100q-12-20-6-32-14 8-18 32z" fill="#7E8C77"/>
-      <ellipse cx="14" cy="96" rx="12" ry="7" fill="#8E9A86"/>
-    </g>
-    <rect width="160" height="100" fill="url(#warmLight)"/>
-    <rect width="160" height="100" fill="url(#vig)"/>
-  </symbol>
-
-  <!-- SANGEETS · hanging paper parasols with tassels -->
-  <symbol id="sc-sangeet" viewBox="0 0 100 125">
-    <linearGradient id="sgBg" x1="0" y1="0" x2=".3" y2="1">
-      <stop offset="0" stop-color="#FCF4EB"/><stop offset=".58" stop-color="#F6E7DA"/><stop offset="1" stop-color="#EFD8C7"/>
-    </linearGradient>
-    <radialGradient id="sgGlow" cx=".46" cy=".3" r=".6">
-      <stop offset="0" stop-color="#FFFFFF" stop-opacity=".72"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
-    </radialGradient>
-    <rect width="100" height="125" fill="url(#sgBg)"/>
-    <rect width="100" height="125" fill="url(#sgGlow)"/>
-    <g filter="url(#fBlurL)" opacity=".46">
-      <circle cx="14" cy="22" r="7" fill="#F5CBD6"/><circle cx="86" cy="14" r="6" fill="#FBE0CB"/>
-      <circle cx="92" cy="52" r="8" fill="#F0D8E6"/><circle cx="8" cy="70" r="6.4" fill="#F5CBD6"/>
-      <circle cx="50" cy="8" r="5" fill="#FBE0CB"/><circle cx="70" cy="104" r="7" fill="#EFD6DD"/>
-    </g>
-    <g stroke="#DCC7B3" stroke-width=".45" fill="none">
-      <path d="M22 0v33"/><path d="M50 0v20"/><path d="M76 0v44"/><path d="M36 0v63"/><path d="M64 0v77"/>
-    </g>
-    <g stroke="#CBB6A2" stroke-width=".5" stroke-linecap="round">
-      <!-- parasol A -->
-      <g><path d="M9 46a13 10.4 0 0 1 26 0z" fill="#FBF1E3"/><path d="M22 35.6V46M13.6 46q8.4-5 16.8 0" fill="none"/><path d="M22 46v7" fill="none"/></g>
-      <!-- parasol B -->
-      <g><path d="M40 30a10 8 0 0 1 20 0z" fill="#F2D8D3"/><path d="M50 22V30M43.6 30q6.4-3.8 12.8 0" fill="none"/><path d="M50 30v6" fill="none"/></g>
-      <!-- parasol C -->
-      <g><path d="M62 58a14 11.2 0 0 1 28 0z" fill="#D6E9EA"/><path d="M76 46.8V58M67 58q9-5.4 18 0" fill="none"/><path d="M76 58v7.5" fill="none"/></g>
-      <!-- parasol D -->
-      <g><path d="M25 74a11 8.8 0 0 1 22 0z" fill="#E1EDE0"/><path d="M36 65.2V74M28.9 74q7.1-4.2 14.2 0" fill="none"/><path d="M36 74v6.5" fill="none"/></g>
-      <!-- parasol E -->
-      <g><path d="M52 88a12 9.6 0 0 1 24 0z" fill="#F8E5C8"/><path d="M64 78.4V88M56.3 88q7.7-4.6 15.4 0" fill="none"/><path d="M64 88v7" fill="none"/></g>
-    </g>
-    <g fill="#D9A987">
-      <circle cx="22" cy="54.4" r="1.7"/><circle cx="50" cy="37.4" r="1.4"/><circle cx="76" cy="67" r="1.8"/>
-      <circle cx="36" cy="82" r="1.5"/><circle cx="64" cy="96.4" r="1.6"/>
-    </g>
-    <g stroke="#D9A987" stroke-width=".45" stroke-linecap="round" opacity=".8">
-      <path d="M20.6 56v4M22 56.1v4.6M23.4 56v4"/>
-      <path d="M74.6 68.6v4.2M76 68.7v4.8M77.4 68.6v4.2"/>
-      <path d="M62.7 98v3.8M64 98.1v4.4M65.3 98v3.8"/>
-      <path d="M34.8 83.4v3.4M36 83.5v3.9M37.2 83.4v3.4"/>
-      <path d="M48.8 38.8v3.2M50 38.9v3.6M51.2 38.8v3.2"/>
-    </g>
-    <path d="M0 108q26-6 50 0t50-3v20H0z" fill="#E8D5C3" opacity=".55"/>
-    <g fill="#5CC6CD" opacity=".45"><circle cx="14" cy="98" r="1.3"/><circle cx="88" cy="88" r="1.3"/><circle cx="46" cy="112" r="1.1"/></g>
-    <g fill="#69BD45" opacity=".4"><circle cx="30" cy="106" r="1.2"/><circle cx="82" cy="110" r="1"/></g>
-    <!-- foreground: a near parasol, thrown out of focus -->
-    <g filter="url(#fBlurM)" opacity=".42">
-      <path d="M-8 118a20 16 0 0 1 40 0z" fill="#E8B7B0"/>
-      <path d="M12 118v10" stroke="#D8A79F" stroke-width="1.6" fill="none"/>
-      <path d="M78 125a16 13 0 0 1 32 0z" fill="#D9C1B0"/>
-    </g>
-    <rect width="100" height="125" fill="url(#warmLight)"/>
-    <rect width="100" height="125" fill="url(#vig)"/>
-  </symbol>
-
-  <!-- ANNIVERSARIES · laid table, candles and foliage -->
-  <symbol id="sc-anniv" viewBox="0 0 120 120">
-    <linearGradient id="anBg" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#F3E9E6"/><stop offset=".62" stop-color="#F7EDE4"/><stop offset="1" stop-color="#EFE0D3"/>
-    </linearGradient>
-    <radialGradient id="anWarm" cx=".5" cy=".52" r=".46">
-      <stop offset="0" stop-color="#FDEBCE" stop-opacity=".8"/><stop offset="1" stop-color="#FDEBCE" stop-opacity="0"/>
-    </radialGradient>
-    <linearGradient id="anCloth" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#FCF8F2"/><stop offset="1" stop-color="#E9DDCE"/>
-    </linearGradient>
-    <rect width="120" height="120" fill="url(#anBg)"/>
-    <g filter="url(#fBlurL)" opacity=".5">
-      <circle cx="16" cy="18" r="7.5" fill="#F6CFD6"/><circle cx="36" cy="10" r="5" fill="#FBE2CC"/>
-      <circle cx="104" cy="16" r="8" fill="#F2D4E0"/><circle cx="88" cy="8" r="4.6" fill="#FBE2CC"/>
-      <circle cx="112" cy="44" r="6" fill="#F6CFD6"/><circle cx="8" cy="46" r="6.4" fill="#EFD8E4"/>
-    </g>
-    <path d="M28 78V38a32 32 0 0 1 64 0v40z" fill="#EFE3DC" opacity=".7"/>
-    <path d="M28 78V38a32 32 0 0 1 64 0v40" fill="none" stroke="#DCCBC1" stroke-width=".8"/>
-    <circle cx="60" cy="62" r="46" fill="url(#anWarm)"/>
-    <g stroke="#C9B49F" stroke-width=".7" fill="none">
-      <path d="M40 62v-9M60 60v-13M80 62v-8"/>
-    </g>
-    <g fill="#B99C7F" opacity=".5"><circle cx="40" cy="52" r="1.4"/><circle cx="60" cy="46" r="1.4"/><circle cx="80" cy="53" r="1.4"/></g>
-    <path d="M10 78h100v6H10z" fill="#DCCBB8"/>
-    <path d="M8 82h104v10q-26 6-52 0T8 92z" fill="url(#anCloth)"/>
-    <path d="M8 92v28h104V92q-26 7-52 0t-52 0z" fill="url(#anCloth)"/>
-    <g>
-      <rect x="38.4" y="62" width="3.2" height="16" rx="1.2" fill="#F6EFE2"/>
-      <rect x="58.4" y="56" width="3.2" height="22" rx="1.2" fill="#F6EFE2"/>
-      <rect x="78.4" y="63" width="3.2" height="15" rx="1.2" fill="#F6EFE2"/>
-      <g fill="#F2B96B"><ellipse cx="40" cy="59.6" rx="1.5" ry="2.8"/><ellipse cx="60" cy="53.6" rx="1.5" ry="2.8"/><ellipse cx="80" cy="60.6" rx="1.5" ry="2.8"/></g>
-    </g>
-    <g fill="#F6F1E7" stroke="#DDCFBE" stroke-width=".6">
-      <ellipse cx="27" cy="80" rx="8.4" ry="2.6"/><ellipse cx="93" cy="80" rx="8.4" ry="2.6"/>
-    </g>
-    <g fill="none" stroke="#8FAE86" stroke-width=".9" stroke-linecap="round">
-      <path d="M46 79q-8-3-13-8"/><path d="M74 79q8-3 13-8"/>
-    </g>
-    <g fill="#A3C29A" opacity=".9">
-      <ellipse cx="38" cy="76.6" rx="2.6" ry="1.5" transform="rotate(-24 38 76.6)"/>
-      <ellipse cx="33" cy="73.4" rx="2.4" ry="1.4" transform="rotate(-30 33 73.4)"/>
-      <ellipse cx="82" cy="76.6" rx="2.6" ry="1.5" transform="rotate(24 82 76.6)"/>
-      <ellipse cx="87" cy="73.4" rx="2.4" ry="1.4" transform="rotate(30 87 73.4)"/>
-    </g>
-    <g fill="none" stroke="#5CC6CD" stroke-width=".8" opacity=".85">
-      <path d="M50 78v-5a4 4 0 0 1 8 0v5"/><path d="M62 78v-5a4 4 0 0 1 8 0v5"/>
-    </g>
-    <!-- foreground: a near glass and a chair back, softened -->
-    <g filter="url(#fBlurM)" opacity=".45">
-      <path d="M2 120V96a9 9 0 0 1 18 0v24z" fill="#7A5F63"/>
-      <path d="M104 120v-18a8 8 0 0 1 16 0v18z" fill="#7A5F63"/>
-    </g>
-    <rect width="120" height="120" fill="url(#fgShade)" opacity=".5"/>
-    <rect width="120" height="120" fill="url(#warmLight)"/>
-    <rect width="120" height="120" fill="url(#vig)"/>
-  </symbol>
-
-  <!-- CORPORATE · stage, microphone, spotlight -->
-  <symbol id="sc-corp" viewBox="0 0 160 80">
-    <linearGradient id="cpBg" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#EDEFF4"/><stop offset=".64" stop-color="#E6E9EF"/><stop offset="1" stop-color="#DDE1E8"/>
-    </linearGradient>
-    <linearGradient id="cpBeam" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#FFFFFF" stop-opacity=".9"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
-    </linearGradient>
-    <rect width="160" height="80" fill="url(#cpBg)"/>
-    <g filter="url(#fBlurL)" opacity=".42">
-      <circle cx="18" cy="14" r="7" fill="#E8D2DE"/><circle cx="38" cy="8" r="4.4" fill="#D9E6EC"/>
-      <circle cx="142" cy="12" r="7.5" fill="#E8D2DE"/><circle cx="122" cy="7" r="4.2" fill="#D9E6EC"/>
-      <circle cx="80" cy="6" r="5" fill="#F2DCE2"/>
-    </g>
-    <g stroke="#D6DAE2" stroke-width=".7" fill="none" opacity=".9">
-      <path d="M24 0v54M40 0v54M56 0v54M104 0v54M120 0v54M136 0v54"/>
-    </g>
-    <path d="M74 0h12l30 62H44z" fill="url(#cpBeam)"/>
-    <ellipse cx="80" cy="62" rx="40" ry="6.5" fill="#F5F6F9" opacity=".9"/>
-    <path d="M0 62h160" stroke="#CCD1DA" stroke-width=".8"/>
-    <path d="M0 62h160v18H0z" fill="#D8DCE4"/>
-    <g fill="#6D7585" opacity=".45">
-      <path d="M12 80v-6a5 5 0 0 1 10 0v6zM34 80v-7a5 5 0 0 1 10 0v7zM56 80v-6a5 5 0 0 1 10 0v6zM94 80v-6a5 5 0 0 1 10 0v6zM116 80v-7a5 5 0 0 1 10 0v7zM138 80v-6a5 5 0 0 1 10 0v6z"/>
-    </g>
-    <g stroke="#5F6775" stroke-width="1.2" fill="none" stroke-linecap="round">
-      <path d="M80 60V32"/><path d="M72 60h16"/>
-    </g>
-    <rect x="76.6" y="22" width="6.8" height="11" rx="3.4" fill="#6D7585"/>
-    <path d="M76.6 27h6.8" stroke="#5CC6CD" stroke-width="1.1"/>
-    <path d="M74 34a6 6 0 0 0 12 0" fill="none" stroke="#5F6775" stroke-width="1"/>
-    <g fill="none" stroke="#5CC6CD" stroke-width=".9" stroke-linecap="round" opacity=".8">
-      <path d="M94 21a13 13 0 0 1 0 14"/><path d="M100 16a20 20 0 0 1 0 24"/>
-      <path d="M66 21a13 13 0 0 0 0 14"/><path d="M60 16a20 20 0 0 0 0 24"/>
-    </g>
-    <path d="M0 62h160" stroke="#5CC6CD" stroke-width=".8" opacity=".55"/>
-    <!-- foreground: the backs of an audience, thrown out of focus -->
-    <g filter="url(#fBlurM)" opacity=".5" fill="#4E4A57">
-      <path d="M-2 80V72a8 8 0 0 1 16 0v8z"/><path d="M20 80v-6a7 7 0 0 1 14 0v6z"/>
-      <path d="M126 80v-7a7.5 7.5 0 0 1 15 0v7z"/><path d="M148 80v-9a8 8 0 0 1 16 0v9z"/>
-    </g>
-    <rect width="160" height="80" fill="url(#warmLight)" opacity=".7"/>
-    <rect width="160" height="80" fill="url(#vig)"/>
-  </symbol>
-
-  <!-- BIRTHDAYS · string lights and bunting over a garden -->
-  <symbol id="sc-bday" viewBox="0 0 150 120">
-    <linearGradient id="bdSky" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#EAF1F1"/><stop offset=".55" stop-color="#F3F0E7"/><stop offset="1" stop-color="#EDE9DC"/>
-    </linearGradient>
-    <radialGradient id="bdSun" cx=".72" cy=".2" r=".4">
-      <stop offset="0" stop-color="#FDF3DD" stop-opacity=".9"/><stop offset="1" stop-color="#FDF3DD" stop-opacity="0"/>
-    </radialGradient>
-    <rect width="150" height="120" fill="url(#bdSky)"/>
-    <circle cx="108" cy="24" r="40" fill="url(#bdSun)"/>
-    <g filter="url(#fBlurL)" opacity=".44">
-      <circle cx="16" cy="14" r="7" fill="#F3CFD9"/><circle cx="36" cy="8" r="4.6" fill="#FBE6CC"/>
-      <circle cx="132" cy="10" r="6.6" fill="#F3CFD9"/><circle cx="66" cy="6" r="4.4" fill="#DCEAE6"/>
-      <circle cx="6" cy="34" r="5.6" fill="#EFD8E2"/>
-    </g>
-    <path d="M0 20q75 34 150 2" fill="none" stroke="#C9BCA8" stroke-width=".6"/>
-    <path d="M0 38q75 32 150 4" fill="none" stroke="#C9BCA8" stroke-width=".6"/>
-    <g stroke="#C9BCA8" stroke-width=".5">
-      <path d="M18 26.6v4M38 31.6v4M58 34.4v4M78 34.6v4M98 32v4M118 26.8v4"/>
-    </g>
-    <g><circle cx="18" cy="32.6" r="3" fill="#F8E4C6"/><circle cx="38" cy="37.6" r="3" fill="#CFE8EA"/><circle cx="58" cy="40.4" r="3" fill="#F3D9D6"/><circle cx="78" cy="40.6" r="3" fill="#DDEBD6"/><circle cx="98" cy="38" r="3" fill="#F8E4C6"/><circle cx="118" cy="32.8" r="3" fill="#CFE8EA"/></g>
-    <g>
-      <path d="M14 40.6l7 .9-3 7.4z" fill="#F2D6D2"/><path d="M32 46.2l7 .9-3 7.4z" fill="#F8E7C9"/>
-      <path d="M52 49.4l7 .9-3 7.4z" fill="#D6E9EA"/><path d="M72 49.6l7 .9-3 7.4z" fill="#E1EDE0"/>
-      <path d="M92 46.8l7 .9-3 7.4z" fill="#F2D6D2"/><path d="M112 41.2l7 .9-3 7.4z" fill="#F8E7C9"/>
-    </g>
-    <path d="M0 78q40-10 76-2t74-6v50H0z" fill="#DFE4D4"/>
-    <g fill="#C3D0B4">
-      <ellipse cx="20" cy="82" rx="19" ry="11"/><ellipse cx="46" cy="86" rx="14" ry="8"/>
-      <ellipse cx="122" cy="80" rx="21" ry="12"/><ellipse cx="98" cy="86" rx="13" ry="7.5"/>
-    </g>
-    <g fill="#69BD45" opacity=".35"><circle cx="16" cy="78" r="2"/><circle cx="128" cy="76" r="2"/><circle cx="48" cy="83" r="1.6"/></g>
-    <path d="M58 104h34v16H58z" fill="#F4EFE4"/>
-    <path d="M55 100h40v4.4H55z" fill="#E7DCCA"/>
-    <path d="M66 100V90h18v10z" fill="#FBF4E8" stroke="#E3D6C2" stroke-width=".7"/>
-    <path d="M66 95h18" stroke="#F0C9C4" stroke-width="1.4"/>
-    <g stroke="#5CC6CD" stroke-width="1" stroke-linecap="round"><path d="M71 90v-5M75 90v-6.5M79 90v-5"/></g>
-    <g fill="#F2B96B"><ellipse cx="71" cy="84" rx="1" ry="1.8"/><ellipse cx="75" cy="82.5" rx="1" ry="1.8"/><ellipse cx="79" cy="84" rx="1" ry="1.8"/></g>
-    <!-- foreground: near planting, out of focus -->
-    <g filter="url(#fBlurM)" opacity=".46">
-      <ellipse cx="8" cy="116" rx="20" ry="13" fill="#7F9273"/>
-      <ellipse cx="142" cy="118" rx="18" ry="12" fill="#7F9273"/>
-      <ellipse cx="34" cy="122" rx="14" ry="9" fill="#8FA083"/>
-    </g>
-    <rect width="150" height="120" fill="url(#warmLight)"/>
-    <rect width="150" height="120" fill="url(#vig)"/>
-  </symbol>
-
-  <!-- BRUNCHES · dessert table with coastal props -->
-  <symbol id="sc-brunch" viewBox="0 0 160 110">
-    <linearGradient id="brSky" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#E7F1F1"/><stop offset=".5" stop-color="#F2F3EC"/><stop offset="1" stop-color="#F3EADC"/>
-    </linearGradient>
-    <linearGradient id="brSea" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#CFE5E7"/><stop offset="1" stop-color="#E4EFEA"/>
-    </linearGradient>
-    <linearGradient id="brCloth" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#FCFAF4"/><stop offset="1" stop-color="#EADFCC"/>
-    </linearGradient>
-    <rect width="160" height="110" fill="url(#brSky)"/>
-    <g filter="url(#fBlurL)" opacity=".42">
-      <circle cx="18" cy="16" r="7.5" fill="#F5D2DA"/><circle cx="40" cy="9" r="4.6" fill="#FBE7CE"/>
-      <circle cx="146" cy="14" r="7" fill="#F5D2DA"/><circle cx="76" cy="8" r="5" fill="#DCEBEC"/>
-      <circle cx="8" cy="36" r="5.6" fill="#EFD9E1"/>
-    </g>
-    <circle cx="120" cy="26" r="13" fill="#FBF0DC" opacity=".85"/>
-    <rect y="42" width="160" height="18" fill="url(#brSea)"/>
-    <path d="M0 42h160" stroke="#BCD8DB" stroke-width=".7"/>
-    <g stroke="#FFFFFF" stroke-width=".8" opacity=".7" fill="none">
-      <path d="M12 50q6-3 12 0t12 0"/><path d="M96 54q6-3 12 0t12 0"/>
-    </g>
-    <path d="M0 60q36-6 80 0t80-4v54H0z" fill="#EFE5D3"/>
-    <path d="M6 70h148v6H6z" fill="#D9C8B2"/>
-    <path d="M4 74h152v12q-38 7-76 0T4 86z" fill="url(#brCloth)"/>
-    <path d="M4 86v24h152V86q-38 8-76 0t-76 0z" fill="url(#brCloth)"/>
-    <g>
-      <path d="M36 70V62h4v8z" fill="#C8B49B"/>
-      <ellipse cx="38" cy="60.6" rx="13" ry="3" fill="#F7F1E5" stroke="#DECFB9" stroke-width=".6"/>
-      <path d="M30 60.6q8-11 16 0z" fill="#FBEFE6"/>
-      <path d="M30 56.5q8-6 16 0" fill="none" stroke="#EBC9C2" stroke-width="1"/>
-    </g>
-    <g>
-      <path d="M118 70v-6h3.4v6z" fill="#C8B49B"/>
-      <ellipse cx="119.7" cy="63" rx="10" ry="2.5" fill="#F7F1E5" stroke="#DECFB9" stroke-width=".6"/>
-      <path d="M113 63q6.7-8 13.4 0z" fill="#F6EEDC"/>
-    </g>
-    <g fill="#E3D3B8" stroke="#CDB894" stroke-width=".6">
-      <ellipse cx="66" cy="68.5" rx="10" ry="2.6"/><ellipse cx="92" cy="69" rx="8" ry="2.2"/>
-    </g>
-    <g fill="#F8F3E9"><ellipse cx="66" cy="66.4" rx="6.4" ry="2"/><ellipse cx="92" cy="67.2" rx="5" ry="1.7"/></g>
-    <g fill="#F4E9DC" stroke="#DCC9B1" stroke-width=".55">
-      <path d="M148 70a7 7 0 0 1 14 0z" transform="translate(-14 -2)"/>
-    </g>
-    <g fill="none" stroke="#DCC9B1" stroke-width=".5"><path d="M141 68v-5M137 68.6l1.6-4.6M145 68.6l-1.6-4.6"/></g>
-    <g fill="#F7F2EA" stroke="#DDD2C2" stroke-width=".45">
-      <circle cx="20" cy="70" r="1.7"/><circle cx="25" cy="71" r="1.5"/><circle cx="30" cy="70.4" r="1.6"/>
-      <circle cx="104" cy="70" r="1.6"/><circle cx="109" cy="70.8" r="1.4"/>
-    </g>
-    <g fill="none" stroke="#8FAE86" stroke-width=".85" stroke-linecap="round"><path d="M54 69q-6-4-10-9"/><path d="M132 70q5-4 8-9"/></g>
-    <g fill="#A3C29A"><ellipse cx="47" cy="64" rx="2.4" ry="1.4" transform="rotate(-28 47 64)"/><ellipse cx="137" cy="64" rx="2.4" ry="1.4" transform="rotate(28 137 64)"/></g>
-    <g fill="#5CC6CD" opacity=".5"><circle cx="78" cy="68" r="1.6"/><circle cx="83" cy="69" r="1.2"/></g>
-    <!-- foreground: near stems and a glass rim, softened -->
-    <g filter="url(#fBlurM)" opacity=".42">
-      <path d="M-4 110V88a10 10 0 0 1 20 0v22z" fill="#8A9B85"/>
-      <ellipse cx="152" cy="104" rx="16" ry="11" fill="#C9A9A2"/>
-    </g>
-    <rect width="160" height="110" fill="url(#warmLight)"/>
-    <rect width="160" height="110" fill="url(#vig)"/>
-  </symbol>
-
-  <!-- ABOUT · marigold strands and a diya, studio detail -->
-  <symbol id="sc-about" viewBox="0 0 200 80">
-    <linearGradient id="abBg" x1="0" y1="0" x2=".2" y2="1">
-      <stop offset="0" stop-color="#FBF6EE"/><stop offset=".55" stop-color="#F5EADC"/><stop offset="1" stop-color="#EEDCC8"/>
-    </linearGradient>
-    <rect width="200" height="80" fill="url(#abBg)"/>
-    <radialGradient id="abGlow" cx=".5" cy=".8" r=".55">
-      <stop offset="0" stop-color="#FDECCF" stop-opacity=".85"/><stop offset="1" stop-color="#FDECCF" stop-opacity="0"/>
-    </radialGradient>
-    <rect width="200" height="80" fill="url(#abGlow)"/>
-    <g filter="url(#fBlurL)" opacity=".42">
-      <circle cx="24" cy="10" r="7" fill="#F6CFD8"/><circle cx="52" cy="6" r="4.6" fill="#FBE5CB"/>
-      <circle cx="176" cy="9" r="7" fill="#F6CFD8"/><circle cx="148" cy="5" r="4.4" fill="#FBE5CB"/>
-      <circle cx="100" cy="4" r="5" fill="#EFD8E4"/><circle cx="6" cy="30" r="6" fill="#F2D6DE"/>
-      <circle cx="194" cy="32" r="6" fill="#F2D6DE"/>
-    </g>
-    <g fill="none" stroke="#DEC7A9" stroke-width=".6">
-      <path d="M0 6q28 30 56 0"/><path d="M56 6q28 34 56 0"/><path d="M112 6q28 30 56 0"/><path d="M168 6q20 24 32 6"/>
-    </g>
-    <g fill="#E9B36F" opacity=".85">
-      <circle cx="10" cy="13.4" r="2.4"/><circle cx="20" cy="18" r="2.6"/><circle cx="30" cy="19.4" r="2.6"/><circle cx="40" cy="17.4" r="2.5"/><circle cx="49" cy="12.6" r="2.3"/>
-      <circle cx="66" cy="14.6" r="2.5"/><circle cx="76" cy="20" r="2.7"/><circle cx="86" cy="21.6" r="2.7"/><circle cx="96" cy="19.2" r="2.6"/><circle cx="106" cy="13.8" r="2.4"/>
-      <circle cx="122" cy="13.4" r="2.4"/><circle cx="132" cy="18" r="2.6"/><circle cx="142" cy="19.4" r="2.6"/><circle cx="152" cy="17.4" r="2.5"/><circle cx="161" cy="12.6" r="2.3"/>
-      <circle cx="176" cy="12.6" r="2.3"/><circle cx="186" cy="16" r="2.4"/><circle cx="195" cy="15" r="2.2"/>
-    </g>
-    <g fill="#D9954F" opacity=".5">
-      <circle cx="20" cy="18" r="1"/><circle cx="76" cy="20" r="1"/><circle cx="86" cy="21.6" r="1"/><circle cx="132" cy="18" r="1"/><circle cx="142" cy="19.4" r="1"/>
-    </g>
-    <g stroke="#CBB79C" stroke-width=".5" fill="none"><path d="M100 26v10"/><path d="M62 24v8"/><path d="M138 24v8"/></g>
-    <g fill="#EDE1CE" stroke="#D8C6A9" stroke-width=".6"><ellipse cx="62" cy="35" rx="3.4" ry="3.8"/><ellipse cx="138" cy="35" rx="3.4" ry="3.8"/></g>
-    <path d="M0 58q50-10 100 0t100-6v28H0z" fill="#E9DECB"/>
-    <path d="M0 58q50-10 100 0t100-6" fill="none" stroke="#D8C9B0" stroke-width=".7"/>
-    <g>
-      <path d="M88 62h24l-3 6H91z" fill="#D8AE7C"/>
-      <ellipse cx="100" cy="62" rx="12" ry="3" fill="#E6C395"/>
-      <ellipse cx="100" cy="61.6" rx="7.6" ry="1.8" fill="#F6E3C2"/>
-      <ellipse cx="100" cy="57.4" rx="1.5" ry="3" fill="#F2B96B"/>
-      <ellipse cx="100" cy="55.4" rx=".8" ry="1.6" fill="#FBE6C4"/>
-    </g>
-    <g fill="none" stroke="#8FAE86" stroke-width=".9" stroke-linecap="round"><path d="M40 66q-8-5-12-12"/><path d="M160 66q8-5 12-12"/></g>
-    <g fill="#A3C29A"><ellipse cx="30" cy="55" rx="3" ry="1.7" transform="rotate(-30 30 55)"/><ellipse cx="170" cy="55" rx="3" ry="1.7" transform="rotate(30 170 55)"/></g>
-    <g fill="#5CC6CD" opacity=".45"><circle cx="52" cy="64" r="1.6"/><circle cx="150" cy="65" r="1.4"/></g>
-    <g fill="#69BD45" opacity=".35"><circle cx="120" cy="67" r="1.5"/><circle cx="74" cy="68" r="1.2"/></g>
-    <!-- foreground: near marigolds falling out of focus -->
-    <g filter="url(#fBlurM)" opacity=".46">
-      <circle cx="10" cy="74" r="8" fill="#E0A059"/><circle cx="26" cy="79" r="6" fill="#E9B472"/>
-      <circle cx="190" cy="74" r="8" fill="#E0A059"/><circle cx="174" cy="79" r="6" fill="#E9B472"/>
-    </g>
-    <rect width="200" height="80" fill="url(#warmLight)"/>
-    <rect width="200" height="80" fill="url(#vig)"/>
-  </symbol>
-
-  <!-- CHELNA · planner at the board, flowers to hand -->
-  <symbol id="sc-chelna" viewBox="0 0 100 125">
-    <linearGradient id="chBg" x1="0" y1="0" x2=".25" y2="1">
-      <stop offset="0" stop-color="#F7EFEF"/><stop offset=".6" stop-color="#F4E7E4"/><stop offset="1" stop-color="#EAD5D0"/>
-    </linearGradient>
-    <rect width="100" height="125" fill="url(#chBg)"/>
-    <g filter="url(#fBlurL)" opacity=".46">
-      <circle cx="12" cy="16" r="7" fill="#F2C6D2"/><circle cx="88" cy="12" r="6.4" fill="#FADFCE"/>
-      <circle cx="94" cy="46" r="7" fill="#EFCFDE"/><circle cx="6" cy="52" r="6" fill="#F2C6D2"/>
-      <circle cx="50" cy="6" r="5" fill="#F6DCE3"/>
-    </g>
-    <path d="M18 125V44a32 32 0 0 1 64 0v81z" fill="#FBF4F2" opacity=".75"/>
-    <path d="M18 125V44a32 32 0 0 1 64 0v81" fill="none" stroke="#E2CDC8" stroke-width=".8"/>
-    <g>
-      <rect x="8" y="34" width="30" height="38" rx="1.6" fill="#FCF8F3" stroke="#DDCBC4" stroke-width=".8"/>
-      <g stroke="#DDCBC4" stroke-width=".55"><path d="M13 43h20M13 49h20M13 55h14M13 61h17"/></g>
-      <rect x="13" y="37.5" width="9" height="3" rx="1.5" fill="#5CC6CD" opacity=".8"/>
-      <path d="M23 72v12M15 84h16" stroke="#D3BFB7" stroke-width=".8" fill="none"/>
-    </g>
-    <g>
-      <path d="M62 92q-3-14 4-24" fill="none" stroke="#8FAE86" stroke-width=".9" stroke-linecap="round"/>
-      <path d="M70 92q3-12-2-20" fill="none" stroke="#8FAE86" stroke-width=".9" stroke-linecap="round"/>
-      <g fill="#E6A9AE"><circle cx="66" cy="66" r="3.4"/><circle cx="72" cy="70" r="2.8"/><circle cx="60" cy="72" r="2.6"/></g>
-      <g fill="#A3C29A"><ellipse cx="59" cy="80" rx="3" ry="1.6" transform="rotate(-30 59 80)"/><ellipse cx="74" cy="80" rx="3" ry="1.6" transform="rotate(30 74 80)"/></g>
-      <path d="M58 92h16l-2 12H60z" fill="#EFE1D8" stroke="#DCC8BE" stroke-width=".7"/>
-    </g>
-    <g>
-      <circle cx="45" cy="45" r="11" fill="#3F3B44"/>
-      <path d="M34 45q0-15 11-15t11 15q0 3-2 3-1-9-9-9t-9 9q-2 0-2-3z" fill="#2E2B34"/>
-      <path d="M45 56c-13 0-22 10-22 24v45h44V80c0-14-9-24-22-24z" fill="#EDD7CE"/>
-      <path d="M45 56c-13 0-22 10-22 24v45h10V80c0-9 5-16 12-19z" fill="#F6E5DD" opacity=".8"/>
-      <path d="M27 88h36" stroke="#DBBEB2" stroke-width=".8" fill="none"/>
-      <path d="M45 68l-4 12h8z" fill="#5CC6CD" opacity=".65"/>
-    </g>
-    <path d="M0 118q30-6 52 0t48-3v10H0z" fill="#E4CFC9" opacity=".55"/>
-    <!-- foreground: blooms carried past the lens -->
-    <g filter="url(#fBlurM)" opacity=".44">
-      <circle cx="6" cy="112" r="10" fill="#DFA0A8"/><circle cx="20" cy="122" r="8" fill="#E8B4B8"/>
-      <circle cx="96" cy="118" r="9" fill="#DFA0A8"/>
-    </g>
-    <rect width="100" height="125" fill="url(#warmLight)"/>
-    <rect width="100" height="125" fill="url(#vig)"/>
-  </symbol>
-
-  <!-- RAMESH · mic in hand, mid-show -->
-  <symbol id="sc-ramesh" viewBox="0 0 100 125">
-    <linearGradient id="raBg" x1="0" y1="0" x2=".25" y2="1">
-      <stop offset="0" stop-color="#EDF3EE"/><stop offset=".6" stop-color="#E6EFEC"/><stop offset="1" stop-color="#D6E5E2"/>
-    </linearGradient>
-    <radialGradient id="raSpot" cx=".5" cy=".28" r=".52">
-      <stop offset="0" stop-color="#FFFFFF" stop-opacity=".85"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
-    </radialGradient>
-    <rect width="100" height="125" fill="url(#raBg)"/>
-    <g filter="url(#fBlurL)" opacity=".44">
-      <circle cx="12" cy="14" r="7" fill="#EFC9D4"/><circle cx="88" cy="10" r="6" fill="#F8DFCC"/>
-      <circle cx="94" cy="44" r="7.4" fill="#D8E6E4"/><circle cx="6" cy="48" r="6.4" fill="#EFC9D4"/>
-      <circle cx="50" cy="4" r="5" fill="#F6DCE3"/>
-    </g>
-    <path d="M38 0h24l26 82H12z" fill="url(#raSpot)"/>
-    <circle cx="50" cy="38" r="30" fill="#FFFFFF" opacity=".35"/>
-    <g fill="none" stroke="#5CC6CD" stroke-width=".9" stroke-linecap="round" opacity=".75">
-      <path d="M80 44a14 14 0 0 1 0 16"/><path d="M87 38a22 22 0 0 1 0 28"/>
-      <path d="M20 44a14 14 0 0 0 0 16"/><path d="M13 38a22 22 0 0 0 0 28"/>
-    </g>
-    <g>
-      <circle cx="48" cy="40" r="11" fill="#3F3B44"/>
-      <path d="M37 38q1-12 11-12t11 12q-4-5-11-5t-11 5z" fill="#2E2B34"/>
-      <path d="M48 51c-13 0-21 10-21 23v51h42V74c0-13-8-23-21-23z" fill="#4A5560"/>
-      <path d="M48 51c-13 0-21 10-21 23v51h9V74c0-9 4-16 11-19z" fill="#5A6672" opacity=".85"/>
-      <path d="M44 51h8l-4 22z" fill="#EDEFF2"/>
-      <path d="M48 62l-3 11h6z" fill="#69BD45" opacity=".6"/>
-      <path d="M62 74l14-16" stroke="#4A5560" stroke-width="7" stroke-linecap="round" fill="none"/>
-      <path d="M62 74l14-16" stroke="#5A6672" stroke-width="3" stroke-linecap="round" fill="none" opacity=".8"/>
-    </g>
-    <g transform="rotate(-42 78 56)">
-      <rect x="74.4" y="40" width="7.2" height="13" rx="3.6" fill="#6D7585"/>
-      <path d="M74.4 46h7.2" stroke="#5CC6CD" stroke-width="1.2"/>
-      <rect x="76.4" y="52" width="3.2" height="12" rx="1.4" fill="#5F6775"/>
-    </g>
-    <path d="M0 116q30-6 50 0t50-3v12H0z" fill="#C8DAD6" opacity=".6"/>
-    <!-- foreground: the heads of a near audience row -->
-    <g filter="url(#fBlurM)" opacity=".46" fill="#4B4652">
-      <path d="M-6 125v-12a11 11 0 0 1 22 0v12z"/>
-      <path d="M78 125v-14a12 12 0 0 1 24 0v14z"/>
-      <path d="M36 125v-8a9 9 0 0 1 18 0v8z"/>
-    </g>
-    <rect width="100" height="125" fill="url(#warmLight)" opacity=".85"/>
-    <rect width="100" height="125" fill="url(#vig)"/>
-  </symbol>
 </svg>
 
 <!-- ============ NAV ============ -->
@@ -1944,9 +1457,10 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 
     <figure class="plate about-plate wipe">
       <span class="plate-ratio"></span>
-      <svg class="scene" viewBox="0 0 200 80" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Sample illustration: marigold strands and a lit diya on a studio table"><use href="#sc-about"></use></svg>
+      <img class="shot" src="assets/samples/wed-05.jpg" width="900" height="585" decoding="async"
+           alt="Sample photograph: a decorated wedding arch above a floral aisle and rows of seating">
       <span class="plate-grain" aria-hidden="true"></span>
-      <figcaption class="plate-cap" style="--tint:#C9A06A"><span class="dot" aria-hidden="true"></span>Marigold · sample</figcaption>
+      <figcaption class="plate-cap" style="--tint:#C9A06A"><span class="dot" aria-hidden="true"></span>Aisle · sample</figcaption>
     </figure>
   </div>
 </section>
@@ -1998,7 +1512,8 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
     <article class="founder">
       <figure class="plate f-plate wipe">
         <span class="plate-ratio"></span>
-        <svg class="scene" viewBox="0 0 100 125" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Sample illustration: a planner at her board, flowers to hand"><use href="#sc-chelna"></use></svg>
+        <img class="shot" src="assets/samples/chelna-02.jpg" width="700" height="467" loading="lazy" decoding="async"
+             alt="Sample photograph: a florist smiling as she works among her flowers">
         <span class="plate-grain" aria-hidden="true"></span>
         <figcaption class="plate-cap" style="--tint:#C08E85"><span class="dot" aria-hidden="true"></span>Chelna · sample</figcaption>
       </figure>
@@ -2021,7 +1536,8 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
     <article class="founder founder--b">
       <figure class="plate f-plate wipe">
         <span class="plate-ratio"></span>
-        <svg class="scene" viewBox="0 0 100 125" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Sample illustration: a compere on stage, microphone in hand"><use href="#sc-ramesh"></use></svg>
+        <img class="shot" src="assets/samples/ramesh-04.jpg" width="700" height="467" loading="lazy" decoding="async"
+             alt="Sample photograph: a man in a light blue shirt speaking into a microphone on stage">
         <span class="plate-grain" aria-hidden="true"></span>
         <figcaption class="plate-cap" style="--tint:#7FA383"><span class="dot" aria-hidden="true"></span>Ramesh · sample</figcaption>
       </figure>
@@ -2196,103 +1712,91 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   <div class="grid">
     <div class="g-tiles">
 
-      <!-- Each tile opens the story viewer at its own slide. The visible
+      <!-- Each tile opens the popup on its own category. The visible
            "View →" is the real control (a button — there is no page to go to
            yet), so the h3 stays a heading and the markup stays valid; the
            whole tile is click-through to that same button for pointer users. -->
-      <div class="g-tile rev-l" style="--tint:#4E9BA1"
-              data-scene="#sc-wed" data-view="0 0 160 100" data-name="Weddings"
-              data-alt="Sample illustration: a mandap arch hung with garlands at dusk"
-              data-line="Mandaps, mehendis and mornings that run on their own time.">
+      <div class="g-tile rev-l" style="--tint:#4E9BA1" data-cat="wed" data-name="Weddings">
         <figure class="plate wipe">
           <span class="plate-ratio"></span>
-          <svg class="scene" viewBox="0 0 160 100" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Sample illustration: a mandap arch hung with garlands at dusk"><use href="#sc-wed"></use></svg>
+          <img class="shot" src="assets/samples/wed-01.jpg" width="860" height="573" decoding="async"
+               alt="Sample photograph: a couple in traditional wedding attire sitting under a floral canopy during a ceremony">
           <span class="plate-grain" aria-hidden="true"></span>
           <figcaption class="plate-cap" style="--tint:#4E9BA1"><span class="dot" aria-hidden="true"></span>Wedding · sample</figcaption>
         </figure>
         <div class="g-meta">
           <h3><svg class="lotus" aria-hidden="true"><use href="#lotus"></use></svg>Weddings</h3>
-          <button type="button" class="view" aria-haspopup="dialog" aria-label="Open the Weddings story">View <span class="arw" aria-hidden="true">→</span></button>
+          <button type="button" class="view" aria-haspopup="dialog" aria-label="Open the Weddings gallery">View <span class="arw" aria-hidden="true">→</span></button>
         </div>
       </div>
 
-      <div class="g-tile rev-l" style="--tint:#B96E45"
-              data-scene="#sc-sangeet" data-view="0 0 100 125" data-name="Sangeets"
-              data-alt="Sample illustration: hanging paper parasols with tassels"
-              data-line="Rehearsed for weeks, remembered for years.">
+      <div class="g-tile rev-l" style="--tint:#B96E45" data-cat="sangeet" data-name="Sangeets">
         <figure class="plate wipe">
           <span class="plate-ratio"></span>
-          <svg class="scene" viewBox="0 0 100 125" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Sample illustration: hanging paper parasols with tassels"><use href="#sc-sangeet"></use></svg>
+          <img class="shot" src="assets/samples/sangeet-01.jpg" width="860" height="573" loading="lazy" decoding="async"
+               alt="Sample photograph: a close up of a person walking on a red carpet">
           <span class="plate-grain" aria-hidden="true"></span>
           <figcaption class="plate-cap" style="--tint:#B96E45"><span class="dot" aria-hidden="true"></span>Sangeet · sample</figcaption>
         </figure>
         <div class="g-meta">
           <h3><svg class="lotus" aria-hidden="true"><use href="#lotus"></use></svg>Sangeets</h3>
-          <button type="button" class="view" aria-haspopup="dialog" aria-label="Open the Sangeets story">View <span class="arw" aria-hidden="true">→</span></button>
+          <button type="button" class="view" aria-haspopup="dialog" aria-label="Open the Sangeets gallery">View <span class="arw" aria-hidden="true">→</span></button>
         </div>
       </div>
 
-      <div class="g-tile rev-l" style="--tint:#B37A72"
-              data-scene="#sc-anniv" data-view="0 0 120 120" data-name="Anniversaries"
-              data-alt="Sample illustration: a laid dinner table with candles and foliage"
-              data-line="A table laid for the people who stayed.">
+      <div class="g-tile rev-l" style="--tint:#B37A72" data-cat="anniv" data-name="Anniversaries">
         <figure class="plate wipe">
           <span class="plate-ratio"></span>
-          <svg class="scene" viewBox="0 0 120 120" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Sample illustration: a laid dinner table with candles and foliage"><use href="#sc-anniv"></use></svg>
+          <img class="shot" src="assets/samples/anniv-01.jpg" width="900" height="600" loading="lazy" decoding="async"
+               alt="Sample photograph: a long dining table set with white plates, candles, and glass bottles">
           <span class="plate-grain" aria-hidden="true"></span>
           <figcaption class="plate-cap" style="--tint:#B37A72"><span class="dot" aria-hidden="true"></span>Anniversary · sample</figcaption>
         </figure>
         <div class="g-meta">
           <h3><svg class="lotus" aria-hidden="true"><use href="#lotus"></use></svg>Anniversaries</h3>
-          <button type="button" class="view" aria-haspopup="dialog" aria-label="Open the Anniversaries story">View <span class="arw" aria-hidden="true">→</span></button>
+          <button type="button" class="view" aria-haspopup="dialog" aria-label="Open the Anniversaries gallery">View <span class="arw" aria-hidden="true">→</span></button>
         </div>
       </div>
 
-      <div class="g-tile rev-l" style="--tint:#6E719A"
-              data-scene="#sc-corp" data-view="0 0 160 80" data-name="Corporate Events"
-              data-alt="Sample illustration: a stage with a microphone under a spotlight"
-              data-line="Stages, launches and galas that still feel personal.">
+      <div class="g-tile rev-l" style="--tint:#6E719A" data-cat="corp" data-name="Corporate Events">
         <figure class="plate wipe">
           <span class="plate-ratio"></span>
-          <svg class="scene" viewBox="0 0 160 80" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Sample illustration: a stage with a microphone under a spotlight"><use href="#sc-corp"></use></svg>
+          <img class="shot" src="assets/samples/corp-01.jpg" width="900" height="600" loading="lazy" decoding="async"
+               alt="Sample photograph: crowd of people sitting on chairs inside room">
           <span class="plate-grain" aria-hidden="true"></span>
           <figcaption class="plate-cap" style="--tint:#6E719A"><span class="dot" aria-hidden="true"></span>Corporate · sample</figcaption>
         </figure>
         <div class="g-meta">
           <h3><svg class="lotus" aria-hidden="true"><use href="#lotus"></use></svg>Corporate Events</h3>
-          <button type="button" class="view" aria-haspopup="dialog" aria-label="Open the Corporate Events story">View <span class="arw" aria-hidden="true">→</span></button>
+          <button type="button" class="view" aria-haspopup="dialog" aria-label="Open the Corporate Events gallery">View <span class="arw" aria-hidden="true">→</span></button>
         </div>
       </div>
 
-      <div class="g-tile rev-l" style="--tint:#B08B37"
-              data-scene="#sc-bday" data-view="0 0 150 120" data-name="Birthdays"
-              data-alt="Sample illustration: string lights and bunting over a garden table"
-              data-line="String lights, small conspiracies, one very big surprise.">
+      <div class="g-tile rev-l" style="--tint:#B08B37" data-cat="bday" data-name="Birthdays">
         <figure class="plate wipe">
           <span class="plate-ratio"></span>
-          <svg class="scene" viewBox="0 0 150 120" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Sample illustration: string lights and bunting over a garden table"><use href="#sc-bday"></use></svg>
+          <img class="shot" src="assets/samples/bday-01.jpg" width="900" height="601" loading="lazy" decoding="async"
+               alt="Sample photograph: person holding balloons">
           <span class="plate-grain" aria-hidden="true"></span>
           <figcaption class="plate-cap" style="--tint:#B08B37"><span class="dot" aria-hidden="true"></span>Birthday · sample</figcaption>
         </figure>
         <div class="g-meta">
           <h3><svg class="lotus" aria-hidden="true"><use href="#lotus"></use></svg>Birthdays</h3>
-          <button type="button" class="view" aria-haspopup="dialog" aria-label="Open the Birthdays story">View <span class="arw" aria-hidden="true">→</span></button>
+          <button type="button" class="view" aria-haspopup="dialog" aria-label="Open the Birthdays gallery">View <span class="arw" aria-hidden="true">→</span></button>
         </div>
       </div>
 
-      <div class="g-tile rev-l" style="--tint:#71906A"
-              data-scene="#sc-brunch" data-view="0 0 160 110" data-name="Brunches"
-              data-alt="Sample illustration: a coastal dessert table with shells and pearls"
-              data-line="Long tables, late mornings, no rush anywhere.">
+      <div class="g-tile rev-l" style="--tint:#71906A" data-cat="brunch" data-name="Brunches">
         <figure class="plate wipe">
           <span class="plate-ratio"></span>
-          <svg class="scene" viewBox="0 0 160 110" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Sample illustration: a coastal dessert table with shells and pearls"><use href="#sc-brunch"></use></svg>
+          <img class="shot" src="assets/samples/brunch-01.jpg" width="860" height="573" loading="lazy" decoding="async"
+               alt="Sample photograph: sliced bread with green vegetable and meat on white ceramic plate">
           <span class="plate-grain" aria-hidden="true"></span>
           <figcaption class="plate-cap" style="--tint:#71906A"><span class="dot" aria-hidden="true"></span>Brunch · sample</figcaption>
         </figure>
         <div class="g-meta">
           <h3><svg class="lotus" aria-hidden="true"><use href="#lotus"></use></svg>Brunches</h3>
-          <button type="button" class="view" aria-haspopup="dialog" aria-label="Open the Brunches story">View <span class="arw" aria-hidden="true">→</span></button>
+          <button type="button" class="view" aria-haspopup="dialog" aria-label="Open the Brunches gallery">View <span class="arw" aria-hidden="true">→</span></button>
         </div>
       </div>
 
@@ -2694,42 +2198,49 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   </div>
 </footer>
 
-<!-- ============ GALLERY STORY VIEWER ============
-     One dialog, six slides. Content is copied in from whichever tile was
-     pressed; the SVG <use> is repointed at that category's <symbol>. -->
-<div class="story" id="story" role="dialog" aria-modal="true" aria-labelledby="storyTitle" hidden>
-  <div class="story-scrim" data-story-close></div>
+<!-- ============ GALLERY POPUP ============
+     One dialog, reused by all six categories. The grid is built from GALLERY
+     below when a tile is pressed; clicking a frame expands it in place. -->
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-labelledby="lbTitle" hidden>
+  <div class="lb-scrim" data-lb-close></div>
 
-  <div class="story-panel">
-    <div class="story-bars" id="storyBars" aria-hidden="true"></div>
+  <div class="lb-panel">
+    <header class="lb-head">
+      <div>
+        <h2 class="lb-title" id="lbTitle">
+          <svg class="lotus" aria-hidden="true"><use href="#lotus"></use></svg>
+          <span id="lbName">Weddings</span>
+        </h2>
+        <p class="mono lb-count" id="lbCount">Six frames &middot; Weddings</p>
+      </div>
+      <button type="button" class="lb-close" id="lbClose" aria-label="Close the gallery"><span aria-hidden="true">&times;</span></button>
+    </header>
 
-    <figure class="story-figure">
-      <svg class="story-scene" id="storyScene" viewBox="0 0 160 100" preserveAspectRatio="xMidYMid slice" role="img" aria-labelledby="storyAlt">
-        <title id="storyAlt">Sample illustration</title>
-        <use id="storyUse" href="#sc-wed"></use>
-      </svg>
-      <span class="story-grain" aria-hidden="true"></span>
-    </figure>
+    <div class="lb-body" id="lbBody">
+      <div class="lb-grid" id="lbGrid"></div>
 
-    <div class="story-caption">
-      <p class="mono story-idx" id="storyIdx">01 / 06</p>
-      <h2 class="story-title" id="storyTitle">
-        <svg class="lotus" aria-hidden="true"><use href="#lotus"></use></svg>
-        <span id="storyName">Weddings</span>
-      </h2>
-      <p class="story-line" id="storyLine"></p>
-      <p class="story-chip"><span class="dot" aria-hidden="true"></span>Actual photography arriving soon</p>
+      <div class="lb-solo" id="lbSolo" hidden>
+        <button type="button" class="lb-back" id="lbBack"><span aria-hidden="true">&larr;</span> Back to all six frames</button>
+        <figure class="lb-figure">
+          <img id="lbImg" src="" alt="" decoding="async">
+          <figcaption>
+            <p class="lb-cap" id="lbCap"></p>
+            <p class="mono lb-credit" id="lbCredit"></p>
+          </figcaption>
+        </figure>
+        <div class="lb-solo-nav">
+          <button type="button" class="lb-nav" id="lbPrev" aria-label="Previous photograph">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4 7 12l8 8"/></svg>
+          </button>
+          <button type="button" class="lb-nav" id="lbNext" aria-label="Next photograph">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4l8 8-8 8"/></svg>
+          </button>
+          <p class="mono lb-idx" id="lbIdx">01 / 06</p>
+        </div>
+      </div>
     </div>
 
-    <button type="button" class="story-nav story-prev" id="storyPrev" aria-label="Previous category">
-      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4 7 12l8 8"/></svg>
-    </button>
-    <button type="button" class="story-nav story-next" id="storyNext" aria-label="Next category">
-      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4l8 8-8 8"/></svg>
-    </button>
-    <button type="button" class="story-close" id="storyClose" aria-label="Close the gallery story"><span aria-hidden="true">×</span></button>
-
-    <p class="vh" id="storyLive" role="status" aria-live="polite"></p>
+    <p class="vh" id="lbLive" role="status" aria-live="polite"></p>
   </div>
 </div>
 
@@ -2915,6 +2426,22 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
       });
     }, {threshold:0.12, rootMargin:"0px 0px -8% 0px"});
     Array.prototype.forEach.call(revealables, function(el){ io.observe(el); });
+    /* Safety net. An IntersectionObserver delivers nothing while the document is
+       hidden (page opened in a background tab), and every revealable starts at
+       opacity:0 / clipped — so content could sit invisible indefinitely. If
+       NOTHING has revealed by the time the page has settled, reveal everything;
+       a normal visible load always trips the observer first and keeps its
+       scroll choreography untouched. */
+    window.setTimeout(function(){
+      var anyShown = false;
+      Array.prototype.forEach.call(revealables, function(el){
+        if (el.classList.contains("in")) anyShown = true;
+      });
+      if (anyShown) return;
+      Array.prototype.forEach.call(revealables, function(el){
+        el.classList.add("in"); io.unobserve(el);
+      });
+    }, 1600);
   } else {
     Array.prototype.forEach.call(revealables, function(el){ el.classList.add("in"); });
   }
@@ -2994,129 +2521,220 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   }
 
   /* ============================================================
-     GALLERY STORY VIEWER
-     A fullscreen, story-style browser over the six category scenes.
-     Open: click anywhere on a tile, or press its "View" button.
-     Move: on-screen arrows, ← / →, or a horizontal swipe.
-     Close: ×, Esc, or the backdrop. Focus is trapped while open and
-     handed back to the button that opened it.
+     GALLERY POPUP
+     One dialog per category: a scrollable grid of that category's six
+     frames, and an inline expanded view for any one of them.
+     Open:  click a tile, or press its "View" button.
+     Grid:  click a frame to expand; ← / → move within the category.
+     Close: ×, Esc, or the backdrop. Esc in the expanded view goes back
+     to the grid first. Focus is trapped and handed back to the opener.
      ============================================================ */
-  var story     = document.getElementById("story");
-  var tiles     = document.querySelectorAll(".g-tile");
-  var slides    = Array.prototype.slice.call(tiles);
-  var storyUse  = document.getElementById("storyUse");
-  var storyScene= document.getElementById("storyScene");
-  var storyAlt  = document.getElementById("storyAlt");
-  var storyName = document.getElementById("storyName");
-  var storyLine = document.getElementById("storyLine");
-  var storyIdx  = document.getElementById("storyIdx");
-  var storyBars = document.getElementById("storyBars");
-  var storyLive = document.getElementById("storyLive");
-  var storyPrev = document.getElementById("storyPrev");
-  var storyNext = document.getElementById("storyNext");
-  var storyClose= document.getElementById("storyClose");
-  var current = 0, opener = null, storyOpen = false, closeTimer = 0;
+  var lb = document.getElementById("lb");
+  var tiles = document.querySelectorAll(".g-tile");
 
-  function pad(n){ return (n < 10 ? "0" : "") + n; }
+  var GALLERY = {
+    wed: [
+      {f:"wed-01.jpg", w:860, h:573, a:"Sample photograph: A couple in traditional wedding attire sitting under a floral canopy during a ceremony", c:"AMISH THAKKAR / Unsplash"},
+      {f:"wed-02.jpg", w:900, h:600, a:"Sample photograph: A couple's hands tied together during a ceremony", c:"Sushanta Rokka / Unsplash"},
+      {f:"wed-03.jpg", w:860, h:573, a:"Sample photograph: A couple participating in a traditional indian wedding ceremony", c:"Sushanta Rokka / Unsplash"},
+      {f:"wed-04.jpg", w:860, h:573, a:"Sample photograph: Couple participating in a traditional indian wedding ceremony", c:"Sushanta Rokka / Unsplash"},
+      {f:"wed-05.jpg", w:900, h:585, a:"Sample photograph: Decorated wedding arch with floral aisle and seating", c:"Vidit Goswami / Unsplash"},
+      {f:"wed-06.jpg", w:900, h:600, a:"Sample photograph: Hands exchanging rings during a traditional ceremony", c:"Sushanta Rokka / Unsplash"}
+    ],
+    sangeet: [
+      {f:"sangeet-01.jpg", w:860, h:573, a:"Sample photograph: A close up of a person walking on a red carpet", c:"Arun Prakash / Unsplash"},
+      {f:"sangeet-02.jpg", w:900, h:601, a:"Sample photograph: Three woman performing traditional dance", c:"pavan gupta / Unsplash"},
+      {f:"sangeet-03.jpg", w:860, h:573, a:"Sample photograph: People in red and yellow long sleeve shirt dancing", c:"bhupesh pal / Unsplash"},
+      {f:"sangeet-04.jpg", w:860, h:573, a:"Sample photograph: A crowd of people standing under a colorful canopy", c:"vinay manda / Unsplash"},
+      {f:"sangeet-05.jpg", w:860, h:573, a:"Sample photograph: Five dancers in colorful traditional costumes pose outdoors", c:"Prithvi Raj / Unsplash"},
+      {f:"sangeet-06.jpg", w:860, h:573, a:"Sample photograph: Two women dressed in traditional indian garb dancing", c:"Sooraj Perambra / Unsplash"}
+    ],
+    anniv: [
+      {f:"anniv-01.jpg", w:900, h:600, a:"Sample photograph: A long dining table set with white plates, candles, and glass bottles", c:"Nadia Valko / Unsplash"},
+      {f:"anniv-02.jpg", w:900, h:600, a:"Sample photograph: A long dining table set for a dinner party with flowers and candles", c:"M F / Unsplash"},
+      {f:"anniv-03.jpg", w:900, h:600, a:"Sample photograph: A close up of a candle on a table", c:"Charlotte Wurch / Unsplash"},
+      {f:"anniv-04.jpg", w:900, h:600, a:"Sample photograph: White ceramic plate", c:"Anthony Cantin / Unsplash"},
+      {f:"anniv-05.jpg", w:900, h:600, a:"Sample photograph: Lighted candles on brown wooden table", c:"Faizan / Unsplash"},
+      {f:"anniv-06.jpg", w:900, h:600, a:"Sample photograph: A dining room table is set with wine glasses and place settings", c:"Patrick Pahlke / Unsplash"}
+    ],
+    corp: [
+      {f:"corp-01.jpg", w:900, h:600, a:"Sample photograph: Crowd of people sitting on chairs inside room", c:"Headway / Unsplash"},
+      {f:"corp-02.jpg", w:860, h:573, a:"Sample photograph: Speaker on stage addressing large audience", c:"Alexandre Pellaes / Unsplash"},
+      {f:"corp-03.jpg", w:900, h:600, a:"Sample photograph: People watching concert during night time", c:"Terren Hurst / Unsplash"},
+      {f:"corp-04.jpg", w:900, h:600, a:"Sample photograph: People sitting on chair inside room", c:"Wan San Yip / Unsplash"},
+      {f:"corp-05.jpg", w:900, h:601, a:"Sample photograph: An audience watching a speaker on a bright screen in a dark room", c:"Kevin Gonzalez / Unsplash"},
+      {f:"corp-06.jpg", w:900, h:600, a:"Sample photograph: Man speaking in front of crowd", c:"Miguel Henriques / Unsplash"}
+    ],
+    bday: [
+      {f:"bday-01.jpg", w:900, h:601, a:"Sample photograph: Person holding balloons", c:"Gaelle Marcel / Unsplash"},
+      {f:"bday-02.jpg", w:900, h:600, a:"Sample photograph: A festive birthday celebration decorated with balloons", c:"Onkar Singh / Unsplash"},
+      {f:"bday-03.jpg", w:860, h:573, a:"Sample photograph: A happy birthday banner with balloons and streamers", c:"Fujiphilm / Unsplash"},
+      {f:"bday-04.jpg", w:900, h:498, a:"Sample photograph: Yellow and white balloons on table", c:"Lucas Law / Unsplash"},
+      {f:"bday-05.jpg", w:860, h:572, a:"Sample photograph: Silver letter b wall decor", c:"Adam Kring / Unsplash"},
+      {f:"bday-06.jpg", w:900, h:600, a:"Sample photograph: Illuminated number 18 with balloon decorations", c:"Gabriel Tudor / Unsplash"}
+    ],
+    brunch: [
+      {f:"brunch-01.jpg", w:860, h:573, a:"Sample photograph: Sliced bread with green vegetable and meat on white ceramic plate", c:"Colin Michel / Unsplash"},
+      {f:"brunch-02.jpg", w:900, h:600, a:"Sample photograph: Brown and white pastry on white ceramic plate", c:"Colin Michel / Unsplash"},
+      {f:"brunch-03.jpg", w:900, h:600, a:"Sample photograph: A woman cutting up a platter of food on a table", c:"Priscilla Du Preez \ud83c\udde8\ud83c\udde6 / Unsplash"},
+      {f:"brunch-04.jpg", w:860, h:573, a:"Sample photograph: A person enjoys a breakfast spread with various foods", c:"Antonio Araujo / Unsplash"},
+      {f:"brunch-05.jpg", w:900, h:600, a:"Sample photograph: A white table topped with plates of fruit and pastries", c:"Iason Raissis / Unsplash"},
+      {f:"brunch-06.jpg", w:900, h:600, a:"Sample photograph: A white table topped with plates of food and drinks", c:"Priscilla Du Preez \ud83c\udde8\ud83c\udde6 / Unsplash"}
+    ]
+  };
+  var COUNT_WORD = ["Zero","One","Two","Three","Four","Five","Six"];
 
-  if (story && slides.length) {
-    /* one progress segment per category, built once */
-    for (var b = 0; b < slides.length; b++) storyBars.appendChild(document.createElement("i"));
-    var bars = storyBars.querySelectorAll("i");
+  if (lb && tiles.length) {
+    var lbName   = document.getElementById("lbName");
+    var lbCount  = document.getElementById("lbCount");
+    var lbGrid   = document.getElementById("lbGrid");
+    var lbBody   = document.getElementById("lbBody");
+    var lbSolo   = document.getElementById("lbSolo");
+    var lbImg    = document.getElementById("lbImg");
+    var lbCap    = document.getElementById("lbCap");
+    var lbCredit = document.getElementById("lbCredit");
+    var lbIdx    = document.getElementById("lbIdx");
+    var lbLive   = document.getElementById("lbLive");
+    var lbClose  = document.getElementById("lbClose");
+    var lbBack   = document.getElementById("lbBack");
+    var lbPrev   = document.getElementById("lbPrev");
+    var lbNext   = document.getElementById("lbNext");
 
-    var SVGNS = "http://www.w3.org/2000/svg";
+    var shots = [], catName = "", opener = null, isOpen = false, solo = -1, closeTimer = 0;
 
-    function paint(i){
-      var t = slides[i];
-      current = i;
-      /* a fresh <use> node rather than a re-pointed href: some engines
-         will not re-resolve a changed href on an existing instance */
-      var u = document.createElementNS(SVGNS, "use");
-      u.setAttribute("href", t.getAttribute("data-scene"));
-      storyUse.parentNode.replaceChild(u, storyUse);
-      storyUse = u;
-      storyScene.setAttribute("viewBox", t.getAttribute("data-view"));
-      storyAlt.textContent  = t.getAttribute("data-alt") || "";
-      storyName.textContent = t.getAttribute("data-name") || "";
-      storyLine.textContent = t.getAttribute("data-line") || "";
-      storyIdx.textContent  = pad(i + 1) + " / " + pad(slides.length);
-      story.style.setProperty("--tint", (t.style.getPropertyValue("--tint") || "").trim() || "#1C666D");
-      Array.prototype.forEach.call(bars, function(bar, n){
-        bar.className = n === i ? "on" : (n < i ? "done" : "");
-      });
-      if (storyLive) storyLive.textContent =
-        storyName.textContent + ", " + (i + 1) + " of " + slides.length + ". " + storyLine.textContent;
+    function pad(n){ return (n < 10 ? "0" : "") + n; }
+
+    /* ---- grid ---- */
+    function buildGrid(){
+      lbGrid.textContent = "";
+      for (var i = 0; i < shots.length; i++) {
+        (function(i){
+          var s = shots[i];
+          var cell = document.createElement("button");
+          cell.type = "button";
+          cell.className = "lb-cell";
+          cell.setAttribute("aria-label", "Expand frame " + (i + 1) + " of " + shots.length + ": " + s.a);
+          var img = document.createElement("img");
+          img.src = "assets/samples/" + s.f;
+          img.width = s.w; img.height = s.h;
+          img.alt = s.a;
+          img.loading = "lazy";
+          img.decoding = "async";
+          cell.appendChild(img);
+          cell.addEventListener("click", function(){ showSolo(i); });
+          lbGrid.appendChild(cell);
+        })(i);
+      }
     }
 
-    function go(step){ paint((current + step + slides.length) % slides.length); }
+    /* ---- expanded frame ---- */
+    function showSolo(i){
+      solo = (i + shots.length) % shots.length;
+      var s = shots[solo];
+      lbImg.src = "assets/samples/" + s.f;
+      lbImg.width = s.w; lbImg.height = s.h;
+      lbImg.alt = s.a;
+      lbCap.textContent = s.a.replace(/^Sample photograph: /, "");
+      lbCredit.textContent = "Photograph · " + s.c;
+      lbIdx.textContent = pad(solo + 1) + " / " + pad(shots.length);
+      lbGrid.hidden = true;
+      lbSolo.hidden = false;
+      lbBody.scrollTop = 0;
+      if (lbLive) lbLive.textContent = catName + ", frame " + (solo + 1) + " of " + shots.length + ". " + s.a;
+      lbBack.focus();
+    }
 
-    function openStory(i, from){
-      opener = from || slides[i].querySelector(".view");
+    function showGrid(){
+      var was = solo;
+      solo = -1;
+      lbSolo.hidden = true;
+      lbGrid.hidden = false;
+      lbBody.scrollTop = 0;
+      if (lbLive) lbLive.textContent = catName + ", " + shots.length + " frames.";
+      var cells = lbGrid.children;
+      if (was > -1 && cells[was]) cells[was].focus(); else lbClose.focus();
+    }
+
+    /* ---- open / close ---- */
+    function openLb(tile, from){
+      var key = tile.getAttribute("data-cat");
+      if (!GALLERY[key]) return;
+      shots = GALLERY[key];
+      catName = tile.getAttribute("data-name") || "";
+      opener = from || tile.querySelector(".view");
       window.clearTimeout(closeTimer);
-      paint(i);
-      story.hidden = false;
-      storyOpen = true;
-      document.documentElement.classList.add("story-open");
-      document.body.classList.add("story-open");
-      requestAnimationFrame(function(){ story.classList.add("open"); });
-      storyClose.focus();
+
+      lbName.textContent = catName;
+      lbCount.textContent = (COUNT_WORD[shots.length] || shots.length) + " frames · " + catName;
+      lb.style.setProperty("--tint", (tile.style.getPropertyValue("--tint") || "").trim() || "#1C666D");
+      buildGrid();
+      solo = -1;
+      lbSolo.hidden = true;
+      lbGrid.hidden = false;
+
+      lb.hidden = false;
+      isOpen = true;
+      document.documentElement.classList.add("lb-open");
+      document.body.classList.add("lb-open");
+      requestAnimationFrame(function(){ lb.classList.add("open"); });
+      lbBody.scrollTop = 0;
+      lbClose.focus();
+      if (lbLive) lbLive.textContent = catName + ", " + shots.length + " frames.";
     }
 
-    function closeStory(){
-      if (!storyOpen) return;
-      storyOpen = false;
-      story.classList.remove("open");
-      document.documentElement.classList.remove("story-open");
-      document.body.classList.remove("story-open");
+    function closeLb(){
+      if (!isOpen) return;
+      isOpen = false;
+      lb.classList.remove("open");
+      document.documentElement.classList.remove("lb-open");
+      document.body.classList.remove("lb-open");
       var back = opener; opener = null;
-      var hide = function(){ if (!storyOpen) story.hidden = true; };
-      if (reduce) hide(); else closeTimer = window.setTimeout(hide, 320);
+      var hide = function(){ if (!isOpen) { lb.hidden = true; lbGrid.textContent = ""; } };
+      if (reduce) hide(); else closeTimer = window.setTimeout(hide, 300);
       if (back && back.focus) back.focus();
     }
 
-    Array.prototype.forEach.call(tiles, function(tile, i){
+    /* ---- wiring (bound once, on elements that are never replaced) ---- */
+    Array.prototype.forEach.call(tiles, function(tile){
       var btn = tile.querySelector(".view");
-      if (btn) btn.addEventListener("click", function(e){ e.stopPropagation(); openStory(i, btn); });
-      /* the whole tile is a pointer target for the same button */
-      tile.addEventListener("click", function(){ openStory(i, btn); });
+      if (btn) btn.addEventListener("click", function(e){ e.stopPropagation(); openLb(tile, btn); });
+      tile.addEventListener("click", function(){ openLb(tile, btn); });
     });
 
-    storyPrev.addEventListener("click", function(){ go(-1); });
-    storyNext.addEventListener("click", function(){ go(1); });
-    storyClose.addEventListener("click", closeStory);
-    story.addEventListener("click", function(e){
-      if (e.target.hasAttribute("data-story-close")) closeStory();
+    lbClose.addEventListener("click", closeLb);
+    lbBack.addEventListener("click", showGrid);
+    lbPrev.addEventListener("click", function(){ if (solo > -1) showSolo(solo - 1); });
+    lbNext.addEventListener("click", function(){ if (solo > -1) showSolo(solo + 1); });
+    lb.addEventListener("click", function(e){
+      if (e.target.hasAttribute("data-lb-close")) closeLb();
     });
 
-    /* keyboard: Esc closes, arrows move, Tab is trapped inside the dialog */
-    story.addEventListener("keydown", function(e){
-      if (e.key === "Escape") { e.preventDefault(); closeStory(); return; }
-      if (e.key === "ArrowLeft")  { e.preventDefault(); go(-1); return; }
-      if (e.key === "ArrowRight") { e.preventDefault(); go(1);  return; }
+    lb.addEventListener("keydown", function(e){
+      if (e.key === "Escape") {
+        e.preventDefault();
+        if (solo > -1) showGrid(); else closeLb();
+        return;
+      }
+      if (solo > -1 && (e.key === "ArrowLeft" || e.key === "ArrowRight")) {
+        e.preventDefault();
+        showSolo(solo + (e.key === "ArrowLeft" ? -1 : 1));
+        return;
+      }
       if (e.key !== "Tab") return;
-      var f = [storyPrev, storyNext, storyClose];
-      var first = f[0], last = f[f.length - 1];
+      /* the focusables change as the dialog switches views, so collect live */
+      var f = lb.querySelectorAll("button:not([disabled])");
+      var vis = [];
+      for (var i = 0; i < f.length; i++) if (f[i].offsetParent !== null) vis.push(f[i]);
+      if (!vis.length) return;
+      var first = vis[0], last = vis[vis.length - 1];
       if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
       else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
     });
+
     /* anything that steals focus out of an open dialog gets pulled back */
     document.addEventListener("focusin", function(e){
-      if (storyOpen && !story.contains(e.target)) storyClose.focus();
+      if (isOpen && !lb.contains(e.target)) lbClose.focus();
     });
-
-    /* touch: a horizontal swipe of 44px or more turns the slide */
-    var tx = 0, ty = 0, tracking = false;
-    story.addEventListener("touchstart", function(e){
-      if (e.touches.length !== 1) { tracking = false; return; }
-      tracking = true; tx = e.touches[0].clientX; ty = e.touches[0].clientY;
-    }, {passive:true});
-    story.addEventListener("touchend", function(e){
-      if (!tracking) return;
-      tracking = false;
-      var t = e.changedTouches[0];
-      var dx = t.clientX - tx, dy = t.clientY - ty;
-      if (Math.abs(dx) > 44 && Math.abs(dx) > Math.abs(dy) * 1.4) go(dx < 0 ? 1 : -1);
-    }, {passive:true});
   }
 })();
 </script>
