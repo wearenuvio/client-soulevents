@@ -76,7 +76,10 @@ body{
   font-family:var(--sans); font-weight:400; font-size:clamp(15px,1.02vw,17px);
   line-height:1.62; letter-spacing:.002em;
   -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
-  overflow-x:hidden;
+  /* `clip`, not `hidden`: the root already clips the viewport, and
+     `overflow-x:hidden` here would turn <body> into a scroll container,
+     which silently kills `position:sticky` on the process intro. */
+  overflow-x:clip;
 }
 img,svg{max-width:100%}
 h1,h2,h3,h4,p,figure,blockquote,ul,ol{margin:0}
@@ -92,6 +95,9 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
   border-radius:2px;
 }
 .inverted :focus-visible{outline-color:var(--accent)}
+/* skip-link landing zones take focus programmatically; the scroll is the
+   feedback, and a ring around the whole of <main> is not */
+[tabindex="-1"]:focus,[tabindex="-1"]:focus-visible{outline:none}
 
 .skip{
   position:absolute; left:-9999px; top:0; z-index:200;
@@ -117,6 +123,18 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
 .mono--ink{color:var(--ink)}
 .display{font-family:var(--display); font-weight:400; line-height:1.02; letter-spacing:0}
 
+/* ---------- line-breaking policy ----------
+   Every display heading balances its own line breaks so a two-line title
+   never leaves one word stranded; body copy only avoids orphans. Hard <br>
+   is reserved for postal addresses and the stacked client wordmarks — the
+   headings that used to carry one now balance instead. `.keep` protects a
+   short accented phrase (the teal-underlined italic) from ever splitting. */
+h1,h2,h3,h4,
+.display,.big,.s-lede,.f-device,.f-quote,.stat .cap,.g-meta h3,
+.story-title,.foot-tag{text-wrap:balance}
+p,li,q,blockquote,figcaption,address{text-wrap:pretty}
+.keep{white-space:nowrap}
+
 .lede{
   font-size:clamp(1.05rem,1.5vw,1.3rem);
   line-height:1.58; color:var(--ink);
@@ -135,7 +153,18 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
   background-image:var(--grain); background-size:160px 160px;
   opacity:var(--grain-o,.30); mix-blend-mode:multiply;
 }
+/* ---------- ONE HAIRLINE PER JUNCTION ----------
+   The single rule for the whole page: a section owns the hairline above it,
+   and only when the thing above it is another section. The marquee strips sit
+   between sections, so they own both of their own edges — and a section that
+   follows a marquee must not draw a second one. Nothing else on the page may
+   put a border on a section's top or bottom edge (that is why #stats has none
+   of its own any more). Sequence, top to bottom:
+     hero → marq(top+bottom) → about → stats → founders → process → services
+     → marq(top+bottom) → gallery → voices → clients → marq(top+bottom)
+     → contact → footer (continuous ink, no rule wanted). */
 .sect + .sect{border-top:1px solid var(--hair)}
+.marq + .sect{border-top:0}
 
 /* ABOUT — warm blush, the loudest of the light sections */
 #about{--wash:
@@ -339,8 +368,8 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
    ============================================================ */
 .hero{
   position:relative; min-height:100svh;
-  display:flex; flex-direction:column; justify-content:flex-end;
-  padding-top:clamp(108px,15vh,196px); padding-bottom:clamp(22px,3.2vw,46px);
+  display:flex; flex-direction:column;
+  padding-top:clamp(102px,13.5vh,168px); padding-bottom:clamp(22px,3.2vw,46px);
   overflow:hidden;
 }
 .hero-wash{
@@ -358,19 +387,16 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
   background-image:var(--grain); background-size:160px 160px;
   opacity:.34; mix-blend-mode:multiply;
 }
-.hero-inner{position:relative; z-index:1; width:100%}
-.hero-top{
-  display:flex; justify-content:space-between; align-items:flex-start; gap:24px;
-  padding-bottom:clamp(24px,3.6vw,50px);
-}
-.hero-top .mono{max-width:34ch}
-.hero-top .right{text-align:right}
+/* the inner column fills the hero so the headline can sit high and the foot
+   stays pinned to the bottom edge, with a guaranteed gap between them */
+.hero-inner{position:relative; z-index:1; width:100%; flex:1; display:flex; flex-direction:column}
 
 .hero h1{
   font-family:var(--display); font-weight:400;
-  font-size:clamp(2rem,9vw,8.4rem);
+  font-size:clamp(2.05rem,8.8vw,8.4rem);
   line-height:1.0; letter-spacing:.004em;
-  margin-bottom:clamp(22px,3.2vw,44px);
+  margin-top:clamp(2px,3vh,48px);
+  margin-bottom:clamp(34px,6vh,88px);
 }
 .line{display:block; overflow:hidden; padding-bottom:.14em; margin-bottom:-.12em}
 .line > span{
@@ -382,11 +408,29 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
 .hero h1 .amp{font-family:var(--serif); font-style:italic; color:var(--accent-deep)}
 
 .hero-foot{
+  margin-top:auto;
   display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between;
-  gap:26px; border-top:1px solid var(--hair); padding-top:20px;
+  gap:24px clamp(24px,4vw,64px);
+  border-top:1px solid var(--hair); padding-top:clamp(18px,2.2vw,26px);
 }
+.hero-lead{display:flex; flex-direction:column; gap:clamp(16px,1.9vw,22px); flex:1 1 360px; min-width:0}
 .hero-foot p{max-width:46ch; color:var(--ink); font-size:clamp(.95rem,1.15vw,1.08rem)}
+.hero-cta{display:flex; flex-wrap:wrap; gap:10px}
+.hbtn{
+  display:inline-flex; align-items:center; gap:10px; text-decoration:none; white-space:nowrap;
+  font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+  padding:14px 24px; min-height:44px; border-radius:999px; border:1px solid transparent;
+  transition:background 420ms var(--ease), color 420ms var(--ease),
+             border-color 420ms var(--ease), box-shadow 520ms var(--ease);
+}
+.hbtn .arw{display:inline-block; transition:transform 420ms var(--ease)}
+.hbtn:hover .arw{transform:translateX(4px)}
+.hbtn--fill{background:var(--accent); border-color:var(--accent); color:#0F2E31}
+.hbtn--fill:hover{box-shadow:0 14px 30px -20px rgba(31,112,120,.85)}
+.hbtn--ghost{border-color:var(--hair); color:var(--ink); background:rgba(255,255,255,.4)}
+.hbtn--ghost:hover{border-color:var(--accent); color:var(--accent-deep); background:rgba(92,198,205,.09)}
 .scroll-cue{
+  flex:0 0 auto;
   display:inline-flex; align-items:center; gap:10px; text-decoration:none; min-height:44px;
   font-family:var(--mono); font-size:10.5px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-soft);
 }
@@ -446,9 +490,10 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
 /* ============================================================
    STATS (02) — bordered cell grid (from "Soul on Stage")
    ============================================================ */
-/* no border-bottom here: the next .sect already draws its own border-top,
-   and the two together made a 2px rule between stats and founders */
-#stats{background:var(--raised); border-top:1px solid var(--hair)}
+/* no borders of its own at all — #about above draws nothing on its bottom
+   edge and .sect + .sect already gives #stats its top hairline, while
+   #founders below draws its own. Adding any here made 2px rules. */
+#stats{background:var(--raised)}
 .stats-row{
   grid-column:1 / -1;
   display:grid; grid-template-columns:repeat(4,minmax(0,1fr));
@@ -479,12 +524,6 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
 }
 .stat .num sup{font-size:.32em; line-height:1; color:var(--accent-deep); font-family:var(--sans); translate:0 .5em}
 .stat .cap{font-family:var(--mono); font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-soft); line-height:1.7}
-.stat--gag .cap{color:var(--accent-deep)}
-.stat--gag .note{
-  font-family:var(--serif); font-style:italic;
-  font-size:clamp(1.02rem,1.35vw,1.32rem); line-height:1.3;
-  color:var(--ink); margin-top:auto; padding-top:6px;
-}
 
 /* ============================================================
    FOUNDERS (03) — mutual portraits
@@ -644,8 +683,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
 /* ============================================================
    GALLERY (06)
    ============================================================ */
-#gallery .g-head{grid-column:1 / -1}
-.g-tile{text-decoration:none; display:block; position:relative}
+.g-tile{display:block; position:relative; cursor:pointer}
 .g-tile:nth-child(1){grid-column:1 / span 7}
 .g-tile:nth-child(2){grid-column:8 / span 5; align-self:end}
 .g-tile:nth-child(3){grid-column:1 / span 4}
@@ -660,8 +698,8 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
 .g-tile:nth-child(6) .plate-ratio{aspect-ratio:16/11}
 .g-tiles{grid-column:1 / -1; display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); gap:var(--gap); row-gap:clamp(22px,3.2vw,56px)}
 .g-meta{
-  display:flex; align-items:baseline; justify-content:space-between; gap:12px;
-  margin-top:12px; padding-top:10px; border-top:1px solid var(--hair);
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  margin-top:12px; padding-top:6px; border-top:1px solid var(--hair);
   transition:border-color 460ms var(--ease);
 }
 .g-tile:hover .g-meta{border-top-color:var(--accent)}
@@ -671,8 +709,17 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
   display:flex; align-items:center; gap:10px;
 }
 .g-meta .lotus{font-size:.74em; color:var(--tint)}
-.g-meta .view{font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-soft); white-space:nowrap; transition:color 400ms var(--ease)}
-.g-tile:hover .view{color:var(--accent-deep)}
+/* the real control: ≥44px tall, its label carries the category name */
+.g-meta .view{
+  font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--ink-soft); white-space:nowrap; flex:none;
+  display:inline-flex; align-items:center; gap:6px;
+  min-height:44px; padding-inline:6px; margin-right:-6px;
+  transition:color 400ms var(--ease);
+}
+.g-meta .view .arw{display:inline-block; transition:transform 400ms var(--ease)}
+.g-tile:hover .view,.g-tile .view:hover,.g-tile .view:focus-visible{color:var(--accent-deep)}
+.g-tile:hover .view .arw,.g-tile .view:hover .arw{transform:translateX(3px)}
 /* clip-path listed here too: this rule outranks .wipe and would otherwise
    cancel the gallery plates' reveal wipe */
 .g-tile .plate{transition:transform 700ms var(--ease), clip-path 800ms var(--ease)}
@@ -681,11 +728,13 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
 /* ============================================================
    TESTIMONIALS (07) — counter-rotating quote rows
    ============================================================ */
-#voices .v-head{grid-column:1 / span 5}
-#voices .v-aside{grid-column:7 / span 6; align-self:end}
+/* 7 columns: enough for "What people say afterwards." to hold one line at
+   1200px and up, and to balance onto two clean lines below that */
+#voices .v-head{grid-column:1 / span 7}
+#voices .v-aside{grid-column:9 / span 4; align-self:end}
 #voices .v-head h2{
   font-family:var(--display); font-weight:400;
-  font-size:clamp(1.9rem,4vw,3.1rem); line-height:1.08; letter-spacing:.006em;
+  font-size:clamp(1.85rem,3.6vw,2.9rem); line-height:1.08; letter-spacing:.006em;
 }
 #voices .v-head h2 .em{font-family:var(--serif); font-style:italic; color:var(--accent-deep); letter-spacing:-.006em}
 #voices .v-aside p{
@@ -822,15 +871,19 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
 .inverted .mono{color:var(--ink-soft)}
 .inverted .sect-head{border-bottom-color:var(--hair)}
 .inverted .lede{color:#EFEDE8}
-#contact .k-left{grid-column:1 / span 6}
-#contact .k-right{grid-column:8 / span 5}
+/* Two intentional columns, no form: the ask on the left (headline + the two
+   things we actually want people to press), the particulars on the right. */
+#contact .k-lead{grid-column:1 / span 6; align-self:start}
+#contact .k-info{grid-column:8 / span 5; align-self:start}
 #contact h2{
   font-family:var(--display); font-weight:400;
-  font-size:clamp(1.9rem,5.4vw,4.4rem); line-height:1.04; letter-spacing:.006em; margin-bottom:.48em;
+  font-size:clamp(1.95rem,4.4vw,3.6rem); line-height:1.05; letter-spacing:.006em;
+  margin-bottom:.44em; max-width:20ch;
 }
 #contact h2 .ital{font-family:var(--serif); font-style:italic; color:var(--accent); letter-spacing:-.008em}
-#contact .k-left > p{max-width:36ch; color:#EFEDE8}
+#contact .k-sub{max-width:38ch; color:#EFEDE8; font-size:clamp(1rem,1.25vw,1.14rem)}
 .k-block{margin-top:clamp(28px,3.6vw,48px)}
+.k-info .k-block:first-child{margin-top:0}
 .k-block h3{font-family:var(--mono); font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-soft); font-weight:700; padding-bottom:10px; border-bottom:1px solid var(--hair); margin-bottom:14px}
 .k-line{display:flex; flex-wrap:wrap; align-items:center; gap:6px 14px}
 .k-line .who{font-family:var(--display); font-size:clamp(1.05rem,1.7vw,1.35rem); letter-spacing:.01em; min-width:9.5em}
@@ -842,52 +895,29 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
   transition:color 380ms var(--ease);
 }
 .k-line a:hover{color:var(--accent)}
-.k-actions{display:flex; flex-wrap:wrap; gap:10px; margin-top:22px}
+.k-actions{display:flex; flex-wrap:wrap; gap:12px; margin-top:clamp(26px,3.4vw,40px)}
 .btn{
   display:inline-flex; align-items:center; gap:10px; text-decoration:none;
   font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase;
   padding:14px 24px; min-height:44px; border-radius:999px; border:1px solid #F8F7F4; color:#F8F7F4;
-  transition:background 420ms var(--ease), color 420ms var(--ease), border-color 420ms var(--ease);
+  transition:background 420ms var(--ease), color 420ms var(--ease),
+             border-color 420ms var(--ease), box-shadow 520ms var(--ease);
 }
 .btn:hover{background:#F8F7F4; color:#1A1A22}
 .btn--accent{background:var(--accent); border-color:var(--accent); color:#0F2E31}
-.btn--accent:hover{background:transparent; color:var(--accent)}
-
-.form{display:grid; gap:2px}
-.field{position:relative; border-bottom:1px solid var(--hair); padding-top:22px}
-.field label{
-  position:absolute; top:22px; left:0; font-family:var(--mono); font-size:11px;
-  letter-spacing:.14em; text-transform:uppercase; color:var(--ink-soft);
-  /* the label is scaled, not resized — no font-size transition to run */
-  transition:transform 460ms var(--ease), color 460ms var(--ease);
-  transform-origin:left top; pointer-events:none;
+.btn--accent:hover{background:transparent; color:var(--accent); box-shadow:none}
+/* the two CTAs carry the section now that the form is gone — give them weight */
+.btn--lg{
+  padding:18px 30px; font-size:12px; letter-spacing:.15em;
+  min-height:56px; flex:0 1 auto;
 }
-.field input,.field textarea,.field select{
-  width:100%; background:transparent; border:0; color:#F8F7F4;
-  font-family:var(--sans); font-size:1rem; line-height:1.5; padding:2px 0 12px;
-  border-radius:0;
-}
-/* 44px minimum touch target on every single-line control */
-.field input,.field select{min-height:44px}
-.field textarea{resize:vertical; min-height:84px}
-.field select option{color:#1A1A22}
-.field input:focus,.field textarea:focus,.field select:focus{outline:none}
-/* …but keyboard focus still needs a real indicator, not just a 1px underline */
-.field input:focus-visible,.field textarea:focus-visible,.field select:focus-visible{
-  outline:2px solid var(--accent); outline-offset:2px;
-}
-.field:focus-within{border-bottom-color:var(--accent)}
-.field:focus-within label,.field.filled label{transform:translateY(-20px) scale(.86); color:var(--accent)}
-.field select{color:#F8F7F4; appearance:none}
-.field.select-field label{transform:translateY(-20px) scale(.86)}
-.field.select-field::after{
-  content:""; position:absolute; right:2px; bottom:20px; width:7px; height:7px;
-  border-right:1px solid var(--ink-soft); border-bottom:1px solid var(--ink-soft);
-  transform:rotate(45deg); pointer-events:none;
-}
-.form-foot{display:flex; flex-wrap:wrap; align-items:center; gap:16px; margin-top:26px}
-.form-note{font-family:var(--mono); font-size:10px; letter-spacing:.1em; color:var(--ink-soft); line-height:1.7; max-width:34ch}
-.form-status{font-family:var(--mono); font-size:11px; letter-spacing:.1em; color:var(--accent); min-height:1.4em; margin-top:12px}
+.btn--lg.btn--accent{box-shadow:0 18px 38px -24px rgba(92,198,205,.75)}
+/* the glow belongs to the filled state only — it must go when the fill does,
+   and this needs the same specificity as the rule above to win */
+.btn--lg.btn--accent:hover{box-shadow:none}
+.btn-ico{width:19px; height:19px; flex:none; display:block}
+.btn .arw{display:inline-block; transition:transform 420ms var(--ease)}
+.btn:hover .arw{transform:translateX(4px)}
 
 /* ============================================================
    FOOTER
@@ -895,26 +925,168 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
 .foot{
   background:#1A1A22; color:#F4F2ED;
   --ink:#F4F2ED; --hair:#33323C; --ink-soft:#A8A5B0;
-  padding-block:clamp(24px,3vw,38px) clamp(18px,2.2vw,28px);
+  padding-block:clamp(44px,5.6vw,84px) clamp(18px,2.2vw,26px);
 }
-.foot-top{
-  display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between;
-  gap:8px clamp(20px,3vw,44px);
+/* Row 1 — the brand and the line it stands for */
+.foot-brand{
+  display:flex; flex-wrap:wrap; align-items:center; gap:14px clamp(22px,3.4vw,52px);
+  padding-bottom:clamp(28px,3.6vw,48px);
 }
+.foot-brand .brand .mark-brand{font-size:34px}
 .foot-brand .brand-word b{color:#F8F7F4}
 .foot-brand .brand-word span{color:var(--accent)}
-.foot-social{display:flex; flex-wrap:wrap; gap:0 clamp(14px,1.8vw,26px)}
-.foot-social a{
+.foot-tag{
+  font-family:var(--serif); font-style:italic; letter-spacing:0;
+  font-size:clamp(1.08rem,1.9vw,1.5rem); line-height:1.34; color:#EFEDE8;
+  max-width:30ch;
+}
+/* Row 2 — three labelled columns */
+.foot-cols{
+  display:grid; grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:clamp(26px,3vw,44px) var(--gap);
+  padding-top:clamp(26px,3.4vw,44px); border-top:1px solid var(--hair);
+}
+.foot-col-h{
+  font-family:var(--mono); font-weight:700; font-size:10px;
+  letter-spacing:.2em; text-transform:uppercase; color:var(--ink-soft);
+  margin-bottom:6px;
+}
+.foot-col ul{display:flex; flex-direction:column}
+.foot-col a{
   text-decoration:none; color:#EFEDE8;
-  font-family:var(--mono); font-size:10.5px; letter-spacing:.14em; text-transform:uppercase;
-  display:inline-flex; align-items:center; min-height:44px;
+  font-family:var(--mono); font-size:11px; letter-spacing:.11em;
+  display:inline-flex; align-items:center; gap:12px; min-height:44px;
   transition:color 380ms var(--ease);
 }
-.foot-social a:hover{color:var(--accent)}
+.foot-col a:hover{color:var(--accent)}
+.foot-col--site a{text-transform:uppercase; letter-spacing:.14em; font-size:10.5px}
+.foot-ico{width:20px; height:20px; flex:none; display:block; color:currentColor}
+.foot-social a .lbl{letter-spacing:.14em; text-transform:uppercase; font-size:10.5px}
 .foot-bar{
-  margin-top:clamp(14px,1.8vw,22px); padding-top:14px; border-top:1px solid var(--hair);
+  margin-top:clamp(30px,3.6vw,48px); padding-top:16px; border-top:1px solid var(--hair);
 }
 .foot-bar .mono{color:var(--ink-soft)}
+
+/* ============================================================
+   STORY VIEWER — fullscreen category browser opened from the tiles
+   ============================================================ */
+.story{
+  position:fixed; inset:0; z-index:200;
+  display:flex; align-items:center; justify-content:center;
+  opacity:0; transition:opacity 300ms var(--ease);
+}
+.story[hidden]{display:none}
+.story.open{opacity:1}
+.story-scrim{position:absolute; inset:0; background:rgba(16,16,22,.72); -webkit-backdrop-filter:blur(3px); backdrop-filter:blur(3px)}
+.story-panel{
+  position:relative; z-index:1; overflow:hidden;
+  width:100%; height:100%;
+  background:var(--ground);
+  transform:scale(.97); transition:transform 300ms var(--ease);
+}
+.story.open .story-panel{transform:none}
+/* The portrait card only makes sense when there is height to cut it from:
+   on a short window (a landscape phone, a half-height desktop window) a
+   9/16 card would collapse to a sliver, so the panel stays fullscreen. */
+@media (min-width:760px) and (min-height:600px){
+  .story{padding:clamp(16px,2.4vw,40px)}
+  /* a portrait story card, sized off the available height */
+  .story-panel{
+    height:100%; width:auto; aspect-ratio:9 / 16;
+    max-width:100%; max-height:100%;
+    border-radius:6px; box-shadow:0 40px 90px -40px rgba(0,0,0,.7);
+  }
+}
+.story-figure{position:absolute; inset:0; margin:0; overflow:hidden}
+.story-scene{position:absolute; inset:0; width:100%; height:100%; display:block; max-width:none}
+.story-grain{
+  position:absolute; inset:-6%; background-image:var(--grain); background-size:160px 160px;
+  opacity:.30; mix-blend-mode:multiply; pointer-events:none;
+}
+/* legibility scrims — the sample scenes are pale, so ink type wins */
+.story-panel::before,.story-panel::after{
+  content:""; position:absolute; left:0; right:0; z-index:2; pointer-events:none;
+}
+.story-panel::before{top:0; height:34%; background:linear-gradient(rgba(248,247,244,.94), rgba(248,247,244,0))}
+.story-panel::after{bottom:0; height:56%; background:linear-gradient(rgba(248,247,244,0), rgba(248,247,244,.90) 46%, rgba(248,247,244,.97))}
+
+/* story-style progress segments */
+.story-bars{
+  position:absolute; z-index:4; top:14px; left:14px; right:14px;
+  display:grid; grid-auto-flow:column; grid-auto-columns:1fr; gap:5px;
+}
+.story-bars i{height:3px; border-radius:2px; background:rgba(26,26,34,.20); display:block; overflow:hidden}
+.story-bars i.on{background:var(--accent-deep)}
+.story-bars i.done{background:rgba(28,102,109,.42)}
+
+.story-caption{
+  position:absolute; z-index:4; left:0; right:0; bottom:0;
+  padding:0 clamp(18px,4.4vw,34px) clamp(22px,4.6vw,34px);
+  display:flex; flex-direction:column; align-items:flex-start; gap:9px;
+}
+.story-idx{color:var(--ink-soft)}
+.story-title{
+  font-family:var(--display); font-weight:400;
+  font-size:clamp(2rem,7.6vw,3.1rem); line-height:1.04; letter-spacing:.01em;
+  display:flex; align-items:center; gap:12px;
+}
+.story-title .lotus{font-size:.62em; color:var(--tint,var(--accent-deep)); flex:none}
+.story-line{
+  font-family:var(--serif); font-style:italic;
+  font-size:clamp(1.06rem,3.6vw,1.34rem); line-height:1.34; color:var(--ink);
+  max-width:32ch;
+}
+.story-chip{
+  margin-top:4px;
+  display:inline-flex; align-items:center; gap:8px;
+  font-family:var(--mono); font-size:9.5px; letter-spacing:.15em; text-transform:uppercase;
+  color:var(--accent-deep); border:1px solid var(--accent); border-radius:999px;
+  padding:7px 13px; background:rgba(255,255,255,.6);
+}
+.story-chip .dot{width:5px; height:5px; border-radius:50%; background:var(--accent); flex:none}
+
+/* controls — all ≥44px */
+.story-nav,.story-close{
+  position:absolute; z-index:5;
+  width:46px; height:46px; border-radius:50%;
+  display:inline-flex; align-items:center; justify-content:center;
+  background:rgba(248,247,244,.86); color:var(--ink);
+  border:1px solid rgba(26,26,34,.10);
+  -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px);
+  transition:background 360ms var(--ease), color 360ms var(--ease), border-color 360ms var(--ease);
+}
+.story-nav:hover,.story-close:hover{background:var(--accent); border-color:var(--accent); color:#0F2E31}
+.story-nav svg{width:17px; height:17px; display:block}
+.story-prev{left:clamp(10px,2.4vw,18px); top:50%; margin-top:-23px}
+.story-next{right:clamp(10px,2.4vw,18px); top:50%; margin-top:-23px}
+.story-close{top:clamp(28px,3.4vw,34px); right:clamp(10px,2.4vw,18px); font-size:20px; line-height:1}
+.story-close span{display:block; margin-top:-2px}
+
+/* On the portrait card the panel's width is derived from viewport HEIGHT, so
+   its type has to be too: vw would set a ~50px title inside a 354px-wide card
+   at 1440×700 and push "Anniversaries" straight through the clipped edge.
+   (Declared after the base caption rules so it actually wins the cascade.) */
+@media (min-width:760px) and (min-height:600px){
+  .story-caption{padding:0 clamp(18px,2.6vh,32px) clamp(20px,3.4vh,34px)}
+  .story-title{font-size:clamp(1.6rem,4.6vh,3.1rem)}
+  .story-line{font-size:clamp(1rem,1.9vh,1.3rem)}
+}
+
+/* Landscape phones and short windows: the panel is wide and shallow, so the
+   side arrows sit level with the caption. Inset the text past them, shorten
+   the type, and lengthen the bottom scrim so the words stay on porcelain. */
+@media (orientation:landscape) and (max-height:560px){
+  .story-caption{
+    padding:0 72px clamp(12px,3.2vh,22px);
+    gap:5px;
+  }
+  .story-title{font-size:clamp(1.35rem,5.4vh,2rem)}
+  .story-line{font-size:1rem; line-height:1.3; max-width:56ch}
+  .story-panel::after{height:76%}
+  .story-panel::before{height:26%}
+}
+
+.story-open{overflow:hidden}
 
 /* ============================================================
    RESPONSIVE
@@ -927,8 +1099,8 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
   #process .p-intro .sticky{position:static}
   #voices .v-head{grid-column:1 / -1}
   #voices .v-aside{grid-column:1 / -1; margin-top:18px}
-  #contact .k-left{grid-column:1 / -1}
-  #contact .k-right{grid-column:1 / -1; margin-top:44px}
+  #contact .k-lead{grid-column:1 / -1}
+  #contact .k-info{grid-column:1 / -1; margin-top:clamp(38px,5vw,56px)}
   .c-roster ol{columns:2}
   .c-wall{grid-template-columns:repeat(4,minmax(0,1fr))}
 }
@@ -956,12 +1128,16 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
   .step-n{padding-top:0}
   .step-dot{top:calc(var(--step-pad) + .18em)}
   .c-roster ol{columns:1}
-  .hero-top{flex-direction:column; gap:10px}
-  .hero-top .right{text-align:left}
   .k-line .who{min-width:0; width:100%}
   .nav-sheet a{padding-block:12px}
+  .foot-cols{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (max-width:560px){
+  /* footer columns stack; the hero CTAs go full width so both are easy to hit */
+  .foot-cols{grid-template-columns:minmax(0,1fr); gap:22px}
+  .hero-cta{gap:8px}
+  .hbtn{flex:1 1 100%; justify-content:center}
+  .btn--lg{flex:1 1 100%; justify-content:center}
   /* quote cards read as one-per-screen on phones */
   .card{width:85vw; padding:22px}
   .card--feat{width:87vw}
@@ -969,9 +1145,8 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
 }
 @media (max-width:420px){
   .brand-word span{display:none}
+  .foot-brand .brand-word span{display:inline}
   .s-card{min-height:120px}
-  /* keep "36,678" on one line inside a half-width cell */
-  .stat .num{font-size:1.86rem}
   .stat{padding:16px 12px 20px}
   .wm-caps,.wm-wide{letter-spacing:.22em; text-indent:.22em}
   .wm-sub{letter-spacing:.12em; text-indent:.12em}
@@ -1003,6 +1178,11 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
   .nav-links a::after{transition:none !important}
   #clients .c-roster{transition:none !important}
   .scroll-cue .stem::after{display:none}
+  .hbtn .arw,.btn .arw,.g-meta .view .arw{transition:none !important; transform:none !important}
+
+  /* story viewer: appears and changes slide instantly, no fade or scale */
+  .story{transition:none !important; opacity:1}
+  .story-panel{transform:none !important; transition:none !important}
 
   /* process spine: drawn full and static; steps get a plain opacity fade */
   .p-spine i{height:100% !important; transition:none !important}
@@ -1153,6 +1333,37 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
       </g>
     </symbol>
   </g>
+
+  <!-- ============================================================
+       SOCIAL GLYPHS — monochrome, stroke/fill currentColor, drawn on a
+       24px grid so they sit at the same weight as the mono type beside them.
+       ============================================================ -->
+  <symbol id="ic-instagram" viewBox="0 0 24 24">
+    <g fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3.2" y="3.2" width="17.6" height="17.6" rx="5.2"/>
+      <circle cx="12" cy="12" r="4.15"/>
+    </g>
+    <circle cx="17.15" cy="6.85" r="1.1" fill="currentColor"/>
+  </symbol>
+  <symbol id="ic-facebook" viewBox="0 0 24 24">
+    <g fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3.2" y="3.2" width="17.6" height="17.6" rx="5.2"/>
+      <path d="M15.1 7.9h-1.35a2.05 2.05 0 0 0-2.05 2.05V18"/>
+      <path d="M9.5 12.15h4.5"/>
+    </g>
+  </symbol>
+  <symbol id="ic-youtube" viewBox="0 0 24 24">
+    <g fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="2.4" y="5.4" width="19.2" height="13.2" rx="4.2"/>
+      <path d="M10.3 9.15 15.9 12l-5.6 2.85z" fill="currentColor" stroke-width="1.2"/>
+    </g>
+  </symbol>
+  <symbol id="ic-whatsapp" viewBox="0 0 24 24">
+    <g fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M20.4 11.75a8.4 8.4 0 0 1-12.5 7.35L3.6 20.4l1.35-4.2a8.4 8.4 0 1 1 15.45-4.45Z"/>
+      <path d="M9.15 8.95c.3-.1.6.02.75.3l.75 1.3c.12.22.1.5-.05.7l-.5.62c-.14.18-.16.42-.04.62a6.2 6.2 0 0 0 2.42 2.13c.2.1.44.05.6-.11l.6-.6c.18-.18.46-.22.68-.1l1.3.72c.28.15.4.48.3.78a2.25 2.25 0 0 1-2.06 1.44c-2.63 0-5.98-3.35-5.98-5.98 0-.92.53-1.6 1.23-1.82Z"/>
+    </g>
+  </symbol>
 
   <!-- ============================================================
        SAMPLE SCENES — art-directed abstract compositions.
@@ -1658,18 +1869,13 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
   </div>
 </div>
 
-<main id="main">
+<main id="main" tabindex="-1">
 <span id="top"></span>
 
 <!-- ============ HERO ============ -->
 <section class="hero wrap" aria-labelledby="hero-h">
   <div class="hero-wash" id="heroWash" aria-hidden="true"></div>
   <div class="hero-inner">
-
-    <div class="hero-top">
-      <p class="mono rev-l" style="--d:520ms">Bespoke event design<br>Bangalore &amp; internationally</p>
-      <p class="mono right rev-l" style="--d:600ms">Chelna Lekhi &amp; Ramesh Sadhwani<br>300+ events</p>
-    </div>
 
     <h1 id="hero-h">
       <span class="line"><span style="--d:120ms">Occasions</span></span>
@@ -1678,8 +1884,14 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
     </h1>
 
     <div class="hero-foot">
-      <p class="rev-l" style="--d:700ms">One part exciting, two parts soulful, three quarters funny, and very many portions of creative flair.</p>
-      <a class="scroll-cue rev-l" href="#about" style="--d:780ms">
+      <div class="hero-lead">
+        <p class="rev-l" style="--d:560ms">One part exciting, two parts soulful, three quarters funny, and very many portions of creative flair.</p>
+        <div class="hero-cta rev-l" style="--d:640ms">
+          <a class="hbtn hbtn--fill" href="#contact">Let’s talk <span class="arw" aria-hidden="true">→</span></a>
+          <a class="hbtn hbtn--ghost" href="#gallery">See the work</a>
+        </div>
+      </div>
+      <a class="scroll-cue rev-l" href="#about" style="--d:720ms">
         <span class="stem" aria-hidden="true"></span>
         Scroll
       </a>
@@ -1714,7 +1926,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
 
     <div class="about-body">
       <p class="big rev-l">
-        One part exciting, two parts soulful, three quarters funny, and very many portions of <span class="em uline">creative flair.</span>
+        One part exciting, two parts soulful, three quarters funny, and very many portions of <span class="em uline keep">creative flair.</span>
       </p>
       <p class="lede rev-l" style="--d:110ms">
         SOUL is not a company – that would mean we look at what we do as simply a job. <em class="soul-em">SOUL is our passion.</em>
@@ -1744,22 +1956,24 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
 
   <div class="grid">
     <div class="stats-row" id="statsRow">
+      <!-- The number is announced once, by the .num's own aria-label; the
+           animated span is aria-hidden. No visually-hidden twin, so selecting
+           and copying the row no longer yields "15 15". -->
       <div class="stat rev-l">
-        <p class="num"><span class="count" data-target="15" aria-hidden="true">0</span><span class="vh">15</span></p>
+        <p class="num" role="img" aria-label="15"><span class="count" data-target="15" aria-hidden="true">0</span></p>
         <p class="cap">Years since formation</p>
       </div>
       <div class="stat rev-l" style="--d:110ms">
-        <p class="num"><span class="count" data-target="300" aria-hidden="true">0</span><sup aria-hidden="true">+</sup><span class="vh">300+</span></p>
+        <p class="num" role="img" aria-label="300 plus"><span class="count" data-target="300" aria-hidden="true">0</span><sup aria-hidden="true">+</sup></p>
         <p class="cap">Events executed</p>
       </div>
       <div class="stat rev-l" style="--d:220ms">
-        <p class="num"><span class="count" data-target="47" aria-hidden="true">0</span><span class="vh">47</span></p>
+        <p class="num" role="img" aria-label="47"><span class="count" data-target="47" aria-hidden="true">0</span></p>
         <p class="cap">Years of collective experience</p>
       </div>
-      <div class="stat stat--gag rev-l" style="--d:330ms">
-        <p class="num"><span class="count" data-target="36678" data-group="1" aria-hidden="true">0</span><span class="vh">36,678</span></p>
-        <p class="cap">Cups of green tea consumed</p>
-        <p class="note">Yes, we counted.</p>
+      <div class="stat rev-l" style="--d:330ms">
+        <p class="num" role="img" aria-label="6"><span class="count" data-target="6" aria-hidden="true">0</span></p>
+        <p class="cap">Countries celebrated in</p>
       </div>
     </div>
   </div>
@@ -1836,7 +2050,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
   <div class="grid">
     <div class="p-intro">
       <div class="sticky">
-        <h2 class="rev-l">How an occasion<br><span class="em uline">comes together.</span></h2>
+        <h2 class="rev-l">How an occasion <span class="em uline keep">comes together.</span></h2>
       </div>
     </div>
 
@@ -1977,7 +2191,14 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
   <div class="grid">
     <div class="g-tiles">
 
-      <a class="g-tile rev-l" href="#" style="--tint:#4E9BA1">
+      <!-- Each tile opens the story viewer at its own slide. The visible
+           "View →" is the real control (a button — there is no page to go to
+           yet), so the h3 stays a heading and the markup stays valid; the
+           whole tile is click-through to that same button for pointer users. -->
+      <div class="g-tile rev-l" style="--tint:#4E9BA1"
+              data-scene="#sc-wed" data-view="0 0 160 100" data-name="Weddings"
+              data-alt="Sample illustration: a mandap arch hung with garlands at dusk"
+              data-line="Mandaps, mehendis and mornings that run on their own time.">
         <figure class="plate wipe">
           <span class="plate-ratio"></span>
           <svg class="scene" viewBox="0 0 160 100" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Sample illustration: a mandap arch hung with garlands at dusk"><use href="#sc-wed"></use></svg>
@@ -1986,11 +2207,14 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
         </figure>
         <div class="g-meta">
           <h3><svg class="lotus" aria-hidden="true"><use href="#lotus"></use></svg>Weddings</h3>
-          <span class="view">View →</span>
+          <button type="button" class="view" aria-haspopup="dialog" aria-label="Open the Weddings story">View <span class="arw" aria-hidden="true">→</span></button>
         </div>
-      </a>
+      </div>
 
-      <a class="g-tile rev-l" href="#" style="--tint:#B96E45">
+      <div class="g-tile rev-l" style="--tint:#B96E45"
+              data-scene="#sc-sangeet" data-view="0 0 100 125" data-name="Sangeets"
+              data-alt="Sample illustration: hanging paper parasols with tassels"
+              data-line="Rehearsed for weeks, remembered for years.">
         <figure class="plate wipe">
           <span class="plate-ratio"></span>
           <svg class="scene" viewBox="0 0 100 125" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Sample illustration: hanging paper parasols with tassels"><use href="#sc-sangeet"></use></svg>
@@ -1999,11 +2223,14 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
         </figure>
         <div class="g-meta">
           <h3><svg class="lotus" aria-hidden="true"><use href="#lotus"></use></svg>Sangeets</h3>
-          <span class="view">View →</span>
+          <button type="button" class="view" aria-haspopup="dialog" aria-label="Open the Sangeets story">View <span class="arw" aria-hidden="true">→</span></button>
         </div>
-      </a>
+      </div>
 
-      <a class="g-tile rev-l" href="#" style="--tint:#B37A72">
+      <div class="g-tile rev-l" style="--tint:#B37A72"
+              data-scene="#sc-anniv" data-view="0 0 120 120" data-name="Anniversaries"
+              data-alt="Sample illustration: a laid dinner table with candles and foliage"
+              data-line="A table laid for the people who stayed.">
         <figure class="plate wipe">
           <span class="plate-ratio"></span>
           <svg class="scene" viewBox="0 0 120 120" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Sample illustration: a laid dinner table with candles and foliage"><use href="#sc-anniv"></use></svg>
@@ -2012,11 +2239,14 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
         </figure>
         <div class="g-meta">
           <h3><svg class="lotus" aria-hidden="true"><use href="#lotus"></use></svg>Anniversaries</h3>
-          <span class="view">View →</span>
+          <button type="button" class="view" aria-haspopup="dialog" aria-label="Open the Anniversaries story">View <span class="arw" aria-hidden="true">→</span></button>
         </div>
-      </a>
+      </div>
 
-      <a class="g-tile rev-l" href="#" style="--tint:#6E719A">
+      <div class="g-tile rev-l" style="--tint:#6E719A"
+              data-scene="#sc-corp" data-view="0 0 160 80" data-name="Corporate Events"
+              data-alt="Sample illustration: a stage with a microphone under a spotlight"
+              data-line="Stages, launches and galas that still feel personal.">
         <figure class="plate wipe">
           <span class="plate-ratio"></span>
           <svg class="scene" viewBox="0 0 160 80" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Sample illustration: a stage with a microphone under a spotlight"><use href="#sc-corp"></use></svg>
@@ -2025,11 +2255,14 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
         </figure>
         <div class="g-meta">
           <h3><svg class="lotus" aria-hidden="true"><use href="#lotus"></use></svg>Corporate Events</h3>
-          <span class="view">View →</span>
+          <button type="button" class="view" aria-haspopup="dialog" aria-label="Open the Corporate Events story">View <span class="arw" aria-hidden="true">→</span></button>
         </div>
-      </a>
+      </div>
 
-      <a class="g-tile rev-l" href="#" style="--tint:#B08B37">
+      <div class="g-tile rev-l" style="--tint:#B08B37"
+              data-scene="#sc-bday" data-view="0 0 150 120" data-name="Birthdays"
+              data-alt="Sample illustration: string lights and bunting over a garden table"
+              data-line="String lights, small conspiracies, one very big surprise.">
         <figure class="plate wipe">
           <span class="plate-ratio"></span>
           <svg class="scene" viewBox="0 0 150 120" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Sample illustration: string lights and bunting over a garden table"><use href="#sc-bday"></use></svg>
@@ -2038,11 +2271,14 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
         </figure>
         <div class="g-meta">
           <h3><svg class="lotus" aria-hidden="true"><use href="#lotus"></use></svg>Birthdays</h3>
-          <span class="view">View →</span>
+          <button type="button" class="view" aria-haspopup="dialog" aria-label="Open the Birthdays story">View <span class="arw" aria-hidden="true">→</span></button>
         </div>
-      </a>
+      </div>
 
-      <a class="g-tile rev-l" href="#" style="--tint:#71906A">
+      <div class="g-tile rev-l" style="--tint:#71906A"
+              data-scene="#sc-brunch" data-view="0 0 160 110" data-name="Brunches"
+              data-alt="Sample illustration: a coastal dessert table with shells and pearls"
+              data-line="Long tables, late mornings, no rush anywhere.">
         <figure class="plate wipe">
           <span class="plate-ratio"></span>
           <svg class="scene" viewBox="0 0 160 110" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Sample illustration: a coastal dessert table with shells and pearls"><use href="#sc-brunch"></use></svg>
@@ -2051,9 +2287,9 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
         </figure>
         <div class="g-meta">
           <h3><svg class="lotus" aria-hidden="true"><use href="#lotus"></use></svg>Brunches</h3>
-          <span class="view">View →</span>
+          <button type="button" class="view" aria-haspopup="dialog" aria-label="Open the Brunches story">View <span class="arw" aria-hidden="true">→</span></button>
         </div>
-      </a>
+      </div>
 
     </div>
   </div>
@@ -2070,7 +2306,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
 
     <div class="grid">
       <div class="v-head">
-        <h2 class="rev-l">What people say <span class="em uline">afterwards</span>.</h2>
+        <h2 class="rev-l">What people say <span class="em uline keep">afterwards</span>.</h2>
       </div>
       <div class="v-aside">
         <p class="rev-l" style="--d:120ms">Flourished on goodwill alone.</p>
@@ -2364,21 +2600,28 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
   </div>
 
   <div class="grid">
-    <div class="k-left">
-      <h2 class="rev-l">Sit back, relax,<br>and <span class="ital">let us step in.</span></h2>
+    <div class="k-lead">
+      <h2 class="rev-l">Sit back, relax, and <span class="ital keep">let us step in.</span></h2>
+      <p class="k-sub rev-l" style="--d:90ms">Tell us the date, the city and the feeling you are after. A phone call is usually the fastest way to begin.</p>
 
-      <div class="k-block rev-l" style="--d:160ms">
+      <div class="k-actions rev-l" style="--d:150ms">
+        <a class="btn btn--accent btn--lg" href="https://wa.me/919342283539" target="_blank" rel="noopener">
+          <svg class="btn-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-whatsapp"></use></svg>
+          WhatsApp us
+        </a>
+        <a class="btn btn--lg" href="tel:+919342283539">Call Chelna <span class="arw" aria-hidden="true">→</span></a>
+      </div>
+    </div>
+
+    <div class="k-info">
+      <div class="k-block rev-l" style="--d:200ms">
         <h3>Talk to us</h3>
         <p class="k-line"><span class="who">Chelna Lekhi</span><a href="tel:+919342283539">+91 93422 83539</a></p>
         <p class="k-line"><span class="who">Ramesh Sadhwani</span><a href="tel:+919845054881">+91 98450 54881</a><a href="tel:+919886329400">+91 98863 29400</a></p>
         <p class="k-line"><span class="who">Email</span><a href="mailto:souleventsindia@gmail.com">souleventsindia@gmail.com</a></p>
-        <div class="k-actions">
-          <a class="btn btn--accent" href="https://wa.me/919342283539" target="_blank" rel="noopener">WhatsApp us</a>
-          <a class="btn" href="tel:+919342283539">Call Chelna</a>
-        </div>
       </div>
 
-      <div class="k-block rev-l" style="--d:220ms">
+      <div class="k-block rev-l" style="--d:260ms">
         <h3>Studio</h3>
         <address style="font-style:normal">
           <p class="display" style="font-size:clamp(1.15rem,1.9vw,1.5rem); line-height:1.4; letter-spacing:.01em">Bella Vista, 66, Lavelle Road,<br>Bangalore – 560001</p>
@@ -2386,74 +2629,104 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
         <p class="mono" style="margin-top:14px">India · Dubai · Toronto · Madrid · Nairobi · USA</p>
       </div>
     </div>
-
-    <div class="k-right">
-      <form class="form rev-l" id="enquiry" novalidate>
-        <p class="mono" style="margin-bottom:8px">Or leave a note</p>
-
-        <div class="field">
-          <label for="f-name">Name</label>
-          <input id="f-name" name="name" type="text" autocomplete="name" required>
-        </div>
-        <div class="field">
-          <label for="f-email">Email</label>
-          <input id="f-email" name="email" type="email" autocomplete="email" required>
-        </div>
-        <div class="field">
-          <label for="f-phone">Phone</label>
-          <input id="f-phone" name="phone" type="tel" autocomplete="tel">
-        </div>
-        <div class="field select-field">
-          <label for="f-type">Event type</label>
-          <select id="f-type" name="eventType">
-            <option value="Wedding">Wedding</option>
-            <option value="Sangeet">Sangeet</option>
-            <option value="Anniversary">Anniversary</option>
-            <option value="Birthday">Birthday</option>
-            <option value="Brunch">Brunch</option>
-            <option value="Corporate Event">Corporate Event</option>
-            <option value="Something else">Something else</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="f-msg">Message</label>
-          <textarea id="f-msg" name="message" rows="3"></textarea>
-        </div>
-
-        <div class="form-foot">
-          <button class="btn btn--accent" type="submit">Send enquiry</button>
-          <p class="form-note">Opens your mail app, addressed to souleventsindia@gmail.com. Prefer WhatsApp? That works too.</p>
-        </div>
-        <p class="form-status" id="formStatus" role="status"></p>
-      </form>
-    </div>
   </div>
 </section>
 
 </main>
 
 <!-- ============ FOOTER ============ -->
-<footer class="foot wrap">
-  <div class="foot-top">
+<footer class="foot">
+  <div class="wrap">
+
     <div class="foot-brand">
       <a class="brand" href="#top" aria-label="Soul Events — back to top">
         <svg class="mark-brand" aria-hidden="true"><use href="#soulmark"></use></svg>
         <span class="brand-word"><b>Soul</b><span>events</span></span>
       </a>
+      <p class="foot-tag">Pouring our Heart &amp; Soul into turning your dreams to reality.</p>
     </div>
 
-    <nav class="foot-social" aria-label="Social">
-      <a href="https://www.instagram.com/souleventsindia/" target="_blank" rel="noopener">Instagram</a>
-      <a href="https://www.facebook.com/pages/Soul-Events/1654430458123769" target="_blank" rel="noopener">Facebook</a>
-      <a href="https://www.youtube.com/channel/UC1Z_ibAYVkYGPvLVtaoBUNA" target="_blank" rel="noopener">YouTube</a>
-      <a href="https://wa.me/919342283539" target="_blank" rel="noopener">WhatsApp</a>
-    </nav>
-  </div>
+    <div class="foot-cols">
+      <nav class="foot-col foot-col--site" aria-labelledby="foot-site">
+        <h2 class="foot-col-h" id="foot-site">Site</h2>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#founders">Founders</a></li>
+          <li><a href="#process">Process</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+        </ul>
+      </nav>
 
-  <div class="foot-bar">
-    <span class="mono">© <span id="yr">2026</span> Soul Events · Bangalore</span>
+      <div class="foot-col">
+        <h2 class="foot-col-h" id="foot-reach">Reach us</h2>
+        <ul aria-labelledby="foot-reach">
+          <li><a href="tel:+919342283539">+91 93422 83539</a></li>
+          <li><a href="tel:+919845054881">+91 98450 54881</a></li>
+          <li><a href="mailto:souleventsindia@gmail.com">souleventsindia@gmail.com</a></li>
+        </ul>
+      </div>
+
+      <div class="foot-col">
+        <h2 class="foot-col-h" id="foot-follow">Follow</h2>
+        <ul class="foot-social" aria-labelledby="foot-follow">
+          <li><a href="https://www.instagram.com/souleventsindia/" target="_blank" rel="noopener">
+            <svg class="foot-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-instagram"></use></svg><span class="lbl">Instagram</span></a></li>
+          <li><a href="https://www.facebook.com/pages/Soul-Events/1654430458123769" target="_blank" rel="noopener">
+            <svg class="foot-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-facebook"></use></svg><span class="lbl">Facebook</span></a></li>
+          <li><a href="https://www.youtube.com/channel/UC1Z_ibAYVkYGPvLVtaoBUNA" target="_blank" rel="noopener">
+            <svg class="foot-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-youtube"></use></svg><span class="lbl">YouTube</span></a></li>
+          <li><a href="https://wa.me/919342283539" target="_blank" rel="noopener">
+            <svg class="foot-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-whatsapp"></use></svg><span class="lbl">WhatsApp</span></a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="foot-bar">
+      <span class="mono">© <span id="yr">2026</span> Soul Events · Bangalore</span>
+    </div>
+
   </div>
 </footer>
+
+<!-- ============ GALLERY STORY VIEWER ============
+     One dialog, six slides. Content is copied in from whichever tile was
+     pressed; the SVG <use> is repointed at that category's <symbol>. -->
+<div class="story" id="story" role="dialog" aria-modal="true" aria-labelledby="storyTitle" hidden>
+  <div class="story-scrim" data-story-close></div>
+
+  <div class="story-panel">
+    <div class="story-bars" id="storyBars" aria-hidden="true"></div>
+
+    <figure class="story-figure">
+      <svg class="story-scene" id="storyScene" viewBox="0 0 160 100" preserveAspectRatio="xMidYMid slice" role="img" aria-labelledby="storyAlt">
+        <title id="storyAlt">Sample illustration</title>
+        <use id="storyUse" href="#sc-wed"></use>
+      </svg>
+      <span class="story-grain" aria-hidden="true"></span>
+    </figure>
+
+    <div class="story-caption">
+      <p class="mono story-idx" id="storyIdx">01 / 06</p>
+      <h2 class="story-title" id="storyTitle">
+        <svg class="lotus" aria-hidden="true"><use href="#lotus"></use></svg>
+        <span id="storyName">Weddings</span>
+      </h2>
+      <p class="story-line" id="storyLine"></p>
+      <p class="story-chip"><span class="dot" aria-hidden="true"></span>Actual photography arriving soon</p>
+    </div>
+
+    <button type="button" class="story-nav story-prev" id="storyPrev" aria-label="Previous category">
+      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4 7 12l8 8"/></svg>
+    </button>
+    <button type="button" class="story-nav story-next" id="storyNext" aria-label="Next category">
+      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4l8 8-8 8"/></svg>
+    </button>
+    <button type="button" class="story-close" id="storyClose" aria-label="Close the gallery story"><span aria-hidden="true">×</span></button>
+
+    <p class="vh" id="storyLive" role="status" aria-live="polite"></p>
+  </div>
+</div>
 
 <script type="application/ld+json">
 {
@@ -2619,6 +2892,12 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
     } else {
       window.scrollTo({top: top, behavior: "smooth"});
     }
+    /* preventDefault above also cancels the browser's focus handoff, so a
+       skip link would scroll but leave the tab order behind it. Anything
+       given an explicit tabindex (i.e. <main>) takes focus by hand. */
+    if (target.hasAttribute("tabindex")) {
+      try { target.focus({preventScroll:true}); } catch (err) { target.focus(); }
+    }
     if (history.replaceState) history.replaceState(null, "", id);
   });
 
@@ -2635,7 +2914,11 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
     Array.prototype.forEach.call(revealables, function(el){ el.classList.add("in"); });
   }
 
-  /* ---------- count-up stats (once, en-IN grouping) ---------- */
+  /* ---------- count-up stats (once) ----------
+     Every figure is now a plain small integer, so there is no thousands
+     grouping left to do. The visible span is aria-hidden; the announced
+     value lives on the .num's aria-label, which is also all that gets
+     copied when someone selects the row. */
   var statsRow = document.getElementById("statsRow");
   var counted = false;
   function runCount(){
@@ -2644,17 +2927,15 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
     var nodes = statsRow.querySelectorAll(".count");
     Array.prototype.forEach.call(nodes, function(node, i){
       var target = parseInt(node.getAttribute("data-target"), 10) || 0;
-      var group  = node.getAttribute("data-group") === "1";
-      var fmt = function(v){ return group ? v.toLocaleString("en-IN") : String(v); };
-      if (reduce) { node.textContent = fmt(target); return; }
+      if (reduce) { node.textContent = String(target); return; }
       var dur = 1500 + i * 140, start = null;
       function tick(ts){
         if (start === null) start = ts;
         var p = Math.min((ts - start) / dur, 1);
         var e = 1 - Math.pow(1 - p, 4);
-        node.textContent = fmt(Math.round(target * e));
+        node.textContent = String(Math.round(target * e));
         if (p < 1) requestAnimationFrame(tick);
-        else node.textContent = fmt(target);
+        else node.textContent = String(target);
       }
       requestAnimationFrame(tick);
     });
@@ -2707,40 +2988,130 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
     });
   }
 
-  /* ---------- form: floating labels + mailto ---------- */
-  var fields = document.querySelectorAll(".field input, .field textarea");
-  Array.prototype.forEach.call(fields, function(el){
-    var mark = function(){ el.parentNode.classList.toggle("filled", !!el.value.trim()); };
-    el.addEventListener("input", mark);
-    el.addEventListener("blur", mark);
-    mark();
-  });
+  /* ============================================================
+     GALLERY STORY VIEWER
+     A fullscreen, story-style browser over the six category scenes.
+     Open: click anywhere on a tile, or press its "View" button.
+     Move: on-screen arrows, ← / →, or a horizontal swipe.
+     Close: ×, Esc, or the backdrop. Focus is trapped while open and
+     handed back to the button that opened it.
+     ============================================================ */
+  var story     = document.getElementById("story");
+  var tiles     = document.querySelectorAll(".g-tile");
+  var slides    = Array.prototype.slice.call(tiles);
+  var storyUse  = document.getElementById("storyUse");
+  var storyScene= document.getElementById("storyScene");
+  var storyAlt  = document.getElementById("storyAlt");
+  var storyName = document.getElementById("storyName");
+  var storyLine = document.getElementById("storyLine");
+  var storyIdx  = document.getElementById("storyIdx");
+  var storyBars = document.getElementById("storyBars");
+  var storyLive = document.getElementById("storyLive");
+  var storyPrev = document.getElementById("storyPrev");
+  var storyNext = document.getElementById("storyNext");
+  var storyClose= document.getElementById("storyClose");
+  var current = 0, opener = null, storyOpen = false, closeTimer = 0;
 
-  var form = document.getElementById("enquiry");
-  var status = document.getElementById("formStatus");
-  if (form) {
-    form.addEventListener("submit", function(e){
-      e.preventDefault();
-      var g = function(id){ var n = document.getElementById(id); return n ? n.value.trim() : ""; };
-      var name = g("f-name"), email = g("f-email"), phone = g("f-phone"),
-          type = g("f-type"), msg = g("f-msg");
-      if (!name || !email) {
-        if (status) status.textContent = "A name and an email, please — then we can write back.";
-        var first = !name ? document.getElementById("f-name") : document.getElementById("f-email");
-        if (first) first.focus();
-        return;
-      }
-      var subject = "Event enquiry — " + (type || "Event") + " — " + name;
-      var body =
-        "Name: " + name + "\n" +
-        "Email: " + email + "\n" +
-        "Phone: " + (phone || "—") + "\n" +
-        "Event type: " + (type || "—") + "\n\n" +
-        "Message:\n" + (msg || "—") + "\n";
-      if (status) status.textContent = "Opening your mail app…";
-      window.location.href = "mailto:souleventsindia@gmail.com?subject=" +
-        encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+  function pad(n){ return (n < 10 ? "0" : "") + n; }
+
+  if (story && slides.length) {
+    /* one progress segment per category, built once */
+    for (var b = 0; b < slides.length; b++) storyBars.appendChild(document.createElement("i"));
+    var bars = storyBars.querySelectorAll("i");
+
+    var SVGNS = "http://www.w3.org/2000/svg";
+
+    function paint(i){
+      var t = slides[i];
+      current = i;
+      /* a fresh <use> node rather than a re-pointed href: some engines
+         will not re-resolve a changed href on an existing instance */
+      var u = document.createElementNS(SVGNS, "use");
+      u.setAttribute("href", t.getAttribute("data-scene"));
+      storyUse.parentNode.replaceChild(u, storyUse);
+      storyUse = u;
+      storyScene.setAttribute("viewBox", t.getAttribute("data-view"));
+      storyAlt.textContent  = t.getAttribute("data-alt") || "";
+      storyName.textContent = t.getAttribute("data-name") || "";
+      storyLine.textContent = t.getAttribute("data-line") || "";
+      storyIdx.textContent  = pad(i + 1) + " / " + pad(slides.length);
+      story.style.setProperty("--tint", (t.style.getPropertyValue("--tint") || "").trim() || "#1C666D");
+      Array.prototype.forEach.call(bars, function(bar, n){
+        bar.className = n === i ? "on" : (n < i ? "done" : "");
+      });
+      if (storyLive) storyLive.textContent =
+        storyName.textContent + ", " + (i + 1) + " of " + slides.length + ". " + storyLine.textContent;
+    }
+
+    function go(step){ paint((current + step + slides.length) % slides.length); }
+
+    function openStory(i, from){
+      opener = from || slides[i].querySelector(".view");
+      window.clearTimeout(closeTimer);
+      paint(i);
+      story.hidden = false;
+      storyOpen = true;
+      document.documentElement.classList.add("story-open");
+      document.body.classList.add("story-open");
+      requestAnimationFrame(function(){ story.classList.add("open"); });
+      storyClose.focus();
+    }
+
+    function closeStory(){
+      if (!storyOpen) return;
+      storyOpen = false;
+      story.classList.remove("open");
+      document.documentElement.classList.remove("story-open");
+      document.body.classList.remove("story-open");
+      var back = opener; opener = null;
+      var hide = function(){ if (!storyOpen) story.hidden = true; };
+      if (reduce) hide(); else closeTimer = window.setTimeout(hide, 320);
+      if (back && back.focus) back.focus();
+    }
+
+    Array.prototype.forEach.call(tiles, function(tile, i){
+      var btn = tile.querySelector(".view");
+      if (btn) btn.addEventListener("click", function(e){ e.stopPropagation(); openStory(i, btn); });
+      /* the whole tile is a pointer target for the same button */
+      tile.addEventListener("click", function(){ openStory(i, btn); });
     });
+
+    storyPrev.addEventListener("click", function(){ go(-1); });
+    storyNext.addEventListener("click", function(){ go(1); });
+    storyClose.addEventListener("click", closeStory);
+    story.addEventListener("click", function(e){
+      if (e.target.hasAttribute("data-story-close")) closeStory();
+    });
+
+    /* keyboard: Esc closes, arrows move, Tab is trapped inside the dialog */
+    story.addEventListener("keydown", function(e){
+      if (e.key === "Escape") { e.preventDefault(); closeStory(); return; }
+      if (e.key === "ArrowLeft")  { e.preventDefault(); go(-1); return; }
+      if (e.key === "ArrowRight") { e.preventDefault(); go(1);  return; }
+      if (e.key !== "Tab") return;
+      var f = [storyPrev, storyNext, storyClose];
+      var first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    });
+    /* anything that steals focus out of an open dialog gets pulled back */
+    document.addEventListener("focusin", function(e){
+      if (storyOpen && !story.contains(e.target)) storyClose.focus();
+    });
+
+    /* touch: a horizontal swipe of 44px or more turns the slide */
+    var tx = 0, ty = 0, tracking = false;
+    story.addEventListener("touchstart", function(e){
+      if (e.touches.length !== 1) { tracking = false; return; }
+      tracking = true; tx = e.touches[0].clientX; ty = e.touches[0].clientY;
+    }, {passive:true});
+    story.addEventListener("touchend", function(e){
+      if (!tracking) return;
+      tracking = false;
+      var t = e.changedTouches[0];
+      var dx = t.clientX - tx, dy = t.clientY - ty;
+      if (Math.abs(dx) > 44 && Math.abs(dx) > Math.abs(dy) * 1.4) go(dx < 0 ? 1 : -1);
+    }, {passive:true});
   }
 })();
 </script>
