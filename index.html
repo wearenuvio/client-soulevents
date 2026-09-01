@@ -19,7 +19,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&amp;family=Marcellus&amp;family=Space+Grotesk:wght@300;400;500;600&amp;family=Space+Mono:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg fill='none' stroke='%236D7585' stroke-linecap='round'%3E%3Cpath stroke-width='3.4' d='M56.47 20.59A27 27 0 1 1 7.53 20.59'/%3E%3Cpath stroke-width='2.2' d='M53.28 15.38a27 27 0 0 1 3.19 5.21'/%3E%3Cpath stroke-width='2.2' d='M7.53 20.59a27 27 0 0 1 3.19-5.21'/%3E%3Cpath stroke-width='1.4' d='M49.36 11.32a27 27 0 0 1 3.92 4.06'/%3E%3Cpath stroke-width='1.4' d='M10.72 15.38a27 27 0 0 1 3.92-4.06'/%3E%3C/g%3E%3Cg%3E%3Cpath fill='%235CC6CD' d='M32 47C27.5 40 27.5 28 32 20C36.5 28 36.5 40 32 47Z' transform='rotate(-58 32 47)'/%3E%3Cpath fill='%235CC6CD' d='M32 47C27.5 40 27.5 28 32 20C36.5 28 36.5 40 32 47Z' transform='rotate(58 32 47)'/%3E%3Cpath fill='%2369BD45' opacity='.85' d='M32 47C27.5 40 27.5 28 32 20C36.5 28 36.5 40 32 47Z' transform='rotate(-30 32 47)'/%3E%3Cpath fill='%2369BD45' opacity='.85' d='M32 47C27.5 40 27.5 28 32 20C36.5 28 36.5 40 32 47Z' transform='rotate(30 32 47)'/%3E%3Cpath fill='%2369BD45' d='M32 47C27.5 40 27.5 28 32 20C36.5 28 36.5 40 32 47Z'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="icon" href="assets/brand/soul-mark.png">
 
 <style>
 /* ============================================================
@@ -38,10 +38,18 @@
   --ink-mute:#6A6A6E;      /* the logo wall's single muted tone — reads as ~64% ink, still 5:1 */
   --hair:#E7E5E0;
   --hair-warm:#E6D8DA;     /* hairline that sits on the blush washes */
-  --accent:#5CC6CD;
-  --accent-deep:#1C666D;   /* AA-safe teal for small text on porcelain (6.2:1) and on washes (5.1:1) */
-  --leaf:#69BD45;          /* logo green — decorative only */
-  --swoosh:#6D7585;        /* logo brush grey-blue */
+  /* ---- brand palette, taken from the real logo ----
+     Layered plum/wine petals cradled in two powder-blue base petals, ringed by
+     an incomplete silver-grey watercolour arc. Plum carries the meaning;
+     powder blue is the quiet partner. */
+  --accent:#7B3B54;        /* plum, 7.6:1 on porcelain */
+  --accent-deep:#5A2A3F;   /* deep plum, hovers and small accented text (10.7:1) */
+  --accent-soft:#A96B85;   /* light plum, decorative only */
+  --blue:#C5D6E9;          /* powder blue, decorative on light, text-safe on ink */
+  --blue-deep:#54708C;     /* text-safe blue for a secondary accent */
+  --leaf:#A96B85;          /* was the old green; now the soft plum */
+  --swoosh:#B4BEC9;        /* logo brush grey */
+  --ink-plum:#2E2228;      /* the wordmark's plum-black */
 
   /* ---- pastel wash palette (RGB channels; always used at low alpha) ----
      Blush leads. Everything is de-saturated enough that porcelain text
@@ -49,7 +57,7 @@
   --blush:246,220,227;     /* #F6DCE3 */
   --rose:243,226,225;      /* #F3E2E1 */
   --lilac:233,227,240;     /* #E9E3F0 */
-  --mist:224,237,239;      /* #E0EDEF */
+  --mist:226,236,246;      /* #E0EDEF */
   --butter:246,238,220;    /* #F6EEDC */
 
   --display:"Marcellus", "Trajan Pro", Constantia, Georgia, "Times New Roman", serif;
@@ -87,7 +95,7 @@ ul,ol{padding:0; list-style:none}
 a{color:inherit}
 button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
 
-::selection{background:rgba(92,198,205,.28); color:var(--ink)}
+::selection{background:rgba(123,59,84,.24); color:var(--ink)}
 
 :focus-visible{
   outline:2px solid var(--accent-deep);
@@ -201,7 +209,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 /* CONTACT — ink inversion with a pink-teal aurora along the top edge */
 #contact{--wash:
   radial-gradient(72% 40% at 24% -4%, rgba(246,196,214,.20) 0%, rgba(246,196,214,0) 62%),
-  radial-gradient(64% 36% at 78% -2%, rgba(92,198,205,.17) 0%, rgba(92,198,205,0) 64%),
+  radial-gradient(64% 36% at 78% -2%, rgba(197,214,233,.22) 0%, rgba(197,214,233,0) 64%),
   radial-gradient(120% 24% at 50% 0%, rgba(233,227,240,.10) 0%, rgba(233,227,240,0) 70%);
 }
 #contact::after{mix-blend-mode:screen; opacity:.14}
@@ -233,7 +241,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 }
 /* ---------- lotus marks ---------- */
 .lotus{width:1em; height:1em; display:inline-block; color:var(--accent); flex:none}
-.mark-brand{width:1em; height:1em; display:block; flex:none}
+.mark-brand{width:auto; height:1em; display:block; flex:none; object-fit:contain}
 
 /* ============================================================
    NAV
@@ -253,7 +261,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   border-bottom-color:var(--hair);
 }
 .brand{display:flex; align-items:center; gap:11px; text-decoration:none; line-height:1; min-height:44px}
-.brand .mark-brand{font-size:30px}
+.brand .mark-brand{font-size:34px}
 .brand-word{display:flex; align-items:baseline; gap:7px}
 .brand-word b{
   font-family:var(--display); font-weight:400; font-size:20px;
@@ -281,7 +289,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   padding:11px 18px; border-radius:999px;
   transition:background 400ms var(--ease), color 400ms var(--ease), border-color 400ms var(--ease);
 }
-.nav-cta:hover{background:var(--accent); border-color:var(--accent); color:#0F2E31}
+.nav-cta:hover{background:var(--accent); border-color:var(--accent); color:#FBF7F8}
 
 .nav-toggle{display:none; align-items:center; gap:9px; padding:8px 4px}
 .nav-toggle .bars{width:22px; height:9px; position:relative; display:block}
@@ -373,7 +381,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   position:absolute; inset:-14% -6% -6%; z-index:0; pointer-events:none;
   background:
     radial-gradient(66% 52% at 16% 12%, rgba(var(--blush),.86) 0%, rgba(var(--blush),0) 64%),
-    radial-gradient(58% 46% at 78% 20%, rgba(92,198,205,.15) 0%, transparent 64%),
+    radial-gradient(58% 46% at 78% 20%, rgba(123,59,84,.13) 0%, transparent 64%),
     radial-gradient(56% 46% at 94% 74%, rgba(var(--rose),.70) 0%, rgba(var(--rose),0) 66%),
     radial-gradient(64% 44% at 44% 100%, rgba(var(--lilac),.56) 0%, rgba(var(--lilac),0) 66%),
     radial-gradient(70% 50% at 46% 96%, rgba(105,189,69,.06) 0%, transparent 62%);
@@ -422,10 +430,10 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 }
 .hbtn .arw{display:inline-block; transition:transform 420ms var(--ease)}
 .hbtn:hover .arw{transform:translateX(4px)}
-.hbtn--fill{background:var(--accent); border-color:var(--accent); color:#0F2E31}
-.hbtn--fill:hover{box-shadow:0 14px 30px -20px rgba(31,112,120,.85)}
+.hbtn--fill{background:var(--accent); border-color:var(--accent); color:#FBF7F8}
+.hbtn--fill:hover{box-shadow:0 14px 30px -20px rgba(90,42,63,.75)}
 .hbtn--ghost{border-color:var(--hair); color:var(--ink); background:rgba(255,255,255,.4)}
-.hbtn--ghost:hover{border-color:var(--accent); color:var(--accent-deep); background:rgba(92,198,205,.09)}
+.hbtn--ghost:hover{border-color:var(--accent); color:var(--accent-deep); background:rgba(123,59,84,.08)}
 .scroll-cue{
   flex:0 0 auto;
   display:inline-flex; align-items:center; gap:10px; text-decoration:none; min-height:44px;
@@ -508,7 +516,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   background:var(--accent); transform:scaleX(0); transform-origin:left;
   transition:transform 560ms var(--ease);
 }
-.stat:hover{background:rgba(92,198,205,.055)}
+.stat:hover{background:rgba(123,59,84,.05)}
 .stat:hover::before,.stat.in::before{transform:scaleX(1)}
 .stat .num{
   font-family:var(--display); font-weight:400;
@@ -592,7 +600,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
              opacity 620ms var(--ease) var(--d,0ms),
              translate 620ms var(--ease) var(--d,0ms);
 }
-.p-cell:hover{background:rgba(92,198,205,.055)}
+.p-cell:hover{background:rgba(123,59,84,.05)}
 /* index row: mono numeral + a rule that runs out to the cell edge,
    echoing the section header's own index tick */
 .p-idx{display:flex; align-items:center; gap:12px; margin-bottom:clamp(12px,1.4vw,18px)}
@@ -642,8 +650,8 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 .s-card:hover{
   transform:translateY(-4px);
   border-color:var(--accent);
-  background:rgba(92,198,205,.055);
-  box-shadow:0 16px 34px -26px rgba(31,112,120,.65);
+  background:rgba(123,59,84,.05);
+  box-shadow:0 16px 34px -26px rgba(90,42,63,.6);
 }
 .s-card .n{font-family:var(--mono); font-size:10px; letter-spacing:.18em; color:var(--ink-soft); transition:color 420ms var(--ease)}
 .s-card:hover .n{color:var(--accent-deep)}
@@ -803,8 +811,8 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
              translate 620ms var(--ease) var(--d,0ms);
 }
 .c-logo:hover,.c-logo:focus-within{
-  color:var(--ink); background:rgba(92,198,205,.07);
-  box-shadow:inset 0 -2px 0 rgba(92,198,205,.55);
+  color:var(--ink); background:rgba(123,59,84,.06);
+  box-shadow:inset 0 -2px 0 rgba(123,59,84,.5);
 }
 .c-logo:hover .wm-dot,.c-logo:hover .wm-rule{background:var(--accent-deep)}
 .c-logo:hover .wm-ring{border-color:var(--accent-deep)}
@@ -829,7 +837,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
              opacity 620ms var(--ease) var(--d,0ms),
              translate 620ms var(--ease) var(--d,0ms);
 }
-.c-toggle:hover{background:rgba(92,198,205,.08); border-color:var(--accent); color:var(--accent-deep)}
+.c-toggle:hover{background:rgba(123,59,84,.07); border-color:var(--accent); color:var(--accent-deep)}
 .c-toggle .pm{width:11px; height:11px; position:relative; flex:none}
 .c-toggle .pm::before,.c-toggle .pm::after{content:""; position:absolute; background:currentColor}
 .c-toggle .pm::before{left:0; right:0; top:5px; height:1px}
@@ -851,7 +859,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 .inverted{
   background:#1A1A22; color:#F4F2ED;
   /* flip the tokens so every inherited rule follows, without recolouring the ground */
-  --ink:#F4F2ED; --ink-soft:#A8A5B0; --hair:#33323C; --raised:#22212B; --accent-deep:#7FD6DC;
+  --ink:#F4F2ED; --ink-soft:#A8A5B0; --hair:#33323C; --raised:#22212B; --accent-deep:#E4B9C9;
 }
 .inverted .sect-idx{color:var(--accent)}
 .inverted .mono{color:var(--ink-soft)}
@@ -890,14 +898,14 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
              border-color 420ms var(--ease), box-shadow 520ms var(--ease);
 }
 .btn:hover{background:#F8F7F4; color:#1A1A22}
-.btn--accent{background:var(--accent); border-color:var(--accent); color:#0F2E31}
+.btn--accent{background:var(--accent); border-color:var(--accent); color:#FBF7F8}
 .btn--accent:hover{background:transparent; color:var(--accent); box-shadow:none}
 /* the two CTAs carry the section now that the form is gone — give them weight */
 .btn--lg{
   padding:18px 30px; font-size:12px; letter-spacing:.15em;
   min-height:56px; flex:0 1 auto;
 }
-.btn--lg.btn--accent{box-shadow:0 18px 38px -24px rgba(92,198,205,.75)}
+.btn--lg.btn--accent{box-shadow:0 18px 38px -24px rgba(123,59,84,.6)}
 /* the glow belongs to the filled state only — it must go when the fill does,
    and this needs the same specificity as the rule above to win */
 .btn--lg.btn--accent:hover{box-shadow:none}
@@ -918,7 +926,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   display:flex; flex-wrap:wrap; align-items:center; gap:14px clamp(22px,3.4vw,52px);
   padding-bottom:clamp(28px,3.6vw,48px);
 }
-.foot-brand .brand .mark-brand{font-size:34px}
+.foot-brand .brand .mark-brand{font-size:40px}
 .foot-brand .brand-word b{color:#F8F7F4}
 .foot-brand .brand-word span{color:var(--accent)}
 .foot-tag{
@@ -1014,7 +1022,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   transition:background 320ms var(--ease), color 320ms var(--ease), border-color 320ms var(--ease);
 }
 .lb-close span{display:block; margin-top:-3px}
-.lb-close:hover{background:var(--accent); border-color:var(--accent); color:#0F2E31}
+.lb-close:hover{background:var(--accent); border-color:var(--accent); color:#FBF7F8}
 
 /* the one scroll container; the page behind is locked by .lb-open */
 .lb-body{
@@ -1074,7 +1082,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   color:var(--ink); border:1px solid var(--hair); background:var(--raised);
   transition:background 320ms var(--ease), color 320ms var(--ease), border-color 320ms var(--ease);
 }
-.lb-nav:hover{background:var(--accent); border-color:var(--accent); color:#0F2E31}
+.lb-nav:hover{background:var(--accent); border-color:var(--accent); color:#FBF7F8}
 .lb-nav svg{width:17px; height:17px; display:block}
 .lb-idx{color:var(--ink-soft); font-size:10.5px; letter-spacing:.15em}
 
@@ -1224,23 +1232,6 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
     </g>
   </symbol>
 
-  <!-- brand mark: green inner petals, teal outer petals, grey-blue brush arc -->
-  <symbol id="soulmark" viewBox="0 0 64 64">
-    <g fill="none" stroke="#6D7585" stroke-linecap="round">
-      <path stroke-width="3.4" d="M56.47 20.59A27 27 0 1 1 7.53 20.59"/>
-      <path stroke-width="2.2" d="M53.28 15.38a27 27 0 0 1 3.19 5.21"/>
-      <path stroke-width="2.2" d="M7.53 20.59a27 27 0 0 1 3.19-5.21"/>
-      <path stroke-width="1.4" d="M49.36 11.32a27 27 0 0 1 3.92 4.06"/>
-      <path stroke-width="1.4" d="M10.72 15.38a27 27 0 0 1 3.92-4.06"/>
-    </g>
-    <g>
-      <path fill="#5CC6CD" d="M32 47C27.5 40 27.5 28 32 20C36.5 28 36.5 40 32 47Z" transform="rotate(-58 32 47)"/>
-      <path fill="#5CC6CD" d="M32 47C27.5 40 27.5 28 32 20C36.5 28 36.5 40 32 47Z" transform="rotate(58 32 47)"/>
-      <path fill="#69BD45" opacity=".85" d="M32 47C27.5 40 27.5 28 32 20C36.5 28 36.5 40 32 47Z" transform="rotate(-30 32 47)"/>
-      <path fill="#69BD45" opacity=".85" d="M32 47C27.5 40 27.5 28 32 20C36.5 28 36.5 40 32 47Z" transform="rotate(30 32 47)"/>
-      <path fill="#69BD45" d="M32 47C27.5 40 27.5 28 32 20C36.5 28 36.5 40 32 47Z"/>
-    </g>
-  </symbol>
 
   <!-- ============================================================
        SERVICE ICONS · hand-drawn minimal line marks, stroke currentColor
@@ -1347,7 +1338,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 <!-- ============ NAV ============ -->
 <header class="nav" id="nav">
   <a class="brand" href="#top" aria-label="Soul Events, home">
-    <svg class="mark-brand" aria-hidden="true"><use href="#soulmark"></use></svg>
+    <img class="mark-brand" src="assets/brand/soul-mark.png" alt="" width="520" height="493" decoding="async">
     <span class="brand-word"><b>Soul</b><span>events</span></span>
   </a>
   <nav class="nav-links" aria-label="Primary">
@@ -1579,7 +1570,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
           <img class="shot" src="assets/samples/anniv-02.jpg" width="900" height="600" loading="lazy" decoding="async"
                alt="Sample photograph: a long dining table laid out for a dinner party with flowers and candles">
           <span class="plate-grain" aria-hidden="true"></span>
-          <figcaption class="plate-cap" style="--tint:#69BD45"><span class="dot" aria-hidden="true"></span>Layout &middot; sample</figcaption>
+          <figcaption class="plate-cap" style="--tint:#A96B85"><span class="dot" aria-hidden="true"></span>Layout &middot; sample</figcaption>
         </figure>
       </div>
 
@@ -2118,7 +2109,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 
     <div class="foot-brand">
       <a class="brand" href="#top" aria-label="Soul Events, back to top">
-        <svg class="mark-brand" aria-hidden="true"><use href="#soulmark"></use></svg>
+        <img class="mark-brand" src="assets/brand/soul-mark-light.png" alt="" width="520" height="493" decoding="async">
         <span class="brand-word"><b>Soul</b><span>events</span></span>
       </a>
       <p class="foot-tag">Pouring our Heart &amp; Soul into turning your dreams to reality.</p>
@@ -2618,7 +2609,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 
       lbName.textContent = catName;
       lbCount.textContent = (COUNT_WORD[shots.length] || shots.length) + " frames · " + catName;
-      lb.style.setProperty("--tint", (tile.style.getPropertyValue("--tint") || "").trim() || "#1C666D");
+      lb.style.setProperty("--tint", (tile.style.getPropertyValue("--tint") || "").trim() || "#5A2A3F");
       buildGrid();
       solo = -1;
       lbSolo.hidden = true;
