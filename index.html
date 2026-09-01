@@ -18,7 +18,7 @@
 <link rel="canonical" href="https://souleventsindia.com/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&amp;family=Marcellus&amp;family=Space+Grotesk:wght@300;400;500;600&amp;family=Space+Mono:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&amp;family=Space+Grotesk:wght@300;400;500;600&amp;family=Space+Mono:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg fill='none' stroke-linecap='round'%3E%3Cpath stroke='%23D8DEE5' stroke-width='5.2' opacity='.55' d='M11.79 54.44A30.2 30.2 0 1 1 54.44 52.21'/%3E%3Cpath stroke='%23B4BEC9' stroke-width='4.2' d='M14.15 54.85A29 29 0 1 1 54.22 50.64'/%3E%3C/g%3E%3Cg transform='translate(32,52) scale(1.1) translate(-32,-52)'%3E%3Cg fill='%23C5D6E9'%3E%3Cpath d='M32 47C22 44.5 21 33.5 32 25.5C43 33.5 42 44.5 32 47Z' transform='rotate(-84 32 47)'/%3E%3Cpath d='M32 47C22 44.5 21 33.5 32 25.5C43 33.5 42 44.5 32 47Z' transform='rotate(84 32 47)'/%3E%3C/g%3E%3Cg%3E%3Cpath fill='%237B3B54' d='M32 48C24.8 41 24.4 30 32 22C39.6 30 39.2 41 32 48Z' transform='rotate(-50 32 48)'/%3E%3Cpath fill='%237B3B54' d='M32 48C24.8 41 24.4 30 32 22C39.6 30 39.2 41 32 48Z' transform='rotate(50 32 48)'/%3E%3Cpath fill='%235C2840' d='M32 48C24.8 41 24.4 30 32 22C39.6 30 39.2 41 32 48Z' transform='rotate(-25 32 48)'/%3E%3Cpath fill='%235C2840' d='M32 48C24.8 41 24.4 30 32 22C39.6 30 39.2 41 32 48Z' transform='rotate(25 32 48)'/%3E%3Cpath fill='%232E1520' d='M32 48C24.8 41 24.4 30 32 22C39.6 30 39.2 41 32 48Z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E">
 
 <style>
@@ -26,8 +26,8 @@
    SOUL EVENTS — production homepage
    Base: "Porcelain Gallery" · marquees, stat cells and quote
    rows folded in from "Soul on Stage", restyled to porcelain.
-   Type system tied to the real logo: Marcellus (Trajan-flavoured
-   classical caps) is the house; Instrument Serif italic is the wink.
+   Type system tied to the real logo: Bodoni Moda (the Didone family of
+   the wordmark, with optical sizing) is the house in roman and italic.
    ============================================================ */
 
 :root{
@@ -60,8 +60,8 @@
   --mist:226,236,246;      /* #E2ECF6 — powder-blue tint */
   --butter:246,238,220;    /* #F6EEDC */
 
-  --display:"Marcellus", "Trajan Pro", Constantia, Georgia, "Times New Roman", serif;
-  --serif:"Instrument Serif", Georgia, "Times New Roman", Times, serif;
+  --display:"Bodoni Moda", Didot, "Bodoni MT", "Times New Roman", serif;
+  --serif:"Bodoni Moda", Didot, "Bodoni MT", "Times New Roman", serif;
   --sans:"Space Grotesk", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --mono:"Space Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
 
@@ -84,6 +84,9 @@ body{
   font-family:var(--sans); font-weight:400; font-size:clamp(15px,1.02vw,17px);
   line-height:1.62; letter-spacing:.002em;
   -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+  /* Bodoni Moda is a variable optical-size face: let it pick sturdier
+     strokes at caption sizes and razor-fine ones at display sizes */
+  font-optical-sizing:auto;
   /* `clip`, not `hidden`: the root already clips the viewport, and
      `overflow-x:hidden` here would turn <body> into a scroll container,
      which silently kills `position:sticky` on the process intro. */
@@ -271,7 +274,8 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 .brand .mark-brand{font-size:30px}
 .brand-word{display:flex; align-items:baseline; gap:7px}
 .brand-word b{
-  font-family:var(--display); font-weight:400; font-size:20px;
+  /* weight 600 matches the bold Didone cut of the logo's wordmark */
+  font-family:var(--display); font-weight:600; font-size:20px;
   letter-spacing:.14em; text-transform:uppercase; color:var(--ink-plum);
 }
 .brand-word span{font-family:var(--mono); font-size:10.5px; letter-spacing:.16em; color:var(--accent)}
