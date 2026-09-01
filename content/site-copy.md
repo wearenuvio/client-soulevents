@@ -6,7 +6,7 @@ This is the single source of truth for site copy. Use text VERBATIM unless marke
 - Name: Soul Events (also "Soul Events India" on Instagram)
 - Founders: Chelna Lekhi (designer/planner — "the magician") and Ramesh Sadhwani (compere/emcee — "the Event Energizer", 1000+ events compered)
 - Based: Bangalore. Works across India + internationally (Dubai, Toronto, Madrid, Nairobi, USA clients on record)
-- Logo: lotus mark in green (#69bd45) + teal (#5cc6cd) with grey brush-swoosh; on Instagram they recolor the lotus per highlight (green, yellow, pink, teal) — recolorable-lotus is a sanctioned brand device
+- Logo (FINAL, client-supplied 2026): lotus of layered plum/wine petals (outer ~#7B3B54, mids ~#5C2840, near-black maroon center overlap) cradled by two powder-blue base petals (~#C5D6E9), encircled by a silver-grey watercolor brush arc (~#B4BEC9); "SOUL" in dark plum-black (~#2E2228) widely-spaced serif caps, "EVENTS" letterspaced beneath. Site accent system: plum primary + powder blue partner. (The old 2015 site's green #69bd45 + teal #5cc6cd is retired.)
 - Instagram bio line: "Pouring our Heart & Soul into turning your dreams to reality ✨ Curating bespoke experiences in India & Internationally"
 - Instagram: @souleventsindia · Facebook: facebook.com/pages/Soul-Events/1654430458123769 · YouTube channel: UC1Z_ibAYVkYGPvLVtaoBUNA
 
