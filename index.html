@@ -18,7 +18,7 @@
 <link rel="canonical" href="https://souleventsindia.com/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,600&amp;family=Instrument+Serif:ital@1&amp;family=Marcellus&amp;family=Space+Grotesk:wght@300;400;500;600&amp;family=Space+Mono:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&amp;family=Instrument+Serif:ital@1&amp;family=Marcellus&amp;family=Space+Grotesk:wght@300;400;500;600&amp;family=Space+Mono:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet">
 <link rel="icon" href="assets/brand/soul-mark.png">
 
 <style>
@@ -64,7 +64,7 @@
   --serif:"Instrument Serif", Georgia, "Times New Roman", Times, serif;
   --sans:"Space Grotesk", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --mono:"Space Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
-  --wordmark:"Bodoni Moda", "Bodoni 72", Didot, "Playfair Display", Georgia, serif;   /* the logo lockup only */
+  --wordmark:"Playfair Display", "Bodoni 72", Didot, Georgia, serif;   /* the logo lockup only */
 
   --gutter:clamp(20px, 5.4vw, 92px);
   --gap:clamp(14px, 2.1vw, 30px);
@@ -268,8 +268,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 /* the wordmark is set to match the logo's own Didone, and nowhere else */
 .brand-word b{
   font-family:var(--wordmark); font-weight:600; font-size:21px;
-  font-variation-settings:"opsz" 72;
-  letter-spacing:.17em; text-transform:uppercase; color:var(--ink-plum);
+  letter-spacing:.16em; text-transform:uppercase; color:var(--ink-plum);
   line-height:1;
 }
 .brand-word span{font-family:var(--mono); font-size:10.5px; letter-spacing:.16em; color:var(--accent-deep)}
