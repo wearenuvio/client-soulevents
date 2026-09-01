@@ -19,7 +19,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&amp;family=Marcellus&amp;family=Space+Grotesk:wght@300;400;500;600&amp;family=Space+Mono:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg fill='none' stroke='%236D7585' stroke-linecap='round'%3E%3Cpath stroke-width='3.4' d='M56.47 20.59A27 27 0 1 1 7.53 20.59'/%3E%3Cpath stroke-width='2.2' d='M53.28 15.38a27 27 0 0 1 3.19 5.21'/%3E%3Cpath stroke-width='2.2' d='M7.53 20.59a27 27 0 0 1 3.19-5.21'/%3E%3Cpath stroke-width='1.4' d='M49.36 11.32a27 27 0 0 1 3.92 4.06'/%3E%3Cpath stroke-width='1.4' d='M10.72 15.38a27 27 0 0 1 3.92-4.06'/%3E%3C/g%3E%3Cg%3E%3Cpath fill='%235CC6CD' d='M32 47C27.5 40 27.5 28 32 20C36.5 28 36.5 40 32 47Z' transform='rotate(-58 32 47)'/%3E%3Cpath fill='%235CC6CD' d='M32 47C27.5 40 27.5 28 32 20C36.5 28 36.5 40 32 47Z' transform='rotate(58 32 47)'/%3E%3Cpath fill='%2369BD45' opacity='.85' d='M32 47C27.5 40 27.5 28 32 20C36.5 28 36.5 40 32 47Z' transform='rotate(-30 32 47)'/%3E%3Cpath fill='%2369BD45' opacity='.85' d='M32 47C27.5 40 27.5 28 32 20C36.5 28 36.5 40 32 47Z' transform='rotate(30 32 47)'/%3E%3Cpath fill='%2369BD45' d='M32 47C27.5 40 27.5 28 32 20C36.5 28 36.5 40 32 47Z'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg fill='none' stroke-linecap='round'%3E%3Cpath stroke='%23D8DEE5' stroke-width='5.2' opacity='.55' d='M11.79 54.44A30.2 30.2 0 1 1 54.44 52.21'/%3E%3Cpath stroke='%23B4BEC9' stroke-width='4.2' d='M14.15 54.85A29 29 0 1 1 54.22 50.64'/%3E%3C/g%3E%3Cg transform='translate(32,52) scale(1.1) translate(-32,-52)'%3E%3Cg fill='%23C5D6E9'%3E%3Cpath d='M32 47C22 44.5 21 33.5 32 25.5C43 33.5 42 44.5 32 47Z' transform='rotate(-84 32 47)'/%3E%3Cpath d='M32 47C22 44.5 21 33.5 32 25.5C43 33.5 42 44.5 32 47Z' transform='rotate(84 32 47)'/%3E%3C/g%3E%3Cg%3E%3Cpath fill='%237B3B54' d='M32 48C24.8 41 24.4 30 32 22C39.6 30 39.2 41 32 48Z' transform='rotate(-50 32 48)'/%3E%3Cpath fill='%237B3B54' d='M32 48C24.8 41 24.4 30 32 22C39.6 30 39.2 41 32 48Z' transform='rotate(50 32 48)'/%3E%3Cpath fill='%235C2840' d='M32 48C24.8 41 24.4 30 32 22C39.6 30 39.2 41 32 48Z' transform='rotate(-25 32 48)'/%3E%3Cpath fill='%235C2840' d='M32 48C24.8 41 24.4 30 32 22C39.6 30 39.2 41 32 48Z' transform='rotate(25 32 48)'/%3E%3Cpath fill='%232E1520' d='M32 48C24.8 41 24.4 30 32 22C39.6 30 39.2 41 32 48Z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E">
 
 <style>
 /* ============================================================
@@ -38,10 +38,18 @@
   --ink-mute:#6A6A6E;      /* the logo wall's single muted tone — reads as ~64% ink, still 5:1 */
   --hair:#E7E5E0;
   --hair-warm:#E6D8DA;     /* hairline that sits on the blush washes */
-  --accent:#5CC6CD;
-  --accent-deep:#1C666D;   /* AA-safe teal for small text on porcelain (6.2:1) and on washes (5.1:1) */
-  --leaf:#69BD45;          /* logo green — decorative only */
-  --swoosh:#6D7585;        /* logo brush grey-blue */
+
+  /* ---- brand palette, taken from the final logo ----
+     A lotus of layered plum/wine petals cradled in two powder-blue base
+     petals, ringed by an incomplete silver-grey watercolour arc. Plum is
+     the accent that carries meaning; powder blue is the quiet partner. */
+  --accent:#7B3B54;        /* plum — 7.6:1 on porcelain, 6.3:1 on the blush wash */
+  --accent-deep:#5A2A3F;   /* deep plum — hovers and small accented text (10.7:1) */
+  --accent-soft:#A96B85;   /* light plum — decorative only (3.8:1) */
+  --blue:#C5D6E9;          /* powder blue — decorative on light, text-safe on ink (11.7:1) */
+  --blue-deep:#54708C;     /* text-safe blue if a secondary text accent is needed (4.8:1) */
+  --swoosh:#B4BEC9;        /* logo brush grey */
+  --ink-plum:#2E2228;      /* the wordmark's plum-black */
 
   /* ---- pastel wash palette (RGB channels; always used at low alpha) ----
      Blush leads. Everything is de-saturated enough that porcelain text
@@ -49,7 +57,7 @@
   --blush:246,220,227;     /* #F6DCE3 */
   --rose:243,226,225;      /* #F3E2E1 */
   --lilac:233,227,240;     /* #E9E3F0 */
-  --mist:224,237,239;      /* #E0EDEF */
+  --mist:226,236,246;      /* #E2ECF6 — powder-blue tint */
   --butter:246,238,220;    /* #F6EEDC */
 
   --display:"Marcellus", "Trajan Pro", Constantia, Georgia, "Times New Roman", serif;
@@ -87,14 +95,15 @@ ul,ol{padding:0; list-style:none}
 a{color:inherit}
 button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
 
-::selection{background:rgba(92,198,205,.28); color:var(--ink)}
+::selection{background:rgba(123,59,84,.22); color:var(--ink)}
 
 :focus-visible{
   outline:2px solid var(--accent-deep);
   outline-offset:3px;
   border-radius:2px;
 }
-.inverted :focus-visible{outline-color:var(--accent)}
+/* on the two ink grounds the ring turns powder blue so it stays visible */
+.inverted :focus-visible,.foot :focus-visible{outline-color:var(--blue)}
 /* skip-link landing zones take focus programmatically; the scroll is the
    feedback, and a ring around the whole of <main> is not */
 [tabindex="-1"]:focus,[tabindex="-1"]:focus-visible{outline:none}
@@ -128,7 +137,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
    never leaves one word stranded; body copy only avoids orphans. Hard <br>
    is reserved for postal addresses and the stacked client wordmarks — the
    headings that used to carry one now balance instead. `.keep` protects a
-   short accented phrase (the teal-underlined italic) from ever splitting. */
+   short accented phrase (the plum-underlined italic) from ever splitting. */
 h1,h2,h3,h4,
 .display,.big,.s-lede,.f-device,.f-quote,.stat .cap,.g-meta h3,
 .story-title,.foot-tag{text-wrap:balance}
@@ -180,10 +189,10 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   radial-gradient(62% 52% at 96% 62%, rgba(var(--lilac),.62) 0%, rgba(var(--lilac),0) 66%),
   radial-gradient(80% 40% at 50% 100%, rgba(var(--blush),.34) 0%, rgba(var(--blush),0) 68%);
 }
-/* PROCESS — mist, cool enough to make the teal spine sing */
+/* PROCESS — powder-blue mist, cool enough to make the plum spine sing */
 #process{--wash:
-  radial-gradient(70% 58% at 90% 6%, rgba(var(--mist),.72) 0%, rgba(var(--mist),0) 64%),
-  radial-gradient(58% 48% at 4% 58%, rgba(var(--blush),.40) 0%, rgba(var(--blush),0) 66%);
+  radial-gradient(70% 58% at 90% 6%, rgba(var(--mist),.80) 0%, rgba(var(--mist),0) 64%),
+  radial-gradient(58% 48% at 4% 58%, rgba(var(--blush),.46) 0%, rgba(var(--blush),0) 66%);
 }
 /* SERVICES — faint butter with a blush corner */
 #services{--wash:
@@ -202,13 +211,14 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 }
 /* CLIENTS — near-porcelain; the logo wall needs a clean ground */
 #clients{--wash:
-  radial-gradient(80% 40% at 92% 0%, rgba(var(--mist),.30) 0%, rgba(var(--mist),0) 70%);
+  radial-gradient(80% 40% at 92% 0%, rgba(var(--mist),.38) 0%, rgba(var(--mist),0) 70%),
+  radial-gradient(60% 34% at 4% 6%, rgba(var(--blush),.20) 0%, rgba(var(--blush),0) 68%);
   --grain-o:.20;
 }
-/* CONTACT — ink inversion with a pink-teal aurora along the top edge */
+/* CONTACT — ink inversion with a pink-and-powder-blue aurora along the top */
 #contact{--wash:
   radial-gradient(72% 40% at 24% -4%, rgba(246,196,214,.20) 0%, rgba(246,196,214,0) 62%),
-  radial-gradient(64% 36% at 78% -2%, rgba(92,198,205,.17) 0%, rgba(92,198,205,0) 64%),
+  radial-gradient(64% 36% at 78% -2%, rgba(197,214,233,.16) 0%, rgba(197,214,233,0) 64%),
   radial-gradient(120% 24% at 50% 0%, rgba(233,227,240,.10) 0%, rgba(233,227,240,0) 70%);
 }
 #contact::after{mix-blend-mode:screen; opacity:.14}
@@ -229,7 +239,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 .sect-name{font-family:var(--mono); font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--ink-soft); white-space:nowrap}
 .sect-head .rule{flex:1; height:1px; background:var(--hair); transform:translateY(-4px)}
 
-/* teal highlight primitives — the accent language of the page */
+/* plum highlight primitives — the accent language of the page */
 .em{font-family:var(--serif); font-style:italic; color:var(--accent-deep); letter-spacing:-.006em}
 .uline{
   background-image:linear-gradient(var(--accent),var(--accent));
@@ -262,9 +272,9 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 .brand-word{display:flex; align-items:baseline; gap:7px}
 .brand-word b{
   font-family:var(--display); font-weight:400; font-size:20px;
-  letter-spacing:.14em; text-transform:uppercase; color:var(--ink);
+  letter-spacing:.14em; text-transform:uppercase; color:var(--ink-plum);
 }
-.brand-word span{font-family:var(--mono); font-size:10.5px; letter-spacing:.16em; color:var(--accent-deep)}
+.brand-word span{font-family:var(--mono); font-size:10.5px; letter-spacing:.16em; color:var(--accent)}
 
 .nav-links{display:flex; align-items:center; gap:clamp(14px,1.9vw,30px)}
 .nav-links a{
@@ -286,7 +296,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   padding:11px 18px; border-radius:999px;
   transition:background 400ms var(--ease), color 400ms var(--ease), border-color 400ms var(--ease);
 }
-.nav-cta:hover{background:var(--accent); border-color:var(--accent); color:#0F2E31}
+.nav-cta:hover{background:var(--accent); border-color:var(--accent); color:#F8F7F4}
 
 .nav-toggle{display:none; align-items:center; gap:9px; padding:8px 4px}
 .nav-toggle .bars{width:22px; height:9px; position:relative; display:block}
@@ -377,10 +387,10 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   position:absolute; inset:-14% -6% -6%; z-index:0; pointer-events:none;
   background:
     radial-gradient(66% 52% at 16% 12%, rgba(var(--blush),.86) 0%, rgba(var(--blush),0) 64%),
-    radial-gradient(58% 46% at 78% 20%, rgba(92,198,205,.15) 0%, transparent 64%),
+    radial-gradient(58% 46% at 78% 20%, rgba(197,214,233,.55) 0%, transparent 64%),
     radial-gradient(56% 46% at 94% 74%, rgba(var(--rose),.70) 0%, rgba(var(--rose),0) 66%),
     radial-gradient(64% 44% at 44% 100%, rgba(var(--lilac),.56) 0%, rgba(var(--lilac),0) 66%),
-    radial-gradient(70% 50% at 46% 96%, rgba(105,189,69,.06) 0%, transparent 62%);
+    radial-gradient(70% 50% at 46% 96%, rgba(123,59,84,.05) 0%, transparent 62%);
   will-change:transform;
 }
 .hero-wash::after{
@@ -426,10 +436,10 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 }
 .hbtn .arw{display:inline-block; transition:transform 420ms var(--ease)}
 .hbtn:hover .arw{transform:translateX(4px)}
-.hbtn--fill{background:var(--accent); border-color:var(--accent); color:#0F2E31}
-.hbtn--fill:hover{box-shadow:0 14px 30px -20px rgba(31,112,120,.85)}
+.hbtn--fill{background:var(--accent); border-color:var(--accent); color:#F8F7F4}
+.hbtn--fill:hover{box-shadow:0 14px 30px -20px rgba(90,42,63,.85)}
 .hbtn--ghost{border-color:var(--hair); color:var(--ink); background:rgba(255,255,255,.4)}
-.hbtn--ghost:hover{border-color:var(--accent); color:var(--accent-deep); background:rgba(92,198,205,.09)}
+.hbtn--ghost:hover{border-color:var(--accent); color:var(--accent-deep); background:rgba(123,59,84,.06)}
 .scroll-cue{
   flex:0 0 auto;
   display:inline-flex; align-items:center; gap:10px; text-decoration:none; min-height:44px;
@@ -517,7 +527,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   background:var(--accent); transform:scaleX(0); transform-origin:left;
   transition:transform 560ms var(--ease);
 }
-.stat:hover{background:rgba(92,198,205,.055)}
+.stat:hover{background:rgba(123,59,84,.045)}
 .stat:hover::before,.stat.in::before{transform:scaleX(1)}
 .stat .num{
   font-family:var(--display); font-weight:400;
@@ -575,7 +585,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   padding-left:var(--spine-pad);
 }
 
-/* the vertical progress spine: hairline track + teal line drawn by scroll */
+/* the vertical progress spine: hairline track + plum line drawn by scroll */
 .p-spine{
   position:absolute; left:0; top:0; bottom:0; width:1px;
   background:var(--hair); overflow:visible; pointer-events:none;
@@ -605,7 +615,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 }
 .step.active .step-dot{
   background:var(--accent-deep); border-color:var(--accent-deep);
-  box-shadow:0 0 0 4px rgba(92,198,205,.20);
+  box-shadow:0 0 0 4px rgba(123,59,84,.16);
 }
 .step-n{
   font-family:var(--mono); font-size:11px; letter-spacing:.14em;
@@ -664,8 +674,8 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 .s-card:hover{
   transform:translateY(-4px);
   border-color:var(--accent);
-  background:rgba(92,198,205,.055);
-  box-shadow:0 16px 34px -26px rgba(31,112,120,.65);
+  background:rgba(123,59,84,.045);
+  box-shadow:0 16px 34px -26px rgba(90,42,63,.6);
 }
 .s-card .n{font-family:var(--mono); font-size:10px; letter-spacing:.18em; color:var(--ink-soft); transition:color 420ms var(--ease)}
 .s-card:hover .n{color:var(--accent-deep)}
@@ -780,16 +790,16 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 .card .by b{color:var(--ink); font-weight:400}
 .card--feat{
   width:clamp(292px,32vw,462px);
-  background:var(--ink); border-color:var(--ink);
+  background:#211823; border-color:#211823;
 }
 .card--feat::before{display:none}
 .card--feat q{color:#F4F2ED; font-size:clamp(17px,1.5vw,24px); line-height:1.38; letter-spacing:-.004em}
 .card--feat .kicker{
-  font-family:var(--serif); font-style:italic; color:var(--accent);
+  font-family:var(--serif); font-style:italic; color:#D9A8BE;
   font-size:clamp(1.6rem,2.3vw,2.35rem); line-height:1.05; letter-spacing:0;
   display:block;
 }
-.card--feat .by{border-top-color:#3A3944; color:#B4B1BC}
+.card--feat .by{border-top-color:#3D3540; color:#B6B0BA}
 .card--feat .by b{color:#F4F2ED}
 .tm-static{display:none}
 
@@ -820,8 +830,8 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
              translate 620ms var(--ease) var(--d,0ms);
 }
 .c-logo:hover,.c-logo:focus-within{
-  color:var(--ink); background:rgba(92,198,205,.07);
-  box-shadow:inset 0 -2px 0 rgba(92,198,205,.55);
+  color:var(--ink); background:rgba(123,59,84,.055);
+  box-shadow:inset 0 -2px 0 rgba(123,59,84,.5);
 }
 .c-logo:hover .wm-dot,.c-logo:hover .wm-rule{background:var(--accent-deep)}
 .c-logo:hover .wm-ring{border-color:var(--accent-deep)}
@@ -846,7 +856,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
              opacity 620ms var(--ease) var(--d,0ms),
              translate 620ms var(--ease) var(--d,0ms);
 }
-.c-toggle:hover{background:rgba(92,198,205,.08); border-color:var(--accent); color:var(--accent-deep)}
+.c-toggle:hover{background:rgba(123,59,84,.06); border-color:var(--accent); color:var(--accent-deep)}
 .c-toggle .pm{width:11px; height:11px; position:relative; flex:none}
 .c-toggle .pm::before,.c-toggle .pm::after{content:""; position:absolute; background:currentColor}
 .c-toggle .pm::before{left:0; right:0; top:5px; height:1px}
@@ -866,9 +876,13 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
    CONTACT (09) — inverted
    ============================================================ */
 .inverted{
-  background:#1A1A22; color:#F4F2ED;
-  /* flip the tokens so every inherited rule follows, without recolouring the ground */
-  --ink:#F4F2ED; --ink-soft:#A8A5B0; --hair:#33323C; --raised:#22212B; --accent-deep:#7FD6DC;
+  /* the ink ground carries a trace of plum so it belongs to the logo */
+  background:#211823; color:#F4F2ED;
+  /* flip the tokens so every inherited rule follows, without recolouring the ground.
+     On ink the accent becomes powder blue (11.7:1) and the serif italics light
+     plum (8.5:1) — the inverse of the balance the light sections keep. */
+  --ink:#F4F2ED; --ink-soft:#A8A5B0; --hair:#3A2E3B; --raised:#2A1F2C;
+  --accent:#C5D6E9; --accent-deep:#C5D6E9; --accent-soft:#D9A8BE;
 }
 .inverted .sect-idx{color:var(--accent)}
 .inverted .mono{color:var(--ink-soft)}
@@ -883,7 +897,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   font-size:clamp(1.95rem,4.4vw,3.6rem); line-height:1.05; letter-spacing:.006em;
   margin-bottom:.44em; max-width:20ch;
 }
-#contact h2 .ital{font-family:var(--serif); font-style:italic; color:var(--accent); letter-spacing:-.008em}
+#contact h2 .ital{font-family:var(--serif); font-style:italic; color:var(--accent-soft); letter-spacing:-.008em}
 #contact .k-sub{max-width:38ch; color:#EFEDE8; font-size:clamp(1rem,1.25vw,1.14rem)}
 .k-block{margin-top:clamp(28px,3.6vw,48px)}
 .k-info .k-block:first-child{margin-top:0}
@@ -906,15 +920,15 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   transition:background 420ms var(--ease), color 420ms var(--ease),
              border-color 420ms var(--ease), box-shadow 520ms var(--ease);
 }
-.btn:hover{background:#F8F7F4; color:#1A1A22}
-.btn--accent{background:var(--accent); border-color:var(--accent); color:#0F2E31}
+.btn:hover{background:#F8F7F4; color:#211823}
+.btn--accent{background:var(--accent); border-color:var(--accent); color:#2E2228}
 .btn--accent:hover{background:transparent; color:var(--accent); box-shadow:none}
 /* the two CTAs carry the section now that the form is gone — give them weight */
 .btn--lg{
   padding:18px 30px; font-size:12px; letter-spacing:.15em;
   min-height:56px; flex:0 1 auto;
 }
-.btn--lg.btn--accent{box-shadow:0 18px 38px -24px rgba(92,198,205,.75)}
+.btn--lg.btn--accent{box-shadow:0 18px 38px -24px rgba(197,214,233,.5)}
 /* the glow belongs to the filled state only — it must go when the fill does,
    and this needs the same specificity as the rule above to win */
 .btn--lg.btn--accent:hover{box-shadow:none}
@@ -926,8 +940,9 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
    FOOTER
    ============================================================ */
 .foot{
-  background:#1A1A22; color:#F4F2ED;
-  --ink:#F4F2ED; --hair:#33323C; --ink-soft:#A8A5B0;
+  background:#211823; color:#F4F2ED;
+  --ink:#F4F2ED; --hair:#3A2E3B; --ink-soft:#A8A5B0;
+  --accent:#C5D6E9; --accent-deep:#C5D6E9; --accent-soft:#D9A8BE;
   padding-block:clamp(44px,5.6vw,84px) clamp(18px,2.2vw,26px);
 }
 /* Row 1 — the brand and the line it stands for */
@@ -980,7 +995,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 }
 .story[hidden]{display:none}
 .story.open{opacity:1}
-.story-scrim{position:absolute; inset:0; background:rgba(16,16,22,.72); -webkit-backdrop-filter:blur(3px); backdrop-filter:blur(3px)}
+.story-scrim{position:absolute; inset:0; background:rgba(20,14,21,.74); -webkit-backdrop-filter:blur(3px); backdrop-filter:blur(3px)}
 .story-panel{
   position:relative; z-index:1; overflow:hidden;
   width:100%; height:100%;
@@ -1020,7 +1035,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 }
 .story-bars i{height:3px; border-radius:2px; background:rgba(26,26,34,.20); display:block; overflow:hidden}
 .story-bars i.on{background:var(--accent-deep)}
-.story-bars i.done{background:rgba(28,102,109,.42)}
+.story-bars i.done{background:rgba(90,42,63,.40)}
 
 .story-caption{
   position:absolute; z-index:4; left:0; right:0; bottom:0;
@@ -1058,7 +1073,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px);
   transition:background 360ms var(--ease), color 360ms var(--ease), border-color 360ms var(--ease);
 }
-.story-nav:hover,.story-close:hover{background:var(--accent); border-color:var(--accent); color:#0F2E31}
+.story-nav:hover,.story-close:hover{background:var(--accent); border-color:var(--accent); color:#F8F7F4}
 .story-nav svg{width:17px; height:17px; display:block}
 .story-prev{left:clamp(10px,2.4vw,18px); top:50%; margin-top:-23px}
 .story-next{right:clamp(10px,2.4vw,18px); top:50%; margin-top:-23px}
@@ -1237,33 +1252,53 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
     </linearGradient>
   </defs>
 
-  <!-- simple single-hue lotus: recolourable per gallery category / service hover -->
+  <!-- simple single-hue lotus: recolourable per gallery category / service hover.
+       Same petal language as the brand mark — five upright petals over two
+       wide base petals — flattened to one ink so it can take any --tint. -->
   <symbol id="lotus" viewBox="0 0 24 24">
     <g fill="currentColor">
-      <path opacity=".45" d="M12 4C14 7 14 11 12 14C10 11 10 7 12 4Z" transform="rotate(-68 12 16)"/>
-      <path opacity=".45" d="M12 4C14 7 14 11 12 14C10 11 10 7 12 4Z" transform="rotate(68 12 16)"/>
-      <path opacity=".72" d="M12 4C14 7 14 11 12 14C10 11 10 7 12 4Z" transform="rotate(-34 12 15)"/>
-      <path opacity=".72" d="M12 4C14 7 14 11 12 14C10 11 10 7 12 4Z" transform="rotate(34 12 15)"/>
-      <path d="M12 4C14 7 14 11 12 14C10 11 10 7 12 4Z"/>
-      <path opacity=".55" d="M6 15.4C8.2 17.6 10 18.6 12 18.8C14 18.6 15.8 17.6 18 15.4" fill="none" stroke="currentColor" stroke-width="1.05" stroke-linecap="round"/>
+      <!-- the cradle -->
+      <path opacity=".30" d="M12 17.4C8.9 15.4 8.4 11.6 12 8.4C15.6 11.6 15.1 15.4 12 17.4Z" transform="rotate(-80 12 17.4)"/>
+      <path opacity=".30" d="M12 17.4C8.9 15.4 8.4 11.6 12 8.4C15.6 11.6 15.1 15.4 12 17.4Z" transform="rotate(80 12 17.4)"/>
+      <!-- five petals, outer pair palest -->
+      <path opacity=".46" d="M12 17C8.6 14 8.4 9.2 12 5.6C15.6 9.2 15.4 14 12 17Z" transform="rotate(-52 12 17)"/>
+      <path opacity=".46" d="M12 17C8.6 14 8.4 9.2 12 5.6C15.6 9.2 15.4 14 12 17Z" transform="rotate(52 12 17)"/>
+      <path opacity=".74" d="M12 17C8.6 14 8.4 9.2 12 5.6C15.6 9.2 15.4 14 12 17Z" transform="rotate(-26 12 17)"/>
+      <path opacity=".74" d="M12 17C8.6 14 8.4 9.2 12 5.6C15.6 9.2 15.4 14 12 17Z" transform="rotate(26 12 17)"/>
+      <path d="M12 17C8.6 14 8.4 9.2 12 5.6C15.6 9.2 15.4 14 12 17Z"/>
     </g>
   </symbol>
 
-  <!-- brand mark: green inner petals, teal outer petals, grey-blue brush arc -->
+  <!-- ============================================================
+       BRAND MARK — drawn from the client's final logo.
+       Back to front: an incomplete silver-grey watercolour arc in three
+       tapered passes, sweeping the top and open at the base; two wide
+       powder-blue petals cradling; five plum petals laid over one another
+       with fill-opacity, so the overlaps compound toward the near-black
+       maroon the real mark carries at its heart.
+       ============================================================ -->
   <symbol id="soulmark" viewBox="0 0 64 64">
-    <g fill="none" stroke="#6D7585" stroke-linecap="round">
-      <path stroke-width="3.4" d="M56.47 20.59A27 27 0 1 1 7.53 20.59"/>
-      <path stroke-width="2.2" d="M53.28 15.38a27 27 0 0 1 3.19 5.21"/>
-      <path stroke-width="2.2" d="M7.53 20.59a27 27 0 0 1 3.19-5.21"/>
-      <path stroke-width="1.4" d="M49.36 11.32a27 27 0 0 1 3.92 4.06"/>
-      <path stroke-width="1.4" d="M10.72 15.38a27 27 0 0 1 3.92-4.06"/>
+    <!-- the brush arc: a wide pale bleed, the body stroke, a thin highlight,
+         and two thinning tails that fade out either side of the opening -->
+    <g fill="none" stroke-linecap="round">
+      <path stroke="#D8DEE5" stroke-width="6.2" opacity=".45" d="M12.41 52.29A28.2 28.2 0 1 1 52.29 51.59"/>
+      <path stroke="#B4BEC9" stroke-width="3.5" opacity=".95" d="M15.38 53.28A27 27 0 1 1 52.68 49.35"/>
+      <path stroke="#D8DEE5" stroke-width="1.5" opacity=".62" d="M6.48 45.57A28.9 28.9 0 1 1 59.16 41.88"/>
+      <path stroke="#B4BEC9" stroke-width="1.9" opacity=".78" d="M21.02 56.67A27 27 0 0 1 15.38 53.28"/>
+      <path stroke="#B4BEC9" stroke-width="1.9" opacity=".78" d="M52.68 49.35A27 27 0 0 1 47.87 53.84"/>
     </g>
+    <!-- the powder-blue base petals -->
+    <g fill="#C5D6E9">
+      <path d="M32 47C22 44.5 21 33.5 32 25.5C43 33.5 42 44.5 32 47Z" transform="rotate(-84 32 47)"/>
+      <path d="M32 47C22 44.5 21 33.5 32 25.5C43 33.5 42 44.5 32 47Z" transform="rotate(84 32 47)"/>
+    </g>
+    <!-- the plum lotus: outer pair, mid pair, heart -->
     <g>
-      <path fill="#5CC6CD" d="M32 47C27.5 40 27.5 28 32 20C36.5 28 36.5 40 32 47Z" transform="rotate(-58 32 47)"/>
-      <path fill="#5CC6CD" d="M32 47C27.5 40 27.5 28 32 20C36.5 28 36.5 40 32 47Z" transform="rotate(58 32 47)"/>
-      <path fill="#69BD45" opacity=".85" d="M32 47C27.5 40 27.5 28 32 20C36.5 28 36.5 40 32 47Z" transform="rotate(-30 32 47)"/>
-      <path fill="#69BD45" opacity=".85" d="M32 47C27.5 40 27.5 28 32 20C36.5 28 36.5 40 32 47Z" transform="rotate(30 32 47)"/>
-      <path fill="#69BD45" d="M32 47C27.5 40 27.5 28 32 20C36.5 28 36.5 40 32 47Z"/>
+      <path fill="#6E3049" fill-opacity=".93" d="M32 48C24.8 41 24.4 30 32 22C39.6 30 39.2 41 32 48Z" transform="rotate(-50 32 48)"/>
+      <path fill="#6E3049" fill-opacity=".93" d="M32 48C24.8 41 24.4 30 32 22C39.6 30 39.2 41 32 48Z" transform="rotate(50 32 48)"/>
+      <path fill="#4A1C31" fill-opacity=".90" d="M32 48C24.8 41 24.4 30 32 22C39.6 30 39.2 41 32 48Z" transform="rotate(-25 32 48)"/>
+      <path fill="#4A1C31" fill-opacity=".90" d="M32 48C24.8 41 24.4 30 32 22C39.6 30 39.2 41 32 48Z" transform="rotate(25 32 48)"/>
+      <path fill="#2A1220" fill-opacity=".93" d="M32 48C24.8 41 24.4 30 32 22C39.6 30 39.2 41 32 48Z"/>
     </g>
   </symbol>
 
@@ -1405,11 +1440,11 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
       <rect x="97.2" y="42" width="2.4" height="34"/><rect x="112.6" y="42" width="2.4" height="34"/>
     </g>
     <path d="M42 46Q80 12 118 46" fill="none" stroke="#BBA592" stroke-width="2.6" stroke-linecap="round"/>
-    <path d="M46.5 47.4Q80 18 113.5 47.4" fill="none" stroke="#5CC6CD" stroke-width="1.1" opacity=".8"/>
+    <path d="M46.5 47.4Q80 18 113.5 47.4" fill="none" stroke="#7B3B54" stroke-width="1.1" opacity=".8"/>
     <g fill="none" stroke="#E8B98C" stroke-width="1.5" stroke-linecap="round">
       <path d="M46.2 48Q54 58.5 61.6 48"/><path d="M98.4 48Q106 58.5 113.8 48"/><path d="M63 44.5Q80 57 97 44.5"/>
     </g>
-    <g fill="#69BD45" opacity=".5"><circle cx="53.9" cy="55.6" r="1.5"/><circle cx="106.1" cy="55.6" r="1.5"/><circle cx="80" cy="52" r="1.7"/></g>
+    <g fill="#A96B85" opacity=".65"><circle cx="53.9" cy="55.6" r="1.5"/><circle cx="106.1" cy="55.6" r="1.5"/><circle cx="80" cy="52" r="1.7"/></g>
     <g stroke="#C7B3A1" stroke-width=".55"><path d="M70 18v11"/><path d="M90 22v10"/></g>
     <ellipse cx="70" cy="32.6" rx="4" ry="4.6" fill="#FCF1E2" stroke="#E3CEB5" stroke-width=".7"/>
     <ellipse cx="90" cy="35.4" rx="3.2" ry="3.7" fill="#FCF1E2" stroke="#E3CEB5" stroke-width=".7"/>
@@ -1448,9 +1483,9 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
       <!-- parasol B -->
       <g><path d="M40 30a10 8 0 0 1 20 0z" fill="#F2D8D3"/><path d="M50 22V30M43.6 30q6.4-3.8 12.8 0" fill="none"/><path d="M50 30v6" fill="none"/></g>
       <!-- parasol C -->
-      <g><path d="M62 58a14 11.2 0 0 1 28 0z" fill="#D6E9EA"/><path d="M76 46.8V58M67 58q9-5.4 18 0" fill="none"/><path d="M76 58v7.5" fill="none"/></g>
+      <g><path d="M62 58a14 11.2 0 0 1 28 0z" fill="#DBE6F3"/><path d="M76 46.8V58M67 58q9-5.4 18 0" fill="none"/><path d="M76 58v7.5" fill="none"/></g>
       <!-- parasol D -->
-      <g><path d="M25 74a11 8.8 0 0 1 22 0z" fill="#E1EDE0"/><path d="M36 65.2V74M28.9 74q7.1-4.2 14.2 0" fill="none"/><path d="M36 74v6.5" fill="none"/></g>
+      <g><path d="M25 74a11 8.8 0 0 1 22 0z" fill="#EEE1EA"/><path d="M36 65.2V74M28.9 74q7.1-4.2 14.2 0" fill="none"/><path d="M36 74v6.5" fill="none"/></g>
       <!-- parasol E -->
       <g><path d="M52 88a12 9.6 0 0 1 24 0z" fill="#F8E5C8"/><path d="M64 78.4V88M56.3 88q7.7-4.6 15.4 0" fill="none"/><path d="M64 88v7" fill="none"/></g>
     </g>
@@ -1466,8 +1501,8 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
       <path d="M48.8 38.8v3.2M50 38.9v3.6M51.2 38.8v3.2"/>
     </g>
     <path d="M0 108q26-6 50 0t50-3v20H0z" fill="#E8D5C3" opacity=".55"/>
-    <g fill="#5CC6CD" opacity=".45"><circle cx="14" cy="98" r="1.3"/><circle cx="88" cy="88" r="1.3"/><circle cx="46" cy="112" r="1.1"/></g>
-    <g fill="#69BD45" opacity=".4"><circle cx="30" cy="106" r="1.2"/><circle cx="82" cy="110" r="1"/></g>
+    <g fill="#7B3B54" opacity=".45"><circle cx="14" cy="98" r="1.3"/><circle cx="88" cy="88" r="1.3"/><circle cx="46" cy="112" r="1.1"/></g>
+    <g fill="#A96B85" opacity=".55"><circle cx="30" cy="106" r="1.2"/><circle cx="82" cy="110" r="1"/></g>
     <!-- foreground: a near parasol, thrown out of focus -->
     <g filter="url(#fBlurM)" opacity=".42">
       <path d="M-8 118a20 16 0 0 1 40 0z" fill="#E8B7B0"/>
@@ -1523,7 +1558,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
       <ellipse cx="82" cy="76.6" rx="2.6" ry="1.5" transform="rotate(24 82 76.6)"/>
       <ellipse cx="87" cy="73.4" rx="2.4" ry="1.4" transform="rotate(30 87 73.4)"/>
     </g>
-    <g fill="none" stroke="#5CC6CD" stroke-width=".8" opacity=".85">
+    <g fill="none" stroke="#7B3B54" stroke-width=".8" opacity=".85">
       <path d="M50 78v-5a4 4 0 0 1 8 0v5"/><path d="M62 78v-5a4 4 0 0 1 8 0v5"/>
     </g>
     <!-- foreground: a near glass and a chair back, softened -->
@@ -1564,13 +1599,13 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
       <path d="M80 60V32"/><path d="M72 60h16"/>
     </g>
     <rect x="76.6" y="22" width="6.8" height="11" rx="3.4" fill="#6D7585"/>
-    <path d="M76.6 27h6.8" stroke="#5CC6CD" stroke-width="1.1"/>
+    <path d="M76.6 27h6.8" stroke="#C5D6E9" stroke-width="1.1"/>
     <path d="M74 34a6 6 0 0 0 12 0" fill="none" stroke="#5F6775" stroke-width="1"/>
-    <g fill="none" stroke="#5CC6CD" stroke-width=".9" stroke-linecap="round" opacity=".8">
+    <g fill="none" stroke="#7B3B54" stroke-width=".9" stroke-linecap="round" opacity=".8">
       <path d="M94 21a13 13 0 0 1 0 14"/><path d="M100 16a20 20 0 0 1 0 24"/>
       <path d="M66 21a13 13 0 0 0 0 14"/><path d="M60 16a20 20 0 0 0 0 24"/>
     </g>
-    <path d="M0 62h160" stroke="#5CC6CD" stroke-width=".8" opacity=".55"/>
+    <path d="M0 62h160" stroke="#7B3B54" stroke-width=".8" opacity=".55"/>
     <!-- foreground: the backs of an audience, thrown out of focus -->
     <g filter="url(#fBlurM)" opacity=".5" fill="#4E4A57">
       <path d="M-2 80V72a8 8 0 0 1 16 0v8z"/><path d="M20 80v-6a7 7 0 0 1 14 0v6z"/>
@@ -1592,7 +1627,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
     <circle cx="108" cy="24" r="40" fill="url(#bdSun)"/>
     <g filter="url(#fBlurL)" opacity=".44">
       <circle cx="16" cy="14" r="7" fill="#F3CFD9"/><circle cx="36" cy="8" r="4.6" fill="#FBE6CC"/>
-      <circle cx="132" cy="10" r="6.6" fill="#F3CFD9"/><circle cx="66" cy="6" r="4.4" fill="#DCEAE6"/>
+      <circle cx="132" cy="10" r="6.6" fill="#F3CFD9"/><circle cx="66" cy="6" r="4.4" fill="#DDE7F3"/>
       <circle cx="6" cy="34" r="5.6" fill="#EFD8E2"/>
     </g>
     <path d="M0 20q75 34 150 2" fill="none" stroke="#C9BCA8" stroke-width=".6"/>
@@ -1600,10 +1635,10 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
     <g stroke="#C9BCA8" stroke-width=".5">
       <path d="M18 26.6v4M38 31.6v4M58 34.4v4M78 34.6v4M98 32v4M118 26.8v4"/>
     </g>
-    <g><circle cx="18" cy="32.6" r="3" fill="#F8E4C6"/><circle cx="38" cy="37.6" r="3" fill="#CFE8EA"/><circle cx="58" cy="40.4" r="3" fill="#F3D9D6"/><circle cx="78" cy="40.6" r="3" fill="#DDEBD6"/><circle cx="98" cy="38" r="3" fill="#F8E4C6"/><circle cx="118" cy="32.8" r="3" fill="#CFE8EA"/></g>
+    <g><circle cx="18" cy="32.6" r="3" fill="#F8E4C6"/><circle cx="38" cy="37.6" r="3" fill="#D7E4F4"/><circle cx="58" cy="40.4" r="3" fill="#F3D9D6"/><circle cx="78" cy="40.6" r="3" fill="#EBDCE6"/><circle cx="98" cy="38" r="3" fill="#F8E4C6"/><circle cx="118" cy="32.8" r="3" fill="#D7E4F4"/></g>
     <g>
       <path d="M14 40.6l7 .9-3 7.4z" fill="#F2D6D2"/><path d="M32 46.2l7 .9-3 7.4z" fill="#F8E7C9"/>
-      <path d="M52 49.4l7 .9-3 7.4z" fill="#D6E9EA"/><path d="M72 49.6l7 .9-3 7.4z" fill="#E1EDE0"/>
+      <path d="M52 49.4l7 .9-3 7.4z" fill="#DBE6F3"/><path d="M72 49.6l7 .9-3 7.4z" fill="#EEE1EA"/>
       <path d="M92 46.8l7 .9-3 7.4z" fill="#F2D6D2"/><path d="M112 41.2l7 .9-3 7.4z" fill="#F8E7C9"/>
     </g>
     <path d="M0 78q40-10 76-2t74-6v50H0z" fill="#DFE4D4"/>
@@ -1611,12 +1646,12 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
       <ellipse cx="20" cy="82" rx="19" ry="11"/><ellipse cx="46" cy="86" rx="14" ry="8"/>
       <ellipse cx="122" cy="80" rx="21" ry="12"/><ellipse cx="98" cy="86" rx="13" ry="7.5"/>
     </g>
-    <g fill="#69BD45" opacity=".35"><circle cx="16" cy="78" r="2"/><circle cx="128" cy="76" r="2"/><circle cx="48" cy="83" r="1.6"/></g>
+    <g fill="#A96B85" opacity=".5"><circle cx="16" cy="78" r="2"/><circle cx="128" cy="76" r="2"/><circle cx="48" cy="83" r="1.6"/></g>
     <path d="M58 104h34v16H58z" fill="#F4EFE4"/>
     <path d="M55 100h40v4.4H55z" fill="#E7DCCA"/>
     <path d="M66 100V90h18v10z" fill="#FBF4E8" stroke="#E3D6C2" stroke-width=".7"/>
     <path d="M66 95h18" stroke="#F0C9C4" stroke-width="1.4"/>
-    <g stroke="#5CC6CD" stroke-width="1" stroke-linecap="round"><path d="M71 90v-5M75 90v-6.5M79 90v-5"/></g>
+    <g stroke="#7B3B54" stroke-width="1" stroke-linecap="round"><path d="M71 90v-5M75 90v-6.5M79 90v-5"/></g>
     <g fill="#F2B96B"><ellipse cx="71" cy="84" rx="1" ry="1.8"/><ellipse cx="75" cy="82.5" rx="1" ry="1.8"/><ellipse cx="79" cy="84" rx="1" ry="1.8"/></g>
     <!-- foreground: near planting, out of focus -->
     <g filter="url(#fBlurM)" opacity=".46">
@@ -1642,7 +1677,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
     <rect width="160" height="110" fill="url(#brSky)"/>
     <g filter="url(#fBlurL)" opacity=".42">
       <circle cx="18" cy="16" r="7.5" fill="#F5D2DA"/><circle cx="40" cy="9" r="4.6" fill="#FBE7CE"/>
-      <circle cx="146" cy="14" r="7" fill="#F5D2DA"/><circle cx="76" cy="8" r="5" fill="#DCEBEC"/>
+      <circle cx="146" cy="14" r="7" fill="#F5D2DA"/><circle cx="76" cy="8" r="5" fill="#DDE7F3"/>
       <circle cx="8" cy="36" r="5.6" fill="#EFD9E1"/>
     </g>
     <circle cx="120" cy="26" r="13" fill="#FBF0DC" opacity=".85"/>
@@ -1680,7 +1715,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
     </g>
     <g fill="none" stroke="#8FAE86" stroke-width=".85" stroke-linecap="round"><path d="M54 69q-6-4-10-9"/><path d="M132 70q5-4 8-9"/></g>
     <g fill="#A3C29A"><ellipse cx="47" cy="64" rx="2.4" ry="1.4" transform="rotate(-28 47 64)"/><ellipse cx="137" cy="64" rx="2.4" ry="1.4" transform="rotate(28 137 64)"/></g>
-    <g fill="#5CC6CD" opacity=".5"><circle cx="78" cy="68" r="1.6"/><circle cx="83" cy="69" r="1.2"/></g>
+    <g fill="#7B3B54" opacity=".5"><circle cx="78" cy="68" r="1.6"/><circle cx="83" cy="69" r="1.2"/></g>
     <!-- foreground: near stems and a glass rim, softened -->
     <g filter="url(#fBlurM)" opacity=".42">
       <path d="M-4 110V88a10 10 0 0 1 20 0v22z" fill="#8A9B85"/>
@@ -1731,8 +1766,8 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
     </g>
     <g fill="none" stroke="#8FAE86" stroke-width=".9" stroke-linecap="round"><path d="M40 66q-8-5-12-12"/><path d="M160 66q8-5 12-12"/></g>
     <g fill="#A3C29A"><ellipse cx="30" cy="55" rx="3" ry="1.7" transform="rotate(-30 30 55)"/><ellipse cx="170" cy="55" rx="3" ry="1.7" transform="rotate(30 170 55)"/></g>
-    <g fill="#5CC6CD" opacity=".45"><circle cx="52" cy="64" r="1.6"/><circle cx="150" cy="65" r="1.4"/></g>
-    <g fill="#69BD45" opacity=".35"><circle cx="120" cy="67" r="1.5"/><circle cx="74" cy="68" r="1.2"/></g>
+    <g fill="#7B3B54" opacity=".45"><circle cx="52" cy="64" r="1.6"/><circle cx="150" cy="65" r="1.4"/></g>
+    <g fill="#A96B85" opacity=".5"><circle cx="120" cy="67" r="1.5"/><circle cx="74" cy="68" r="1.2"/></g>
     <!-- foreground: near marigolds falling out of focus -->
     <g filter="url(#fBlurM)" opacity=".46">
       <circle cx="10" cy="74" r="8" fill="#E0A059"/><circle cx="26" cy="79" r="6" fill="#E9B472"/>
@@ -1758,7 +1793,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
     <g>
       <rect x="8" y="34" width="30" height="38" rx="1.6" fill="#FCF8F3" stroke="#DDCBC4" stroke-width=".8"/>
       <g stroke="#DDCBC4" stroke-width=".55"><path d="M13 43h20M13 49h20M13 55h14M13 61h17"/></g>
-      <rect x="13" y="37.5" width="9" height="3" rx="1.5" fill="#5CC6CD" opacity=".8"/>
+      <rect x="13" y="37.5" width="9" height="3" rx="1.5" fill="#7B3B54" opacity=".8"/>
       <path d="M23 72v12M15 84h16" stroke="#D3BFB7" stroke-width=".8" fill="none"/>
     </g>
     <g>
@@ -1774,7 +1809,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
       <path d="M45 56c-13 0-22 10-22 24v45h44V80c0-14-9-24-22-24z" fill="#EDD7CE"/>
       <path d="M45 56c-13 0-22 10-22 24v45h10V80c0-9 5-16 12-19z" fill="#F6E5DD" opacity=".8"/>
       <path d="M27 88h36" stroke="#DBBEB2" stroke-width=".8" fill="none"/>
-      <path d="M45 68l-4 12h8z" fill="#5CC6CD" opacity=".65"/>
+      <path d="M45 68l-4 12h8z" fill="#7B3B54" opacity=".65"/>
     </g>
     <path d="M0 118q30-6 52 0t48-3v10H0z" fill="#E4CFC9" opacity=".55"/>
     <!-- foreground: blooms carried past the lens -->
@@ -1797,12 +1832,12 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
     <rect width="100" height="125" fill="url(#raBg)"/>
     <g filter="url(#fBlurL)" opacity=".44">
       <circle cx="12" cy="14" r="7" fill="#EFC9D4"/><circle cx="88" cy="10" r="6" fill="#F8DFCC"/>
-      <circle cx="94" cy="44" r="7.4" fill="#D8E6E4"/><circle cx="6" cy="48" r="6.4" fill="#EFC9D4"/>
+      <circle cx="94" cy="44" r="7.4" fill="#DBE5F2"/><circle cx="6" cy="48" r="6.4" fill="#EFC9D4"/>
       <circle cx="50" cy="4" r="5" fill="#F6DCE3"/>
     </g>
     <path d="M38 0h24l26 82H12z" fill="url(#raSpot)"/>
     <circle cx="50" cy="38" r="30" fill="#FFFFFF" opacity=".35"/>
-    <g fill="none" stroke="#5CC6CD" stroke-width=".9" stroke-linecap="round" opacity=".75">
+    <g fill="none" stroke="#7B3B54" stroke-width=".9" stroke-linecap="round" opacity=".75">
       <path d="M80 44a14 14 0 0 1 0 16"/><path d="M87 38a22 22 0 0 1 0 28"/>
       <path d="M20 44a14 14 0 0 0 0 16"/><path d="M13 38a22 22 0 0 0 0 28"/>
     </g>
@@ -1812,13 +1847,13 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
       <path d="M48 51c-13 0-21 10-21 23v51h42V74c0-13-8-23-21-23z" fill="#4A5560"/>
       <path d="M48 51c-13 0-21 10-21 23v51h9V74c0-9 4-16 11-19z" fill="#5A6672" opacity=".85"/>
       <path d="M44 51h8l-4 22z" fill="#EDEFF2"/>
-      <path d="M48 62l-3 11h6z" fill="#69BD45" opacity=".6"/>
+      <path d="M48 62l-3 11h6z" fill="#C5D6E9" opacity=".85"/>
       <path d="M62 74l14-16" stroke="#4A5560" stroke-width="7" stroke-linecap="round" fill="none"/>
       <path d="M62 74l14-16" stroke="#5A6672" stroke-width="3" stroke-linecap="round" fill="none" opacity=".8"/>
     </g>
     <g transform="rotate(-42 78 56)">
       <rect x="74.4" y="40" width="7.2" height="13" rx="3.6" fill="#6D7585"/>
-      <path d="M74.4 46h7.2" stroke="#5CC6CD" stroke-width="1.2"/>
+      <path d="M74.4 46h7.2" stroke="#C5D6E9" stroke-width="1.2"/>
       <rect x="76.4" y="52" width="3.2" height="12" rx="1.4" fill="#5F6775"/>
     </g>
     <path d="M0 116q30-6 50 0t50-3v12H0z" fill="#C8DAD6" opacity=".6"/>
@@ -1944,7 +1979,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
       <span class="plate-ratio"></span>
       <svg class="scene" viewBox="0 0 200 80" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Sample illustration: marigold strands and a lit diya on a studio table"><use href="#sc-about"></use></svg>
       <span class="plate-grain" aria-hidden="true"></span>
-      <figcaption class="plate-cap" style="--tint:#C9A06A"><span class="dot" aria-hidden="true"></span>Marigold · sample</figcaption>
+      <figcaption class="plate-cap" style="--tint:#95602F"><span class="dot" aria-hidden="true"></span>Marigold · sample</figcaption>
     </figure>
   </div>
 </section>
@@ -1998,7 +2033,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
         <span class="plate-ratio"></span>
         <svg class="scene" viewBox="0 0 100 125" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Sample illustration: a planner at her board, flowers to hand"><use href="#sc-chelna"></use></svg>
         <span class="plate-grain" aria-hidden="true"></span>
-        <figcaption class="plate-cap" style="--tint:#C08E85"><span class="dot" aria-hidden="true"></span>Chelna · sample</figcaption>
+        <figcaption class="plate-cap" style="--tint:#A55A72"><span class="dot" aria-hidden="true"></span>Chelna · sample</figcaption>
       </figure>
       <div class="f-body">
         <h3 class="f-name rev-l">Chelna Lekhi</h3>
@@ -2021,7 +2056,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
         <span class="plate-ratio"></span>
         <svg class="scene" viewBox="0 0 100 125" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Sample illustration: a compere on stage, microphone in hand"><use href="#sc-ramesh"></use></svg>
         <span class="plate-grain" aria-hidden="true"></span>
-        <figcaption class="plate-cap" style="--tint:#7FA383"><span class="dot" aria-hidden="true"></span>Ramesh · sample</figcaption>
+        <figcaption class="plate-cap" style="--tint:var(--blue-deep)"><span class="dot" aria-hidden="true"></span>Ramesh · sample</figcaption>
       </figure>
       <div class="f-body">
         <h3 class="f-name rev-l">Ramesh Sadhwani</h3>
@@ -2198,7 +2233,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
            "View →" is the real control (a button — there is no page to go to
            yet), so the h3 stays a heading and the markup stays valid; the
            whole tile is click-through to that same button for pointer users. -->
-      <div class="g-tile rev-l" style="--tint:#4E9BA1"
+      <div class="g-tile rev-l" style="--tint:#7B3B54"
               data-scene="#sc-wed" data-view="0 0 160 100" data-name="Weddings"
               data-alt="Sample illustration: a mandap arch hung with garlands at dusk"
               data-line="Mandaps, mehendis and mornings that run on their own time.">
@@ -2206,7 +2241,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
           <span class="plate-ratio"></span>
           <svg class="scene" viewBox="0 0 160 100" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Sample illustration: a mandap arch hung with garlands at dusk"><use href="#sc-wed"></use></svg>
           <span class="plate-grain" aria-hidden="true"></span>
-          <figcaption class="plate-cap" style="--tint:#4E9BA1"><span class="dot" aria-hidden="true"></span>Wedding · sample</figcaption>
+          <figcaption class="plate-cap" style="--tint:#7B3B54"><span class="dot" aria-hidden="true"></span>Wedding · sample</figcaption>
         </figure>
         <div class="g-meta">
           <h3><svg class="lotus" aria-hidden="true"><use href="#lotus"></use></svg>Weddings</h3>
@@ -2214,7 +2249,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
         </div>
       </div>
 
-      <div class="g-tile rev-l" style="--tint:#B96E45"
+      <div class="g-tile rev-l" style="--tint:#B0525A"
               data-scene="#sc-sangeet" data-view="0 0 100 125" data-name="Sangeets"
               data-alt="Sample illustration: hanging paper parasols with tassels"
               data-line="Rehearsed for weeks, remembered for years.">
@@ -2222,7 +2257,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
           <span class="plate-ratio"></span>
           <svg class="scene" viewBox="0 0 100 125" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Sample illustration: hanging paper parasols with tassels"><use href="#sc-sangeet"></use></svg>
           <span class="plate-grain" aria-hidden="true"></span>
-          <figcaption class="plate-cap" style="--tint:#B96E45"><span class="dot" aria-hidden="true"></span>Sangeet · sample</figcaption>
+          <figcaption class="plate-cap" style="--tint:#B0525A"><span class="dot" aria-hidden="true"></span>Sangeet · sample</figcaption>
         </figure>
         <div class="g-meta">
           <h3><svg class="lotus" aria-hidden="true"><use href="#lotus"></use></svg>Sangeets</h3>
@@ -2230,7 +2265,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
         </div>
       </div>
 
-      <div class="g-tile rev-l" style="--tint:#B37A72"
+      <div class="g-tile rev-l" style="--tint:#96547E"
               data-scene="#sc-anniv" data-view="0 0 120 120" data-name="Anniversaries"
               data-alt="Sample illustration: a laid dinner table with candles and foliage"
               data-line="A table laid for the people who stayed.">
@@ -2238,7 +2273,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
           <span class="plate-ratio"></span>
           <svg class="scene" viewBox="0 0 120 120" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Sample illustration: a laid dinner table with candles and foliage"><use href="#sc-anniv"></use></svg>
           <span class="plate-grain" aria-hidden="true"></span>
-          <figcaption class="plate-cap" style="--tint:#B37A72"><span class="dot" aria-hidden="true"></span>Anniversary · sample</figcaption>
+          <figcaption class="plate-cap" style="--tint:#96547E"><span class="dot" aria-hidden="true"></span>Anniversary · sample</figcaption>
         </figure>
         <div class="g-meta">
           <h3><svg class="lotus" aria-hidden="true"><use href="#lotus"></use></svg>Anniversaries</h3>
@@ -2246,7 +2281,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
         </div>
       </div>
 
-      <div class="g-tile rev-l" style="--tint:#6E719A"
+      <div class="g-tile rev-l" style="--tint:#3E5D77"
               data-scene="#sc-corp" data-view="0 0 160 80" data-name="Corporate Events"
               data-alt="Sample illustration: a stage with a microphone under a spotlight"
               data-line="Stages, launches and galas that still feel personal.">
@@ -2254,7 +2289,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
           <span class="plate-ratio"></span>
           <svg class="scene" viewBox="0 0 160 80" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Sample illustration: a stage with a microphone under a spotlight"><use href="#sc-corp"></use></svg>
           <span class="plate-grain" aria-hidden="true"></span>
-          <figcaption class="plate-cap" style="--tint:#6E719A"><span class="dot" aria-hidden="true"></span>Corporate · sample</figcaption>
+          <figcaption class="plate-cap" style="--tint:#3E5D77"><span class="dot" aria-hidden="true"></span>Corporate · sample</figcaption>
         </figure>
         <div class="g-meta">
           <h3><svg class="lotus" aria-hidden="true"><use href="#lotus"></use></svg>Corporate Events</h3>
@@ -2262,7 +2297,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
         </div>
       </div>
 
-      <div class="g-tile rev-l" style="--tint:#B08B37"
+      <div class="g-tile rev-l" style="--tint:#6F5C9B"
               data-scene="#sc-bday" data-view="0 0 150 120" data-name="Birthdays"
               data-alt="Sample illustration: string lights and bunting over a garden table"
               data-line="String lights, small conspiracies, one very big surprise.">
@@ -2270,7 +2305,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
           <span class="plate-ratio"></span>
           <svg class="scene" viewBox="0 0 150 120" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Sample illustration: string lights and bunting over a garden table"><use href="#sc-bday"></use></svg>
           <span class="plate-grain" aria-hidden="true"></span>
-          <figcaption class="plate-cap" style="--tint:#B08B37"><span class="dot" aria-hidden="true"></span>Birthday · sample</figcaption>
+          <figcaption class="plate-cap" style="--tint:#6F5C9B"><span class="dot" aria-hidden="true"></span>Birthday · sample</figcaption>
         </figure>
         <div class="g-meta">
           <h3><svg class="lotus" aria-hidden="true"><use href="#lotus"></use></svg>Birthdays</h3>
@@ -2278,7 +2313,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
         </div>
       </div>
 
-      <div class="g-tile rev-l" style="--tint:#71906A"
+      <div class="g-tile rev-l" style="--tint:#5E6BA0"
               data-scene="#sc-brunch" data-view="0 0 160 110" data-name="Brunches"
               data-alt="Sample illustration: a coastal dessert table with shells and pearls"
               data-line="Long tables, late mornings, no rush anywhere.">
@@ -2286,7 +2321,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
           <span class="plate-ratio"></span>
           <svg class="scene" viewBox="0 0 160 110" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Sample illustration: a coastal dessert table with shells and pearls"><use href="#sc-brunch"></use></svg>
           <span class="plate-grain" aria-hidden="true"></span>
-          <figcaption class="plate-cap" style="--tint:#71906A"><span class="dot" aria-hidden="true"></span>Brunch · sample</figcaption>
+          <figcaption class="plate-cap" style="--tint:#5E6BA0"><span class="dot" aria-hidden="true"></span>Brunch · sample</figcaption>
         </figure>
         <div class="g-meta">
           <h3><svg class="lotus" aria-hidden="true"><use href="#lotus"></use></svg>Brunches</h3>
@@ -2791,7 +2826,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   var yr = document.getElementById("yr");
   if (yr) yr.textContent = String(new Date().getFullYear());
 
-  /* ---------- process spine: a teal line drawn by scroll progress ----------
+  /* ---------- process spine: a plum line drawn by scroll progress ----------
      Hairline track + fill whose height tracks how far an anchor line (62% down
      the viewport) has travelled through the steps list. Each step lights up as
      the fill passes its node. Under reduced motion the line is simply full and
@@ -3038,7 +3073,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
       storyName.textContent = t.getAttribute("data-name") || "";
       storyLine.textContent = t.getAttribute("data-line") || "";
       storyIdx.textContent  = pad(i + 1) + " / " + pad(slides.length);
-      story.style.setProperty("--tint", (t.style.getPropertyValue("--tint") || "").trim() || "#1C666D");
+      story.style.setProperty("--tint", (t.style.getPropertyValue("--tint") || "").trim() || "#5A2A3F");
       Array.prototype.forEach.call(bars, function(bar, n){
         bar.className = n === i ? "on" : (n < i ? "done" : "");
       });
