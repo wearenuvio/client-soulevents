@@ -391,19 +391,13 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
     radial-gradient(70% 50% at 46% 96%, rgba(105,189,69,.06) 0%, transparent 62%);
   will-change:transform;
 }
-/* the lotus bleeding in from the right edge, behind the headline */
+/* the lotus: a plain image, on the same layer as the type */
 .hero-lotus{
-  position:absolute; inset:0 0 0 auto; pointer-events:none;
-  width:min(50%,660px);
-  background-image:image-set(url("assets/brand/hero-lotus.webp") type("image/webp"),
-                             url("assets/brand/hero-lotus.png") type("image/png"));
-  background-repeat:no-repeat; background-position:right top;
-  background-size:contain;
-  z-index:2;                 /* over the wash and the grain, still under the type */
-  opacity:.95;
-  /* feather the left edge only, so it runs the full height of the hero */
-  -webkit-mask-image:linear-gradient(90deg, transparent 0%, #000 48%);
-  mask-image:linear-gradient(90deg, transparent 0%, #000 48%);
+  position:absolute; right:0; top:0; height:100%; width:auto;
+  z-index:3; pointer-events:none; user-select:none;
+  object-fit:contain; object-position:right top;
+  -webkit-mask-image:linear-gradient(90deg, transparent 0%, #000 34%);
+  mask-image:linear-gradient(90deg, transparent 0%, #000 34%);
 }
 .hero-wash::after{
   content:""; position:absolute; inset:0;
@@ -1130,7 +1124,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
      between the headline and the CTAs. */
   .hero{min-height:100svh; padding-top:clamp(92px,15vh,140px); padding-bottom:clamp(26px,4vh,40px)}
   .hero-inner{flex:1; justify-content:center}
-  .hero-lotus{width:min(76%,430px); opacity:.4; background-position:right top}
+  .hero-lotus{opacity:.55}
   .hero h1{margin-top:0; margin-bottom:clamp(26px,5vh,44px)}
   .hero-foot{margin-top:clamp(26px,5vh,44px)}
   .nav-links,.nav > .nav-cta{display:none}
@@ -1399,7 +1393,8 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 <!-- ============ HERO ============ -->
 <section class="hero wrap" aria-labelledby="hero-h">
   <div class="hero-wash" id="heroWash" aria-hidden="true"></div>
-  <div class="hero-lotus" aria-hidden="true"></div>
+  <img class="hero-lotus" src="assets/brand/hero-lotus.png" alt="" aria-hidden="true"
+       width="586" height="900" decoding="async" fetchpriority="low">
   <div class="hero-inner">
 
     <h1 id="hero-h">
