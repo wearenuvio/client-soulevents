@@ -411,6 +411,11 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   height:min(82%,660px); width:auto; aspect-ratio:420/760; max-width:none;
   mix-blend-mode:multiply; opacity:.92;
 }
+/* the PNG keeps its own proportions and only appears once it has loaded;
+   when it does, the SVG stand-in steps aside */
+.hero-art--png{display:none; aspect-ratio:auto; object-fit:contain; object-position:bottom right}
+.png-art .hero-art--png{display:block}
+.png-art .hero-art--svg{display:none}
 /* the faint lighter column the art stands against */
 .hero-band{
   position:absolute; z-index:0; pointer-events:none;
@@ -2040,7 +2045,14 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 <section class="hero wrap" aria-labelledby="hero-h">
   <div class="hero-wash" id="heroWash" aria-hidden="true"></div>
   <div class="hero-band" aria-hidden="true"></div>
-  <svg class="hero-art" aria-hidden="true" viewBox="0 0 420 760" preserveAspectRatio="xMidYMax meet"><use href="#lotus-art"></use></svg>
+  <!-- The real artwork: drop the client's file at assets/lotus-hero.png
+       (portrait, white or transparent background — multiply blends it into
+       the wash either way) and it is used directly. Until that file exists,
+       the drawn SVG study below stands in. -->
+  <img class="hero-art hero-art--png" src="assets/lotus-hero.png" alt=""
+       onload="this.closest('.hero').classList.add('png-art')"
+       onerror="this.remove()">
+  <svg class="hero-art hero-art--svg" aria-hidden="true" viewBox="0 0 420 760" preserveAspectRatio="xMidYMax meet"><use href="#lotus-art"></use></svg>
   <div class="hero-inner">
 
     <h1 id="hero-h">
