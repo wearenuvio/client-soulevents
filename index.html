@@ -67,6 +67,7 @@
   --wordmark:"Playfair Display", "Bodoni 72", Didot, Georgia, serif;   /* the logo lockup only */
 
   --gutter:clamp(20px, 5.4vw, 92px);
+  --lotus-lift:clamp(74px, 11vh, 116px);   /* clears the hero's scroll cue */
   --gap:clamp(14px, 2.1vw, 30px);
   --sect:clamp(52px, 7.4vw, 100px);
   --measure:60ch;          /* one reading measure for every body paragraph */
@@ -391,16 +392,18 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
     radial-gradient(70% 50% at 46% 96%, rgba(105,189,69,.06) 0%, transparent 62%);
   will-change:transform;
 }
-/* The lotus: the supplied PNG with its own alpha. It sits low in the right
-   margin, held back far enough in opacity that the headline always wins. */
+/* The lotus: the supplied PNG with its own alpha. It sits in the right margin
+   with its foot just above the scroll cue, held back far enough in opacity that
+   the headline always wins. */
 .hero picture{display:contents}
 .hero-lotus{
-  position:absolute; bottom:0; right:0;
-  height:clamp(340px,68vh,700px); width:auto; max-width:none;
-  z-index:2; pointer-events:none; user-select:none;
+  position:absolute; right:0;
+  /* it rests on the scroll cue rather than the hero's bottom edge */
+  bottom:var(--lotus-lift); height:clamp(300px,58vh,560px);
+  width:auto; max-width:none;
+  z-index:2; pointer-events:none; user-select:none; will-change:transform;
   object-fit:contain; object-position:right bottom;
   opacity:.5; filter:saturate(.85);
-  /* fades into the wash at the top rather than being cropped by the nav */
   -webkit-mask-image:linear-gradient(transparent 0%, #000 26%);
   mask-image:linear-gradient(transparent 0%, #000 26%);
 }
@@ -430,10 +433,15 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 .hero h1 .amp{font-family:var(--serif); font-style:italic; color:var(--accent-deep)}
 
 .hero-foot{
-  margin-top:auto;
+  position:relative; margin-top:auto;
   display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between;
   gap:24px clamp(24px,4vw,64px);
-  border-top:1px solid var(--hair); padding-top:clamp(18px,2.2vw,26px);
+  padding-top:clamp(18px,2.2vw,26px);
+}
+/* the rule fades out before it reaches the lotus instead of cutting across it */
+.hero-foot::before{
+  content:""; position:absolute; inset-inline:0; top:0; height:1px;
+  background:linear-gradient(90deg, var(--hair) 0%, var(--hair) 52%, transparent 88%);
 }
 .hero-lead{display:flex; flex-direction:column; gap:clamp(16px,1.9vw,22px); flex:1 1 360px; min-width:0}
 .hero-foot p{
@@ -1133,7 +1141,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
      between the headline and the CTAs. */
   .hero{min-height:100svh; padding-top:clamp(92px,15vh,140px); padding-bottom:clamp(26px,4vh,40px)}
   .hero-inner{flex:1; justify-content:center}
-  .hero-lotus{opacity:.34; height:clamp(240px,42vh,380px)}
+  .hero-lotus{opacity:.34; height:clamp(210px,34vh,320px)}
   .hero h1{margin-top:0; margin-bottom:clamp(26px,5vh,44px)}
   .hero-foot{margin-top:clamp(26px,5vh,44px)}
   .nav-links,.nav > .nav-cta{display:none}
@@ -2075,19 +2083,6 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   </div>
 </section>
 
-<!-- ============ MARQUEE · the reach ============ -->
-<div class="marq marq--tall marq--rev" aria-hidden="true" data-marq>
-  <div class="marq-track">
-    <div class="marq-seq">
-      <b>Bangalore</b><i>→</i><b class="hi">Bahamas</b><i>·</i><b>Dubai</b><i>·</i><b>Toronto</b><i>·</i><b>Madrid</b><i>·</i><b>Nairobi</b><i>·</i><b>Bangalore</b><i>→</i><b class="hi">Bahamas</b><i>·</i><b>Dubai</b><i>·</i><b>Toronto</b><i>·</i><b>Madrid</b><i>·</i><b>Nairobi</b><i>·</i>
-    </div>
-    <div class="marq-seq">
-      <b>Bangalore</b><i>→</i><b class="hi">Bahamas</b><i>·</i><b>Dubai</b><i>·</i><b>Toronto</b><i>·</i><b>Madrid</b><i>·</i><b>Nairobi</b><i>·</i><b>Bangalore</b><i>→</i><b class="hi">Bahamas</b><i>·</i><b>Dubai</b><i>·</i><b>Toronto</b><i>·</i><b>Madrid</b><i>·</i><b>Nairobi</b><i>·</i>
-    </div>
-  </div>
-</div>
-
-<!-- ============ 09 · CONTACT ============ -->
 <section class="sect wrap inverted" id="contact" aria-labelledby="contact-h">
   <div class="sect-head">
     <span class="sect-idx">09</span>
@@ -2295,6 +2290,12 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   /* ---------- nav: condense on scroll + hero parallax ---------- */
   var nav = document.getElementById("nav");
   var wash = document.getElementById("heroWash");
+  var lotus = document.querySelector(".hero-lotus");
+  var lotusScrollY = 0, camX = 0, camY = 0, aimX = 0, aimY = 0, camRAF = 0;
+  function drawLotus(){
+    lotus.style.transform =
+      "translate3d(" + camX.toFixed(2) + "px," + (lotusScrollY + camY).toFixed(2) + "px,0)";
+  }
   var ticking = false;
   function onScroll(){
     var y = window.pageYOffset || document.documentElement.scrollTop;
@@ -2304,12 +2305,40 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
       var t = Math.min(y * 0.10, max);
       wash.style.transform = "translate3d(0," + t.toFixed(2) + "px,0)";
     }
+    if (lotus && !reduce) {
+      // the lotus drifts a touch further than the wash, so the hero gains depth
+      lotusScrollY = Math.min(y * 0.16, window.innerHeight * 0.10);
+      drawLotus();
+    }
     ticking = false;
   }
   window.addEventListener("scroll", function(){
     if (!ticking) { ticking = true; requestAnimationFrame(onScroll); }
   }, {passive:true});
   onScroll();
+
+  /* ---------- hero: a subtle camera that leans with the pointer ---------- */
+  if (lotus && !reduce && window.matchMedia("(hover:hover) and (pointer:fine)").matches) {
+    var AMP_X = 16, AMP_Y = 10;            // the whole move is well under a centimetre
+    function ease(){
+      camX += (aimX - camX) * 0.06;
+      camY += (aimY - camY) * 0.06;
+      drawLotus();
+      if (wash) wash.style.setProperty("--cam", (camX * 0.4).toFixed(2) + "px");
+      camRAF = (Math.abs(aimX - camX) > 0.05 || Math.abs(aimY - camY) > 0.05)
+        ? requestAnimationFrame(ease) : 0;
+    }
+    window.addEventListener("pointermove", function(e){
+      // -1..1 from the centre of the viewport
+      aimX = ((e.clientX / window.innerWidth) * 2 - 1) * -AMP_X;
+      aimY = ((e.clientY / window.innerHeight) * 2 - 1) * -AMP_Y;
+      if (!camRAF) camRAF = requestAnimationFrame(ease);
+    }, {passive:true});
+    window.addEventListener("pointerleave", function(){
+      aimX = aimY = 0;
+      if (!camRAF) camRAF = requestAnimationFrame(ease);
+    }, {passive:true});
+  }
 
   /* ---------- mobile nav sheet ---------- */
   var toggle = document.getElementById("navToggle");
