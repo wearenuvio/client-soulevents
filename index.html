@@ -385,12 +385,14 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 }
 .hero-wash{
   position:absolute; inset:-14% -6% -6%; z-index:0; pointer-events:none;
+  /* a fuller rosy field, per the reference: the whole hero reads pink,
+     deepest at the top-left and warming again along the bottom */
   background:
-    radial-gradient(66% 52% at 16% 12%, rgba(var(--blush),.86) 0%, rgba(var(--blush),0) 64%),
-    radial-gradient(58% 46% at 78% 20%, rgba(197,214,233,.55) 0%, transparent 64%),
-    radial-gradient(56% 46% at 94% 74%, rgba(var(--rose),.70) 0%, rgba(var(--rose),0) 66%),
-    radial-gradient(64% 44% at 44% 100%, rgba(var(--lilac),.56) 0%, rgba(var(--lilac),0) 66%),
-    radial-gradient(70% 50% at 46% 96%, rgba(123,59,84,.05) 0%, transparent 62%);
+    linear-gradient(168deg, rgba(var(--blush),.62) 0%, rgba(var(--rose),.34) 46%, rgba(var(--blush),.52) 100%),
+    radial-gradient(66% 52% at 14% 10%, rgba(var(--blush),.88) 0%, rgba(var(--blush),0) 66%),
+    radial-gradient(58% 46% at 80% 18%, rgba(197,214,233,.40) 0%, transparent 64%),
+    radial-gradient(56% 46% at 94% 74%, rgba(var(--rose),.72) 0%, rgba(var(--rose),0) 66%),
+    radial-gradient(70% 50% at 46% 96%, rgba(123,59,84,.06) 0%, transparent 62%);
   will-change:transform;
 }
 .hero-wash::after{
@@ -400,6 +402,21 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 }
 /* the inner column fills the hero so the headline can sit high and the foot
    stays pinned to the bottom edge, with a guaranteed gap between them */
+/* the botanical study standing along the right edge, per the reference:
+   bottom-anchored, multiplied into the wash so the grain and pink pass
+   through it, and kept behind the content column */
+.hero-art{
+  position:absolute; z-index:0; pointer-events:none;
+  right:clamp(-30px,1.5vw,44px); bottom:0;
+  height:min(82%,660px); width:auto; aspect-ratio:420/760; max-width:none;
+  mix-blend-mode:multiply; opacity:.92;
+}
+/* the faint lighter column the art stands against */
+.hero-band{
+  position:absolute; z-index:0; pointer-events:none;
+  right:clamp(30px,6vw,120px); top:0; bottom:0; width:clamp(80px,9vw,150px);
+  background:linear-gradient(180deg, rgba(255,255,255,.55), rgba(255,255,255,.12) 62%, rgba(255,255,255,0));
+}
 .hero-inner{position:relative; z-index:1; width:100%; flex:1; display:flex; flex-direction:column}
 
 .hero h1{
@@ -1148,6 +1165,9 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   .c-roster ol{columns:1}
   .k-line .who{min-width:0; width:100%}
   .nav-sheet a{padding-block:12px}
+  /* on phones the botanical steps back so the headline owns the frame */
+  .hero-art{height:44%; right:-44px; opacity:.55}
+  .hero-band{display:none}
   .foot-cols{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (max-width:560px){
@@ -1277,6 +1297,112 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
        with fill-opacity, so the overlaps compound toward the near-black
        maroon the real mark carries at its heart.
        ============================================================ -->
+  <!-- ============================================================
+       HERO BOTANICAL — an original line-and-wash lotus study in the
+       brand's dusty rose: one open bloom, two buds on tall stems,
+       two round leaves. Stands along the hero's right edge.
+       ============================================================ -->
+  <symbol id="lotus-art" viewBox="0 0 420 760">
+    <defs>
+      <linearGradient id="laPetal" x1="0" y1="1" x2="0" y2="0">
+        <stop offset="0" stop-color="#F7EDEB"/>
+        <stop offset=".62" stop-color="#EBD5D8"/>
+        <stop offset="1" stop-color="#C99AA6"/>
+      </linearGradient>
+      <linearGradient id="laPetalDeep" x1="0" y1="1" x2="0" y2="0">
+        <stop offset="0" stop-color="#EFDCDC"/>
+        <stop offset="1" stop-color="#B37F8D"/>
+      </linearGradient>
+      <radialGradient id="laLeaf" cx=".38" cy=".34" r=".85">
+        <stop offset="0" stop-color="#D9BCC2"/>
+        <stop offset=".72" stop-color="#C6A0AB"/>
+        <stop offset="1" stop-color="#B08694"/>
+      </radialGradient>
+      <path id="laP" d="M0 0C27 -32 31 -84 0 -132C-31 -84 -27 -32 0 0Z"/>
+      <path id="laB" d="M0 0C15 -17 17 -50 0 -74C-17 -50 -15 -17 0 0Z"/>
+    </defs>
+
+    <!-- stems, behind everything -->
+    <g fill="none" stroke="#C4A3AC" stroke-linecap="round">
+      <path stroke-width="5" d="M352 96C346 300 336 520 330 760"/>
+      <path stroke-width="4.6" d="M300 212C302 400 308 600 312 760"/>
+      <path stroke-width="5.4" d="M206 484C216 590 232 680 240 760"/>
+      <path stroke-width="5" d="M150 652C146 690 142 726 140 760"/>
+      <path stroke-width="5.6" d="M318 660C320 696 322 728 324 760"/>
+      <g stroke="#B08E98" stroke-width="1" opacity=".55">
+        <path d="M349 140v10M341 340v10M334 520v10"/>
+        <path d="M302 300v9M306 470v9"/>
+      </g>
+    </g>
+
+    <!-- leaves: round peltate pads with radial veins -->
+    <g>
+      <g transform="translate(148 646) rotate(-14)">
+        <ellipse rx="64" ry="56" fill="url(#laLeaf)"/>
+        <g stroke="#A87E8B" stroke-width="1" opacity=".6" fill="none">
+          <path d="M0 0L0 -52M0 0L34 -40M0 0L54 -16M0 0L52 22M0 0L26 48M0 0L-22 50M0 0L-50 26M0 0L-56 -12M0 0L-36 -40"/>
+        </g>
+        <circle r="4" fill="#9C7280"/>
+      </g>
+      <g transform="translate(322 654) rotate(9)">
+        <ellipse rx="88" ry="78" fill="url(#laLeaf)"/>
+        <g stroke="#A87E8B" stroke-width="1.1" opacity=".6" fill="none">
+          <path d="M0 0L0 -72M0 0L46 -56M0 0L74 -22M0 0L72 30M0 0L38 66M0 0L-28 70M0 0L-66 38M0 0L-76 -16M0 0L-48 -56"/>
+        </g>
+        <circle r="5" fill="#9C7280"/>
+      </g>
+    </g>
+
+    <!-- tall bud -->
+    <g transform="translate(352 96)">
+      <use href="#laB" fill="url(#laPetalDeep)" transform="rotate(-16) scale(1.02)"/>
+      <use href="#laB" fill="url(#laPetalDeep)" transform="rotate(16) scale(1.02)"/>
+      <use href="#laB" fill="url(#laPetal)"/>
+      <path d="M0 0C5 -20 5 -48 0 -70" fill="none" stroke="#B98C98" stroke-width="1" opacity=".65"/>
+    </g>
+    <!-- half-open bud -->
+    <g transform="translate(300 212) scale(1.18)">
+      <use href="#laB" fill="url(#laPetalDeep)" transform="rotate(-34)"/>
+      <use href="#laB" fill="url(#laPetalDeep)" transform="rotate(34)"/>
+      <use href="#laB" fill="url(#laPetal)" transform="rotate(-12) scale(1.04)"/>
+      <use href="#laB" fill="url(#laPetal)" transform="rotate(12) scale(1.04)"/>
+      <use href="#laB" fill="url(#laPetal)" transform="scale(1.06)"/>
+    </g>
+
+    <!-- the open bloom -->
+    <g transform="translate(206 484)">
+      <!-- back fan -->
+      <g fill="url(#laPetalDeep)" opacity=".92">
+        <use href="#laP" transform="rotate(-78) scale(.82)"/>
+        <use href="#laP" transform="rotate(78) scale(.82)"/>
+        <use href="#laP" transform="rotate(-52) scale(.92)"/>
+        <use href="#laP" transform="rotate(52) scale(.92)"/>
+        <use href="#laP" transform="rotate(-26) scale(.98)"/>
+        <use href="#laP" transform="rotate(26) scale(.98)"/>
+      </g>
+      <!-- seed pod peeking between the front petals -->
+      <g transform="translate(0 -58)">
+        <ellipse rx="21" ry="14" fill="#C39AA4"/>
+        <g fill="#8C5B6B"><circle cx="-9" cy="-3" r="2.5"/><circle cx="0" cy="-5" r="2.5"/><circle cx="9" cy="-3" r="2.5"/><circle cx="-4" cy="3" r="2.2"/><circle cx="5" cy="3" r="2.2"/></g>
+      </g>
+      <!-- front petals -->
+      <g fill="url(#laPetal)" stroke="#B98C98" stroke-width=".9">
+        <use href="#laP" transform="rotate(-38) scale(.9)"/>
+        <use href="#laP" transform="rotate(38) scale(.9)"/>
+        <use href="#laP" transform="rotate(-14)"/>
+        <use href="#laP" transform="rotate(14)"/>
+      </g>
+      <!-- the big cupped front petal -->
+      <path d="M0 0C-44 -18 -52 -74 -30 -118C-4 -80 4 -80 30 -118C52 -74 44 -18 0 0Z" fill="url(#laPetal)" stroke="#B98C98" stroke-width="1"/>
+      <path d="M0 -6C-10 -40 -10 -72 0 -104" fill="none" stroke="#C69EA9" stroke-width="1" opacity=".7"/>
+      <!-- deep tips on the visible points -->
+      <g fill="#8C4A5C" opacity=".8">
+        <path d="M-30 -118C-27 -125 -25 -130 -24 -136C-28 -131 -31 -126 -33 -121Z"/>
+        <path d="M30 -118C27 -125 25 -130 24 -136C28 -131 31 -126 33 -121Z"/>
+      </g>
+    </g>
+  </symbol>
+
   <symbol id="soulmark" viewBox="0 0 64 64">
     <!-- the brush arc: a wide pale bleed, the body stroke, a thin highlight,
          and two thinning tails that fade out either side of the opening -->
@@ -1913,6 +2039,8 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 <!-- ============ HERO ============ -->
 <section class="hero wrap" aria-labelledby="hero-h">
   <div class="hero-wash" id="heroWash" aria-hidden="true"></div>
+  <div class="hero-band" aria-hidden="true"></div>
+  <svg class="hero-art" aria-hidden="true" viewBox="0 0 420 760" preserveAspectRatio="xMidYMax meet"><use href="#lotus-art"></use></svg>
   <div class="hero-inner">
 
     <h1 id="hero-h">
