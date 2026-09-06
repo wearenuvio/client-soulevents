@@ -365,6 +365,9 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   display:flex; align-items:center; gap:7px; line-height:1.3;
 }
 .plate-cap .dot{width:5px; height:5px; border-radius:50%; background:var(--tint,var(--accent)); flex:none}
+/* Every plate on the site shares one accent, so a page of photographs reads as
+   one set rather than a dozen colour codes. */
+.plate{--tint:var(--accent)}
 .plate-ratio{display:block; width:100%}
 
 /* reveal wipe for plates */
@@ -767,16 +770,20 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 /* At rest the tiles sit under a wash of their own tint, so the grid reads as
    one quiet surface. Hovering, tabbing to a tile or opening it clears the
    wash and the photograph comes up to full colour. */
+.g-tile{--tint:var(--accent-soft)}
 .g-tile .shot{
-  filter:saturate(.42) contrast(1.03) brightness(1.03);
-  transition:filter 640ms var(--ease);
+  filter:saturate(.34) contrast(1.05) brightness(1.05);
+  transition:filter 720ms var(--ease);
 }
+/* porcelain haze at the head, an ink-plum foot, and a soft plum veil over the
+   whole plate — the same three colours the rest of the page is built from */
 .g-tile .plate::after{
   content:""; position:absolute; inset:0; z-index:2; pointer-events:none;
   background:
-    linear-gradient(180deg, rgba(26,26,34,.06) 0%, rgba(26,26,34,.30) 100%),
-    var(--tint);
-  opacity:.30; transition:opacity 640ms var(--ease);
+    linear-gradient(180deg, rgba(248,247,244,.26) 0%, rgba(248,247,244,0) 44%),
+    linear-gradient(0deg, rgba(46,34,40,.44) 0%, rgba(46,34,40,0) 60%),
+    rgba(169,107,133,.24);
+  transition:opacity 720ms var(--ease);
 }
 .g-tile:hover .shot,
 .g-tile:focus-within .shot,
@@ -1083,7 +1090,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   font-size:clamp(1.44rem,3.2vw,2.2rem); line-height:1.06; letter-spacing:.01em;
   display:flex; align-items:center; gap:12px;
 }
-.lb-title .lotus{font-size:.6em; color:var(--tint,var(--accent-deep)); flex:none}
+.lb-title .lotus{font-size:.6em; color:var(--accent-soft); flex:none}
 .lb-count{
   margin-top:8px; color:var(--ink-soft);
   font-size:10px; letter-spacing:.15em; text-transform:uppercase;
@@ -1520,7 +1527,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
       <img class="shot" src="assets/samples/wed-05.jpg" width="900" height="585" decoding="async"
            alt="a decorated wedding arch above a floral aisle and rows of seating">
       <span class="plate-grain" aria-hidden="true"></span>
-      <figcaption class="plate-cap" style="--tint:#C9A06A"><span class="dot" aria-hidden="true"></span>Sparklers · Soul Events</figcaption>
+      <figcaption class="plate-cap"><span class="dot" aria-hidden="true"></span>Sparklers · Soul Events</figcaption>
     </figure>
   </div>
 </section>
@@ -1575,7 +1582,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
         <img class="shot" src="assets/samples/chelna-02.jpg" width="860" height="573" loading="lazy" decoding="async"
              alt="A floral wall built for a poolside brunch">
         <span class="plate-grain" aria-hidden="true"></span>
-        <figcaption class="plate-cap" style="--tint:#C08E85"><span class="dot" aria-hidden="true"></span>Design · Soul Events</figcaption>
+        <figcaption class="plate-cap"><span class="dot" aria-hidden="true"></span>Design · Soul Events</figcaption>
       </figure>
       <div class="f-body">
         <h3 class="f-name rev-l">Chelna Lekhi</h3>
@@ -1595,7 +1602,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
         <img class="shot" src="assets/samples/ramesh-04.jpg" width="860" height="573" loading="lazy" decoding="async"
              alt="A lit stage set for the evening&#x27;s performances">
         <span class="plate-grain" aria-hidden="true"></span>
-        <figcaption class="plate-cap" style="--tint:#7FA383"><span class="dot" aria-hidden="true"></span>On stage · Soul Events</figcaption>
+        <figcaption class="plate-cap"><span class="dot" aria-hidden="true"></span>On stage · Soul Events</figcaption>
       </figure>
       <div class="f-body">
         <h3 class="f-name rev-l">Ramesh Sadhwani</h3>
@@ -1646,7 +1653,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
           <img class="shot" src="assets/samples/anniv-02.jpg" width="900" height="600" loading="lazy" decoding="async"
                alt="a long dining table laid out for a dinner party with flowers and candles">
           <span class="plate-grain" aria-hidden="true"></span>
-          <figcaption class="plate-cap" style="--tint:#A96B85"><span class="dot" aria-hidden="true"></span>Layout &middot; Soul Events</figcaption>
+          <figcaption class="plate-cap"><span class="dot" aria-hidden="true"></span>Layout &middot; Soul Events</figcaption>
         </figure>
       </div>
 
@@ -1750,13 +1757,13 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 
   <div class="grid">
     <div class="g-tiles">
-      <div class="g-tile rev-l" style="--tint:#4E9BA1" data-cat="wed" data-name="Weddings">
+      <div class="g-tile rev-l" data-cat="wed" data-name="Weddings">
         <figure class="plate wipe">
           <span class="plate-ratio"></span>
           <img class="shot" src="assets/samples/wed-01.jpg" width="860" height="573" decoding="async"
                alt="A red and gold wedding mandap lit under a timber pavilion">
           <span class="plate-grain" aria-hidden="true"></span>
-          <figcaption class="plate-cap" style="--tint:#4E9BA1"><span class="dot" aria-hidden="true"></span>Wedding · Soul Events</figcaption>
+          <figcaption class="plate-cap"><span class="dot" aria-hidden="true"></span>Wedding · Soul Events</figcaption>
         </figure>
         <div class="g-meta">
           <h3><svg class="lotus" aria-hidden="true"><use href="#lotus"></use></svg>Weddings</h3>
@@ -1764,13 +1771,13 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
         </div>
       </div>
 
-      <div class="g-tile rev-l" style="--tint:#8E6F9E; --d:60ms" data-cat="recep" data-name="Receptions">
+      <div class="g-tile rev-l" style="--d:60ms" data-cat="recep" data-name="Receptions">
         <figure class="plate wipe">
           <span class="plate-ratio"></span>
           <img class="shot" src="assets/samples/recep-01.jpg" width="860" height="573" loading="lazy" decoding="async"
                alt="A mirrored staircase entrance dressed for the reception">
           <span class="plate-grain" aria-hidden="true"></span>
-          <figcaption class="plate-cap" style="--tint:#8E6F9E"><span class="dot" aria-hidden="true"></span>Reception · Soul Events</figcaption>
+          <figcaption class="plate-cap"><span class="dot" aria-hidden="true"></span>Reception · Soul Events</figcaption>
         </figure>
         <div class="g-meta">
           <h3><svg class="lotus" aria-hidden="true"><use href="#lotus"></use></svg>Receptions</h3>
@@ -1778,13 +1785,13 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
         </div>
       </div>
 
-      <div class="g-tile rev-l" style="--tint:#C79A2E; --d:120ms" data-cat="haldi" data-name="Haldi">
+      <div class="g-tile rev-l" style="--d:120ms" data-cat="haldi" data-name="Haldi">
         <figure class="plate wipe">
           <span class="plate-ratio"></span>
           <img class="shot" src="assets/samples/haldi-01.jpg" width="860" height="573" loading="lazy" decoding="async"
                alt="A hand-painted haldi ceremony sign banked with marigolds">
           <span class="plate-grain" aria-hidden="true"></span>
-          <figcaption class="plate-cap" style="--tint:#C79A2E"><span class="dot" aria-hidden="true"></span>Haldi · Soul Events</figcaption>
+          <figcaption class="plate-cap"><span class="dot" aria-hidden="true"></span>Haldi · Soul Events</figcaption>
         </figure>
         <div class="g-meta">
           <h3><svg class="lotus" aria-hidden="true"><use href="#lotus"></use></svg>Haldi</h3>
@@ -1792,13 +1799,13 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
         </div>
       </div>
 
-      <div class="g-tile rev-l" style="--tint:#9C5B45; --d:180ms" data-cat="mehendi" data-name="Mehendi">
+      <div class="g-tile rev-l" style="--d:180ms" data-cat="mehendi" data-name="Mehendi">
         <figure class="plate wipe">
           <span class="plate-ratio"></span>
           <img class="shot" src="assets/samples/mehendi-01.jpg" width="860" height="573" loading="lazy" decoding="async"
                alt="The mehendi hall in warm red drapery and lanterns">
           <span class="plate-grain" aria-hidden="true"></span>
-          <figcaption class="plate-cap" style="--tint:#9C5B45"><span class="dot" aria-hidden="true"></span>Mehendi · Soul Events</figcaption>
+          <figcaption class="plate-cap"><span class="dot" aria-hidden="true"></span>Mehendi · Soul Events</figcaption>
         </figure>
         <div class="g-meta">
           <h3><svg class="lotus" aria-hidden="true"><use href="#lotus"></use></svg>Mehendi</h3>
@@ -1806,13 +1813,13 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
         </div>
       </div>
 
-      <div class="g-tile rev-l" style="--tint:#71906A; --d:240ms" data-cat="brunch" data-name="Brunches">
+      <div class="g-tile rev-l" style="--d:240ms" data-cat="brunch" data-name="Brunches">
         <figure class="plate wipe">
           <span class="plate-ratio"></span>
           <img class="shot" src="assets/samples/brunch-01.jpg" width="860" height="573" loading="lazy" decoding="async"
                alt="The poolside brunch set with round tables and white chairs">
           <span class="plate-grain" aria-hidden="true"></span>
-          <figcaption class="plate-cap" style="--tint:#71906A"><span class="dot" aria-hidden="true"></span>Brunch · Soul Events</figcaption>
+          <figcaption class="plate-cap"><span class="dot" aria-hidden="true"></span>Brunch · Soul Events</figcaption>
         </figure>
         <div class="g-meta">
           <h3><svg class="lotus" aria-hidden="true"><use href="#lotus"></use></svg>Brunches</h3>
@@ -1820,13 +1827,13 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
         </div>
       </div>
 
-      <div class="g-tile rev-l" style="--tint:#B08B37; --d:300ms" data-cat="bday" data-name="Milestone Birthdays">
+      <div class="g-tile rev-l" style="--d:300ms" data-cat="bday" data-name="Milestone Birthdays">
         <figure class="plate wipe">
           <span class="plate-ratio"></span>
           <img class="shot" src="assets/samples/bday-01.jpg" width="860" height="573" loading="lazy" decoding="async"
                alt="The marquee stage in pampas, palms and hand-painted panels">
           <span class="plate-grain" aria-hidden="true"></span>
-          <figcaption class="plate-cap" style="--tint:#B08B37"><span class="dot" aria-hidden="true"></span>Birthday · Soul Events</figcaption>
+          <figcaption class="plate-cap"><span class="dot" aria-hidden="true"></span>Birthday · Soul Events</figcaption>
         </figure>
         <div class="g-meta">
           <h3><svg class="lotus" aria-hidden="true"><use href="#lotus"></use></svg>Milestone Birthdays</h3>
@@ -1834,13 +1841,13 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
         </div>
       </div>
 
-      <div class="g-tile rev-l" style="--tint:#C2647E; --d:360ms" data-cat="kids" data-name="Children&#x27;s Birthdays">
+      <div class="g-tile rev-l" style="--d:360ms" data-cat="kids" data-name="Children&#x27;s Birthdays">
         <figure class="plate wipe">
           <span class="plate-ratio"></span>
           <img class="shot" src="assets/samples/kids-01.jpg" width="860" height="573" loading="lazy" decoding="async"
                alt="The entrance walk dressed in pastel drapes and lanterns">
           <span class="plate-grain" aria-hidden="true"></span>
-          <figcaption class="plate-cap" style="--tint:#C2647E"><span class="dot" aria-hidden="true"></span>Birthday · Soul Events</figcaption>
+          <figcaption class="plate-cap"><span class="dot" aria-hidden="true"></span>Birthday · Soul Events</figcaption>
         </figure>
         <div class="g-meta">
           <h3><svg class="lotus" aria-hidden="true"><use href="#lotus"></use></svg>Children&#x27;s Birthdays</h3>
@@ -1848,13 +1855,13 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
         </div>
       </div>
 
-      <div class="g-tile rev-l" style="--tint:#B37A72; --d:420ms" data-cat="anniv" data-name="Anniversaries">
+      <div class="g-tile rev-l" style="--d:420ms" data-cat="anniv" data-name="Anniversaries">
         <figure class="plate wipe">
           <span class="plate-ratio"></span>
           <img class="shot" src="assets/samples/anniv-01.jpg" width="573" height="860" loading="lazy" decoding="async"
                alt="A chandelier hung over a candlelit garden setting">
           <span class="plate-grain" aria-hidden="true"></span>
-          <figcaption class="plate-cap" style="--tint:#B37A72"><span class="dot" aria-hidden="true"></span>Anniversary · Soul Events</figcaption>
+          <figcaption class="plate-cap"><span class="dot" aria-hidden="true"></span>Anniversary · Soul Events</figcaption>
         </figure>
         <div class="g-meta">
           <h3><svg class="lotus" aria-hidden="true"><use href="#lotus"></use></svg>Anniversaries</h3>
@@ -1862,13 +1869,13 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
         </div>
       </div>
 
-      <div class="g-tile rev-l" style="--tint:#6E719A; --d:480ms" data-cat="table" data-name="Table Decor">
+      <div class="g-tile rev-l" style="--d:480ms" data-cat="table" data-name="Table Decor">
         <figure class="plate wipe">
           <span class="plate-ratio"></span>
           <img class="shot" src="assets/samples/table-01.jpg" width="860" height="573" loading="lazy" decoding="async"
                alt="A cane basket of blooms beside a painted place card">
           <span class="plate-grain" aria-hidden="true"></span>
-          <figcaption class="plate-cap" style="--tint:#6E719A"><span class="dot" aria-hidden="true"></span>Table · Soul Events</figcaption>
+          <figcaption class="plate-cap"><span class="dot" aria-hidden="true"></span>Table · Soul Events</figcaption>
         </figure>
         <div class="g-meta">
           <h3><svg class="lotus" aria-hidden="true"><use href="#lotus"></use></svg>Table Decor</h3>
@@ -2765,7 +2772,6 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 
       lbName.textContent = catName;
       lbCount.textContent = (COUNT_WORD[shots.length] || shots.length) + " frames · " + catName;
-      lb.style.setProperty("--tint", (tile.style.getPropertyValue("--tint") || "").trim() || "#5A2A3F");
       buildGrid();
       solo = -1;
       lbSolo.hidden = true;
