@@ -699,7 +699,10 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   line-height:1.2; letter-spacing:.008em;
 }
 @media (min-width:900px){
-  .s-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .s-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media (min-width:1180px){
+  .s-grid{grid-template-columns:repeat(5,minmax(0,1fr))}
 }
 
 /* ============================================================
@@ -1271,6 +1274,39 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
        SERVICE ICONS · hand-drawn minimal line marks, stroke currentColor
        ============================================================ -->
   <g id="ic-defs">
+    <symbol id="ic-shake" viewBox="0 0 32 32">
+      <g fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12.6h21"/>
+        <path d="M21.6 8.2 26 12.6l-4.4 4.4"/>
+        <path d="M27 19.4H6"/>
+        <path d="M10.4 15 6 19.4l4.4 4.4"/>
+      </g>
+    </symbol>
+    <symbol id="ic-board" viewBox="0 0 32 32">
+      <g fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="4.6" y="6.2" width="22.8" height="19.6" rx="1.8"/>
+        <path d="M4.6 12.4h22.8"/>
+        <path d="M13.2 12.4v13.4"/>
+        <path d="M20.4 16.6h7"/>
+        <path d="M20.4 21h7"/>
+      </g>
+    </symbol>
+    <symbol id="ic-route" viewBox="0 0 32 32">
+      <g fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="8" cy="8.4" r="2.8"/>
+        <circle cx="24" cy="23.6" r="2.8"/>
+        <path d="M8 11.2v4.2a4 4 0 0 0 4 4h8a4 4 0 0 1 4 4"/>
+        <path d="M17.8 16.4l2.4 3M17.8 22.4l2.4-3"/>
+      </g>
+    </symbol>
+    <symbol id="ic-bell" viewBox="0 0 32 32">
+      <g fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4.6 22.4h22.8"/>
+        <path d="M6.8 22.4a9.2 9.2 0 0 1 18.4 0"/>
+        <path d="M16 13.2v-2.6"/>
+        <circle cx="16" cy="9.2" r="1.5"/>
+      </g>
+    </symbol>
     <symbol id="ic-car" viewBox="0 0 32 32">
       <g fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
         <path d="M4 20.5h24"/>
@@ -1295,22 +1331,6 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
         <path d="M9.2 20.4h13.6"/>
         <path d="M10.4 20.4l-1.2 5.2M21.6 20.4l1.2 5.2"/>
         <path d="M9.6 12.6h12.8"/>
-      </g>
-    </symbol>
-    <symbol id="ic-mail" viewBox="0 0 32 32">
-      <g fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
-        <rect x="5.4" y="8.6" width="21.2" height="14.8" rx="1.8"/>
-        <path d="M5.9 10L16 17.4 26.1 10"/>
-        <path d="M5.9 22.2l7-5.6M26.1 22.2l-7-5.6"/>
-      </g>
-    </symbol>
-    <symbol id="ic-makeup" viewBox="0 0 32 32">
-      <g fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
-        <ellipse cx="12.4" cy="12.6" rx="6.2" ry="7"/>
-        <path d="M12.4 19.6v5.4M9.6 25h5.6"/>
-        <path d="M22.6 24.4v-6.6"/>
-        <path d="M20.5 17.8h4.2v-3.4c0-1.6-.7-2.7-2.1-2.7s-2.1 1.1-2.1 2.7z"/>
-        <path d="M22.6 11.7V7.6"/>
       </g>
     </symbol>
     <symbol id="ic-clip" viewBox="0 0 32 32">
@@ -1432,7 +1452,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
         <p class="rev-l" style="--d:560ms">One part exciting, two parts soulful, three quarters funny, and very many portions of creative flair.</p>
         <div class="hero-cta rev-l" style="--d:640ms">
           <a class="hbtn hbtn--fill" href="#contact">Let’s talk <span class="arw" aria-hidden="true">→</span></a>
-          <a class="hbtn hbtn--ghost" href="#gallery">See the work</a>
+          <a class="hbtn hbtn--ghost" href="#gallery">Our work</a>
         </div>
       </div>
       <a class="scroll-cue rev-l" href="#about" style="--d:720ms">
@@ -1446,8 +1466,8 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 <!-- ============ MARQUEE · the occasions ============ -->
 <div class="marq marq--tall" aria-hidden="true" data-marq>
   <div class="marq-track">
-    <div class="marq-seq"><b>weddings</b><i>·</i><b class="hi">sangeets</b><i>·</i><b>mehendis</b><i>·</i><b>receptions</b><i>·</i><b>engagements</b><i>·</i><b>anniversaries</b><i>·</i><b>birthdays</b><i>·</i><b>baby showers</b><i>·</i><b class="hi">brunches</b><i>·</i><b>corporate galas</b><i>·</i><b>product launches</b><i>·</i><b class="hi">destination weddings</b><i>·</i><b>weddings</b><i>·</i><b class="hi">sangeets</b><i>·</i><b>mehendis</b><i>·</i><b>receptions</b><i>·</i><b>engagements</b><i>·</i><b>anniversaries</b><i>·</i><b>birthdays</b><i>·</i><b>baby showers</b><i>·</i><b class="hi">brunches</b><i>·</i><b>corporate galas</b><i>·</i><b>product launches</b><i>·</i><b class="hi">destination weddings</b><i>·</i></div>
-    <div class="marq-seq"><b>weddings</b><i>·</i><b class="hi">sangeets</b><i>·</i><b>mehendis</b><i>·</i><b>receptions</b><i>·</i><b>engagements</b><i>·</i><b>anniversaries</b><i>·</i><b>birthdays</b><i>·</i><b>baby showers</b><i>·</i><b class="hi">brunches</b><i>·</i><b>corporate galas</b><i>·</i><b>product launches</b><i>·</i><b class="hi">destination weddings</b><i>·</i><b>weddings</b><i>·</i><b class="hi">sangeets</b><i>·</i><b>mehendis</b><i>·</i><b>receptions</b><i>·</i><b>engagements</b><i>·</i><b>anniversaries</b><i>·</i><b>birthdays</b><i>·</i><b>baby showers</b><i>·</i><b class="hi">brunches</b><i>·</i><b>corporate galas</b><i>·</i><b>product launches</b><i>·</i><b class="hi">destination weddings</b><i>·</i></div>
+    <div class="marq-seq"><b>Engagements</b><i>·</i><b class="hi">Haldi</b><i>·</i><b>Mehendi</b><i>·</i><b class="hi">Sangeets</b><i>·</i><b>Weddings</b><i>·</i><b>Receptions</b><i>·</i><b class="hi">Brunches</b><i>·</i><b>Baby Showers</b><i>·</i><b>Birthdays</b><i>·</i><b>Anniversaries</b><i>·</i><b>Corporate Events</b><i>·</i><b class="hi">Product Launches</b><i>·</i><b>Engagements</b><i>·</i><b class="hi">Haldi</b><i>·</i><b>Mehendi</b><i>·</i><b class="hi">Sangeets</b><i>·</i><b>Weddings</b><i>·</i><b>Receptions</b><i>·</i><b class="hi">Brunches</b><i>·</i><b>Baby Showers</b><i>·</i><b>Birthdays</b><i>·</i><b>Anniversaries</b><i>·</i><b>Corporate Events</b><i>·</i><b class="hi">Product Launches</b><i>·</i></div>
+    <div class="marq-seq"><b>Engagements</b><i>·</i><b class="hi">Haldi</b><i>·</i><b>Mehendi</b><i>·</i><b class="hi">Sangeets</b><i>·</i><b>Weddings</b><i>·</i><b>Receptions</b><i>·</i><b class="hi">Brunches</b><i>·</i><b>Baby Showers</b><i>·</i><b>Birthdays</b><i>·</i><b>Anniversaries</b><i>·</i><b>Corporate Events</b><i>·</i><b class="hi">Product Launches</b><i>·</i><b>Engagements</b><i>·</i><b class="hi">Haldi</b><i>·</i><b>Mehendi</b><i>·</i><b class="hi">Sangeets</b><i>·</i><b>Weddings</b><i>·</i><b>Receptions</b><i>·</i><b class="hi">Brunches</b><i>·</i><b>Baby Showers</b><i>·</i><b>Birthdays</b><i>·</i><b>Anniversaries</b><i>·</i><b>Corporate Events</b><i>·</i><b class="hi">Product Launches</b><i>·</i></div>
   </div>
 </div>
 
@@ -1494,11 +1514,11 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
            animated span is aria-hidden. No visually-hidden twin, so selecting
            and copying the row no longer yields "15 15". -->
       <div class="stat rev-l">
-        <p class="num" role="img" aria-label="15"><span class="count" data-target="15" aria-hidden="true">0</span></p>
+        <p class="num" role="img" aria-label="20"><span class="count" data-target="20" aria-hidden="true">0</span></p>
         <p class="cap">Years since formation</p>
       </div>
       <div class="stat rev-l" style="--d:110ms">
-        <p class="num" role="img" aria-label="300 plus"><span class="count" data-target="300" aria-hidden="true">0</span><sup aria-hidden="true">+</sup></p>
+        <p class="num" role="img" aria-label="450 plus"><span class="count" data-target="450" aria-hidden="true">0</span><sup aria-hidden="true">+</sup></p>
         <p class="cap">Events executed</p>
       </div>
       <div class="stat rev-l" style="--d:220ms">
@@ -1506,8 +1526,8 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
         <p class="cap">Years of collective experience</p>
       </div>
       <div class="stat rev-l" style="--d:330ms">
-        <p class="num" role="img" aria-label="6"><span class="count" data-target="6" aria-hidden="true">0</span></p>
-        <p class="cap">Countries celebrated in</p>
+        <p class="num" role="img" aria-label="450 plus"><span class="count" data-target="450" aria-hidden="true">0</span><sup aria-hidden="true">+</sup></p>
+        <p class="cap">Happy clients</p>
       </div>
     </div>
   </div>
@@ -1559,7 +1579,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
       <div class="f-body">
         <h3 class="f-name rev-l">Ramesh Sadhwani</h3>
         <div class="f-role rev-l" style="--d:80ms">
-          <span class="tag">Compere &amp; Emcee</span>
+          <span class="tag">Anchor</span>
           <span class="tag">1000+ events</span>
           <span class="tag">“The Event Energizer”</span>
         </div>
@@ -1650,55 +1670,58 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
     <ul class="s-grid">
       <li class="s-card rev-l">
         <span class="n">01</span>
-        <svg class="s-ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#ic-car"></use></svg>
-        <span class="t">Transport</span>
+        <svg class="s-ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#ic-shake"></use></svg>
+        <span class="t">Vendor Negotiations</span>
       </li>
       <li class="s-card rev-l" style="--d:50ms">
         <span class="n">02</span>
-        <svg class="s-ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#ic-music"></use></svg>
-        <span class="t">Music &amp; Entertainment</span>
+        <svg class="s-ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#ic-board"></use></svg>
+        <span class="t">Layouts &amp; Moodboards</span>
       </li>
       <li class="s-card rev-l" style="--d:100ms">
         <span class="n">03</span>
-        <svg class="s-ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#ic-chair"></use></svg>
-        <span class="t">Décor &amp; Furniture</span>
+        <svg class="s-ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#ic-route"></use></svg>
+        <span class="t">Logistics</span>
       </li>
       <li class="s-card rev-l" style="--d:150ms">
         <span class="n">04</span>
-        <svg class="s-ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#ic-mail"></use></svg>
-        <span class="t">Invitations &amp; Mementos</span>
+        <svg class="s-ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#ic-bell"></use></svg>
+        <span class="t">Hospitality</span>
       </li>
       <li class="s-card rev-l" style="--d:200ms">
         <span class="n">05</span>
-        <svg class="s-ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#ic-makeup"></use></svg>
-        <span class="t">Makeup &amp; Dressing</span>
+        <svg class="s-ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#ic-chair"></use></svg>
+        <span class="t">Décor &amp; Furniture</span>
       </li>
       <li class="s-card rev-l" style="--d:250ms">
         <span class="n">06</span>
-        <svg class="s-ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#ic-clip"></use></svg>
-        <span class="t">Event Coordination</span>
+        <svg class="s-ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#ic-music"></use></svg>
+        <span class="t">Music &amp; Entertainment</span>
       </li>
       <li class="s-card rev-l" style="--d:300ms">
         <span class="n">07</span>
-        <svg class="s-ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#ic-plane"></use></svg>
-        <span class="t">Destinations</span>
+        <svg class="s-ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#ic-car"></use></svg>
+        <span class="t">Transport</span>
       </li>
       <li class="s-card rev-l" style="--d:350ms">
         <span class="n">08</span>
         <svg class="s-ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#ic-cam"></use></svg>
         <span class="t">Video &amp; Photography</span>
       </li>
+      <li class="s-card rev-l" style="--d:400ms">
+        <span class="n">09</span>
+        <svg class="s-ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#ic-clip"></use></svg>
+        <span class="t">End to End Event Coordination</span>
+      </li>
+      <li class="s-card rev-l" style="--d:450ms">
+        <span class="n">10</span>
+        <svg class="s-ico" viewBox="0 0 32 32" aria-hidden="true"><use href="#ic-plane"></use></svg>
+        <span class="t">Destination Events</span>
+      </li>
     </ul>
   </div>
 </section>
 
-<!-- ============ MARQUEE · the count ============ -->
-<div class="marq marq--rev" aria-hidden="true" data-marq>
-  <div class="marq-track">
-    <div class="marq-seq"><b>300+ events</b><i>·</i><b class="hi">0 boring ones</b><i>·</i><b>300+ events</b><i>·</i><b class="hi">0 boring ones</b><i>·</i><b>300+ events</b><i>·</i><b class="hi">0 boring ones</b><i>·</i><b>300+ events</b><i>·</i><b class="hi">0 boring ones</b><i>·</i></div>
-    <div class="marq-seq"><b>300+ events</b><i>·</i><b class="hi">0 boring ones</b><i>·</i><b>300+ events</b><i>·</i><b class="hi">0 boring ones</b><i>·</i><b>300+ events</b><i>·</i><b class="hi">0 boring ones</b><i>·</i><b>300+ events</b><i>·</i><b class="hi">0 boring ones</b><i>·</i></div>
-  </div>
-</div>
 
 <!-- ============ 06 · GALLERY ============ -->
 <section class="sect wrap" id="gallery" aria-labelledby="gallery-h">
@@ -1833,7 +1856,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
             <span class="by"><b>Kushali &amp; Kunal Bhandari</b></span>
           </article>
           <article class="card">
-            <q>Ramesh, as compere, gave our book launch the ideal frame. He sharpened the audience’s mood to receive a serious message.</q>
+            <q>Ramesh, as anchor, gave our book launch the ideal frame. He sharpened the audience’s mood to receive a serious message.</q>
             <span class="by"><b>Shankar Jagarnathan</b>, Author: Corporate Disclosures</span>
           </article>
           <article class="card">
@@ -1852,7 +1875,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
             <span class="by"><b>Kushali &amp; Kunal Bhandari</b></span>
           </article>
           <article class="card">
-            <q>Ramesh, as compere, gave our book launch the ideal frame. He sharpened the audience’s mood to receive a serious message.</q>
+            <q>Ramesh, as anchor, gave our book launch the ideal frame. He sharpened the audience’s mood to receive a serious message.</q>
             <span class="by"><b>Shankar Jagarnathan</b>, Author: Corporate Disclosures</span>
           </article>
           <article class="card">
@@ -1921,7 +1944,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
         <span class="by"><b>Kushali &amp; Kunal Bhandari</b></span>
       </article>
       <article class="card">
-        <q>Ramesh, as compere, gave our book launch the ideal frame. He sharpened the audience’s mood to receive a serious message.</q>
+        <q>Ramesh, as anchor, gave our book launch the ideal frame. He sharpened the audience’s mood to receive a serious message.</q>
         <span class="by"><b>Shankar Jagarnathan</b>, Author: Corporate Disclosures</span>
       </article>
       <article class="card">
@@ -2121,7 +2144,6 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
         <address style="font-style:normal">
           <p class="display" style="font-size:clamp(1.15rem,1.9vw,1.5rem); line-height:1.4; letter-spacing:.01em">Bella Vista, 66, Lavelle Road,<br>Bangalore – 560001</p>
         </address>
-        <p class="mono" style="margin-top:14px">India · Dubai · Toronto · Madrid · Nairobi · USA</p>
       </div>
     </div>
   </div>
@@ -2179,7 +2201,6 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 
     <div class="foot-bar">
       <span class="mono">© <span id="yr">2026</span> Soul Events · Bangalore</span>
-      <span class="foot-wink">Also, plan that grand entrance you always wanted. *wink wink*</span>
     </div>
 
   </div>
@@ -2253,7 +2274,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   "areaServed":["Bangalore","India","Dubai","Toronto","Madrid","Nairobi","United States"],
   "founder":[
     {"@type":"Person","name":"Chelna Lekhi","jobTitle":"Event Designer & Planner"},
-    {"@type":"Person","name":"Ramesh Sadhwani","jobTitle":"Compere & Emcee"}
+    {"@type":"Person","name":"Ramesh Sadhwani","jobTitle":"Anchor"}
   ],
   "sameAs":[
     "https://www.instagram.com/souleventsindia/",
@@ -2261,13 +2282,15 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
     "https://www.youtube.com/channel/UC1Z_ibAYVkYGPvLVtaoBUNA"
   ],
   "makesOffer":[
+    {"@type":"Offer","itemOffered":{"@type":"Service","name":"Vendor Negotiations"}},
+    {"@type":"Offer","itemOffered":{"@type":"Service","name":"Layouts and Moodboards"}},
+    {"@type":"Offer","itemOffered":{"@type":"Service","name":"Logistics"}},
+    {"@type":"Offer","itemOffered":{"@type":"Service","name":"Hospitality"}},
     {"@type":"Offer","itemOffered":{"@type":"Service","name":"Transport"}},
     {"@type":"Offer","itemOffered":{"@type":"Service","name":"Music and Entertainment"}},
     {"@type":"Offer","itemOffered":{"@type":"Service","name":"Décor and Furniture"}},
-    {"@type":"Offer","itemOffered":{"@type":"Service","name":"Personalised Invitations and Mementos"}},
-    {"@type":"Offer","itemOffered":{"@type":"Service","name":"Makeup and Dressing"}},
     {"@type":"Offer","itemOffered":{"@type":"Service","name":"End-to-end Event Coordination"}},
-    {"@type":"Offer","itemOffered":{"@type":"Service","name":"Destinations"}},
+    {"@type":"Offer","itemOffered":{"@type":"Service","name":"Destination Events"}},
     {"@type":"Offer","itemOffered":{"@type":"Service","name":"Videography and Photography"}}
   ]
 }
