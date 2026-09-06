@@ -764,6 +764,34 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
    cancel the gallery plates' reveal wipe */
 .g-tile .plate{transition:transform 700ms var(--ease), clip-path 800ms var(--ease)}
 .g-tile:hover .plate{transform:translateY(-6px)}
+/* At rest the tiles sit under a wash of their own tint, so the grid reads as
+   one quiet surface. Hovering, tabbing to a tile or opening it clears the
+   wash and the photograph comes up to full colour. */
+.g-tile .shot{
+  filter:saturate(.42) contrast(1.03) brightness(1.03);
+  transition:filter 640ms var(--ease);
+}
+.g-tile .plate::after{
+  content:""; position:absolute; inset:0; z-index:2; pointer-events:none;
+  background:
+    linear-gradient(180deg, rgba(26,26,34,.06) 0%, rgba(26,26,34,.30) 100%),
+    var(--tint);
+  opacity:.30; transition:opacity 640ms var(--ease);
+}
+.g-tile:hover .shot,
+.g-tile:focus-within .shot,
+.g-tile.is-open .shot{filter:none}
+.g-tile:hover .plate::after,
+.g-tile:focus-within .plate::after,
+.g-tile.is-open .plate::after{opacity:0}
+/* Touch has no hover to reveal with, so the photographs stay as they are. */
+@media (hover:none){
+  .g-tile .shot{filter:none}
+  .g-tile .plate::after{opacity:0}
+}
+@media (prefers-reduced-motion:reduce){
+  .g-tile .shot,.g-tile .plate::after{transition-duration:1ms}
+}
 
 /* ============================================================
    TESTIMONIALS (07) — counter-rotating quote rows
@@ -920,7 +948,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   font-size:clamp(1.95rem,4.4vw,3.6rem); line-height:1.05; letter-spacing:.006em;
   margin-bottom:.44em; max-width:20ch;
 }
-#contact h2 .ital{font-family:var(--serif); font-style:italic; color:var(--blue); letter-spacing:-.008em}
+#contact h2 .ital{color:var(--blue)}
 #contact .k-sub{max-width:38ch; color:#EFEDE8; font-size:clamp(1rem,1.25vw,1.14rem)}
 .k-block{margin-top:clamp(28px,3.6vw,48px)}
 .k-info .k-block:first-child{margin-top:0}
@@ -1490,9 +1518,9 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
     <figure class="plate about-plate wipe">
       <span class="plate-ratio"></span>
       <img class="shot" src="assets/samples/wed-05.jpg" width="900" height="585" decoding="async"
-           alt="Sample photograph: a decorated wedding arch above a floral aisle and rows of seating">
+           alt="a decorated wedding arch above a floral aisle and rows of seating">
       <span class="plate-grain" aria-hidden="true"></span>
-      <figcaption class="plate-cap" style="--tint:#C9A06A"><span class="dot" aria-hidden="true"></span>Aisle · sample</figcaption>
+      <figcaption class="plate-cap" style="--tint:#C9A06A"><span class="dot" aria-hidden="true"></span>Sparklers · Soul Events</figcaption>
     </figure>
   </div>
 </section>
@@ -1544,10 +1572,10 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
     <article class="founder">
       <figure class="plate f-plate wipe">
         <span class="plate-ratio"></span>
-        <img class="shot" src="assets/samples/chelna-02.jpg" width="700" height="467" loading="lazy" decoding="async"
-             alt="Sample photograph: a florist smiling as she works among her flowers">
+        <img class="shot" src="assets/samples/chelna-02.jpg" width="860" height="573" loading="lazy" decoding="async"
+             alt="A floral wall built for a poolside brunch">
         <span class="plate-grain" aria-hidden="true"></span>
-        <figcaption class="plate-cap" style="--tint:#C08E85"><span class="dot" aria-hidden="true"></span>Chelna · sample</figcaption>
+        <figcaption class="plate-cap" style="--tint:#C08E85"><span class="dot" aria-hidden="true"></span>Design · Soul Events</figcaption>
       </figure>
       <div class="f-body">
         <h3 class="f-name rev-l">Chelna Lekhi</h3>
@@ -1564,10 +1592,10 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
     <article class="founder founder--b">
       <figure class="plate f-plate wipe">
         <span class="plate-ratio"></span>
-        <img class="shot" src="assets/samples/ramesh-04.jpg" width="700" height="467" loading="lazy" decoding="async"
-             alt="Sample photograph: a man in a light blue shirt speaking into a microphone on stage">
+        <img class="shot" src="assets/samples/ramesh-04.jpg" width="860" height="573" loading="lazy" decoding="async"
+             alt="A lit stage set for the evening&#x27;s performances">
         <span class="plate-grain" aria-hidden="true"></span>
-        <figcaption class="plate-cap" style="--tint:#7FA383"><span class="dot" aria-hidden="true"></span>Ramesh · sample</figcaption>
+        <figcaption class="plate-cap" style="--tint:#7FA383"><span class="dot" aria-hidden="true"></span>On stage · Soul Events</figcaption>
       </figure>
       <div class="f-body">
         <h3 class="f-name rev-l">Ramesh Sadhwani</h3>
@@ -1616,9 +1644,9 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
       <div class="p-cell p-cell--shot rev-l" style="--d:180ms">
         <figure class="plate wipe">
           <img class="shot" src="assets/samples/anniv-02.jpg" width="900" height="600" loading="lazy" decoding="async"
-               alt="Sample photograph: a long dining table laid out for a dinner party with flowers and candles">
+               alt="a long dining table laid out for a dinner party with flowers and candles">
           <span class="plate-grain" aria-hidden="true"></span>
-          <figcaption class="plate-cap" style="--tint:#A96B85"><span class="dot" aria-hidden="true"></span>Layout &middot; sample</figcaption>
+          <figcaption class="plate-cap" style="--tint:#A96B85"><span class="dot" aria-hidden="true"></span>Layout &middot; Soul Events</figcaption>
         </figure>
       </div>
 
@@ -1753,10 +1781,10 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
       <div class="g-tile rev-l" style="--tint:#C79A2E; --d:120ms" data-cat="haldi" data-name="Haldi">
         <figure class="plate wipe">
           <span class="plate-ratio"></span>
-          <img class="shot" src="assets/samples/haldi-01.jpg" width="573" height="860" loading="lazy" decoding="async"
-               alt="Sample photograph: A woman is covered in yellow powder and water">
+          <img class="shot" src="assets/samples/haldi-01.jpg" width="860" height="573" loading="lazy" decoding="async"
+               alt="A hand-painted haldi ceremony sign banked with marigolds">
           <span class="plate-grain" aria-hidden="true"></span>
-          <figcaption class="plate-cap" style="--tint:#C79A2E"><span class="dot" aria-hidden="true"></span>Haldi · sample</figcaption>
+          <figcaption class="plate-cap" style="--tint:#C79A2E"><span class="dot" aria-hidden="true"></span>Haldi · Soul Events</figcaption>
         </figure>
         <div class="g-meta">
           <h3><svg class="lotus" aria-hidden="true"><use href="#lotus"></use></svg>Haldi</h3>
@@ -2249,7 +2277,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
       <div class="lb-grid" id="lbGrid"></div>
 
       <div class="lb-solo" id="lbSolo" hidden>
-        <button type="button" class="lb-back" id="lbBack"><span aria-hidden="true">&larr;</span> Back to all six frames</button>
+        <button type="button" class="lb-back" id="lbBack"><span aria-hidden="true">&larr;</span> Back to all frames</button>
         <figure class="lb-figure">
           <img id="lbImg" src="" alt="" decoding="async">
           <figcaption>
@@ -2619,12 +2647,11 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
       {f:"recep-06.jpg", w:860, h:573, a:"A red canopy reception set in a lit garden", c:"Soul Events"}
     ],
     haldi: [
-      {f:"haldi-01.jpg", w:573, h:860, a:"Sample photograph: A woman is covered in yellow powder and water", c:"Arun Prakash / Unsplash"},
-      {f:"haldi-02.jpg", w:483, h:860, a:"Sample photograph: A wooden table topped with bowls of food", c:"Amit Rana / Unsplash"},
-      {f:"haldi-03.jpg", w:573, h:860, a:"Sample photograph: A person holding a piece of bread on top of a cutting board", c:"Amit Rana / Unsplash"},
-      {f:"haldi-04.jpg", w:860, h:573, a:"Sample photograph: A young girl is getting her face painted", c:"ARTO SURAJ / Unsplash"},
-      {f:"haldi-05.jpg", w:572, h:860, a:"Sample photograph: A woman in a yellow sari holding a garland", c:"Arun Prakash / Unsplash"},
-      {f:"haldi-06.jpg", w:860, h:572, a:"Sample photograph: A group of people standing around each other", c:"Arun Prakash / Unsplash"}
+      {f:"haldi-01.jpg", w:860, h:573, a:"A hand-painted haldi ceremony sign banked with marigolds", c:"Soul Events"},
+      {f:"haldi-02.jpg", w:860, h:483, a:"The haldi pavilion dressed in colour under the trees", c:"Soul Events"},
+      {f:"haldi-03.jpg", w:860, h:573, a:"The ceremony backdrop in red and gold beneath a tiled roof", c:"Soul Events"},
+      {f:"haldi-04.jpg", w:860, h:573, a:"Figurines set among marigolds for the ceremony", c:"Soul Events"},
+      {f:"haldi-05.jpg", w:573, h:860, a:"A brass lamp garlanded for the haldi", c:"Soul Events"}
     ],
     mehendi: [
       {f:"mehendi-01.jpg", w:860, h:573, a:"The mehendi hall in warm red drapery and lanterns", c:"Soul Events"},
@@ -2703,7 +2730,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
       lbImg.src = "assets/samples/" + s.f;
       lbImg.width = s.w; lbImg.height = s.h;
       lbImg.alt = s.a;
-      lbCap.textContent = s.a.replace(/^Sample photograph: /, "");
+      lbCap.textContent = s.a.replace(/^/, "");
       lbCredit.textContent = "Photograph · " + s.c;
       lbIdx.textContent = pad(solo + 1) + " / " + pad(shots.length);
       lbGrid.hidden = true;
@@ -2731,6 +2758,9 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
       shots = GALLERY[key];
       catName = tile.getAttribute("data-name") || "";
       opener = from || tile.querySelector(".view");
+      // the opened tile drops its resting wash, so it matches the popup behind
+      Array.prototype.forEach.call(tiles, function(t){ t.classList.remove("is-open"); });
+      tile.classList.add("is-open");
       window.clearTimeout(closeTimer);
 
       lbName.textContent = catName;
@@ -2757,6 +2787,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
       lb.classList.remove("open");
       document.documentElement.classList.remove("lb-open");
       document.body.classList.remove("lb-open");
+      Array.prototype.forEach.call(tiles, function(t){ t.classList.remove("is-open"); });
       var back = opener; opener = null;
       var hide = function(){ if (!isOpen) { lb.hidden = true; lbGrid.textContent = ""; } };
       if (reduce) hide(); else closeTimer = window.setTimeout(hide, 300);
