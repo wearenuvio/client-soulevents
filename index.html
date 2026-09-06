@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Soul Events</title>
-<meta name="description" content="Soul Events, bespoke event design by Chelna Lekhi and Ramesh Sadhwani. Weddings, sangeets, brunches, birthdays and corporate galas in Bangalore, across India and internationally. 300+ events, 47 years of collective experience.">
+<meta name="description" content="Soul Events, bespoke event design by Chelna Lekhi and Ramesh Sadhwani. Weddings, receptions, haldi, mehendi, brunches, birthdays and anniversaries in Bangalore, across India and internationally. 450+ events, 47 years of collective experience.">
 <meta name="theme-color" content="#F8F7F4">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Soul Events">
@@ -713,12 +713,17 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 .g-tile:nth-child(4){grid-column:5 / span 8}
 .g-tile:nth-child(5){grid-column:1 / span 6}
 .g-tile:nth-child(6){grid-column:7 / span 6}
+.g-tile:nth-child(7){grid-column:1 / span 5}
+.g-tile:nth-child(8){grid-column:6 / span 7}
+/* Table Decor closes the grid on a full-width band */
+.g-tile:nth-child(9){grid-column:1 / -1}
 .g-tiles{
   grid-column:1 / -1; display:grid;
   grid-template-columns:repeat(12,minmax(0,1fr));
   /* the rows carry the height, so paired tiles always end level and no tile
      is left with a pocket of white beneath it */
-  grid-template-rows:clamp(240px,29vw,430px) clamp(210px,25vw,350px) clamp(220px,27vw,390px);
+  grid-template-rows:clamp(240px,29vw,430px) clamp(210px,25vw,350px) clamp(220px,27vw,390px)
+                     clamp(210px,25vw,350px) clamp(230px,24vw,360px);
   gap:var(--gap); row-gap:clamp(22px,3.2vw,56px);
   align-items:stretch;
 }
@@ -908,7 +913,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   font-size:clamp(1.95rem,4.4vw,3.6rem); line-height:1.05; letter-spacing:.006em;
   margin-bottom:.44em; max-width:20ch;
 }
-#contact h2 .ital{font-family:var(--serif); font-style:italic; color:var(--accent); letter-spacing:-.008em}
+#contact h2 .ital{font-family:var(--serif); font-style:italic; color:var(--blue); letter-spacing:-.008em}
 #contact .k-sub{max-width:38ch; color:#EFEDE8; font-size:clamp(1rem,1.25vw,1.14rem)}
 .k-block{margin-top:clamp(28px,3.6vw,48px)}
 .k-info .k-block:first-child{margin-top:0}
@@ -1366,19 +1371,6 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
     </g>
     <circle cx="17.15" cy="6.85" r="1.1" fill="currentColor"/>
   </symbol>
-  <symbol id="ic-facebook" viewBox="0 0 24 24">
-    <g fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round">
-      <rect x="3.2" y="3.2" width="17.6" height="17.6" rx="5.2"/>
-      <path d="M15.1 7.9h-1.35a2.05 2.05 0 0 0-2.05 2.05V18"/>
-      <path d="M9.5 12.15h4.5"/>
-    </g>
-  </symbol>
-  <symbol id="ic-youtube" viewBox="0 0 24 24">
-    <g fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round">
-      <rect x="2.4" y="5.4" width="19.2" height="13.2" rx="4.2"/>
-      <path d="M10.3 9.15 15.9 12l-5.6 2.85z" fill="currentColor" stroke-width="1.2"/>
-    </g>
-  </symbol>
   <symbol id="ic-whatsapp" viewBox="0 0 24 24">
     <g fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round">
       <path d="M20.4 11.75a8.4 8.4 0 0 1-12.5 7.35L3.6 20.4l1.35-4.2a8.4 8.4 0 1 1 15.45-4.45Z"/>
@@ -1723,16 +1715,11 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 
   <div class="grid">
     <div class="g-tiles">
-
-      <!-- Each tile opens the popup on its own category. The visible
-           "View →" is the real control (a button, there is no page to go to
-           yet), so the h3 stays a heading and the markup stays valid; the
-           whole tile is click-through to that same button for pointer users. -->
       <div class="g-tile rev-l" style="--tint:#4E9BA1" data-cat="wed" data-name="Weddings">
         <figure class="plate wipe">
           <span class="plate-ratio"></span>
           <img class="shot" src="assets/samples/wed-01.jpg" width="860" height="573" decoding="async"
-               alt="Sample photograph: a couple in traditional wedding attire sitting under a floral canopy during a ceremony">
+               alt="Sample photograph: A couple in traditional wedding attire sitting under a floral canopy during a ceremony">
           <span class="plate-grain" aria-hidden="true"></span>
           <figcaption class="plate-cap" style="--tint:#4E9BA1"><span class="dot" aria-hidden="true"></span>Wedding · sample</figcaption>
         </figure>
@@ -1742,67 +1729,53 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
         </div>
       </div>
 
-      <div class="g-tile rev-l" style="--tint:#B96E45" data-cat="sangeet" data-name="Sangeets">
+      <div class="g-tile rev-l" style="--tint:#8E6F9E; --d:60ms" data-cat="recep" data-name="Receptions">
         <figure class="plate wipe">
           <span class="plate-ratio"></span>
-          <img class="shot" src="assets/samples/sangeet-01.jpg" width="860" height="573" loading="lazy" decoding="async"
-               alt="Sample photograph: a close up of a person walking on a red carpet">
+          <img class="shot" src="assets/samples/recep-01.jpg" width="860" height="483" loading="lazy" decoding="async"
+               alt="Sample photograph: Wedding stage decorated with flowers and drapery">
           <span class="plate-grain" aria-hidden="true"></span>
-          <figcaption class="plate-cap" style="--tint:#B96E45"><span class="dot" aria-hidden="true"></span>Sangeet · sample</figcaption>
+          <figcaption class="plate-cap" style="--tint:#8E6F9E"><span class="dot" aria-hidden="true"></span>Reception · sample</figcaption>
         </figure>
         <div class="g-meta">
-          <h3><svg class="lotus" aria-hidden="true"><use href="#lotus"></use></svg>Sangeets</h3>
-          <button type="button" class="view" aria-haspopup="dialog" aria-label="Open the Sangeets gallery">View <span class="arw" aria-hidden="true">→</span></button>
+          <h3><svg class="lotus" aria-hidden="true"><use href="#lotus"></use></svg>Receptions</h3>
+          <button type="button" class="view" aria-haspopup="dialog" aria-label="Open the Receptions gallery">View <span class="arw" aria-hidden="true">→</span></button>
         </div>
       </div>
 
-      <div class="g-tile rev-l" style="--tint:#B37A72" data-cat="anniv" data-name="Anniversaries">
+      <div class="g-tile rev-l" style="--tint:#C79A2E; --d:120ms" data-cat="haldi" data-name="Haldi">
         <figure class="plate wipe">
           <span class="plate-ratio"></span>
-          <img class="shot" src="assets/samples/anniv-01.jpg" width="900" height="600" loading="lazy" decoding="async"
-               alt="Sample photograph: a long dining table set with white plates, candles, and glass bottles">
+          <img class="shot" src="assets/samples/haldi-01.jpg" width="573" height="860" loading="lazy" decoding="async"
+               alt="Sample photograph: A woman is covered in yellow powder and water">
           <span class="plate-grain" aria-hidden="true"></span>
-          <figcaption class="plate-cap" style="--tint:#B37A72"><span class="dot" aria-hidden="true"></span>Anniversary · sample</figcaption>
+          <figcaption class="plate-cap" style="--tint:#C79A2E"><span class="dot" aria-hidden="true"></span>Haldi · sample</figcaption>
         </figure>
         <div class="g-meta">
-          <h3><svg class="lotus" aria-hidden="true"><use href="#lotus"></use></svg>Anniversaries</h3>
-          <button type="button" class="view" aria-haspopup="dialog" aria-label="Open the Anniversaries gallery">View <span class="arw" aria-hidden="true">→</span></button>
+          <h3><svg class="lotus" aria-hidden="true"><use href="#lotus"></use></svg>Haldi</h3>
+          <button type="button" class="view" aria-haspopup="dialog" aria-label="Open the Haldi gallery">View <span class="arw" aria-hidden="true">→</span></button>
         </div>
       </div>
 
-      <div class="g-tile rev-l" style="--tint:#6E719A" data-cat="corp" data-name="Corporate Events">
+      <div class="g-tile rev-l" style="--tint:#9C5B45; --d:180ms" data-cat="mehendi" data-name="Mehendi">
         <figure class="plate wipe">
           <span class="plate-ratio"></span>
-          <img class="shot" src="assets/samples/corp-01.jpg" width="900" height="600" loading="lazy" decoding="async"
-               alt="Sample photograph: crowd of people sitting on chairs inside room">
+          <img class="shot" src="assets/samples/mehendi-01.jpg" width="860" height="573" loading="lazy" decoding="async"
+               alt="Sample photograph: A group of people showing hands decorated with intricate black henna patterns">
           <span class="plate-grain" aria-hidden="true"></span>
-          <figcaption class="plate-cap" style="--tint:#6E719A"><span class="dot" aria-hidden="true"></span>Corporate · sample</figcaption>
+          <figcaption class="plate-cap" style="--tint:#9C5B45"><span class="dot" aria-hidden="true"></span>Mehendi · sample</figcaption>
         </figure>
         <div class="g-meta">
-          <h3><svg class="lotus" aria-hidden="true"><use href="#lotus"></use></svg>Corporate Events</h3>
-          <button type="button" class="view" aria-haspopup="dialog" aria-label="Open the Corporate Events gallery">View <span class="arw" aria-hidden="true">→</span></button>
+          <h3><svg class="lotus" aria-hidden="true"><use href="#lotus"></use></svg>Mehendi</h3>
+          <button type="button" class="view" aria-haspopup="dialog" aria-label="Open the Mehendi gallery">View <span class="arw" aria-hidden="true">→</span></button>
         </div>
       </div>
 
-      <div class="g-tile rev-l" style="--tint:#B08B37" data-cat="bday" data-name="Birthdays">
-        <figure class="plate wipe">
-          <span class="plate-ratio"></span>
-          <img class="shot" src="assets/samples/bday-01.jpg" width="900" height="601" loading="lazy" decoding="async"
-               alt="Sample photograph: person holding balloons">
-          <span class="plate-grain" aria-hidden="true"></span>
-          <figcaption class="plate-cap" style="--tint:#B08B37"><span class="dot" aria-hidden="true"></span>Birthday · sample</figcaption>
-        </figure>
-        <div class="g-meta">
-          <h3><svg class="lotus" aria-hidden="true"><use href="#lotus"></use></svg>Birthdays</h3>
-          <button type="button" class="view" aria-haspopup="dialog" aria-label="Open the Birthdays gallery">View <span class="arw" aria-hidden="true">→</span></button>
-        </div>
-      </div>
-
-      <div class="g-tile rev-l" style="--tint:#71906A" data-cat="brunch" data-name="Brunches">
+      <div class="g-tile rev-l" style="--tint:#71906A; --d:240ms" data-cat="brunch" data-name="Brunches">
         <figure class="plate wipe">
           <span class="plate-ratio"></span>
           <img class="shot" src="assets/samples/brunch-01.jpg" width="860" height="573" loading="lazy" decoding="async"
-               alt="Sample photograph: sliced bread with green vegetable and meat on white ceramic plate">
+               alt="Sample photograph: Sliced bread with green vegetable and meat on white ceramic plate">
           <span class="plate-grain" aria-hidden="true"></span>
           <figcaption class="plate-cap" style="--tint:#71906A"><span class="dot" aria-hidden="true"></span>Brunch · sample</figcaption>
         </figure>
@@ -1812,6 +1785,61 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
         </div>
       </div>
 
+      <div class="g-tile rev-l" style="--tint:#B08B37; --d:300ms" data-cat="bday" data-name="Milestone Birthdays">
+        <figure class="plate wipe">
+          <span class="plate-ratio"></span>
+          <img class="shot" src="assets/samples/bday-01.jpg" width="900" height="601" loading="lazy" decoding="async"
+               alt="Sample photograph: Person holding balloons">
+          <span class="plate-grain" aria-hidden="true"></span>
+          <figcaption class="plate-cap" style="--tint:#B08B37"><span class="dot" aria-hidden="true"></span>Birthday · sample</figcaption>
+        </figure>
+        <div class="g-meta">
+          <h3><svg class="lotus" aria-hidden="true"><use href="#lotus"></use></svg>Milestone Birthdays</h3>
+          <button type="button" class="view" aria-haspopup="dialog" aria-label="Open the Milestone Birthdays gallery">View <span class="arw" aria-hidden="true">→</span></button>
+        </div>
+      </div>
+
+      <div class="g-tile rev-l" style="--tint:#C2647E; --d:360ms" data-cat="kids" data-name="Children&#x27;s Birthdays">
+        <figure class="plate wipe">
+          <span class="plate-ratio"></span>
+          <img class="shot" src="assets/samples/kids-01.jpg" width="860" height="574" loading="lazy" decoding="async"
+               alt="Sample photograph: Selective focus photography of assorted-color balloons">
+          <span class="plate-grain" aria-hidden="true"></span>
+          <figcaption class="plate-cap" style="--tint:#C2647E"><span class="dot" aria-hidden="true"></span>Birthday · sample</figcaption>
+        </figure>
+        <div class="g-meta">
+          <h3><svg class="lotus" aria-hidden="true"><use href="#lotus"></use></svg>Children&#x27;s Birthdays</h3>
+          <button type="button" class="view" aria-haspopup="dialog" aria-label="Open the Children&#x27;s Birthdays gallery">View <span class="arw" aria-hidden="true">→</span></button>
+        </div>
+      </div>
+
+      <div class="g-tile rev-l" style="--tint:#B37A72; --d:420ms" data-cat="anniv" data-name="Anniversaries">
+        <figure class="plate wipe">
+          <span class="plate-ratio"></span>
+          <img class="shot" src="assets/samples/anniv-01.jpg" width="900" height="600" loading="lazy" decoding="async"
+               alt="Sample photograph: A long dining table set with white plates, candles, and glass bottles">
+          <span class="plate-grain" aria-hidden="true"></span>
+          <figcaption class="plate-cap" style="--tint:#B37A72"><span class="dot" aria-hidden="true"></span>Anniversary · sample</figcaption>
+        </figure>
+        <div class="g-meta">
+          <h3><svg class="lotus" aria-hidden="true"><use href="#lotus"></use></svg>Anniversaries</h3>
+          <button type="button" class="view" aria-haspopup="dialog" aria-label="Open the Anniversaries gallery">View <span class="arw" aria-hidden="true">→</span></button>
+        </div>
+      </div>
+
+      <div class="g-tile rev-l" style="--tint:#6E719A; --d:480ms" data-cat="table" data-name="Table Decor">
+        <figure class="plate wipe">
+          <span class="plate-ratio"></span>
+          <img class="shot" src="assets/samples/table-01.jpg" width="573" height="860" loading="lazy" decoding="async"
+               alt="Sample photograph: A place setting with flowers and a menu">
+          <span class="plate-grain" aria-hidden="true"></span>
+          <figcaption class="plate-cap" style="--tint:#6E719A"><span class="dot" aria-hidden="true"></span>Table · sample</figcaption>
+        </figure>
+        <div class="g-meta">
+          <h3><svg class="lotus" aria-hidden="true"><use href="#lotus"></use></svg>Table Decor</h3>
+          <button type="button" class="view" aria-haspopup="dialog" aria-label="Open the Table Decor gallery">View <span class="arw" aria-hidden="true">→</span></button>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -2179,10 +2207,6 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
         <ul class="foot-social" aria-labelledby="foot-follow">
           <li><a href="https://www.instagram.com/souleventsindia/" target="_blank" rel="noopener">
             <svg class="foot-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-instagram"></use></svg><span class="lbl">Instagram</span></a></li>
-          <li><a href="https://www.facebook.com/pages/Soul-Events/1654430458123769" target="_blank" rel="noopener">
-            <svg class="foot-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-facebook"></use></svg><span class="lbl">Facebook</span></a></li>
-          <li><a href="https://www.youtube.com/channel/UC1Z_ibAYVkYGPvLVtaoBUNA" target="_blank" rel="noopener">
-            <svg class="foot-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-youtube"></use></svg><span class="lbl">YouTube</span></a></li>
           <li><a href="https://wa.me/919342283539" target="_blank" rel="noopener">
             <svg class="foot-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-whatsapp"></use></svg><span class="lbl">WhatsApp</span></a></li>
         </ul>
@@ -2267,9 +2291,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
     {"@type":"Person","name":"Ramesh Sadhwani","jobTitle":"Anchor"}
   ],
   "sameAs":[
-    "https://www.instagram.com/souleventsindia/",
-    "https://www.facebook.com/pages/Soul-Events/1654430458123769",
-    "https://www.youtube.com/channel/UC1Z_ibAYVkYGPvLVtaoBUNA"
+    "https://www.instagram.com/souleventsindia/"
   ],
   "makesOffer":[
     {"@type":"Offer","itemOffered":{"@type":"Service","name":"Vendor Negotiations"}},
@@ -2596,6 +2618,46 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
       {f:"brunch-04.jpg", w:860, h:573, a:"Sample photograph: A person enjoys a breakfast spread with various foods", c:"Antonio Araujo / Unsplash"},
       {f:"brunch-05.jpg", w:900, h:600, a:"Sample photograph: A white table topped with plates of fruit and pastries", c:"Iason Raissis / Unsplash"},
       {f:"brunch-06.jpg", w:900, h:600, a:"Sample photograph: A white table topped with plates of food and drinks", c:"Priscilla Du Preez \ud83c\udde8\ud83c\udde6 / Unsplash"}
+    ],
+    recep: [
+      {f:"recep-01.jpg", w:860, h:483, a:"Sample photograph: Wedding stage decorated with flowers and drapery", c:"Zaraq Iqbal / Unsplash"},
+      {f:"recep-02.jpg", w:860, h:574, a:"Sample photograph: Red and green chairs inside room", c:"Vaibhav Nagare / Unsplash"},
+      {f:"recep-03.jpg", w:860, h:573, a:"Sample photograph: A couple performing a wedding ritual under a floral canopy in a ballroom", c:"AMISH THAKKAR / Unsplash"},
+      {f:"recep-04.jpg", w:860, h:570, a:"Sample photograph: Yellow and white throw pillows on white bed", c:"s. m. Ibrahim / Unsplash"},
+      {f:"recep-05.jpg", w:860, h:570, a:"Sample photograph: A couch sitting on top of a wooden floor", c:"micky studio / Unsplash"},
+      {f:"recep-06.jpg", w:860, h:573, a:"Sample photograph: A white couch sitting in front of a window covered in flowers", c:"Ami Lisk / Unsplash"}
+    ],
+    haldi: [
+      {f:"haldi-01.jpg", w:573, h:860, a:"Sample photograph: A woman is covered in yellow powder and water", c:"Arun Prakash / Unsplash"},
+      {f:"haldi-02.jpg", w:483, h:860, a:"Sample photograph: A wooden table topped with bowls of food", c:"Amit Rana / Unsplash"},
+      {f:"haldi-03.jpg", w:573, h:860, a:"Sample photograph: A person holding a piece of bread on top of a cutting board", c:"Amit Rana / Unsplash"},
+      {f:"haldi-04.jpg", w:860, h:573, a:"Sample photograph: A young girl is getting her face painted", c:"ARTO SURAJ / Unsplash"},
+      {f:"haldi-05.jpg", w:572, h:860, a:"Sample photograph: A woman in a yellow sari holding a garland", c:"Arun Prakash / Unsplash"},
+      {f:"haldi-06.jpg", w:860, h:572, a:"Sample photograph: A group of people standing around each other", c:"Arun Prakash / Unsplash"}
+    ],
+    mehendi: [
+      {f:"mehendi-01.jpg", w:860, h:573, a:"Sample photograph: A group of people showing hands decorated with intricate black henna patterns", c:"Vitaliy Lyubezhanin / Unsplash"},
+      {f:"mehendi-02.jpg", w:573, h:860, a:"Sample photograph: Person's right mehndi tattoo", c:"Vitaliy Lyubezhanin / Unsplash"},
+      {f:"mehendi-03.jpg", w:573, h:860, a:"Sample photograph: A woman in a wedding dress holding her hands up to her face", c:"MUHAMMAD SHAH ZEB / Unsplash"},
+      {f:"mehendi-04.jpg", w:482, h:860, a:"Sample photograph: Woman covering her face with her two hands", c:"Jo San Diego / Unsplash"},
+      {f:"mehendi-05.jpg", w:572, h:860, a:"Sample photograph: A woman in a green dress holding her hands up to her face", c:"kabita Darlami / Unsplash"},
+      {f:"mehendi-06.jpg", w:860, h:573, a:"Sample photograph: Red and gold floral textile", c:"AMISH THAKKAR / Unsplash"}
+    ],
+    kids: [
+      {f:"kids-01.jpg", w:860, h:574, a:"Sample photograph: Selective focus photography of assorted-color balloons", c:"Adi Goldstein / Unsplash"},
+      {f:"kids-02.jpg", w:860, h:573, a:"Sample photograph: Selective focus photography of multicolored confetti lot", c:"Jason Leung / Unsplash"},
+      {f:"kids-03.jpg", w:860, h:573, a:"Sample photograph: Birthday decor lot", c:"Lidya Nada / Unsplash"},
+      {f:"kids-04.jpg", w:860, h:573, a:"Sample photograph: Pink cupcakes on tray", c:"Robert Anderson / Unsplash"},
+      {f:"kids-05.jpg", w:860, h:574, a:"Sample photograph: Person holding balloons", c:"Gaelle Marcel / Unsplash"},
+      {f:"kids-06.jpg", w:860, h:484, a:"Sample photograph: Kids in spiderman and Captain America costumes", c:"Steven Libralon / Unsplash"}
+    ],
+    table: [
+      {f:"table-01.jpg", w:573, h:860, a:"Sample photograph: A place setting with flowers and a menu", c:"Kari Bjorn Photography / Unsplash"},
+      {f:"table-02.jpg", w:573, h:860, a:"Sample photograph: Dining table setting", c:"Cody  Chan / Unsplash"},
+      {f:"table-03.jpg", w:860, h:573, a:"Sample photograph: Clear wine glass lot on table", c:"Photos by Lanty / Unsplash"},
+      {f:"table-04.jpg", w:860, h:573, a:"Sample photograph: Woman in black blazer holding bouquet of flowers", c:"Nani Williams / Unsplash"},
+      {f:"table-05.jpg", w:572, h:860, a:"Sample photograph: White and brown flowers on white table", c:"Annie Spratt / Unsplash"},
+      {f:"table-06.jpg", w:573, h:860, a:"Sample photograph: A table is set for a formal dinner", c:"Silvia Mara / Unsplash"}
     ]
   };
   var COUNT_WORD = ["Zero","One","Two","Three","Four","Five","Six"];
