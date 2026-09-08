@@ -1,0 +1,236 @@
+[
+ {
+  "id": "d1-1",
+  "day": 1,
+  "bucket": "Tease",
+  "title": "Something is blooming",
+  "sticker": "Countdown",
+  "copy": "Something is blooming. New home opens in 02:19:40.",
+  "note": "Countdown sticker set to launch morning. Viewers can tap to get reminded. The lotus from the site's hero, faded, on the porcelain ground. First time the new palette shows."
+ },
+ {
+  "id": "d1-2",
+  "day": 1,
+  "bucket": "Tease",
+  "title": "What are we up to?",
+  "sticker": "Poll (4 options)",
+  "copy": "What are we up to? Take a guess.",
+  "note": "Their own mehendi decor, blurred so it stays a tease. Poll results give a reason to post again tomorrow. Correct answer is revealed on Day 2."
+ },
+ {
+  "id": "d1-3",
+  "day": 1,
+  "bucket": "Tease",
+  "title": "How excited should you be?",
+  "sticker": "Emoji slider",
+  "copy": "How excited should you be? Slide it.",
+  "note": "The sparkler proposal frame does the work. Slider is the lowest-effort tap on Instagram, which is what a tease needs."
+ },
+ {
+  "id": "d2-1",
+  "day": 2,
+  "bucket": "Reveal",
+  "title": "Same soul. New home.",
+  "sticker": "None (reaction bar)",
+  "copy": "Same soul. New home. The answer was: all of the above.",
+  "note": "Logo reveal, no sticker. Pays off yesterday's poll in the eyebrow. This is the frame people screenshot, so keep it clean."
+ },
+ {
+  "id": "d2-2",
+  "day": 2,
+  "bucket": "Reveal",
+  "title": "Which one don't we do?",
+  "sticker": "Quiz (correct: C)",
+  "copy": "Pop quiz: which one don't we do? A. Vendor negotiations B. Hospitality C. Tax filing D. Destination events",
+  "note": "Smuggles the new services list into a joke. Three of the four are real items from the site's Scope of Services."
+ },
+ {
+  "id": "d2-3",
+  "day": 2,
+  "bucket": "Reveal",
+  "title": "Tomorrow, 10:00",
+  "sticker": "Countdown",
+  "copy": "Occasions that are personal & bespoke. Doors open tomorrow 10:00.",
+  "note": "The site's own hero, rebuilt as a story. Anyone who tapped the Day 1 countdown gets a nudge from this one too."
+ },
+ {
+  "id": "d3-1",
+  "day": 3,
+  "bucket": "Launch",
+  "title": "We're live",
+  "sticker": "Link",
+  "copy": "We're live. souleventsindia.com",
+  "note": "Launch frame. The site's hero inside a phone, on the ink ground from the site's contact section. Link sticker is the whole point, keep it big."
+ },
+ {
+  "id": "d3-2",
+  "day": 3,
+  "bucket": "Launch",
+  "title": "Scroll with us",
+  "sticker": "Link (over a screen recording)",
+  "copy": "Scroll with us. souleventsindia.com",
+  "note": "This one is a placeholder for a phone screen recording of the live site, 12 to 15 seconds. The gallery hover reveal is the moment to catch on camera."
+ },
+ {
+  "id": "d3-3",
+  "day": 3,
+  "bucket": "Launch",
+  "title": "Nine kinds of occasion",
+  "sticker": "Poll (2) + Link",
+  "copy": "Nine kinds of occasion. Which should we show first?",
+  "note": "Lists the gallery's nine categories as they appear on the site. The poll decides Day 4's order, so it is a real vote, not a fake one."
+ },
+ {
+  "id": "d3-4",
+  "day": 3,
+  "bucket": "Launch",
+  "title": "Show us your Soul moment",
+  "sticker": "Add Yours",
+  "copy": "Show us your Soul moment.",
+  "note": "Add Yours chains user photos onto the launch. 450+ past clients is a lot of camera rolls. Reshare the good ones through the week."
+ },
+ {
+  "id": "d4-1",
+  "day": 4,
+  "bucket": "The Work",
+  "title": "Under a roof or under the trees?",
+  "sticker": "Poll (2)",
+  "copy": "This or that: under a roof, or under the trees?",
+  "note": "Split frame, two of their own mandaps: the red timber-pavilion one and the Namrata & Ashwin garden canopy. This-or-that is Instagram's most answered format."
+ },
+ {
+  "id": "d4-2",
+  "day": 4,
+  "bucket": "The Work",
+  "title": "Swing-worthy?",
+  "sticker": "Emoji slider",
+  "copy": "The Taj, Mehendi. Swing-worthy?",
+  "note": "The jhoola from the Taj mehendi. One word question, one slider. Location in the eyebrow is a quiet flex."
+ },
+ {
+  "id": "d4-3",
+  "day": 4,
+  "bucket": "The Work",
+  "title": "By the pool or on the lawn?",
+  "sticker": "Poll (2)",
+  "copy": "The Marriott, brunch. By the pool, or on the lawn?",
+  "note": "The cabana table beside the pool. Second poll of the day, different photo, same rhythm."
+ },
+ {
+  "id": "d4-4",
+  "day": 4,
+  "bucket": "The Work",
+  "title": "What's on your dream table?",
+  "sticker": "Question box",
+  "copy": "Table decor. What's on your dream table?",
+  "note": "First open question of the week. Replies are content for Day 6 and leads for Day 7. Answer a few publicly."
+ },
+ {
+  "id": "d5-1",
+  "day": 5,
+  "bucket": "The Two of Us",
+  "title": "Chelna, by Ramesh",
+  "sticker": "None (reaction bar)",
+  "copy": "We found it easier to introduce each other than ourselves. “Chelna is a magician...” Ramesh, on Chelna.",
+  "note": "The founders section, verbatim. Ink ground so it reads as a page from the site. If Chelna sends a portrait it goes behind this text."
+ },
+ {
+  "id": "d5-2",
+  "day": 5,
+  "bucket": "The Two of Us",
+  "title": "Ramesh, by Chelna",
+  "sticker": "None (reaction bar)",
+  "copy": "“Always fun, often witty, and never dull...” Chelna, on Ramesh.",
+  "note": "Pair to the previous frame. Post them back to back so they read as one spread."
+ },
+ {
+  "id": "d5-3",
+  "day": 5,
+  "bucket": "The Two of Us",
+  "title": "Ask Chelna & Ramesh anything",
+  "sticker": "Question box",
+  "copy": "Open floor. Ask Chelna & Ramesh anything.",
+  "note": "The Q&A. Ramesh with a mic is the right photo for it. Answers get posted as frames on Day 6. Confirm the photo is Ramesh before using it; swap for the stage frame if not."
+ },
+ {
+  "id": "d5-4",
+  "day": 5,
+  "bucket": "The Two of Us",
+  "title": "How many events have we done?",
+  "sticker": "Quiz (correct: C)",
+  "copy": "By the numbers. How many events have we done? 150 / 300 / 450+ / 1000",
+  "note": "Turns the stats section into a quiz. Photo is from the Holi party deck; check it reads well at story size or swap for a brunch wide."
+ },
+ {
+  "id": "d6-1",
+  "day": 6,
+  "bucket": "Voices",
+  "title": "Till 6 in the morning",
+  "sticker": "None (reaction bar)",
+  "copy": "“...the party which lasted till 6 in the morning.” Anand Jain",
+  "note": "Verbatim from the site's testimonials. Porcelain ground, lotus faded in the corner. No sticker; let the quote sit."
+ },
+ {
+  "id": "d6-2",
+  "day": 6,
+  "bucket": "Voices",
+  "title": "As though it was our own family",
+  "sticker": "None (reaction bar)",
+  "copy": "“...as though it was a wedding from your own family.” Kalpana Rao, Dubai",
+  "note": "Second voice. Same frame, so the two read as a set. Both are on the site word for word."
+ },
+ {
+  "id": "d6-3",
+  "day": 6,
+  "bucket": "Voices",
+  "title": "You asked, we answered",
+  "sticker": "Question response",
+  "copy": "You asked, we answered. (One frame per answer, reusing the question sticker.)",
+  "note": "Template for the Day 5 Q&A replies. Instagram lets you reshare a question response with your answer over it; this is the layout to answer in. The example answer here is a placeholder, write the real ones."
+ },
+ {
+  "id": "d6-4",
+  "day": 6,
+  "bucket": "Voices",
+  "title": "Have we planned one of yours?",
+  "sticker": "Poll (2)",
+  "copy": "Quick one. Have we planned one of yours?",
+  "note": "Sorts the audience into past clients and prospects. The “Not yet” voters are who Day 7 talks to."
+ },
+ {
+  "id": "d7-1",
+  "day": 7,
+  "bucket": "Invite",
+  "title": "Tell us the date, the city, and the feeling",
+  "sticker": "Question box",
+  "copy": "Planning something? Tell us the date, the city, and the feeling.",
+  "note": "The contact section's own line. Question box replies land in DMs, which is where a lead should land."
+ },
+ {
+  "id": "d7-2",
+  "day": 7,
+  "bucket": "Invite",
+  "title": "By the numbers",
+  "sticker": "None (reaction bar)",
+  "copy": "20 years since formation. 450+ events. 47 years of collective experience. 450+ happy clients.",
+  "note": "The stats section as a story. Instagram lets you animate each number in, so post this as one frame and let the app do the reveal."
+ },
+ {
+  "id": "d7-3",
+  "day": 7,
+  "bucket": "Invite",
+  "title": "Just let us step in",
+  "sticker": "Link ×2",
+  "copy": "Just let us step in. A phone call is usually the fastest way to begin. WhatsApp works too.",
+  "note": "The contact headline in the site's blue on ink. Two link stickers: site, and wa.me. Confirm the number is theirs before this goes up."
+ },
+ {
+  "id": "d7-4",
+  "day": 7,
+  "bucket": "Invite",
+  "title": "In case you missed it",
+  "sticker": "Link",
+  "copy": "In case you missed it: we have a new home. souleventsindia.com",
+  "note": "Closer. Pin this and the Day 3 launch frame to a “New home” highlight so the link outlives the week."
+ }
+]
