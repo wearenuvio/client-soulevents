@@ -13,8 +13,8 @@ for f in frames:
 
 DAYS = [
  (1, "Wed 9 Sep",  "Tease",         "Something is blooming",  "Three frames that say nothing and promise everything. A countdown people can tap to be reminded, a poll to guess, a slider to play with."),
- (2, "Thu 10 Sep", "Reveal",        "Same soul, new home",    "The logo, the answer to yesterday's poll, and the site's own hero rebuilt as a story. One quiz that sneaks the new services list in."),
- (3, "Fri 11 Sep", "Launch",        "We're live",             "Link sticker day. The site in a phone, a screen recording of it, the nine gallery categories, and an Add Yours chain for past guests."),
+ (2, "Thu 10 Sep", "Reveal",        "Same soul, new home",    "The logo, the site's own hero rebuilt as a story, and one quiz built from events they have actually done."),
+ (3, "Fri 11 Sep", "Launch",        "We're live",             "Link sticker day. The live site in a phone, the nine gallery categories, and an Add Yours chain for favourite moments."),
  (4, "Sat 12 Sep", "The Work",      "This or that",           "Four frames, four of their own venues. Polls and sliders only, because Saturday is a scrolling day, not a reading day."),
  (5, "Sun 13 Sep", "The Two of Us", "Introducing each other", "The founders section verbatim, an open Q&A box, and the 450+ figure turned into a quiz."),
  (6, "Mon 14 Sep", "Voices",        "Word for word",          "Two testimonials from the site, the Q&A answers, and one poll that sorts followers into past clients and prospects."),
@@ -22,15 +22,17 @@ DAYS = [
 ]
 STICKERS = [
  ("Countdown", "d1-1, d2-3", "Tap to get reminded. Instagram sends a notification at zero, which is a launch-morning push you did not have to write."),
- ("Poll", "d1-2, d3-3, d4-1, d4-3, d6-4", "Lowest-friction tap on the platform. Results are content for the next frame, so every poll here has a payoff the day after."),
+ ("Poll", "d1-2, d4-1, d4-3, d6-4", "Lowest-friction tap on the platform. Results are content for the next frame, so every poll here has a payoff the day after."),
  ("Emoji slider", "d1-3, d4-2", "Even lower friction than a poll. Good for frames that are really just a photograph you want people to sit with."),
- ("Quiz", "d2-2, d5-4", "Smuggles a fact in as a game. The two here carry the services list and the 450+ figure."),
+ ("Quiz", "d2-2, d5-4", "Smuggles a fact in as a game. The two here carry the range of their work and the 450+ figure."),
  ("Question box", "d4-4, d5-3, d7-1", "Replies arrive as DMs, which is where a lead should arrive. Answer some publicly on Day 6; the rest are a conversation."),
  ("Add Yours", "d3-4", "Chains follower photos onto the launch. 450+ past clients is a lot of camera rolls. Reshare the best through the week."),
- ("Link", "d3-1, d3-2, d3-3, d7-3, d7-4", "The whole point of the week. Big, centred, never the same frame as a poll, so nothing competes with it."),
+ ("Link", "d3-1, d3-3, d7-3, d7-4", "The whole point of the week. Big, centred, never the same frame as a poll, so nothing competes with it."),
  ("None", "d2-1, d5-1, d5-2, d6-1, d6-2, d7-2", "Reveal, quotes and numbers get no sticker. The reaction bar is enough; a poll on a testimonial cheapens it."),
 ]
 def esc(s): return html.escape(s, quote=True)
+NF=len(frames); NS=sum(1 for f in frames if not f['sticker'].startswith('None'))
+WORDS={18:'eighteen',19:'nineteen',20:'twenty',21:'twenty-one',22:'twenty-two',23:'twenty-three',24:'twenty-four',25:'twenty-five',26:'twenty-six'}
 
 p = []
 p.append("""<title>Soul Launch Week Stories</title>
@@ -135,10 +137,10 @@ body.no-db .offline{display:block}
   <div>
     <span class="mono">Soul Events · Instagram · Wed 9 to Tue 15 September</span>
     <h1>Launch week, <span class="ital">frame by frame.</span></h1>
-    <p>Seven days, twenty-six story frames, one arc: tease, reveal, launch, then a week of reasons to come back. Every photograph is from the studio's own decks. Every sticker is drawn where it goes. Mark each frame approved or send it back with a note; what you mark here is what gets built.</p>
+    <p>Seven days, """ + WORDS[len(frames)] + """ story frames, one arc: tease, reveal, launch, then a week of reasons to come back. Every photograph is from the studio's own decks. The sticker for each frame is named under it, to add in Instagram. Mark each frame approved or send it back with a note; what you mark here is what gets built.</p>
     <span class="offline">Approvals are view-only in this window</span>
   </div>
-  <div class="tally"><span id="tOk">0</span><span class="st"> / 26</span><small id="tLbl">approved · 0 to change</small></div>
+  <div class="tally"><span id="tOk">0</span><span class="st"> / """ + str(len(frames)) + """</span><small id="tLbl">approved · 0 to change</small></div>
 </header>
 <nav class="arc" aria-label="The week">
 """)
@@ -158,7 +160,7 @@ for n, date, bucket, line, lede in DAYS:
     </article>
 ''')
     p.append("  </div>\n</section>\n")
-p.append('<section class="sect" id="stickers">\n  <div class="sect-head"><span class="idx">HOW</span><h2>Where the interactivity <span class="ital">actually comes from.</span></h2></div>\n  <p class="sect-lede">Instagram counts every tap on a story as engagement, and ranks the account on it. Twenty of the twenty-six frames carry a native sticker. Which one, and why, per type:</p>\n  <div class="tbl">\n')
+p.append('<section class="sect" id="stickers">\n  <div class="sect-head"><span class="idx">HOW</span><h2>Where the interactivity <span class="ital">actually comes from.</span></h2></div>\n  <p class="sect-lede">Instagram counts every tap on a story as engagement, and ranks the account on it. ' + WORDS[NS].capitalize() + ' of the ' + WORDS[NF] + ' frames get a native sticker, added in the Instagram app when posting; the frames themselves stay clean. Which one, and why, per type:</p>\n  <div class="tbl">\n')
 for k, where, why in STICKERS:
     p.append(f'    <div class="r"><span class="k">{esc(k)}</span><span class="w">{esc(where)}</span><span class="v">{esc(why)}</span></div>\n')
 p.append('''  </div>
@@ -170,7 +172,7 @@ p.append('''  </div>
     <div><h3>Link sticker gets a clean frame</h3><p>Never on the same frame as a poll or a slider. On launch day it is the biggest thing on screen and it is there three times.</p></div>
     <div><h3>Answer the question boxes</h3><p>Day 4 and Day 5 open two of them. Reply to a handful publicly on Day 6 in the "You asked" template, and reply to the rest in DMs the same day. Unanswered boxes read as an unanswered phone.</p></div>
     <div><h3>Pin two frames as a highlight</h3><p>The launch frame (D3-1) and the closer (D7-4) go into a "New home" highlight before the week ends, so the link outlives the 24 hours.</p></div>
-    <div><h3>Two frames need a recording, not a photo</h3><p>D3-2 is a placeholder for a phone screen recording of the live site. D6-3 is a template to answer questions in. Everything else is ready to post as drawn.</p></div>
+    <div><h3>Stickers go on in Instagram</h3><p>Every frame is a clean 1080×1920 image. The sticker to add, and its options where it has them, is written under each frame. D6-3 is a template to answer questions in; everything else is ready to post as drawn.</p></div>
   </div>
 </section>
 <footer class="foot">

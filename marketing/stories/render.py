@@ -14,6 +14,7 @@ SP   = "/private/tmp/claude-501/-Users-4bhinav-devroar-soul-client-soulevents/d0
 REPO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 OUT  = os.path.join(REPO, "marketing", "stories", "frames"); os.makedirs(OUT, exist_ok=True)
 W, H = 1080, 1920
+STICKERS = False   # the client adds every sticker in the Instagram app; frames stay clean
 
 # ---- palette (the site's tokens) ----
 PORC  = (248, 247, 244); INK = (26, 26, 34); INKP = (46, 34, 40)
@@ -73,6 +74,7 @@ def brand_bar(d, canvas, light=True, y=112):
 
 # ---------------- sticker mock-ups ----------------
 def sticker_poll(canvas, d, y, q, opts, w=760):
+    if not STICKERS: return y
     x = (W - w) // 2
     box = (x, y, x + w, y + 92 + 100 * len(opts) + 24)
     rrect(d, box, 34, fill=(255, 255, 255, 255))
@@ -84,6 +86,7 @@ def sticker_poll(canvas, d, y, q, opts, w=760):
     return box[3]
 
 def sticker_slider(canvas, d, y, q, w=760):
+    if not STICKERS: return y
     x = (W - w) // 2
     rrect(d, (x, y, x + w, y + 210), 34, fill=(255, 255, 255, 255))
     d.text((x + 44, y + 34), q, font=SANS(32, "SemiBold"), fill=INK)
@@ -95,6 +98,7 @@ def sticker_slider(canvas, d, y, q, w=760):
     return y + 210
 
 def sticker_quiz(canvas, d, y, q, opts, correct, w=760):
+    if not STICKERS: return y
     x = (W - w) // 2
     rrect(d, (x, y, x + w, y + 100 + 92 * len(opts) + 20), 34, fill=(*INKP, 255))
     d.text((x + 44, y + 34), q, font=SANS(32, "SemiBold"), fill=PORC)
@@ -106,6 +110,7 @@ def sticker_quiz(canvas, d, y, q, opts, correct, w=760):
     return yy + 20
 
 def sticker_question(canvas, d, y, q, w=760):
+    if not STICKERS: return y
     x = (W - w) // 2
     rrect(d, (x, y, x + w, y + 220), 34, fill=(255, 255, 255, 255))
     d.text((x + 44, y + 34), q, font=SANS(32, "SemiBold"), fill=INK)
@@ -114,6 +119,7 @@ def sticker_question(canvas, d, y, q, w=760):
     return y + 220
 
 def sticker_countdown(canvas, d, y, label, w=680):
+    if not STICKERS: return y
     x = (W - w) // 2
     rrect(d, (x, y, x + w, y + 236), 34, fill=(*PLUMD, 255))
     d.text((x + 44, y + 30), label.upper(), font=MONO(24), fill=BLUSH)
@@ -124,6 +130,7 @@ def sticker_countdown(canvas, d, y, label, w=680):
     return y + 236
 
 def sticker_link(canvas, d, y, text="souleventsindia.com"):
+    if not STICKERS: return y
     f = SANS(30, "SemiBold"); tw = d.textlength(text, font=f) + 150; x = (W - tw) // 2
     rrect(d, (x, y, x + tw, y + 84), 26, fill=(255, 255, 255, 255))
     d.ellipse((x + 26, y + 20, x + 70, y + 64), fill=(*PLUM, 255))
@@ -132,6 +139,7 @@ def sticker_link(canvas, d, y, text="souleventsindia.com"):
     return y + 84
 
 def sticker_addyours(canvas, d, y, text, w=760):
+    if not STICKERS: return y
     x = (W - w) // 2
     rrect(d, (x, y, x + w, y + 150), 34, fill=(255, 255, 255, 255))
     d.text((x + 44, y + 30), "ADD YOURS", font=MONO(22), fill=PLUM)
@@ -202,8 +210,8 @@ def d1_1():
     y = headline(d, 620, ["Something", "is", "blooming."], 132, ital_last=True)
     para(d, y + 40, "Twenty years in. A new home for everything we make. Keep an eye on this space.", 34, fill=INKP, maxw=700)
     sticker_countdown(c, d, 1420, "New home opens in"); return c
-frame("d1-1", 1, "Tease", "Something is blooming", "Countdown",
-      "Something is blooming. New home opens in 02:19:40.",
+frame("d1-1", 1, "Tease", "Something is blooming", "Countdown · add in Instagram, set to launch morning",
+      "Something is blooming.",
       "Countdown sticker set to launch morning. Viewers can tap to get reminded. The lotus from the site's hero, faded, on the porcelain ground. First time the new palette shows.", d1_1)
 
 def d1_2():
@@ -212,19 +220,19 @@ def d1_2():
     eyebrow(d, 500, "GUESS", fill=BLUSH, align="center")
     headline(d, 560, ["What are we", "up to?"], 112, fill=PORC, align="center")
     sticker_poll(c, d, 1040, "Take a guess", ["A new website", "A new city", "A new service", "All of the above"]); return c
-frame("d1-2", 1, "Tease", "What are we up to?", "Poll (4 options)",
-      "What are we up to? Take a guess.",
+frame("d1-2", 1, "Tease", "What are we up to?", "Poll · add in Instagram: A new website / A new city / A new service / All of the above",
+      "What are we up to?",
       "Their own mehendi decor, blurred so it stays a tease. Poll results give a reason to post again tomorrow. Correct answer is revealed on Day 2.", d1_2)
 
 def d1_3():
-    c = base_photo("soulevents", 47, (0.5, 0.45), 20, 170); d = ImageDraw.Draw(c)
+    c = base_photo("recepbrunch", 44, (0.5, 0.5), 20, 170); d = ImageDraw.Draw(c)
     brand_bar(d, c, False)
     eyebrow(d, 1180, "HONEST QUESTION", fill=BLUSH)
     headline(d, 1230, ["How excited", "should you be?"], 96, fill=PORC)
     sticker_slider(c, d, 1520, "Slide it"); return c
-frame("d1-3", 1, "Tease", "How excited should you be?", "Emoji slider",
-      "How excited should you be? Slide it.",
-      "The sparkler proposal frame does the work. Slider is the lowest-effort tap on Instagram, which is what a tease needs.", d1_3)
+frame("d1-3", 1, "Tease", "How excited should you be?", "Emoji slider · add in Instagram",
+      "How excited should you be?",
+      "A lit floral arch after dark, no people. Slider is the lowest-effort tap on Instagram, which is what a tease needs.", d1_3)
 
 # ---------- DAY 2 · REVEAL ----------
 def d2_1():
@@ -234,88 +242,66 @@ def d2_1():
     c.alpha_composite(mark, ((W - mark.width) // 2, 560)); y = 560 + mark.height + 60
     f = F("Marcellus", 150); d.text(((W - d.textlength("SOUL", font=f)) / 2, y), "SOUL", font=f, fill=INKP)
     d.text(((W - d.textlength("events", font=MONO(40))) / 2, y + 170), "events", font=MONO(40), fill=PLUMD)
-    eyebrow(d, y + 300, "THE ANSWER WAS: ALL OF THE ABOVE", align="center")
-    headline(d, y + 350, ["Same soul.", "New home."], 96, ital_last=True, align="center"); return c
+    headline(d, y + 330, ["Same soul.", "New home."], 96, ital_last=True, align="center"); return c
 frame("d2-1", 2, "Reveal", "Same soul. New home.", "None (reaction bar)",
-      "Same soul. New home. The answer was: all of the above.",
-      "Logo reveal, no sticker. Pays off yesterday's poll in the eyebrow. This is the frame people screenshot, so keep it clean.", d2_1)
+      "Same soul. New home.",
+      "Logo reveal, no sticker. This is the frame people screenshot, so keep it clean.", d2_1)
 
 def d2_2():
     c = base_photo("recep_leela", 10, (0.5, 0.5), 60, 200); d = ImageDraw.Draw(c)
     brand_bar(d, c, False)
     eyebrow(d, 560, "POP QUIZ", fill=BLUSH, align="center")
-    headline(d, 610, ["Which one", "don't we do?"], 100, fill=PORC, align="center")
-    sticker_quiz(c, d, 960, "Pick one", ["Vendor negotiations", "Hospitality", "Tax filing", "Destination events"], 2); return c
-frame("d2-2", 2, "Reveal", "Which one don't we do?", "Quiz (correct: C)",
-      "Pop quiz: which one don't we do? A. Vendor negotiations B. Hospitality C. Tax filing D. Destination events",
-      "Smuggles the new services list into a joke. Three of the four are real items from the site's Scope of Services.", d2_2)
+    headline(d, 610, ["Which of these", "have we done?"], 100, fill=PORC, align="center")
+    sticker_quiz(c, d, 960, "Pick one", ["A wedding on a beach in Goa", "A brunch beside a pool", "A Holi party for a whole office", "All of the above"], 3); return c
+frame("d2-2", 2, "Reveal", "Which of these have we done?", "Quiz · add in Instagram: A. A wedding on a beach in Goa · B. A brunch beside a pool · C. A Holi party for a whole office · D. All of the above (correct: D)",
+      "Pop quiz: which of these have we done?",
+      "Every option is a real event from the decks. The answer is all of them, which is the point.", d2_2)
 
 def d2_3():
     c = base_porcelain(); d = ImageDraw.Draw(c)
     lotus_on(c, h=1000, right=-30, bottom=80, alpha=210); brand_bar(d, c, True)
     eyebrow(d, 520, "SOULEVENTSINDIA.COM")
-    y = headline(d, 580, ["Occasions", "that are personal", "& bespoke."], 108, ital_last=True)
-    para(d, y + 36, "One part exciting, two parts soulful, three quarters funny, and very many portions of creative flair.", 34, fill=INKP, maxw=620, font=DISPLAY(34), lh=1.36)
+    headline(d, 640, ["Occasions", "that are personal", "& bespoke."], 108, ital_last=True)
     sticker_countdown(c, d, 1500, "Doors open"); return c
-frame("d2-3", 2, "Reveal", "Tomorrow, 10:00", "Countdown",
-      "Occasions that are personal & bespoke. Doors open tomorrow 10:00.",
+frame("d2-3", 2, "Reveal", "Tomorrow, 10:00", "Countdown · add in Instagram, set to launch morning",
+      "Occasions that are personal & bespoke.",
       "The site's own hero, rebuilt as a story. Anyone who tapped the Day 1 countdown gets a nudge from this one too.", d2_3)
 
 # ---------- DAY 3 · LAUNCH ----------
 def d3_1():
     c = base_ink(); d = ImageDraw.Draw(c); brand_bar(d, c, False)
-    og = Image.open(f"{REPO}/assets/brand/og-image.jpg").convert("RGB")
-    ph_w, ph_h = 640, 1180
-    shot = og.resize((ph_w - 24, round((ph_w - 24) * og.height / og.width)), Image.LANCZOS)
-    screen = Image.new("RGB", (ph_w - 24, ph_h - 24), PORC); screen.paste(shot, (0, 0)); sd = ImageDraw.Draw(screen)
-    sd.text((36, shot.height + 40), "01  ABOUT", font=MONO(16), fill=PLUM)
-    sd.text((36, shot.height + 80), "SOUL is not a company.", font=DISPLAY(36), fill=INK)
-    sd.text((36, shot.height + 126), "That would mean we look at", font=SANS(20), fill=INKP)
-    sd.text((36, shot.height + 154), "what we do as simply a job.", font=SANS(20), fill=INKP)
-    for k, (n, l) in enumerate([("20", "Years"), ("450+", "Events"), ("47", "Years exp."), ("450+", "Clients")]):
-        sd.text((36 + k * 150, shot.height + 250), n, font=DISPLAY(40), fill=INK)
-        sd.text((36 + k * 150, shot.height + 300), l, font=MONO(13), fill=(120, 116, 122))
+    ph_w, ph_h = 640, 1300
+    shot = Image.open(f"{REPO}/marketing/stories/phone-hero.png").convert("RGB")
+    shot = shot.resize((ph_w - 24, round((ph_w - 24) * shot.height / shot.width)), Image.LANCZOS)
+    screen = Image.new("RGB", (ph_w - 24, ph_h - 24), PORC); screen.paste(shot.crop((0, 0, shot.width, min(shot.height, ph_h - 24))), (0, 0))
     ph = Image.new("RGBA", (ph_w, ph_h), (0, 0, 0, 0)); pd = ImageDraw.Draw(ph)
     pd.rounded_rectangle((0, 0, ph_w, ph_h), radius=64, fill=(*INKP, 255), outline=(*PLUMS, 255), width=3)
     mask = Image.new("L", screen.size, 0); ImageDraw.Draw(mask).rounded_rectangle((0, 0, *screen.size), radius=52, fill=255)
-    ph.paste(screen, (12, 12), mask); c.alpha_composite(ph, ((W - ph_w) // 2, 300))
-    headline(d, 1540, ["We're live."], 120, fill=PORC, align="center")
-    sticker_link(c, d, 1700); return c
-frame("d3-1", 3, "Launch", "We're live", "Link",
-      "We're live. souleventsindia.com",
-      "Launch frame. The site's hero inside a phone, on the ink ground from the site's contact section. Link sticker is the whole point, keep it big.", d3_1)
+    ph.paste(screen, (12, 12), mask); c.alpha_composite(ph, ((W - ph_w) // 2, 240))
+    headline(d, 1600, ["We're live."], 120, fill=PORC, align="center"); return c
+frame("d3-1", 3, "Launch", "We're live", "Link · add in Instagram: souleventsindia.com",
+      "We're live.",
+      "Launch frame. A real screenshot of the live site at phone width, in a phone. Add the link sticker below the headline.", d3_1)
 
-def d3_2():
-    c = base_porcelain(); d = ImageDraw.Draw(c); brand_bar(d, c, True)
-    eyebrow(d, 400, "SCREEN RECORDING GOES HERE")
-    headline(d, 450, ["Scroll", "with us."], 132, ital_last=True)
-    rrect(d, (88, 780, W - 88, 1560), 40, fill=(*PORC, 255), outline=(*PLUMS, 255), width=3)
-    d.text((W / 2 - d.textlength("▶", font=DISPLAY(120)) / 2, 1090), "▶", font=DISPLAY(120), fill=PLUMS)
-    para(d, 1250, "Record on your phone: hero → scroll to Founders → hover a gallery tile so the colour comes up → open the Mehendi popup. 12 to 15 seconds, no music needed.", 26, fill=INKP, maxw=760, x=140, font=MONO(24), lh=1.5)
-    sticker_link(c, d, 1660); return c
-frame("d3-2", 3, "Launch", "Scroll with us", "Link (over a screen recording)",
-      "Scroll with us. souleventsindia.com",
-      "This one is a placeholder for a phone screen recording of the live site, 12 to 15 seconds. The gallery hover reveal is the moment to catch on camera.", d3_2)
 
 def d3_3():
     c = base_photo("brunch_marriott", 1, (0.5, 0.5), 60, 210); d = ImageDraw.Draw(c); brand_bar(d, c, False)
     eyebrow(d, 380, "NINE KINDS OF OCCASION", fill=BLUSH); y = 430
     for cat in ["Weddings", "Receptions", "Haldi", "Mehendi", "Brunches", "Milestone Birthdays", "Children's Birthdays", "Anniversaries", "Table Decor"]:
         d.text((88, y), cat, font=DISPLAY(58), fill=PORC); y += 66
-    sticker_poll(c, d, 1180, "Which should we show first?", ["Weddings", "Mehendi"])
-    sticker_link(c, d, 1700); return c
-frame("d3-3", 3, "Launch", "Nine kinds of occasion", "Poll (2) + Link",
-      "Nine kinds of occasion. Which should we show first?",
-      "Lists the gallery's nine categories as they appear on the site. The poll decides Day 4's order, so it is a real vote, not a fake one.", d3_3)
+    return c
+frame("d3-3", 3, "Launch", "Nine kinds of occasion", "Link · add in Instagram",
+      "Nine kinds of occasion.",
+      "The gallery's nine categories as they appear on the site, as a plain listing.", d3_3)
 
 def d3_4():
     c = base_photo("recepbrunch", 17, (0.5, 0.5), 60, 200); d = ImageDraw.Draw(c); brand_bar(d, c, False)
     eyebrow(d, 1080, "YOUR TURN", fill=BLUSH)
-    headline(d, 1130, ["Show us your", "Soul moment."], 92, fill=PORC)
-    sticker_addyours(c, d, 1440, "A Soul Events occasion you were at"); return c
-frame("d3-4", 3, "Launch", "Show us your Soul moment", "Add Yours",
-      "Show us your Soul moment.",
-      "Add Yours chains user photos onto the launch. 450+ past clients is a lot of camera rolls. Reshare the good ones through the week.", d3_4)
+    headline(d, 1130, ["Show us your", "favourite", "Soul moment."], 92, fill=PORC, ital_last=True)
+    sticker_addyours(c, d, 1520, "Your favourite Soul moment"); return c
+frame("d3-4", 3, "Launch", "Show us your favourite Soul moment", "Add Yours · add in Instagram: “Your favourite Soul moment”",
+      "Show us your favourite Soul moment.",
+      "Add Yours chains follower photos onto the launch. Any moment, not a specific occasion. Reshare the good ones through the week.", d3_4)
 
 # ---------- DAY 4 · THE WORK ----------
 def d4_1():
@@ -327,7 +313,7 @@ def d4_1():
     eyebrow(d, 846, "THIS OR THAT", align="center")
     headline(d, 892, ["Under a roof,", "or under the trees?"], 64, align="center")
     sticker_poll(c, d, 1290, "Pick a side", ["A  Under a roof", "B  Under the trees"], w=640); return c
-frame("d4-1", 4, "The Work", "Under a roof or under the trees?", "Poll (2)",
+frame("d4-1", 4, "The Work", "Under a roof or under the trees?", "Poll · add in Instagram: A / B",
       "This or that: under a roof, or under the trees?",
       "Split frame, two of their own mandaps: the red timber-pavilion one and the Namrata & Ashwin garden canopy. This-or-that is Instagram's most answered format.", d4_1)
 
@@ -336,7 +322,7 @@ def d4_2():
     eyebrow(d, 1160, "THE TAJ · MEHENDI", fill=BLUSH)
     headline(d, 1210, ["Swing-", "worthy?"], 110, fill=PORC)
     sticker_slider(c, d, 1560, "How much"); return c
-frame("d4-2", 4, "The Work", "Swing-worthy?", "Emoji slider",
+frame("d4-2", 4, "The Work", "Swing-worthy?", "Emoji slider · add in Instagram",
       "The Taj, Mehendi. Swing-worthy?",
       "The jhoola from the Taj mehendi. One word question, one slider. Location in the eyebrow is a quiet flex.", d4_2)
 
@@ -345,7 +331,7 @@ def d4_3():
     eyebrow(d, 1100, "THE MARRIOTT · BRUNCH", fill=BLUSH)
     headline(d, 1150, ["Brunch by the pool,", "or on the lawn?"], 76, fill=PORC)
     sticker_poll(c, d, 1440, "Where would you sit?", ["By the pool", "On the lawn"]); return c
-frame("d4-3", 4, "The Work", "By the pool or on the lawn?", "Poll (2)",
+frame("d4-3", 4, "The Work", "By the pool or on the lawn?", "Poll · add in Instagram: By the pool / On the lawn",
       "The Marriott, brunch. By the pool, or on the lawn?",
       "The cabana table beside the pool. Second poll of the day, different photo, same rhythm.", d4_3)
 
@@ -354,7 +340,7 @@ def d4_4():
     eyebrow(d, 1140, "TABLE DECOR", fill=BLUSH)
     headline(d, 1190, ["What's on your", "dream table?"], 84, fill=PORC)
     sticker_question(c, d, 1500, "Tell us"); return c
-frame("d4-4", 4, "The Work", "What's on your dream table?", "Question box",
+frame("d4-4", 4, "The Work", "What's on your dream table?", "Question box · add in Instagram",
       "Table decor. What's on your dream table?",
       "First open question of the week. Replies are content for Day 6 and leads for Day 7. Answer a few publicly.", d4_4)
 
@@ -385,7 +371,7 @@ def d5_3():
     eyebrow(d, 1060, "OPEN FLOOR", fill=BLUSH)
     headline(d, 1110, ["Ask Chelna", "& Ramesh", "anything."], 96, fill=PORC, ital_last=True)
     sticker_question(c, d, 1530, "Go on"); return c
-frame("d5-3", 5, "The Two of Us", "Ask Chelna & Ramesh anything", "Question box",
+frame("d5-3", 5, "The Two of Us", "Ask Chelna & Ramesh anything", "Question box · add in Instagram",
       "Open floor. Ask Chelna & Ramesh anything.",
       "The Q&A. Ramesh with a mic is the right photo for it. Answers get posted as frames on Day 6. Confirm the photo is Ramesh before using it; swap for the stage frame if not.", d5_3)
 
@@ -394,8 +380,8 @@ def d5_4():
     eyebrow(d, 560, "BY THE NUMBERS", fill=BLUSH, align="center")
     headline(d, 610, ["How many events", "have we done?"], 84, fill=PORC, align="center")
     sticker_quiz(c, d, 920, "Take a guess", ["150", "300", "450+", "1000"], 2); return c
-frame("d5-4", 5, "The Two of Us", "How many events have we done?", "Quiz (correct: C)",
-      "By the numbers. How many events have we done? 150 / 300 / 450+ / 1000",
+frame("d5-4", 5, "The Two of Us", "How many events have we done?", "Quiz · add in Instagram: 150 / 300 / 450+ / 1000 (correct: 450+)",
+      "By the numbers. How many events have we done?",
       "Turns the stats section into a quiz. Photo is from the Holi party deck; check it reads well at story size or swap for a brunch wide.", d5_4)
 
 # ---------- DAY 6 · VOICES ----------
@@ -427,7 +413,7 @@ def d6_3():
     d.text((128, 800), "How far ahead should we book you?", font=SANS(32, "SemiBold"), fill=INK)
     para(d, 960, "For a wedding, six to nine months. For a birthday or a brunch, six weeks is plenty. For a Tuesday, call us Monday.", 40, fill=PORC, maxw=860, font=DISPLAY(40), lh=1.36)
     d.text((88, 1400), "TEMPLATE · ONE FRAME PER ANSWER", font=MONO(22), fill=PLUMS); return c
-frame("d6-3", 6, "Voices", "You asked, we answered", "Question response",
+frame("d6-3", 6, "Voices", "You asked, we answered", "Question response · reshare a reply from the D5-3 box",
       "You asked, we answered. (One frame per answer, reusing the question sticker.)",
       "Template for the Day 5 Q&A replies. Instagram lets you reshare a question response with your answer over it; this is the layout to answer in. The example answer here is a placeholder, write the real ones.", d6_3)
 
@@ -436,7 +422,7 @@ def d6_4():
     eyebrow(d, 1140, "QUICK ONE", fill=BLUSH)
     headline(d, 1190, ["Have we planned", "one of yours?"], 80, fill=PORC)
     sticker_poll(c, d, 1480, "Be honest", ["Yes, and it was a night", "Not yet"]); return c
-frame("d6-4", 6, "Voices", "Have we planned one of yours?", "Poll (2)",
+frame("d6-4", 6, "Voices", "Have we planned one of yours?", "Poll · add in Instagram: Yes, and it was a night / Not yet",
       "Quick one. Have we planned one of yours?",
       "Sorts the audience into past clients and prospects. The “Not yet” voters are who Day 7 talks to.", d6_4)
 
@@ -446,7 +432,7 @@ def d7_1():
     eyebrow(d, 1040, "PLANNING SOMETHING?", fill=BLUSH)
     headline(d, 1090, ["Tell us the date,", "the city, and", "the feeling."], 80, fill=PORC, ital_last=True)
     sticker_question(c, d, 1500, "Start here"); return c
-frame("d7-1", 7, "Invite", "Tell us the date, the city, and the feeling", "Question box",
+frame("d7-1", 7, "Invite", "Tell us the date, the city, and the feeling", "Question box · add in Instagram",
       "Planning something? Tell us the date, the city, and the feeling.",
       "The contact section's own line. Question box replies land in DMs, which is where a lead should land.", d7_1)
 
@@ -467,7 +453,7 @@ def d7_3():
     d.text((88, 700), "Just", font=f, fill=PORC); d.text((88, 830), "let us", font=f, fill=BLUE); d.text((88, 960), "step in.", font=f, fill=BLUE)
     para(d, 1140, "A phone call is usually the fastest way to begin. WhatsApp works too.", 32, fill=PORC, maxw=760, font=SANS(32), lh=1.4)
     sticker_link(c, d, 1440, "souleventsindia.com"); sticker_link(c, d, 1560, "WhatsApp +91 93422 83539"); return c
-frame("d7-3", 7, "Invite", "Just let us step in", "Link ×2",
+frame("d7-3", 7, "Invite", "Just let us step in", "Link ×2 · add in Instagram: souleventsindia.com and wa.me",
       "Just let us step in. A phone call is usually the fastest way to begin. WhatsApp works too.",
       "The contact headline in the site's blue on ink. Two link stickers: site, and wa.me. Confirm the number is theirs before this goes up.", d7_3)
 
@@ -476,8 +462,8 @@ def d7_4():
     eyebrow(d, 1120, "IN CASE YOU MISSED IT", fill=BLUSH)
     headline(d, 1170, ["We have a", "new home."], 104, fill=PORC, ital_last=True)
     sticker_link(c, d, 1520); return c
-frame("d7-4", 7, "Invite", "In case you missed it", "Link",
-      "In case you missed it: we have a new home. souleventsindia.com",
+frame("d7-4", 7, "Invite", "In case you missed it", "Link · add in Instagram: souleventsindia.com",
+      "In case you missed it: we have a new home.",
       "Closer. Pin this and the Day 3 launch frame to a “New home” highlight so the link outlives the week.", d7_4)
 
 json.dump(FRAMES, open(f"{OUT}/frames.json", "w"), indent=1, ensure_ascii=False)
