@@ -1,2 +1,5 @@
 assets/samples/_source.json
 assets/samples/dl.sh
+
+# full-size story exports, 28MB, rebuild with marketing/stories/render.py
+marketing/stories/png/
