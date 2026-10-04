@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Soul Events</title>
-<meta name="description" content="Soul Events, bespoke event design by Chelna Lekhi and Ramesh Sadhwani. Weddings, receptions, haldi, mehendi, brunches, birthdays and anniversaries in Bangalore, across India and internationally. 450+ events, 47 years of collective experience.">
+<meta name="description" content="Soul Events, bespoke event decor by Chelna Lekhi and Ramesh Sadhwani. Weddings, receptions, haldi, mehendi, brunches, birthdays and anniversaries in Bangalore, across India and internationally. 450+ events, 47 years of collective experience.">
 <meta name="theme-color" content="#F8F7F4">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Soul Events">
-<meta property="og:title" content="Soul Events, Bespoke Event Design in Bangalore">
-<meta property="og:description" content="SOUL is not a company – that would mean we look at what we do as simply a job. SOUL is our passion. Bespoke event design in Bangalore and internationally.">
+<meta property="og:title" content="Soul Events, Bespoke Event Decor in Bangalore">
+<meta property="og:description" content="SOUL is not a company – that would mean we look at what we do as simply a job. SOUL is our passion. Bespoke event decor in Bangalore and internationally.">
 <meta property="og:locale" content="en_IN">
 <meta property="og:url" content="https://souleventsindia.com/">
 <meta property="og:image" content="https://souleventsindia.com/assets/brand/og-image.jpg">
@@ -18,8 +18,8 @@
 <meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:alt" content="Soul Events: Occasions that are personal and bespoke.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Soul Events, Bespoke Event Design in Bangalore">
-<meta name="twitter:description" content="Occasions that are personal and bespoke. Event design by Chelna Lekhi and Ramesh Sadhwani, Bangalore.">
+<meta name="twitter:title" content="Soul Events, Bespoke Event Decor in Bangalore">
+<meta name="twitter:description" content="Occasions that are personal and bespoke. Event decor by Chelna Lekhi and Ramesh Sadhwani, Bangalore.">
 <meta name="twitter:image" content="https://souleventsindia.com/assets/brand/og-image.jpg">
 <meta name="twitter:image:alt" content="Soul Events: Occasions that are personal and bespoke.">
 <link rel="canonical" href="https://souleventsindia.com/">
@@ -178,7 +178,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
    put a border on a section's top or bottom edge (that is why #stats has none
    of its own any more). Sequence, top to bottom:
      hero → marq(top+bottom) → about → stats → founders → process → services
-     → marq(top+bottom) → gallery → voices → clients → marq(top+bottom)
+     → marq(top+bottom) → gallery → voices → clients
      → contact → footer (continuous ink, no rule wanted). */
 .sect + .sect{border-top:1px solid var(--hair)}
 .marq + .sect{border-top:0}
@@ -280,6 +280,8 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   line-height:1;
 }
 .brand-word span{font-family:var(--mono); font-size:10.5px; letter-spacing:.16em; color:var(--accent-deep)}
+/* the nav wordmark takes the hero headline's accent */
+.nav .brand-word b{color:var(--accent-deep)}
 
 .nav-links{display:flex; align-items:center; gap:clamp(14px,1.9vw,30px)}
 .nav-links a{
@@ -596,6 +598,11 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   font-family:var(--display); font-size:clamp(1.16rem,1.95vw,1.6rem); line-height:1.44; letter-spacing:.004em;
   color:var(--ink); max-width:34ch;
 }
+.f-title{
+  grid-column:1 / -1; margin-bottom:clamp(26px,3.4vw,48px);
+  font-family:var(--display); font-weight:400;
+  font-size:clamp(1.75rem,3.9vw,2.9rem); line-height:1.08; letter-spacing:.006em;
+}
 .f-device{
   grid-column:1 / -1; margin-bottom:clamp(26px,3.4vw,48px);
   font-family:var(--serif); font-style:italic; font-size:clamp(1.15rem,2.1vw,1.6rem);
@@ -661,6 +668,9 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 .p-cell--shot{padding:0; overflow:hidden; min-height:210px}
 .p-cell--shot:hover{background:var(--ground)}
 .p-cell--shot .plate{position:absolute; inset:0; border:0}
+/* the floor plan is a drawing, not a photograph: shown whole on white, no grain */
+.plate--plan{background:#fff}
+.plate--plan .shot{object-fit:contain; padding:clamp(6px,.8vw,12px); filter:grayscale(1) contrast(1.05)}
 
 /* ============================================================
    SERVICES (05)
@@ -725,8 +735,9 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 .g-tile:nth-child(6){grid-column:7 / span 6}
 .g-tile:nth-child(7){grid-column:1 / span 5}
 .g-tile:nth-child(8){grid-column:6 / span 7}
-/* Table Decor closes the grid on a full-width band */
-.g-tile:nth-child(9){grid-column:1 / -1}
+/* Corporate Events and Table Decor close the grid as a pair */
+.g-tile:nth-child(9){grid-column:1 / span 7}
+.g-tile:nth-child(10){grid-column:8 / span 5}
 .g-tiles{
   grid-column:1 / -1; display:grid;
   grid-template-columns:repeat(12,minmax(0,1fr));
@@ -803,7 +814,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 /* ============================================================
    TESTIMONIALS (07) — counter-rotating quote rows
    ============================================================ */
-/* 7 columns: enough for "What people say afterwards." to hold one line at
+/* 7 columns: enough for the heading to hold one line at
    1200px and up, and to balance onto two clean lines below that */
 #voices .v-head{grid-column:1 / span 7}
 #voices .v-aside{grid-column:9 / span 4; align-self:end}
@@ -1481,7 +1492,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 
     <div class="hero-foot">
       <div class="hero-lead">
-        <p class="rev-l" style="--d:560ms">One part exciting, two parts soulful, three quarters funny, and very many portions of creative flair.</p>
+        <p class="rev-l" style="--d:560ms">A Bangalore-based event decor and management studio, with two decades of weddings, celebrations and corporate occasions behind us.</p>
         <div class="hero-cta rev-l" style="--d:640ms">
           <a class="hbtn hbtn--fill" href="#contact">Let’s talk <span class="arw" aria-hidden="true">→</span></a>
           <a class="hbtn hbtn--ghost" href="#gallery">Our work</a>
@@ -1498,8 +1509,8 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 <!-- ============ MARQUEE · the occasions ============ -->
 <div class="marq marq--tall" aria-hidden="true" data-marq>
   <div class="marq-track">
-    <div class="marq-seq"><b>Engagements</b><i>·</i><b class="hi">Haldi</b><i>·</i><b>Mehendi</b><i>·</i><b class="hi">Sangeets</b><i>·</i><b>Weddings</b><i>·</i><b>Receptions</b><i>·</i><b class="hi">Brunches</b><i>·</i><b>Baby Showers</b><i>·</i><b>Birthdays</b><i>·</i><b>Anniversaries</b><i>·</i><b>Corporate Events</b><i>·</i><b class="hi">Product Launches</b><i>·</i><b>Engagements</b><i>·</i><b class="hi">Haldi</b><i>·</i><b>Mehendi</b><i>·</i><b class="hi">Sangeets</b><i>·</i><b>Weddings</b><i>·</i><b>Receptions</b><i>·</i><b class="hi">Brunches</b><i>·</i><b>Baby Showers</b><i>·</i><b>Birthdays</b><i>·</i><b>Anniversaries</b><i>·</i><b>Corporate Events</b><i>·</i><b class="hi">Product Launches</b><i>·</i></div>
-    <div class="marq-seq"><b>Engagements</b><i>·</i><b class="hi">Haldi</b><i>·</i><b>Mehendi</b><i>·</i><b class="hi">Sangeets</b><i>·</i><b>Weddings</b><i>·</i><b>Receptions</b><i>·</i><b class="hi">Brunches</b><i>·</i><b>Baby Showers</b><i>·</i><b>Birthdays</b><i>·</i><b>Anniversaries</b><i>·</i><b>Corporate Events</b><i>·</i><b class="hi">Product Launches</b><i>·</i><b>Engagements</b><i>·</i><b class="hi">Haldi</b><i>·</i><b>Mehendi</b><i>·</i><b class="hi">Sangeets</b><i>·</i><b>Weddings</b><i>·</i><b>Receptions</b><i>·</i><b class="hi">Brunches</b><i>·</i><b>Baby Showers</b><i>·</i><b>Birthdays</b><i>·</i><b>Anniversaries</b><i>·</i><b>Corporate Events</b><i>·</i><b class="hi">Product Launches</b><i>·</i></div>
+    <div class="marq-seq"><b>Engagements</b><i>·</i><b class="hi">Haldi</b><i>·</i><b>Mehendi</b><i>·</i><b class="hi">Sangeets</b><i>·</i><b>Weddings</b><i>·</i><b>Receptions</b><i>·</i><b class="hi">Brunches</b><i>·</i><b>Baby Showers</b><i>·</i><b>Birthdays</b><i>·</i><b>Anniversaries</b><i>·</i><b class="hi">Family Get-togethers</b><i>·</i><b>Corporate Events</b><i>·</i><b class="hi">Product Launches</b><i>·</i><b>Engagements</b><i>·</i><b class="hi">Haldi</b><i>·</i><b>Mehendi</b><i>·</i><b class="hi">Sangeets</b><i>·</i><b>Weddings</b><i>·</i><b>Receptions</b><i>·</i><b class="hi">Brunches</b><i>·</i><b>Baby Showers</b><i>·</i><b>Birthdays</b><i>·</i><b>Anniversaries</b><i>·</i><b class="hi">Family Get-togethers</b><i>·</i><b>Corporate Events</b><i>·</i><b class="hi">Product Launches</b><i>·</i></div>
+    <div class="marq-seq"><b>Engagements</b><i>·</i><b class="hi">Haldi</b><i>·</i><b>Mehendi</b><i>·</i><b class="hi">Sangeets</b><i>·</i><b>Weddings</b><i>·</i><b>Receptions</b><i>·</i><b class="hi">Brunches</b><i>·</i><b>Baby Showers</b><i>·</i><b>Birthdays</b><i>·</i><b>Anniversaries</b><i>·</i><b class="hi">Family Get-togethers</b><i>·</i><b>Corporate Events</b><i>·</i><b class="hi">Product Launches</b><i>·</i><b>Engagements</b><i>·</i><b class="hi">Haldi</b><i>·</i><b>Mehendi</b><i>·</i><b class="hi">Sangeets</b><i>·</i><b>Weddings</b><i>·</i><b>Receptions</b><i>·</i><b class="hi">Brunches</b><i>·</i><b>Baby Showers</b><i>·</i><b>Birthdays</b><i>·</i><b>Anniversaries</b><i>·</i><b class="hi">Family Get-togethers</b><i>·</i><b>Corporate Events</b><i>·</i><b class="hi">Product Launches</b><i>·</i></div>
   </div>
 </div>
 
@@ -1514,7 +1525,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   <div class="grid">
     <div class="about-body">
       <p class="lede rev-l">
-        SOUL is not a company – that would mean we look at what we do as simply a job. <em class="soul-em">SOUL is our passion.</em>
+        From the first site visit to the last guest leaving, we plan, design and run every detail, so each occasion feels personal. <em class="soul-em">Every event, made with soul.</em>
       </p>
       <p class="signoff rev-l" style="--d:180ms">
         <svg class="lotus" aria-hidden="true" style="font-size:15px"><use href="#lotus"></use></svg>
@@ -1574,15 +1585,14 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   </div>
 
   <div class="grid">
-    <p class="f-device rev-l">We found it easier to introduce each other than ourselves.</p>
+    <h2 class="f-title rev-l">The people <span class="em">at work.</span></h2>
 
     <article class="founder">
       <figure class="plate f-plate wipe">
         <span class="plate-ratio"></span>
-        <img class="shot" src="assets/samples/chelna-02.jpg" width="860" height="573" loading="lazy" decoding="async"
-             alt="A floral wall built for a poolside brunch">
+        <img class="shot" src="assets/samples/chelna-portrait.jpg" width="860" height="860" loading="lazy" decoding="async"
+             alt="Chelna Lekhi, smiling, in a linen shirt against a warm studio backdrop">
         <span class="plate-grain" aria-hidden="true"></span>
-        <figcaption class="plate-cap"><span class="dot" aria-hidden="true"></span>Design · Soul Events</figcaption>
       </figure>
       <div class="f-body">
         <h3 class="f-name rev-l">Chelna Lekhi</h3>
@@ -1599,10 +1609,9 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
     <article class="founder founder--b">
       <figure class="plate f-plate wipe">
         <span class="plate-ratio"></span>
-        <img class="shot" src="assets/samples/ramesh-04.jpg" width="860" height="573" loading="lazy" decoding="async"
-             alt="A lit stage set for the evening&#x27;s performances">
+        <img class="shot" src="assets/samples/ramesh-portrait.jpg" width="860" height="860" loading="lazy" decoding="async"
+             alt="Ramesh Sadhwani speaking into a microphone on stage">
         <span class="plate-grain" aria-hidden="true"></span>
-        <figcaption class="plate-cap"><span class="dot" aria-hidden="true"></span>On stage · Soul Events</figcaption>
       </figure>
       <div class="f-body">
         <h3 class="f-name rev-l">Ramesh Sadhwani</h3>
@@ -1649,10 +1658,11 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
       </article>
 
       <div class="p-cell p-cell--shot rev-l" style="--d:180ms">
-        <figure class="plate wipe">
-          <img class="shot" src="assets/samples/anniv-02.jpg" width="900" height="600" loading="lazy" decoding="async"
-               alt="a long dining table laid out for a dinner party with flowers and candles">
-          <span class="plate-grain" aria-hidden="true"></span>
+        <figure class="plate plate--plan wipe">
+          <a href="assets/samples/process-layout.jpg" target="_blank" rel="noopener" aria-label="Open the full ballroom floor plan">
+            <img class="shot" src="assets/samples/process-layout.jpg" width="1447" height="1087" loading="lazy" decoding="async"
+                 alt="A technical floor plan for a grand ballroom: main stage and runway, four team seating blocks, green rooms, band and control platforms, and guest entrances">
+          </a>
           <figcaption class="plate-cap"><span class="dot" aria-hidden="true"></span>Layout &middot; Soul Events</figcaption>
         </figure>
       </div>
@@ -1688,7 +1698,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 
   <div class="grid">
     <div class="s-intro">
-      <p class="s-lede rev-l">Every single aspect of your event, <span class="em uline">no two ways about it.</span></p>
+      <p class="s-lede rev-l">Every single aspect of <span class="em uline">your event.</span></p>
     </div>
 
     <ul class="s-grid">
@@ -1746,6 +1756,14 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   </div>
 </section>
 
+
+<!-- ============ MARQUEE · the occasions, again ============ -->
+<div class="marq marq--tall marq--rev" aria-hidden="true" data-marq>
+  <div class="marq-track">
+    <div class="marq-seq"><b>Engagements</b><i>·</i><b class="hi">Haldi</b><i>·</i><b>Mehendi</b><i>·</i><b class="hi">Sangeets</b><i>·</i><b>Weddings</b><i>·</i><b>Receptions</b><i>·</i><b class="hi">Brunches</b><i>·</i><b>Baby Showers</b><i>·</i><b>Birthdays</b><i>·</i><b>Anniversaries</b><i>·</i><b class="hi">Family Get-togethers</b><i>·</i><b>Corporate Events</b><i>·</i><b class="hi">Product Launches</b><i>·</i><b>Engagements</b><i>·</i><b class="hi">Haldi</b><i>·</i><b>Mehendi</b><i>·</i><b class="hi">Sangeets</b><i>·</i><b>Weddings</b><i>·</i><b>Receptions</b><i>·</i><b class="hi">Brunches</b><i>·</i><b>Baby Showers</b><i>·</i><b>Birthdays</b><i>·</i><b>Anniversaries</b><i>·</i><b class="hi">Family Get-togethers</b><i>·</i><b>Corporate Events</b><i>·</i><b class="hi">Product Launches</b><i>·</i></div>
+    <div class="marq-seq"><b>Engagements</b><i>·</i><b class="hi">Haldi</b><i>·</i><b>Mehendi</b><i>·</i><b class="hi">Sangeets</b><i>·</i><b>Weddings</b><i>·</i><b>Receptions</b><i>·</i><b class="hi">Brunches</b><i>·</i><b>Baby Showers</b><i>·</i><b>Birthdays</b><i>·</i><b>Anniversaries</b><i>·</i><b class="hi">Family Get-togethers</b><i>·</i><b>Corporate Events</b><i>·</i><b class="hi">Product Launches</b><i>·</i><b>Engagements</b><i>·</i><b class="hi">Haldi</b><i>·</i><b>Mehendi</b><i>·</i><b class="hi">Sangeets</b><i>·</i><b>Weddings</b><i>·</i><b>Receptions</b><i>·</i><b class="hi">Brunches</b><i>·</i><b>Baby Showers</b><i>·</i><b>Birthdays</b><i>·</i><b>Anniversaries</b><i>·</i><b class="hi">Family Get-togethers</b><i>·</i><b>Corporate Events</b><i>·</i><b class="hi">Product Launches</b><i>·</i></div>
+  </div>
+</div>
 
 <!-- ============ 06 · GALLERY ============ -->
 <section class="sect wrap" id="gallery" aria-labelledby="gallery-h">
@@ -1869,7 +1887,21 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
         </div>
       </div>
 
-      <div class="g-tile rev-l" style="--d:480ms" data-cat="table" data-name="Table Decor">
+      <div class="g-tile rev-l" style="--d:480ms" data-cat="corp" data-name="Corporate Events">
+        <figure class="plate wipe">
+          <span class="plate-ratio"></span>
+          <img class="shot" src="assets/samples/recep-05.jpg" width="860" height="573" loading="lazy" decoding="async"
+               alt="A full ballroom stage lit for the evening, seen from the floor">
+          <span class="plate-grain" aria-hidden="true"></span>
+          <figcaption class="plate-cap"><span class="dot" aria-hidden="true"></span>Corporate · Soul Events</figcaption>
+        </figure>
+        <div class="g-meta">
+          <h3><svg class="lotus" aria-hidden="true"><use href="#lotus"></use></svg>Corporate Events</h3>
+          <button type="button" class="view" aria-haspopup="dialog" aria-label="Open the Corporate Events gallery">View <span class="arw" aria-hidden="true">→</span></button>
+        </div>
+      </div>
+
+      <div class="g-tile rev-l" style="--d:540ms" data-cat="table" data-name="Table Decor">
         <figure class="plate wipe">
           <span class="plate-ratio"></span>
           <img class="shot" src="assets/samples/table-01.jpg" width="860" height="573" loading="lazy" decoding="async"
@@ -1897,10 +1929,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 
     <div class="grid">
       <div class="v-head">
-        <h2 class="rev-l">What people say <span class="em uline keep">afterwards</span>.</h2>
-      </div>
-      <div class="v-aside">
-        <p class="rev-l" style="--d:120ms">Flourished on goodwill alone.</p>
+        <h2 class="rev-l">In the words of <span class="em uline keep">our hosts.</span></h2>
       </div>
     </div>
   </div>
@@ -2202,7 +2231,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
       <div class="k-block rev-l" style="--d:260ms">
         <h3>Studio</h3>
         <address style="font-style:normal">
-          <p class="display" style="font-size:clamp(1.15rem,1.9vw,1.5rem); line-height:1.4; letter-spacing:.01em">Bella Vista, 66, Lavelle Road,<br>Bangalore – 560001</p>
+          <p class="display" style="font-size:clamp(1.15rem,1.9vw,1.5rem); line-height:1.4; letter-spacing:.01em">66, Bella Vista, Lavelle Road,<br>Bangalore – 560001</p>
         </address>
       </div>
     </div>
@@ -2287,10 +2316,6 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
         <button type="button" class="lb-back" id="lbBack"><span aria-hidden="true">&larr;</span> Back to all frames</button>
         <figure class="lb-figure">
           <img id="lbImg" src="" alt="" decoding="async">
-          <figcaption>
-            <p class="lb-cap" id="lbCap"></p>
-            <p class="mono lb-credit" id="lbCredit"></p>
-          </figcaption>
         </figure>
         <div class="lb-solo-nav">
           <button type="button" class="lb-nav" id="lbPrev" aria-label="Previous photograph">
@@ -2315,13 +2340,13 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   "@id":"https://souleventsindia.com/#business",
   "name":"Soul Events",
   "alternateName":"Soul Events India",
-  "description":"Bespoke event design and planning by Chelna Lekhi and Ramesh Sadhwani. Weddings, sangeets, anniversaries, birthdays, brunches and corporate events in Bangalore, across India and internationally.",
+  "description":"Bespoke event decor and planning by Chelna Lekhi and Ramesh Sadhwani. Weddings, sangeets, anniversaries, birthdays, brunches and corporate events in Bangalore, across India and internationally.",
   "url":"https://souleventsindia.com/",
   "email":"souleventsindia@gmail.com",
   "telephone":["+91-93422-83539","+91-98450-54881","+91-98863-29400"],
   "address":{
     "@type":"PostalAddress",
-    "streetAddress":"Bella Vista, 66, Lavelle Road",
+    "streetAddress":"66, Bella Vista, Lavelle Road",
     "addressLocality":"Bangalore",
     "addressRegion":"Karnataka",
     "postalCode":"560001",
@@ -2676,6 +2701,14 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
       {f:"kids-05.jpg", w:860, h:573, a:"A garden table with a stoneware vase of white roses", c:"Soul Events"},
       {f:"kids-06.jpg", w:860, h:573, a:"The birthday cake on its stand against the painted backdrop", c:"Soul Events"}
     ],
+    corp: [
+      {f:"recep-05.jpg", w:860, h:573, a:"A full ballroom stage lit for the evening, seen from the floor", c:"Soul Events"},
+      {f:"recep-04.jpg", w:860, h:573, a:"A stage set in soft uplighting for the evening's programme", c:"Soul Events"},
+      {f:"wed-04.jpg", w:860, h:573, a:"A gold-draped stage ready for the evening", c:"Soul Events"},
+      {f:"anniv-06.jpg", w:860, h:511, a:"Dining tables set beneath the evening canopy", c:"Soul Events"},
+      {f:"table-02.jpg", w:860, h:573, a:"A low centrepiece of tropical leaves and cut flowers", c:"Soul Events"},
+      {f:"anniv-04.jpg", w:860, h:573, a:"The buffet dressed against a carved red screen", c:"Soul Events"}
+    ],
     table: [
       {f:"table-01.jpg", w:860, h:573, a:"A cane basket of blooms beside a painted place card", c:"Soul Events"},
       {f:"table-02.jpg", w:860, h:573, a:"A low centrepiece of tropical leaves and cut flowers", c:"Soul Events"},
@@ -2694,8 +2727,6 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
     var lbBody   = document.getElementById("lbBody");
     var lbSolo   = document.getElementById("lbSolo");
     var lbImg    = document.getElementById("lbImg");
-    var lbCap    = document.getElementById("lbCap");
-    var lbCredit = document.getElementById("lbCredit");
     var lbIdx    = document.getElementById("lbIdx");
     var lbLive   = document.getElementById("lbLive");
     var lbClose  = document.getElementById("lbClose");
@@ -2737,8 +2768,6 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
       lbImg.src = "assets/samples/" + s.f;
       lbImg.width = s.w; lbImg.height = s.h;
       lbImg.alt = s.a;
-      lbCap.textContent = s.a.replace(/^/, "");
-      lbCredit.textContent = "Photograph · " + s.c;
       lbIdx.textContent = pad(solo + 1) + " / " + pad(shots.length);
       lbGrid.hidden = true;
       lbSolo.hidden = false;
