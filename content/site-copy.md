@@ -82,7 +82,7 @@ Headline names for a credibility strip: McKinsey · Bank of Baroda · Prestige E
 
 ## Contact
 - Chelna Lekhi — +91 93422 83539 (tel:+919342283539)
-- Ramesh Sadhwani — +91 98450 54881 (tel:+919845054881) / +91 98863 29400 (tel:+919886329400)
+- Ramesh Sadhwani — +91 98863 29400 (tel:+919886329400)
 - WhatsApp: https://wa.me/919342283539
 - Address: 66, Bella Vista, Lavelle Road, Bangalore - 560001
 - Email: souleventsindia@gmail.com
