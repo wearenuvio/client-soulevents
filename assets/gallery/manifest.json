@@ -1,212 +1,391 @@
 {
+ "anniv": [
+  {
+   "f": "anniv-01.jpg",
+   "w": 1720,
+   "h": 1463,
+   "src": "anniv/0.jpg",
+   "a": "A tropical backdrop with pink flamingos, palms and paper parasols"
+  },
+  {
+   "f": "anniv-02.jpg",
+   "w": 1720,
+   "h": 961,
+   "src": "anniv/1.jpg",
+   "a": "A rooftop dinner under string lights with oversized paper blooms"
+  },
+  {
+   "f": "anniv-03.jpg",
+   "w": 1720,
+   "h": 853,
+   "src": "anniv/3.jpg",
+   "a": "Arched pink panels and lanterns framing a dining setting"
+  },
+  {
+   "f": "anniv-04.jpg",
+   "w": 1147,
+   "h": 1720,
+   "src": "anniv/4.jpg",
+   "a": "A candlelit table of pots, lanterns and trailing greens"
+  },
+  {
+   "f": "anniv-05.jpg",
+   "w": 1720,
+   "h": 823,
+   "src": "anniv/5.jpg",
+   "a": "Patterned arch panels in coral and pink lit against the night"
+  },
+  {
+   "f": "anniv-06.jpg",
+   "w": 1720,
+   "h": 1156,
+   "src": "anniv/6.jpg",
+   "a": "A woven wall framed by golden palm-leaf sculptures on a lawn"
+  }
+ ],
+ "baby": [
+  {
+   "f": "baby-01.jpg",
+   "w": 1720,
+   "h": 1354,
+   "src": "baby shower/0.jpg",
+   "a": "A boho backdrop of dried grasses, pampas and a sheer drape"
+  },
+  {
+   "f": "baby-02.jpg",
+   "w": 1720,
+   "h": 1149,
+   "src": "baby shower/1.JPG",
+   "a": "A photo wall of memories framed in dried palms and yellow blooms"
+  },
+  {
+   "f": "baby-03.jpg",
+   "w": 1720,
+   "h": 1144,
+   "src": "baby shower/2.JPG",
+   "a": "A seaside dessert table with shells, wildflowers and teal accents"
+  }
+ ],
  "brunch": [
   {
    "f": "brunch-01.jpg",
    "w": 1720,
-   "h": 1147,
-   "a": "Poolside brunch tables with white drapes, clear chairs and a bouquet centrepiece",
-   "src": "brunch/TCP2406.jpg",
-   "edits": "slight exposure lift; resized to 1720px"
+   "h": 1020,
+   "src": "brunch/1.jpg",
+   "a": "Courtyard brunch tables beneath palms and a striped canopy"
   },
   {
-   "f": "brunch-04.jpg",
+   "f": "brunch-02.jpg",
    "w": 1720,
-   "h": 1147,
-   "a": "Courtyard brunch setting with palms, pink canopy and round tables under city towers",
-   "src": "brunch/draft/TCP253.jpg",
-   "edits": "slight exposure lift; resized to 1720px"
+   "h": 926,
+   "src": "brunch/2.jpg",
+   "a": "Poolside round tables dressed in white under draped canopies"
   },
   {
-   "f": "brunch-05.jpg",
+   "f": "brunch-03.jpg",
    "w": 1720,
-   "h": 1147,
-   "a": "Floral and foliage arch at a lift lobby entrance with planters and hanging baskets",
-   "src": "brunch/draft/entrance keep .jpg",
-   "edits": "lifted exposure/shadows; resized to 1720px"
-  },
-  {
-   "f": "brunch-06.jpg",
-   "w": 1720,
-   "h": 1147,
-   "a": "Rustic wooden name board on a log, framed by tasselled umbrellas and flower baskets",
-   "src": "brunch/2/TCP2520.jpg",
-   "edits": "slight exposure lift; resized to 1720px"
-  },
-  {
-   "f": "brunch-07.jpg",
-   "w": 1182,
-   "h": 1720,
-   "a": "Oversized pastel paper flowers and bouquets beside the pool under a spreading tree",
-   "src": "brunch/2/TCP2509.jpg",
-   "edits": "tightened crop; slight exposure lift; resized to 1720px"
+   "h": 824,
+   "src": "brunch/3.jpg",
+   "a": "Oversized paper flowers along a hotel pool with a floral sign"
   }
  ],
- "haldi": [
+ "kids": [
   {
-   "f": "haldi-01.jpg",
+   "f": "kids-01.jpg",
    "w": 1720,
-   "h": 1147,
-   "a": "Haldi stage with chevron platform, painted backdrop, ivy ceiling and floral welcome sign",
-   "src": "haldi/draft/TCP109.jpg",
-   "edits": "lifted exposure/shadows; resized to 1720px"
+   "h": 1559,
+   "src": "children bday/1.jpg",
+   "a": "A pastel ribbon backdrop in pink, blue and lilac with paper flowers"
   },
   {
-   "f": "haldi-02.jpg",
+   "f": "kids-02.jpg",
    "w": 1720,
-   "h": 1431,
-   "a": "Betel leaf backdrop with hanging jasmine strings and a carved haldi seat on blue stage",
-   "src": "haldi/draft/TYD_NAT_ABI-1004.jpg",
-   "edits": "tightened crop; slight exposure lift; light denoise; resized to 1720px"
+   "h": 1134,
+   "src": "children bday/2.jpg",
+   "a": "A teddy bear dessert table with balloons and a rustic pallet wall"
+  }
+ ],
+ "corp": [
+  {
+   "f": "corp-01.jpg",
+   "w": 1720,
+   "h": 968,
+   "src": "coorporate events - insta/0.JPG",
+   "a": "An awards stage lit in purple and blue with LED screens"
+  },
+  {
+   "f": "corp-02.jpg",
+   "w": 1720,
+   "h": 826,
+   "src": "coorporate events - insta/1.JPG",
+   "a": "A full auditorium facing a purple-lit stage during a corporate show"
+  },
+  {
+   "f": "corp-03.jpg",
+   "w": 1720,
+   "h": 1117,
+   "src": "coorporate events - insta/3.JPG",
+   "a": "A jubilee celebration backdrop with lilies and a commemorative panel"
+  },
+  {
+   "f": "corp-04.jpg",
+   "w": 1720,
+   "h": 1321,
+   "src": "coorporate events - insta/4.JPG",
+   "a": "A garden-themed stage with paper flowers and a hanging floral canopy"
   }
  ],
  "wed": [
   {
    "f": "wed-01.jpg",
    "w": 1720,
-   "h": 1147,
-   "a": "Outdoor haldi mandap with yellow flower aisle, carved gold frame and lawn seating",
-   "src": "mandaps/TCP1223.jpg",
-   "edits": "lifted exposure/shadows; resized to 1720px"
+   "h": 1056,
+   "src": "mandaps/1.jpg",
+   "a": "A white floral mandap framed by golden lotus sculptures on a lawn"
   },
   {
    "f": "wed-02.jpg",
    "w": 1720,
-   "h": 1147,
-   "a": "Gold jaali mandap with jasmine garlands and floral crown set in a garden",
-   "src": "mandaps/draft/TCP15.jpg",
-   "edits": "lifted exposure/shadows; light denoise; resized to 1720px"
+   "h": 916,
+   "src": "mandaps/2.jpg",
+   "a": "An ornate gold pavilion mandap with flower strands in a coconut garden"
   },
   {
    "f": "wed-03.jpg",
    "w": 1720,
    "h": 1147,
-   "a": "Ornate gold pavilion mandap with lotus lamps and white flower strands in a coconut garden",
-   "src": "mandaps/draft/SoulEventsJan20252753.jpg",
-   "edits": "slight exposure lift; light denoise; resized to 1720px"
+   "src": "mandaps/3.JPG",
+   "a": "A wedding ritual under a leafy pergola with hanging planters"
   },
   {
    "f": "wed-04.jpg",
-   "w": 1720,
-   "h": 1145,
-   "a": "Marigold-canopied indoor mandap with green panels and white chair covers",
-   "src": "mandaps/draft/TYD_NAT_ABI-2196.jpg",
-   "edits": "slight exposure lift; resized to 1720px"
+   "w": 1450,
+   "h": 849,
+   "src": "mandaps/4.jpg",
+   "a": "A marigold-canopied indoor mandap between green panels"
   },
   {
    "f": "wed-05.jpg",
    "w": 1720,
-   "h": 1147,
-   "a": "Wedding ritual under a leafy pergola with a carved gold backdrop and hanging planters",
-   "src": "mandaps/draft/vydevvijayanstories-48.JPG",
-   "edits": "lifted exposure/shadows; resized to 1720px"
+   "h": 962,
+   "src": "mandaps/5.jpg",
+   "a": "A yellow flower aisle leading up to an outdoor mandap"
   }
  ],
- "mehendi": [
+ "bday": [
   {
-   "f": "mehendi-01.jpg",
-   "w": 1720,
-   "h": 1147,
-   "a": "Mehendi hall with a sunburst fabric backdrop, white seating and marigold bowls",
-   "src": "mehendi/draft/light.JPG",
-   "edits": "brightened noticeably; resized to 1720px"
+   "f": "bday-01.jpg",
+   "w": 1290,
+   "h": 1720,
+   "src": "milestone bday/0.jpg",
+   "a": "A Sweet 16 setup glowing in purple with balloons and blooms"
   },
   {
-   "f": "mehendi-02.jpg",
+   "f": "bday-02.jpg",
    "w": 1720,
-   "h": 1145,
-   "a": "Colourful mehendi stage with turquoise settee, marigold garlands and mirror-work umbrellas",
-   "src": "mehendi/draft/exyra/colour.jpg",
-   "edits": "neutralised colour cast; modest saturation; light denoise; resized to 1720px"
+   "h": 1585,
+   "src": "milestone bday/1.jpg",
+   "a": "A neon balloon arch around a sparkling birthday cake table"
   },
   {
-   "f": "mehendi-03.jpg",
+   "f": "bday-03.jpg",
    "w": 1720,
-   "h": 1145,
-   "a": "Mehendi tent along the pool with hanging charms, umbrellas and pink seating",
-   "src": "mehendi/draft/exyra/done.jpg",
-   "edits": "resized to 1720px"
+   "h": 1267,
+   "src": "milestone bday/2.HEIC",
+   "a": "A football-themed birthday wall with jerseys and team colours"
   },
   {
-   "f": "mehendi-04.jpg",
+   "f": "bday-04.jpg",
    "w": 1720,
-   "h": 1147,
-   "a": "Pastel fabric backdrop with flamingos, paper flowers and a personalised wedding sign",
-   "src": "mehendi/draft/exyra/DSC06717.jpg",
-   "edits": "lifted exposure/shadows; resized to 1720px"
+   "h": 1541,
+   "src": "milestone bday/3.HEIC",
+   "a": "A rooftop dining table set for a birthday lunch above the city"
   },
   {
-   "f": "mehendi-05.jpg",
+   "f": "bday-05.jpg",
+   "w": 1270,
+   "h": 1720,
+   "src": "milestone bday/4.jpg",
+   "a": "A framed portrait and florals set for a milestone birthday"
+  },
+  {
+   "f": "bday-06.jpg",
    "w": 1720,
-   "h": 1099,
-   "a": "Rajasthani puppet couple in a marigold basket on a mandala print floor",
-   "src": "mehendi/draft/exyra/TYD_NAT_ABI-1504.jpg",
-   "edits": "tightened crop; light denoise; resized to 1720px"
+   "h": 980,
+   "src": "milestone bday/5.jpg",
+   "a": "A movie-themed birthday set in red with a vintage desk"
+  },
+  {
+   "f": "bday-07.jpg",
+   "w": 1144,
+   "h": 1720,
+   "src": "milestone bday/6.jpg",
+   "a": "A tiered birthday cake on a stand surrounded by red roses"
   }
  ],
  "recep": [
   {
    "f": "recep-01.jpg",
    "w": 1720,
-   "h": 1147,
-   "a": "Reception ballroom with a lit geometric dance floor, truss lighting and drifting fog",
-   "src": "recepntion/TCP126.jpg",
-   "edits": "brightened noticeably; resized to 1720px"
+   "h": 979,
+   "src": "recepntion/0.jpg",
+   "a": "A reception bar under cascading crystal chandeliers at night"
   },
   {
    "f": "recep-02.jpg",
    "w": 1720,
-   "h": 1147,
-   "a": "Reception stage under gold cage lanterns and greenery with a floral moon-gate seat",
-   "src": "recepntion/draft/soft light.jpg",
-   "edits": "lifted exposure/shadows; resized to 1720px"
+   "h": 843,
+   "src": "recepntion/1.jpg",
+   "a": "A garden reception stage in pastel drapes and gold lattice"
   },
   {
    "f": "recep-03.jpg",
    "w": 1720,
-   "h": 1229,
-   "a": "Pastel-green reception stage with crystal globes, foliage and a carved settee in a marble hall",
-   "src": "recepntion/draft/crop.jpg",
-   "edits": "tightened crop; slight exposure lift; light denoise; resized to 1720px"
+   "h": 995,
+   "src": "recepntion/2.jpg",
+   "a": "A pastel-green stage with crystal globes and a carved settee"
   },
   {
    "f": "recep-04.jpg",
    "w": 1720,
    "h": 1147,
-   "a": "Reception stage with a gold ring seat, floral arches, candles and brass lanterns",
-   "src": "recepntion/draft/-DSC3075.jpg",
-   "edits": "slight exposure lift; resized to 1720px"
+   "src": "recepntion/3.jpg",
+   "a": "A ballroom dance floor lit with truss lighting and drifting fog"
   },
   {
    "f": "recep-05.jpg",
    "w": 1720,
-   "h": 1147,
-   "a": "Outdoor reception bar under hanging crystal chandeliers and mirrored pillars",
-   "src": "recepntion/draft/SoulEventsJan20253323.jpg",
-   "edits": "lifted exposure/shadows; light denoise; resized to 1720px"
+   "h": 931,
+   "src": "recepntion/4.jpg",
+   "a": "A stage under gold cage lanterns and greenery"
   },
   {
    "f": "recep-06.jpg",
    "w": 1720,
-   "h": 1147,
-   "a": "Pastel draped reception stage with a red settee, floral frames and lanterns",
-   "src": "recepntion/draft/replace-;ighter.JPG",
-   "edits": "brightened noticeably; resized to 1720px"
+   "h": 1041,
+   "src": "recepntion/5.JPG",
+   "a": "A pastel draped stage with a red settee and floral frames"
   },
   {
    "f": "recep-07.jpg",
    "w": 1720,
-   "h": 1147,
-   "a": "Mirrored truss reception bar canopy with crystal drops beside palms at night",
-   "src": "recepntion/draft/SoulEventsJan20253355.jpg",
-   "edits": "lifted exposure/shadows; light denoise; resized to 1720px"
+   "h": 925,
+   "src": "recepntion/6.jpg",
+   "a": "A stage with a gold ring seat, floral arches and brass lanterns"
+  }
+ ],
+ "table": [
+  {
+   "f": "table-01.jpg",
+   "w": 1720,
+   "h": 1421,
+   "src": "table decor /0.JPG",
+   "a": "A white table with a lilac floral runner and a potted posy"
   },
   {
-   "f": "recep-08.jpg",
+   "f": "table-02.jpg",
+   "w": 1720,
+   "h": 1714,
+   "src": "table decor /DIB_7341.JPG",
+   "a": "Yellow blooms in burlap with a gift box on a wooden table"
+  },
+  {
+   "f": "table-03.jpg",
+   "w": 1314,
+   "h": 1720,
+   "src": "table decor /DSC03113.jpg",
+   "a": "A tall candle centrepiece wreathed in white roses"
+  },
+  {
+   "f": "table-04.jpg",
+   "w": 1720,
+   "h": 1250,
+   "src": "table decor /IMG_0669 2.HEIC",
+   "a": "A racing-themed table with chequered mats and a party menu"
+  },
+  {
+   "f": "table-05.jpg",
+   "w": 1290,
+   "h": 1720,
+   "src": "table decor /IMG_0672.HEIC",
+   "a": "A cricket-themed place setting with a ball in a glass jar"
+  },
+  {
+   "f": "table-06.jpg",
+   "w": 1720,
+   "h": 1664,
+   "src": "table decor /IMG_0677 3.HEIC",
+   "a": "A green sports-themed table with printed placemats"
+  },
+  {
+   "f": "table-07.jpg",
+   "w": 1720,
+   "h": 587,
+   "src": "table decor /KavyaBabyshower2332.jpg",
+   "a": "A long table of dried florals, cane trays and baked treats"
+  },
+  {
+   "f": "table-08.jpg",
+   "w": 1194,
+   "h": 1720,
+   "src": "table decor /SAYA9279.jpg",
+   "a": "Marigolds and a toy truck on a bright bandhani cloth"
+  },
+  {
+   "f": "table-09.jpg",
+   "w": 1068,
+   "h": 1720,
+   "src": "table decor /rotatte.jpg",
+   "a": "A teddy bear centrepiece holding a paper lantern above wildflowers"
+  }
+ ],
+ "hm": [
+  {
+   "f": "mehendi-01.jpg",
    "w": 1720,
    "h": 1145,
-   "a": "Garden reception stage with pastel drapes, gold lattice screens and purple blooms",
-   "src": "recepntion/draft/TYD_NAT_ABI-3287.jpg",
-   "edits": "lifted exposure/shadows; light denoise; resized to 1720px"
+   "src": "mehendi/0.jpg",
+   "a": "Rajasthani puppet couple in a marigold basket on a mandala floor"
+  },
+  {
+   "f": "mehendi-02.jpg",
+   "w": 1720,
+   "h": 883,
+   "src": "mehendi/1.jpg",
+   "a": "A poolside mehendi tent with umbrellas and bright pink seating"
+  },
+  {
+   "f": "mehendi-03.jpg",
+   "w": 1720,
+   "h": 1079,
+   "src": "mehendi/2.jpg",
+   "a": "A turquoise settee under marigold garlands and mirror-work umbrellas"
+  },
+  {
+   "f": "mehendi-04.jpg",
+   "w": 1720,
+   "h": 1285,
+   "src": "mehendi/3.jpg",
+   "a": "A pastel fabric backdrop with flamingos and paper flowers"
+  },
+  {
+   "f": "mehendi-05.jpg",
+   "w": 1720,
+   "h": 873,
+   "src": "mehendi/4.JPG",
+   "a": "A mehendi hall with a sunburst fabric backdrop and white seating"
+  },
+  {
+   "f": "haldi-01.jpg",
+   "w": 1720,
+   "h": 1145,
+   "a": "Betel-leaf backdrop with jasmine strings and a carved haldi seat"
+  },
+  {
+   "f": "haldi-02.jpg",
+   "w": 1720,
+   "h": 1147,
+   "a": "A haldi stage with a painted backdrop, ivy ceiling and floral sign"
   }
  ]
 }

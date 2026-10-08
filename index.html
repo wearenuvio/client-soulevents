@@ -530,7 +530,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   display:flex; align-items:center; gap:10px; max-width:52ch;
 }
 #about .about-plate{grid-column:1 / -1; margin-top:clamp(34px,4.6vw,68px)}
-#about .about-plate .plate-ratio{aspect-ratio:16 / 6.4}
+#about .about-plate .plate-ratio{aspect-ratio:2 / 1}
 
 /* ============================================================
    STATS (02) — bordered cell grid (from "Soul on Stage")
@@ -743,7 +743,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 .g-tile:nth-child(6){grid-column:7 / span 6}
 .g-tile:nth-child(7){grid-column:1 / span 5}
 .g-tile:nth-child(8){grid-column:6 / span 7}
-/* Corporate Events and Table Decor close the grid as a pair */
+/* the last two tiles close the grid as a pair */
 .g-tile:nth-child(9){grid-column:1 / span 7}
 .g-tile:nth-child(10){grid-column:8 / span 5}
 .g-tiles{
@@ -791,7 +791,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
    wash and the photograph comes up to full colour. */
 .g-tile{--tint:var(--accent-soft)}
 .g-tile .shot{
-  filter:saturate(.34) contrast(1.05) brightness(1.05);
+  filter:saturate(.82) contrast(1.02);
   transition:filter 720ms var(--ease);
 }
 /* porcelain haze at the head, an ink-plum foot, and a soft plum veil over the
@@ -799,9 +799,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 .g-tile .plate::after{
   content:""; position:absolute; inset:0; z-index:2; pointer-events:none;
   background:
-    linear-gradient(180deg, rgba(248,247,244,.26) 0%, rgba(248,247,244,0) 44%),
-    linear-gradient(0deg, rgba(46,34,40,.44) 0%, rgba(46,34,40,0) 60%),
-    rgba(169,107,133,.24);
+    linear-gradient(0deg, rgba(46,34,40,.28) 0%, rgba(46,34,40,0) 50%);
   transition:opacity 720ms var(--ease);
 }
 .g-tile:hover .shot,
@@ -1132,17 +1130,25 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 }
 @media (min-width:760px){ .lb-body{max-height:min(74vh,720px)} }
 
-.lb-grid{display:grid; grid-template-columns:minmax(0,1fr); gap:clamp(12px,1.6vw,20px)}
-.lb-grid[hidden]{display:none}
-@media (min-width:600px){ .lb-grid{grid-template-columns:repeat(2,minmax(0,1fr))} }
-@media (min-width:1000px){ .lb-grid{grid-template-columns:repeat(3,minmax(0,1fr))} }
-.lb-cell{
-  display:block; width:100%; position:relative; overflow:hidden; padding:0;
-  border:1px solid var(--hair); border-radius:3px; background:var(--raised);
-  transition:transform 460ms var(--ease), border-color 460ms var(--ease), box-shadow 460ms var(--ease);
+/* justified rows: every frame keeps its own shape, rows read left to right
+   in the client's order, and each row fills the width at one shared height */
+.lb-grid{
+  --row:clamp(150px,22vh,240px); --gap:clamp(8px,1vw,12px);
+  display:flex; flex-wrap:wrap; gap:var(--gap);
 }
-/* width/height on the img plus this ratio box: the grid never reflows on load */
-.lb-cell img{display:block; width:100%; height:auto; aspect-ratio:3 / 2; object-fit:cover}
+.lb-grid::after{content:""; flex:999 1 0}   /* keeps a short last row from ballooning */
+/* on a phone the last row may fill the width: frames are small enough already */
+@media (max-width:599px){ .lb-grid::after{display:none} }
+.lb-grid[hidden]{display:none}
+.lb-cell{
+  flex:var(--r,1.5) 1 calc(var(--r,1.5) * var(--row));
+  max-width:100%;
+  display:block; position:relative; overflow:hidden; padding:0;
+  border:0; border-radius:4px; background:var(--raised);
+  box-shadow:0 1px 0 rgba(26,26,34,.04);
+  transition:transform 460ms var(--ease), box-shadow 460ms var(--ease), filter 460ms var(--ease);
+}
+.lb-cell img{display:block; width:100%; height:auto; aspect-ratio:var(--r,1.5); object-fit:cover}
 .lb-cell:hover,.lb-cell:focus-visible{
   transform:translateY(-4px); border-color:var(--accent);
   box-shadow:0 16px 28px -20px rgba(0,0,0,.55);
@@ -1543,7 +1549,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 
     <figure class="plate about-plate wipe">
       <span class="plate-ratio"></span>
-      <img class="shot" src="assets/gallery/wed-03.jpg" width="1720" height="1147" decoding="async"
+      <img class="shot" src="assets/brand/about-mandap.jpg" width="1720" height="860" decoding="async"
            alt="An ornate gold pavilion mandap with lotus lamps and white flower strands in a coconut garden">
       <span class="plate-grain" aria-hidden="true"></span>
       <figcaption class="plate-cap"><span class="dot" aria-hidden="true"></span>Wedding · Soul Events</figcaption>
@@ -1786,8 +1792,8 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
       <div class="g-tile rev-l" data-cat="wed" data-name="Weddings">
         <figure class="plate wipe">
           <span class="plate-ratio"></span>
-          <img class="shot" src="assets/gallery/wed-01.jpg" width="1720" height="1147" decoding="async"
-               alt="Outdoor haldi mandap with yellow flower aisle, carved gold frame and lawn seating">
+          <img class="shot" src="assets/gallery/wed-02.jpg?v=20261008" width="1720" height="916" decoding="async"
+               alt="An ornate gold pavilion mandap with flower strands in a coconut garden">
           <span class="plate-grain" aria-hidden="true"></span>
           <figcaption class="plate-cap"><span class="dot" aria-hidden="true"></span>Wedding · Soul Events</figcaption>
         </figure>
@@ -1800,8 +1806,8 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
       <div class="g-tile rev-l" style="--d:60ms" data-cat="recep" data-name="Receptions">
         <figure class="plate wipe">
           <span class="plate-ratio"></span>
-          <img class="shot" src="assets/gallery/recep-01.jpg" width="1720" height="1147" loading="lazy" decoding="async"
-               alt="Reception ballroom with a lit geometric dance floor, truss lighting and drifting fog">
+          <img class="shot" src="assets/gallery/recep-01.jpg?v=20261008" width="1720" height="979" loading="lazy" decoding="async"
+               alt="A reception bar under cascading crystal chandeliers at night">
           <span class="plate-grain" aria-hidden="true"></span>
           <figcaption class="plate-cap"><span class="dot" aria-hidden="true"></span>Reception · Soul Events</figcaption>
         </figure>
@@ -1811,39 +1817,26 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
         </div>
       </div>
 
-      <div class="g-tile rev-l" style="--d:120ms" data-cat="haldi" data-name="Haldi">
-        <figure class="plate wipe">
-          <span class="plate-ratio"></span>
-          <img class="shot" src="assets/gallery/haldi-01.jpg" width="1720" height="1147" loading="lazy" decoding="async"
-               alt="Haldi stage with chevron platform, painted backdrop, ivy ceiling and floral welcome sign">
-          <span class="plate-grain" aria-hidden="true"></span>
-          <figcaption class="plate-cap"><span class="dot" aria-hidden="true"></span>Haldi · Soul Events</figcaption>
-        </figure>
-        <div class="g-meta">
-          <h3><svg class="lotus" aria-hidden="true"><use href="#lotus"></use></svg>Haldi</h3>
-          <button type="button" class="view" aria-haspopup="dialog" aria-label="Open the Haldi gallery">View <span class="arw" aria-hidden="true">→</span></button>
-        </div>
-      </div>
 
-      <div class="g-tile rev-l" style="--d:180ms" data-cat="mehendi" data-name="Mehendi">
+      <div class="g-tile rev-l" style="--d:180ms" data-cat="hm" data-name="Haldi &amp; Mehendi">
         <figure class="plate wipe">
           <span class="plate-ratio"></span>
-          <img class="shot" src="assets/gallery/mehendi-01.jpg" width="1720" height="1147" loading="lazy" decoding="async"
-               alt="Mehendi hall with a sunburst fabric backdrop, white seating and marigold bowls">
+          <img class="shot" src="assets/gallery/mehendi-01.jpg?v=20261008" width="1720" height="1145" loading="lazy" decoding="async"
+               alt="Rajasthani puppet couple in a marigold basket on a mandala floor">
           <span class="plate-grain" aria-hidden="true"></span>
-          <figcaption class="plate-cap"><span class="dot" aria-hidden="true"></span>Mehendi · Soul Events</figcaption>
+          <figcaption class="plate-cap"><span class="dot" aria-hidden="true"></span>Haldi &amp; Mehendi · Soul Events</figcaption>
         </figure>
         <div class="g-meta">
-          <h3><svg class="lotus" aria-hidden="true"><use href="#lotus"></use></svg>Mehendi</h3>
-          <button type="button" class="view" aria-haspopup="dialog" aria-label="Open the Mehendi gallery">View <span class="arw" aria-hidden="true">→</span></button>
+          <h3><svg class="lotus" aria-hidden="true"><use href="#lotus"></use></svg>Haldi &amp; Mehendi</h3>
+          <button type="button" class="view" aria-haspopup="dialog" aria-label="Open the Haldi &amp; Mehendi gallery">View <span class="arw" aria-hidden="true">→</span></button>
         </div>
       </div>
 
       <div class="g-tile rev-l" style="--d:240ms" data-cat="brunch" data-name="Brunches">
         <figure class="plate wipe">
           <span class="plate-ratio"></span>
-          <img class="shot" src="assets/gallery/brunch-01.jpg" width="1720" height="1147" loading="lazy" decoding="async"
-               alt="Poolside brunch tables with white drapes, clear chairs and a bouquet centrepiece">
+          <img class="shot" src="assets/gallery/brunch-01.jpg?v=20261008" width="1720" height="1020" loading="lazy" decoding="async"
+               alt="Courtyard brunch tables beneath palms and a striped canopy">
           <span class="plate-grain" aria-hidden="true"></span>
           <figcaption class="plate-cap"><span class="dot" aria-hidden="true"></span>Brunch · Soul Events</figcaption>
         </figure>
@@ -1856,8 +1849,8 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
       <div class="g-tile rev-l" style="--d:300ms" data-cat="bday" data-name="Milestone Birthdays">
         <figure class="plate wipe">
           <span class="plate-ratio"></span>
-          <img class="shot" src="assets/samples/bday-01.jpg" width="860" height="573" loading="lazy" decoding="async"
-               alt="The marquee stage in pampas, palms and hand-painted panels">
+          <img class="shot" src="assets/gallery/bday-01.jpg?v=20261008" width="1290" height="1720" loading="lazy" decoding="async"
+               alt="A Sweet 16 setup glowing in purple with balloons and blooms">
           <span class="plate-grain" aria-hidden="true"></span>
           <figcaption class="plate-cap"><span class="dot" aria-hidden="true"></span>Birthday · Soul Events</figcaption>
         </figure>
@@ -1870,8 +1863,8 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
       <div class="g-tile rev-l" style="--d:360ms" data-cat="kids" data-name="Children&#x27;s Birthdays">
         <figure class="plate wipe">
           <span class="plate-ratio"></span>
-          <img class="shot" src="assets/samples/kids-01.jpg" width="860" height="573" loading="lazy" decoding="async"
-               alt="The entrance walk dressed in pastel drapes and lanterns">
+          <img class="shot" src="assets/gallery/kids-01.jpg?v=20261008" width="1720" height="1559" loading="lazy" decoding="async"
+               alt="A pastel ribbon backdrop in pink, blue and lilac with paper flowers">
           <span class="plate-grain" aria-hidden="true"></span>
           <figcaption class="plate-cap"><span class="dot" aria-hidden="true"></span>Birthday · Soul Events</figcaption>
         </figure>
@@ -1884,8 +1877,8 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
       <div class="g-tile rev-l" style="--d:420ms" data-cat="anniv" data-name="Anniversaries">
         <figure class="plate wipe">
           <span class="plate-ratio"></span>
-          <img class="shot" src="assets/samples/anniv-01.jpg" width="573" height="860" loading="lazy" decoding="async"
-               alt="A chandelier hung over a candlelit garden setting">
+          <img class="shot" src="assets/gallery/anniv-01.jpg?v=20261008" width="1720" height="1463" loading="lazy" decoding="async"
+               alt="A tropical backdrop with pink flamingos, palms and paper parasols">
           <span class="plate-grain" aria-hidden="true"></span>
           <figcaption class="plate-cap"><span class="dot" aria-hidden="true"></span>Anniversary · Soul Events</figcaption>
         </figure>
@@ -1898,8 +1891,8 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
       <div class="g-tile rev-l" style="--d:480ms" data-cat="corp" data-name="Corporate Events">
         <figure class="plate wipe">
           <span class="plate-ratio"></span>
-          <img class="shot" src="assets/samples/recep-05.jpg" width="860" height="573" loading="lazy" decoding="async"
-               alt="A full ballroom stage lit for the evening, seen from the floor">
+          <img class="shot" src="assets/gallery/corp-02.jpg?v=20261008" width="1720" height="826" loading="lazy" decoding="async"
+               alt="A diamond jubilee stage with LED screens, truss lighting and a live band set">
           <span class="plate-grain" aria-hidden="true"></span>
           <figcaption class="plate-cap"><span class="dot" aria-hidden="true"></span>Corporate · Soul Events</figcaption>
         </figure>
@@ -1912,14 +1905,28 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
       <div class="g-tile rev-l" style="--d:540ms" data-cat="table" data-name="Table Decor">
         <figure class="plate wipe">
           <span class="plate-ratio"></span>
-          <img class="shot" src="assets/samples/table-01.jpg" width="860" height="573" loading="lazy" decoding="async"
-               alt="A cane basket of blooms beside a painted place card">
+          <img class="shot" src="assets/gallery/table-01.jpg?v=20261008" width="1720" height="1421" loading="lazy" decoding="async"
+               alt="A white table with a lilac floral runner and a potted posy">
           <span class="plate-grain" aria-hidden="true"></span>
           <figcaption class="plate-cap"><span class="dot" aria-hidden="true"></span>Table · Soul Events</figcaption>
         </figure>
         <div class="g-meta">
           <h3><svg class="lotus" aria-hidden="true"><use href="#lotus"></use></svg>Table Decor</h3>
           <button type="button" class="view" aria-haspopup="dialog" aria-label="Open the Table Decor gallery">View <span class="arw" aria-hidden="true">→</span></button>
+        </div>
+      </div>
+
+      <div class="g-tile rev-l" style="--d:600ms" data-cat="baby" data-name="Baby Showers">
+        <figure class="plate wipe">
+          <span class="plate-ratio"></span>
+          <img class="shot" src="assets/gallery/baby-01.jpg?v=20261008" width="1720" height="1354" loading="lazy" decoding="async"
+               alt="A boho backdrop of dried grasses, pampas and a sheer drape">
+          <span class="plate-grain" aria-hidden="true"></span>
+          <figcaption class="plate-cap"><span class="dot" aria-hidden="true"></span>Baby Shower · Soul Events</figcaption>
+        </figure>
+        <div class="g-meta">
+          <h3><svg class="lotus" aria-hidden="true"><use href="#lotus"></use></svg>Baby Showers</h3>
+          <button type="button" class="view" aria-haspopup="dialog" aria-label="Open the Baby Showers gallery">View <span class="arw" aria-hidden="true">→</span></button>
         </div>
       </div>
     </div>
@@ -2312,7 +2319,6 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
           <svg class="lotus" aria-hidden="true"><use href="#lotus"></use></svg>
           <span id="lbName">Weddings</span>
         </h2>
-        <p class="mono lb-count" id="lbCount">Six frames &middot; Weddings</p>
       </div>
       <button type="button" class="lb-close" id="lbClose" aria-label="Close the gallery"><span aria-hidden="true">&times;</span></button>
     </header>
@@ -2645,93 +2651,86 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   var lb = document.getElementById("lb");
   var tiles = document.querySelectorAll(".g-tile");
 
+  /* bump when gallery files are replaced under the same names */
+  var GV = "?v=20261008";
   var GALLERY = {
     wed: [
-      {d:"assets/gallery/", f:"wed-01.jpg", w:1720, h:1147, a:"Outdoor haldi mandap with yellow flower aisle, carved gold frame and lawn seating", c:"Soul Events"},
-      {d:"assets/gallery/", f:"wed-02.jpg", w:1720, h:1147, a:"Gold jaali mandap with jasmine garlands and floral crown set in a garden", c:"Soul Events"},
-      {d:"assets/gallery/", f:"wed-03.jpg", w:1720, h:1147, a:"Ornate gold pavilion mandap with lotus lamps and white flower strands in a coconut garden", c:"Soul Events"},
-      {d:"assets/gallery/", f:"wed-04.jpg", w:1720, h:1145, a:"Marigold-canopied indoor mandap with green panels and white chair covers", c:"Soul Events"},
-      {d:"assets/gallery/", f:"wed-05.jpg", w:1720, h:1147, a:"Wedding ritual under a leafy pergola with a carved gold backdrop and hanging planters", c:"Soul Events"}
+      {d:"assets/gallery/", f:"wed-02.jpg", w:1720, h:916, a:"An ornate gold pavilion mandap with flower strands in a coconut garden", c:"Soul Events"},
+      {d:"assets/gallery/", f:"wed-01.jpg", w:1720, h:1056, a:"A white floral mandap framed by golden lotus sculptures on a lawn", c:"Soul Events"},
+      {d:"assets/gallery/", f:"wed-03.jpg", w:1720, h:1147, a:"A wedding ritual under a leafy pergola with hanging planters", c:"Soul Events"},
+      {d:"assets/gallery/", f:"wed-04.jpg", w:1450, h:849, a:"A marigold-canopied indoor mandap between green panels", c:"Soul Events"},
+      {d:"assets/gallery/", f:"wed-05.jpg", w:1720, h:962, a:"A yellow flower aisle leading up to an outdoor mandap", c:"Soul Events"}
     ],
     anniv: [
-      {f:"anniv-01.jpg", w:573, h:860, a:"A chandelier hung over a candlelit garden setting", c:"Soul Events"},
-      {f:"anniv-02.jpg", w:573, h:860, a:"A close view of the chandelier and its floral collar", c:"Soul Events"},
-      {f:"anniv-03.jpg", w:860, h:573, a:"Lit floral frames across the lawn after dark", c:"Soul Events"},
-      {f:"anniv-04.jpg", w:860, h:573, a:"The buffet dressed against a carved red screen", c:"Soul Events"},
-      {f:"anniv-05.jpg", w:860, h:645, a:"A pastel dining pavilion strung with fairy lights", c:"Soul Events"},
-      {f:"anniv-06.jpg", w:860, h:511, a:"Dining tables set beneath the evening canopy", c:"Soul Events"}
+      {d:"assets/gallery/", f:"anniv-01.jpg", w:1720, h:1463, a:"A tropical backdrop with pink flamingos, palms and paper parasols", c:"Soul Events"},
+      {d:"assets/gallery/", f:"anniv-02.jpg", w:1720, h:961, a:"A rooftop dinner under string lights with oversized paper blooms", c:"Soul Events"},
+      {d:"assets/gallery/", f:"anniv-03.jpg", w:1720, h:853, a:"Arched pink panels and lanterns framing a dining setting", c:"Soul Events"},
+      {d:"assets/gallery/", f:"anniv-04.jpg", w:1147, h:1720, a:"A candlelit table of pots, lanterns and trailing greens", c:"Soul Events"},
+      {d:"assets/gallery/", f:"anniv-05.jpg", w:1720, h:823, a:"Patterned arch panels in coral and pink lit against the night", c:"Soul Events"},
+      {d:"assets/gallery/", f:"anniv-06.jpg", w:1720, h:1156, a:"A woven wall framed by golden palm-leaf sculptures on a lawn", c:"Soul Events"}
     ],
     bday: [
-      {f:"bday-01.jpg", w:860, h:573, a:"The marquee stage in pampas, palms and hand-painted panels", c:"Soul Events"},
-      {f:"bday-02.jpg", w:645, h:860, a:"A seating vignette against a painted floral backdrop", c:"Soul Events"},
-      {f:"bday-03.jpg", w:645, h:860, a:"A styled side table in dried florals and stoneware", c:"Soul Events"},
-      {f:"bday-04.jpg", w:645, h:860, a:"A close view of the palm-frond and dried-flower detail", c:"Soul Events"},
-      {f:"bday-05.jpg", w:645, h:860, a:"A dressed table with palm fans, blooms and a printed card", c:"Soul Events"},
-      {f:"bday-06.jpg", w:860, h:573, a:"The full birthday stage in sunflower and paper florals", c:"Soul Events"}
+      {d:"assets/gallery/", f:"bday-01.jpg", w:1290, h:1720, a:"A Sweet 16 setup glowing in purple with balloons and blooms", c:"Soul Events"},
+      {d:"assets/gallery/", f:"bday-02.jpg", w:1720, h:1585, a:"A neon balloon arch around a sparkling birthday cake table", c:"Soul Events"},
+      {d:"assets/gallery/", f:"bday-03.jpg", w:1720, h:1267, a:"A football-themed birthday wall with jerseys and team colours", c:"Soul Events"},
+      {d:"assets/gallery/", f:"bday-04.jpg", w:1720, h:1541, a:"A rooftop dining table set for a birthday lunch above the city", c:"Soul Events"},
+      {d:"assets/gallery/", f:"bday-05.jpg", w:1270, h:1720, a:"A framed portrait and florals set for a milestone birthday", c:"Soul Events"},
+      {d:"assets/gallery/", f:"bday-06.jpg", w:1720, h:980, a:"A movie-themed birthday set in red with a vintage desk", c:"Soul Events"},
+      {d:"assets/gallery/", f:"bday-07.jpg", w:1144, h:1720, a:"A tiered birthday cake on a stand surrounded by red roses", c:"Soul Events"}
     ],
     brunch: [
-      {d:"assets/gallery/", f:"brunch-01.jpg", w:1720, h:1147, a:"Poolside brunch tables with white drapes, clear chairs and a bouquet centrepiece", c:"Soul Events"},
-      {d:"assets/gallery/", f:"brunch-04.jpg", w:1720, h:1147, a:"Courtyard brunch setting with palms, pink canopy and round tables under city towers", c:"Soul Events"},
-      {d:"assets/gallery/", f:"brunch-05.jpg", w:1720, h:1147, a:"Floral and foliage arch at a lift lobby entrance with planters and hanging baskets", c:"Soul Events"},
-      {d:"assets/gallery/", f:"brunch-06.jpg", w:1720, h:1147, a:"Rustic wooden name board on a log, framed by tasselled umbrellas and flower baskets", c:"Soul Events"},
-      {d:"assets/gallery/", f:"brunch-07.jpg", w:1182, h:1720, a:"Oversized pastel paper flowers and bouquets beside the pool under a spreading tree", c:"Soul Events"}
+      {d:"assets/gallery/", f:"brunch-01.jpg", w:1720, h:1020, a:"Courtyard brunch tables beneath palms and a striped canopy", c:"Soul Events"},
+      {d:"assets/gallery/", f:"brunch-02.jpg", w:1720, h:926, a:"Poolside round tables dressed in white under draped canopies", c:"Soul Events"},
+      {d:"assets/gallery/", f:"brunch-03.jpg", w:1720, h:824, a:"Oversized paper flowers along a hotel pool with a floral sign", c:"Soul Events"}
     ],
     recep: [
-      {d:"assets/gallery/", f:"recep-01.jpg", w:1720, h:1147, a:"Reception ballroom with a lit geometric dance floor, truss lighting and drifting fog", c:"Soul Events"},
-      {d:"assets/gallery/", f:"recep-02.jpg", w:1720, h:1147, a:"Reception stage under gold cage lanterns and greenery with a floral moon-gate seat", c:"Soul Events"},
-      {d:"assets/gallery/", f:"recep-03.jpg", w:1720, h:1229, a:"Pastel-green reception stage with crystal globes, foliage and a carved settee in a marble hall", c:"Soul Events"},
-      {d:"assets/gallery/", f:"recep-04.jpg", w:1720, h:1147, a:"Reception stage with a gold ring seat, floral arches, candles and brass lanterns", c:"Soul Events"},
-      {d:"assets/gallery/", f:"recep-05.jpg", w:1720, h:1147, a:"Outdoor reception bar under hanging crystal chandeliers and mirrored pillars", c:"Soul Events"},
-      {d:"assets/gallery/", f:"recep-06.jpg", w:1720, h:1147, a:"Pastel draped reception stage with a red settee, floral frames and lanterns", c:"Soul Events"},
-      {d:"assets/gallery/", f:"recep-07.jpg", w:1720, h:1147, a:"Mirrored truss reception bar canopy with crystal drops beside palms at night", c:"Soul Events"},
-      {d:"assets/gallery/", f:"recep-08.jpg", w:1720, h:1145, a:"Garden reception stage with pastel drapes, gold lattice screens and purple blooms", c:"Soul Events"}
+      {d:"assets/gallery/", f:"recep-01.jpg", w:1720, h:979, a:"A reception bar under cascading crystal chandeliers at night", c:"Soul Events"},
+      {d:"assets/gallery/", f:"recep-02.jpg", w:1720, h:843, a:"A garden reception stage in pastel drapes and gold lattice", c:"Soul Events"},
+      {d:"assets/gallery/", f:"recep-03.jpg", w:1720, h:995, a:"A pastel-green stage with crystal globes and a carved settee", c:"Soul Events"},
+      {d:"assets/gallery/", f:"recep-04.jpg", w:1720, h:1147, a:"A ballroom dance floor lit with truss lighting and drifting fog", c:"Soul Events"},
+      {d:"assets/gallery/", f:"recep-05.jpg", w:1720, h:931, a:"A stage under gold cage lanterns and greenery", c:"Soul Events"},
+      {d:"assets/gallery/", f:"recep-06.jpg", w:1720, h:1041, a:"A pastel draped stage with a red settee and floral frames", c:"Soul Events"},
+      {d:"assets/gallery/", f:"recep-07.jpg", w:1720, h:925, a:"A stage with a gold ring seat, floral arches and brass lanterns", c:"Soul Events"}
     ],
-    haldi: [
-      {d:"assets/gallery/", f:"haldi-01.jpg", w:1720, h:1147, a:"Haldi stage with chevron platform, painted backdrop, ivy ceiling and floral welcome sign", c:"Soul Events"},
-      {d:"assets/gallery/", f:"haldi-02.jpg", w:1720, h:1431, a:"Betel leaf backdrop with hanging jasmine strings and a carved haldi seat on blue stage", c:"Soul Events"},
-      {f:"haldi-01.jpg", w:860, h:573, a:"A hand-painted haldi ceremony sign banked with marigolds", c:"Soul Events"},
-      {f:"haldi-02.jpg", w:860, h:483, a:"The haldi pavilion dressed in colour under the trees", c:"Soul Events"},
-      {f:"haldi-03.jpg", w:860, h:573, a:"The ceremony backdrop in red and gold beneath a tiled roof", c:"Soul Events"},
-      {f:"haldi-04.jpg", w:860, h:573, a:"Figurines set among marigolds for the ceremony", c:"Soul Events"},
-      {f:"haldi-05.jpg", w:573, h:860, a:"A brass lamp garlanded for the haldi", c:"Soul Events"}
-    ],
-    mehendi: [
-      {d:"assets/gallery/", f:"mehendi-01.jpg", w:1720, h:1147, a:"Mehendi hall with a sunburst fabric backdrop, white seating and marigold bowls", c:"Soul Events"},
-      {d:"assets/gallery/", f:"mehendi-02.jpg", w:1720, h:1145, a:"Colourful mehendi stage with turquoise settee, marigold garlands and mirror-work umbrellas", c:"Soul Events"},
-      {d:"assets/gallery/", f:"mehendi-03.jpg", w:1720, h:1145, a:"Mehendi tent along the pool with hanging charms, umbrellas and pink seating", c:"Soul Events"},
-      {d:"assets/gallery/", f:"mehendi-04.jpg", w:1720, h:1147, a:"Pastel fabric backdrop with flamingos, paper flowers and a personalised wedding sign", c:"Soul Events"},
-      {d:"assets/gallery/", f:"mehendi-05.jpg", w:1720, h:1099, a:"Rajasthani puppet couple in a marigold basket on a mandala print floor", c:"Soul Events"}
+    hm: [
+      {d:"assets/gallery/", f:"mehendi-01.jpg", w:1720, h:1145, a:"Rajasthani puppet couple in a marigold basket on a mandala floor", c:"Soul Events"},
+      {d:"assets/gallery/", f:"mehendi-02.jpg", w:1720, h:883, a:"A poolside mehendi tent with umbrellas and bright pink seating", c:"Soul Events"},
+      {d:"assets/gallery/", f:"mehendi-03.jpg", w:1720, h:1079, a:"A turquoise settee under marigold garlands and mirror-work umbrellas", c:"Soul Events"},
+      {d:"assets/gallery/", f:"mehendi-04.jpg", w:1720, h:1285, a:"A pastel fabric backdrop with flamingos and paper flowers", c:"Soul Events"},
+      {d:"assets/gallery/", f:"mehendi-05.jpg", w:1720, h:873, a:"A mehendi hall with a sunburst fabric backdrop and white seating", c:"Soul Events"},
+      {d:"assets/gallery/", f:"haldi-01.jpg", w:1720, h:1145, a:"Betel-leaf backdrop with jasmine strings and a carved haldi seat", c:"Soul Events"},
+      {d:"assets/gallery/", f:"haldi-02.jpg", w:1720, h:1147, a:"A haldi stage with a painted backdrop, ivy ceiling and floral sign", c:"Soul Events"}
     ],
     kids: [
-      {f:"kids-01.jpg", w:860, h:573, a:"The entrance walk dressed in pastel drapes and lanterns", c:"Soul Events"},
-      {f:"kids-02.jpg", w:860, h:573, a:"The same walkway from the garden side", c:"Soul Events"},
-      {f:"kids-03.jpg", w:860, h:573, a:"A pastel backdrop banked with flowers and paper fish", c:"Soul Events"},
-      {f:"kids-04.jpg", w:860, h:573, a:"The birthday backdrop in coral and sea-blue with paper birds", c:"Soul Events"},
-      {f:"kids-05.jpg", w:860, h:573, a:"A garden table with a stoneware vase of white roses", c:"Soul Events"},
-      {f:"kids-06.jpg", w:860, h:573, a:"The birthday cake on its stand against the painted backdrop", c:"Soul Events"}
+      {d:"assets/gallery/", f:"kids-01.jpg", w:1720, h:1559, a:"A pastel ribbon backdrop in pink, blue and lilac with paper flowers", c:"Soul Events"},
+      {d:"assets/gallery/", f:"kids-02.jpg", w:1720, h:1134, a:"A teddy bear dessert table with balloons and a rustic pallet wall", c:"Soul Events"}
     ],
     corp: [
-      {f:"recep-05.jpg", w:860, h:573, a:"A full ballroom stage lit for the evening, seen from the floor", c:"Soul Events"},
-      {f:"recep-04.jpg", w:860, h:573, a:"A stage set in soft uplighting for the evening's programme", c:"Soul Events"},
-      {f:"wed-04.jpg", w:860, h:573, a:"A gold-draped stage ready for the evening", c:"Soul Events"},
-      {f:"anniv-06.jpg", w:860, h:511, a:"Dining tables set beneath the evening canopy", c:"Soul Events"},
-      {f:"table-02.jpg", w:860, h:573, a:"A low centrepiece of tropical leaves and cut flowers", c:"Soul Events"},
-      {f:"anniv-04.jpg", w:860, h:573, a:"The buffet dressed against a carved red screen", c:"Soul Events"}
+      {d:"assets/gallery/", f:"corp-02.jpg", w:1720, h:826, a:"A diamond jubilee stage with LED screens, truss lighting and a live band set", c:"Soul Events"},
+      {d:"assets/gallery/", f:"corp-01.jpg", w:1720, h:968, a:"A garden-themed stage with paper flowers and a hanging floral canopy", c:"Soul Events"},
+      {d:"assets/gallery/", f:"corp-03.jpg", w:1720, h:1117, a:"A full auditorium facing a purple-lit stage during a corporate show", c:"Soul Events"},
+      {d:"assets/gallery/", f:"corp-04.jpg", w:1720, h:1321, a:"A jubilee celebration backdrop with lilies and a commemorative panel", c:"Soul Events"}
+    ],
+    baby: [
+      {d:"assets/gallery/", f:"baby-01.jpg", w:1720, h:1354, a:"A boho backdrop of dried grasses, pampas and a sheer drape", c:"Soul Events"},
+      {d:"assets/gallery/", f:"baby-02.jpg", w:1720, h:1149, a:"A photo wall of memories framed in dried palms and yellow blooms", c:"Soul Events"},
+      {d:"assets/gallery/", f:"baby-03.jpg", w:1720, h:1144, a:"A seaside dessert table with shells, wildflowers and teal accents", c:"Soul Events"}
     ],
     table: [
-      {f:"table-01.jpg", w:860, h:573, a:"A cane basket of blooms beside a painted place card", c:"Soul Events"},
-      {f:"table-02.jpg", w:860, h:573, a:"A low centrepiece of tropical leaves and cut flowers", c:"Soul Events"},
-      {f:"table-03.jpg", w:860, h:573, a:"A second centrepiece in white, cream and coral", c:"Soul Events"},
-      {f:"table-04.jpg", w:573, h:860, a:"A styled shelf against a carved red screen", c:"Soul Events"},
-      {f:"table-05.jpg", w:573, h:860, a:"A dressed dresser of preserves and glassware", c:"Soul Events"},
-      {f:"table-06.jpg", w:860, h:645, a:"A cake table set under sheer drapery", c:"Soul Events"}
+      {d:"assets/gallery/", f:"table-01.jpg", w:1720, h:1421, a:"A white table with a lilac floral runner and a potted posy", c:"Soul Events"},
+      {d:"assets/gallery/", f:"table-02.jpg", w:1720, h:1714, a:"Yellow blooms in burlap with a gift box on a wooden table", c:"Soul Events"},
+      {d:"assets/gallery/", f:"table-03.jpg", w:1314, h:1720, a:"A tall candle centrepiece wreathed in white roses", c:"Soul Events"},
+      {d:"assets/gallery/", f:"table-04.jpg", w:1720, h:1250, a:"A racing-themed table with chequered mats and a party menu", c:"Soul Events"},
+      {d:"assets/gallery/", f:"table-05.jpg", w:1290, h:1720, a:"A cricket-themed place setting with a ball in a glass jar", c:"Soul Events"},
+      {d:"assets/gallery/", f:"table-06.jpg", w:1720, h:1664, a:"A green sports-themed table with printed placemats", c:"Soul Events"},
+      {d:"assets/gallery/", f:"table-07.jpg", w:1720, h:587, a:"A long table of dried florals, cane trays and baked treats", c:"Soul Events"},
+      {d:"assets/gallery/", f:"table-08.jpg", w:1194, h:1720, a:"Marigolds and a toy truck on a bright bandhani cloth", c:"Soul Events"},
+      {d:"assets/gallery/", f:"table-09.jpg", w:1068, h:1720, a:"A teddy bear centrepiece holding a paper lantern above wildflowers", c:"Soul Events"}
     ]
   };
-  var COUNT_WORD = ["Zero","One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten"];
 
   if (lb && tiles.length) {
     var lbName   = document.getElementById("lbName");
-    var lbCount  = document.getElementById("lbCount");
     var lbGrid   = document.getElementById("lbGrid");
     var lbBody   = document.getElementById("lbBody");
     var lbSolo   = document.getElementById("lbSolo");
@@ -2748,8 +2747,16 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
     function pad(n){ return (n < 10 ? "0" : "") + n; }
 
     /* ---- grid ---- */
+    /* fewer frames get taller rows, so a short set still fills the popup */
+    function rowHeight(n){
+      var small = window.matchMedia("(max-width:599px)").matches;
+      if (small) return n <= 3 ? "220px" : n <= 5 ? "170px" : "130px";
+      return n <= 3 ? "min(44vh,420px)" : n <= 5 ? "min(34vh,320px)" : n <= 7 ? "min(28vh,270px)" : "min(23vh,230px)";
+    }
+
     function buildGrid(){
       lbGrid.textContent = "";
+      lbGrid.style.setProperty("--row", rowHeight(shots.length));
       for (var i = 0; i < shots.length; i++) {
         (function(i){
           var s = shots[i];
@@ -2758,11 +2765,12 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
           cell.className = "lb-cell";
           cell.setAttribute("aria-label", "Expand frame " + (i + 1) + " of " + shots.length + ": " + s.a);
           var img = document.createElement("img");
-          img.src = (s.d || "assets/samples/") + s.f;
+          img.src = (s.d || "assets/samples/") + s.f + GV;
           img.width = s.w; img.height = s.h;
           img.alt = s.a;
           img.loading = "lazy";
           img.decoding = "async";
+          cell.style.setProperty("--r", (s.w / s.h).toFixed(4));
           cell.appendChild(img);
           cell.addEventListener("click", function(){ showSolo(i); });
           lbGrid.appendChild(cell);
@@ -2774,7 +2782,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
     function showSolo(i){
       solo = (i + shots.length) % shots.length;
       var s = shots[solo];
-      lbImg.src = (s.d || "assets/samples/") + s.f;
+      lbImg.src = (s.d || "assets/samples/") + s.f + GV;
       lbImg.width = s.w; lbImg.height = s.h;
       lbImg.alt = s.a;
       lbIdx.textContent = pad(solo + 1) + " / " + pad(shots.length);
@@ -2809,7 +2817,6 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
       window.clearTimeout(closeTimer);
 
       lbName.textContent = catName;
-      lbCount.textContent = (COUNT_WORD[shots.length] || shots.length) + " frames · " + catName;
       buildGrid();
       solo = -1;
       lbSolo.hidden = true;
