@@ -1132,17 +1132,13 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 
 /* justified rows: every frame keeps its own shape, rows read left to right
    in the client's order, and each row fills the width at one shared height */
-.lb-grid{
-  --row:clamp(150px,22vh,240px); --gap:clamp(8px,1vw,12px);
-  display:flex; flex-wrap:wrap; gap:var(--gap);
-}
-.lb-grid::after{content:""; flex:999 1 0}   /* keeps a short last row from ballooning */
-/* on a phone the last row may fill the width: frames are small enough already */
-@media (max-width:599px){ .lb-grid::after{display:none} }
+/* rows are built in script (at most four frames each); inside a row every
+   frame grows by its own ratio, so all of them share one height */
+.lb-grid{--gap:clamp(8px,1vw,12px); display:flex; flex-direction:column; gap:var(--gap)}
 .lb-grid[hidden]{display:none}
+.lb-row{display:flex; gap:var(--gap); max-width:100%}
 .lb-cell{
-  flex:var(--r,1.5) 1 calc(var(--r,1.5) * var(--row));
-  max-width:100%;
+  flex:var(--r,1.5) 1 0; min-width:0;
   display:block; position:relative; overflow:hidden; padding:0;
   border:0; border-radius:4px; background:var(--raised);
   box-shadow:0 1px 0 rgba(26,26,34,.04);
@@ -2652,7 +2648,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   var tiles = document.querySelectorAll(".g-tile");
 
   /* bump when gallery files are replaced under the same names */
-  var GV = "?v=20261008g";
+  var GV = "?v=20261008h";
   var GALLERY = {
     wed: [
       {d:"assets/gallery/", f:"wed-02.jpg", w:1720, h:916, a:"An ornate gold pavilion mandap with flower strands in a coconut garden", c:"Soul Events"},
@@ -2675,7 +2671,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
       {d:"assets/gallery/", f:"bday-01.jpg", w:1290, h:1720, a:"A Sweet 16 setup glowing in purple with balloons and blooms", c:"Soul Events"},
       {d:"assets/gallery/", f:"bday-02.jpg", w:1720, h:1585, a:"A neon balloon arch around a sparkling birthday cake table", c:"Soul Events"},
       {d:"assets/gallery/", f:"bday-03.jpg", w:1720, h:1267, a:"A football-themed birthday wall with jerseys and team colours", c:"Soul Events"},
-      {d:"assets/gallery/", f:"bday-04.jpg", w:1720, h:1541, a:"A rooftop dining table set for a birthday lunch above the city", c:"Soul Events"},
+      {d:"assets/gallery/", f:"bday-04.jpg", w:1077, h:920, a:"A rooftop table of glass vases, orange blooms and green runners above the city", c:"Soul Events"},
       {d:"assets/gallery/", f:"bday-05.jpg", w:1270, h:1720, a:"A framed portrait and florals set for a milestone birthday", c:"Soul Events"},
       {d:"assets/gallery/", f:"bday-06.jpg", w:1720, h:980, a:"A movie-themed birthday set in red with a vintage desk", c:"Soul Events"},
       {d:"assets/gallery/", f:"bday-07.jpg", w:1144, h:1720, a:"A tiered birthday cake on a stand surrounded by red roses", c:"Soul Events"},
@@ -2765,15 +2761,45 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 
     /* ---- grid ---- */
     /* fewer frames get taller rows, so a short set still fills the popup */
+    var MAX_PER_ROW = 4, cellEls = [];
+    function isSmall(){ return window.matchMedia("(max-width:599px)").matches; }
     function rowHeight(n){
-      var small = window.matchMedia("(max-width:599px)").matches;
-      if (small) return n <= 3 ? "220px" : n <= 5 ? "170px" : "130px";
-      return n <= 3 ? "min(44vh,420px)" : n <= 5 ? "min(34vh,320px)" : n <= 7 ? "min(28vh,270px)" : "min(23vh,230px)";
+      var vh = window.innerHeight;
+      if (isSmall()) return n <= 3 ? 220 : n <= 5 ? 170 : 130;
+      return n <= 3 ? Math.min(vh * .44, 420) : n <= 5 ? Math.min(vh * .34, 320)
+           : n <= 7 ? Math.min(vh * .28, 270) : Math.min(vh * .23, 230);
     }
+
+    /* justified rows, in reading order, never more than four frames wide */
+    function layoutGrid(){
+      var W = lbGrid.clientWidth;
+      if (!W || !cellEls.length) return;
+      var gap = parseFloat(getComputedStyle(lbGrid).rowGap) || 10;
+      var target = rowHeight(shots.length);
+      lbGrid.textContent = "";
+      var row = [], sum = 0;
+      function flush(last){
+        if (!row.length) return;
+        var el = document.createElement("div");
+        el.className = "lb-row";
+        var natural = sum * target + gap * (row.length - 1);
+        // a short last row keeps the target height instead of stretching
+        if (last && natural < W && !isSmall()) el.style.width = natural + "px";
+        row.forEach(function(i){ el.appendChild(cellEls[i]); });
+        lbGrid.appendChild(el);
+        row = []; sum = 0;
+      }
+      for (var i = 0; i < cellEls.length; i++) {
+        row.push(i); sum += shots[i].w / shots[i].h;
+        if (row.length === MAX_PER_ROW || sum * target + gap * (row.length - 1) >= W) flush(false);
+      }
+      flush(true);
+    }
+    window.addEventListener("resize", function(){ if (isOpen && solo < 0) layoutGrid(); });
 
     function buildGrid(){
       lbGrid.textContent = "";
-      lbGrid.style.setProperty("--row", rowHeight(shots.length));
+      cellEls = [];
       for (var i = 0; i < shots.length; i++) {
         (function(i){
           var s = shots[i];
@@ -2790,7 +2816,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
           cell.style.setProperty("--r", (s.w / s.h).toFixed(4));
           cell.appendChild(img);
           cell.addEventListener("click", function(){ showSolo(i); });
-          lbGrid.appendChild(cell);
+          cellEls.push(cell);
         })(i);
       }
     }
@@ -2817,8 +2843,8 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
       lbGrid.hidden = false;
       lbBody.scrollTop = 0;
       if (lbLive) lbLive.textContent = catName + ", " + shots.length + " frames.";
-      var cells = lbGrid.children;
-      if (was > -1 && cells[was]) cells[was].focus(); else lbClose.focus();
+      layoutGrid();
+      if (was > -1 && cellEls[was]) cellEls[was].focus(); else lbClose.focus();
     }
 
     /* ---- open / close ---- */
@@ -2841,6 +2867,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 
       lb.hidden = false;
       isOpen = true;
+      layoutGrid();
       document.documentElement.classList.add("lb-open");
       document.body.classList.add("lb-open");
       requestAnimationFrame(function(){ lb.classList.add("open"); });
