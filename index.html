@@ -2652,14 +2652,16 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   var tiles = document.querySelectorAll(".g-tile");
 
   /* bump when gallery files are replaced under the same names */
-  var GV = "?v=20261008";
+  var GV = "?v=20261008g";
   var GALLERY = {
     wed: [
       {d:"assets/gallery/", f:"wed-02.jpg", w:1720, h:916, a:"An ornate gold pavilion mandap with flower strands in a coconut garden", c:"Soul Events"},
       {d:"assets/gallery/", f:"wed-01.jpg", w:1720, h:1056, a:"A white floral mandap framed by golden lotus sculptures on a lawn", c:"Soul Events"},
       {d:"assets/gallery/", f:"wed-03.jpg", w:1720, h:1147, a:"A wedding ritual under a leafy pergola with hanging planters", c:"Soul Events"},
       {d:"assets/gallery/", f:"wed-04.jpg", w:1450, h:849, a:"A marigold-canopied indoor mandap between green panels", c:"Soul Events"},
-      {d:"assets/gallery/", f:"wed-05.jpg", w:1720, h:962, a:"A yellow flower aisle leading up to an outdoor mandap", c:"Soul Events"}
+      {d:"assets/gallery/", f:"wed-05.jpg", w:1720, h:962, a:"A yellow flower aisle leading up to an outdoor mandap", c:"Soul Events"},
+      {d:"assets/gallery/", f:"wed-06.jpg", w:828, h:650, a:"A pool-side mandap under a red and white flower dome among palms", c:"Soul Events"},
+      {d:"assets/gallery/", f:"wed-07.jpg", w:1440, h:1480, a:"An indoor mandap of bamboo, jasmine strings and cane chairs", c:"Soul Events"}
     ],
     anniv: [
       {d:"assets/gallery/", f:"anniv-01.jpg", w:1720, h:1463, a:"A tropical backdrop with pink flamingos, palms and paper parasols", c:"Soul Events"},
@@ -2676,7 +2678,8 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
       {d:"assets/gallery/", f:"bday-04.jpg", w:1720, h:1541, a:"A rooftop dining table set for a birthday lunch above the city", c:"Soul Events"},
       {d:"assets/gallery/", f:"bday-05.jpg", w:1270, h:1720, a:"A framed portrait and florals set for a milestone birthday", c:"Soul Events"},
       {d:"assets/gallery/", f:"bday-06.jpg", w:1720, h:980, a:"A movie-themed birthday set in red with a vintage desk", c:"Soul Events"},
-      {d:"assets/gallery/", f:"bday-07.jpg", w:1144, h:1720, a:"A tiered birthday cake on a stand surrounded by red roses", c:"Soul Events"}
+      {d:"assets/gallery/", f:"bday-07.jpg", w:1144, h:1720, a:"A tiered birthday cake on a stand surrounded by red roses", c:"Soul Events"},
+      {d:"assets/gallery/", f:"bday-08.jpg", w:620, h:1073, a:"A 50th birthday tower of drinks and cigars on white wire stands among palms", c:"Soul Events"}
     ],
     brunch: [
       {d:"assets/gallery/", f:"brunch-01.jpg", w:1720, h:1020, a:"Courtyard brunch tables beneath palms and a striped canopy", c:"Soul Events"},
@@ -2690,7 +2693,9 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
       {d:"assets/gallery/", f:"recep-04.jpg", w:1720, h:1147, a:"A ballroom dance floor lit with truss lighting and drifting fog", c:"Soul Events"},
       {d:"assets/gallery/", f:"recep-05.jpg", w:1720, h:931, a:"A stage under gold cage lanterns and greenery", c:"Soul Events"},
       {d:"assets/gallery/", f:"recep-06.jpg", w:1720, h:1041, a:"A pastel draped stage with a red settee and floral frames", c:"Soul Events"},
-      {d:"assets/gallery/", f:"recep-07.jpg", w:1720, h:925, a:"A stage with a gold ring seat, floral arches and brass lanterns", c:"Soul Events"}
+      {d:"assets/gallery/", f:"recep-07.jpg", w:1720, h:925, a:"A stage with a gold ring seat, floral arches and brass lanterns", c:"Soul Events"},
+      {d:"assets/gallery/", f:"recep-08.jpg", w:1076, h:1007, a:"A red canopy reception in a lit garden with hanging cages and vines", c:"Soul Events"},
+      {d:"assets/gallery/", f:"recep-09.jpg", w:1440, h:1069, a:"A white cane settee beneath a tree hung with crystal chandeliers", c:"Soul Events"}
     ],
     hm: [
       {d:"assets/gallery/", f:"mehendi-01.jpg", w:1720, h:1145, a:"Rajasthani puppet couple in a marigold basket on a mandala floor", c:"Soul Events"},
@@ -2703,13 +2708,21 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
     ],
     kids: [
       {d:"assets/gallery/", f:"kids-01.jpg", w:1720, h:1559, a:"A pastel ribbon backdrop in pink, blue and lilac with paper flowers", c:"Soul Events"},
-      {d:"assets/gallery/", f:"kids-02.jpg", w:1720, h:1134, a:"A teddy bear dessert table with balloons and a rustic pallet wall", c:"Soul Events"}
+      {d:"assets/gallery/", f:"kids-02.jpg", w:1720, h:1134, a:"A teddy bear dessert table with balloons and a rustic pallet wall", c:"Soul Events"},
+      {d:"assets/gallery/", f:"kids-03.jpg", w:1077, h:794, a:"A princess cake table glowing pink behind a Happy Birthday banner", c:"Soul Events"},
+      {d:"assets/gallery/", f:"kids-04.jpg", w:918, h:638, a:"A rainbow balloon arch over streamers, paper fans and a birthday bunting", c:"Soul Events"},
+      {d:"assets/gallery/", f:"kids-05.jpg", w:1342, h:1378, a:"A Peppa Pig party corner with a play tent, balloons and a number 3", c:"Soul Events"}
     ],
     corp: [
       {d:"assets/gallery/", f:"corp-02.jpg", w:1720, h:826, a:"A diamond jubilee stage with LED screens, truss lighting and a live band set", c:"Soul Events"},
       {d:"assets/gallery/", f:"corp-01.jpg", w:1720, h:968, a:"A garden-themed stage with paper flowers and a hanging floral canopy", c:"Soul Events"},
       {d:"assets/gallery/", f:"corp-03.jpg", w:1720, h:1117, a:"A full auditorium facing a purple-lit stage during a corporate show", c:"Soul Events"},
-      {d:"assets/gallery/", f:"corp-04.jpg", w:1720, h:1321, a:"A jubilee celebration backdrop with lilies and a commemorative panel", c:"Soul Events"}
+      {d:"assets/gallery/", f:"corp-04.jpg", w:1720, h:1321, a:"A jubilee celebration backdrop with lilies and a commemorative panel", c:"Soul Events"},
+      {d:"assets/gallery/", f:"corp-05.jpg", w:1078, h:799, a:"A store window of giant paper flowers around family mannequins", c:"Soul Events"},
+      {d:"assets/gallery/", f:"corp-06.jpg", w:1079, h:896, a:"A Tuxedo Wedding window display with suited mannequins and pampas", c:"Soul Events"},
+      {d:"assets/gallery/", f:"corp-07.jpg", w:1051, h:705, a:"A Kashmiri food counter with a samovar, carpet and floral garland", c:"Soul Events"},
+      {d:"assets/gallery/", f:"corp-08.jpg", w:1079, h:984, a:"A ballroom stage with lit grid panels and a branch of fairy lights", c:"Soul Events"},
+      {d:"assets/gallery/", f:"corp-09.jpg", w:1080, h:810, a:"A panel discussion on a hotel stage beneath a projected portrait", c:"Soul Events"}
     ],
     baby: [
       {d:"assets/gallery/", f:"baby-01.jpg", w:1720, h:1354, a:"A boho backdrop of dried grasses, pampas and a sheer drape", c:"Soul Events"},
@@ -2725,7 +2738,11 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
       {d:"assets/gallery/", f:"table-06.jpg", w:1720, h:1664, a:"A green sports-themed table with printed placemats", c:"Soul Events"},
       {d:"assets/gallery/", f:"table-07.jpg", w:1720, h:587, a:"A long table of dried florals, cane trays and baked treats", c:"Soul Events"},
       {d:"assets/gallery/", f:"table-08.jpg", w:1194, h:1720, a:"Marigolds and a toy truck on a bright bandhani cloth", c:"Soul Events"},
-      {d:"assets/gallery/", f:"table-09.jpg", w:1068, h:1720, a:"A teddy bear centrepiece holding a paper lantern above wildflowers", c:"Soul Events"}
+      {d:"assets/gallery/", f:"table-09.jpg", w:1068, h:1720, a:"A teddy bear centrepiece holding a paper lantern above wildflowers", c:"Soul Events"},
+      {d:"assets/gallery/", f:"table-10.jpg", w:1436, h:811, a:"A long poolside table with wood-slice centrepieces and dressed chairs", c:"Soul Events"},
+      {d:"assets/gallery/", f:"table-11.jpg", w:1440, h:960, a:"A woven basket of white blooms on a wood slice by the pool", c:"Soul Events"},
+      {d:"assets/gallery/", f:"table-12.jpg", w:1080, h:1080, a:"A dinner table with ostrich-feather centrepieces and gold mosaic votives", c:"Soul Events"},
+      {d:"assets/gallery/", f:"table-13.jpg", w:929, h:729, a:"Floral-print tables under pastel drapes and hanging hoops in a garden", c:"Soul Events"}
     ]
   };
 
