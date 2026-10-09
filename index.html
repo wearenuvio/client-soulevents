@@ -354,6 +354,8 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   position:absolute; inset:0; width:100%; height:100%;
   display:block; max-width:none; object-fit:cover;
 }
+/* <picture> wrappers add formats only, never a box of their own */
+.plate picture,.lb-cell picture,.lb-figure picture,.brand picture{display:contents}
 .plate-grain{
   position:absolute; inset:-8%; z-index:1;
   background-image:var(--grain); background-size:160px 160px;
@@ -1448,7 +1450,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 <!-- ============ NAV ============ -->
 <header class="nav" id="nav">
   <a class="brand" href="#top" aria-label="Soul Events, home">
-    <img class="mark-brand" src="assets/brand/soul-mark.png?v=2" alt="" width="520" height="520" decoding="async">
+    <picture><source type="image/webp" srcset="assets/brand/opt/soul-mark-160.webp?v=20261009"><img class="mark-brand" src="assets/brand/opt/soul-mark-160.png?v=20261009" alt="" width="160" height="160" decoding="async"></picture>
     <span class="brand-word"><b>Soul</b><span>events</span></span>
   </a>
   <nav class="nav-links" aria-label="Primary">
@@ -1491,7 +1493,8 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 <section class="hero wrap" aria-labelledby="hero-h">
   <div class="hero-wash" id="heroWash" aria-hidden="true"></div>
   <picture>
-    <source srcset="assets/brand/hero-lotus.webp" type="image/webp">
+    <source type="image/avif" srcset="assets/brand/opt/hero-lotus-480.avif?v=20261009 480w, assets/brand/opt/hero-lotus-701.avif?v=20261009 701w" sizes="(max-width:900px) 290px, 490px">
+    <source type="image/webp" srcset="assets/brand/opt/hero-lotus-480.webp?v=20261009 480w, assets/brand/opt/hero-lotus-701.webp?v=20261009 701w" sizes="(max-width:900px) 290px, 490px">
     <img class="hero-lotus" src="assets/brand/hero-lotus.png" alt="" aria-hidden="true"
          width="701" height="1100" decoding="async" fetchpriority="low">
   </picture>
@@ -1591,8 +1594,12 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
     <article class="founder">
       <figure class="plate f-plate wipe">
         <span class="plate-ratio"></span>
-        <img class="shot" src="assets/samples/chelna-portrait.jpg" width="860" height="860" loading="lazy" decoding="async"
+        <picture>
+          <source type="image/avif" srcset="assets/samples/opt/chelna-portrait-480.avif?v=20261009 480w, assets/samples/opt/chelna-portrait-860.avif?v=20261009 860w" sizes="(max-width:900px) min(420px, 92vw), 40vw">
+          <source type="image/webp" srcset="assets/samples/opt/chelna-portrait-480.webp?v=20261009 480w, assets/samples/opt/chelna-portrait-860.webp?v=20261009 860w" sizes="(max-width:900px) min(420px, 92vw), 40vw">
+          <img class="shot" src="assets/samples/chelna-portrait.jpg?v=20261009" width="860" height="860" loading="lazy" decoding="async"
              alt="Chelna Lekhi, smiling, in a linen shirt against a warm studio backdrop">
+        </picture>
         <span class="plate-grain" aria-hidden="true"></span>
       </figure>
       <div class="f-body">
@@ -1610,8 +1617,12 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
     <article class="founder founder--b">
       <figure class="plate f-plate wipe">
         <span class="plate-ratio"></span>
-        <img class="shot" src="assets/samples/ramesh-portrait.jpg" width="860" height="860" loading="lazy" decoding="async"
+        <picture>
+          <source type="image/avif" srcset="assets/samples/opt/ramesh-portrait-480.avif?v=20261009 480w, assets/samples/opt/ramesh-portrait-860.avif?v=20261009 860w" sizes="(max-width:900px) min(420px, 92vw), 40vw">
+          <source type="image/webp" srcset="assets/samples/opt/ramesh-portrait-480.webp?v=20261009 480w, assets/samples/opt/ramesh-portrait-860.webp?v=20261009 860w" sizes="(max-width:900px) min(420px, 92vw), 40vw">
+          <img class="shot" src="assets/samples/ramesh-portrait.jpg?v=20261009" width="860" height="860" loading="lazy" decoding="async"
              alt="Ramesh Sadhwani speaking into a microphone on stage">
+        </picture>
         <span class="plate-grain" aria-hidden="true"></span>
       </figure>
       <div class="f-body">
@@ -1661,8 +1672,12 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
       <div class="p-cell p-cell--shot rev-l" style="--d:180ms">
         <figure class="plate plate--plan wipe">
           <a href="assets/samples/process-layout.jpg?v=3" target="_blank" rel="noopener" aria-label="Open the full ballroom floor plan">
-            <img class="shot" src="assets/samples/process-layout.jpg?v=3" width="1174" height="1064" loading="lazy" decoding="async"
+            <picture>
+              <source type="image/avif" srcset="assets/samples/opt/process-layout-480.avif?v=20261009 480w, assets/samples/opt/process-layout-960.avif?v=20261009 960w, assets/samples/opt/process-layout-1174.avif?v=20261009 1174w" sizes="(max-width:720px) 92vw, 33vw">
+              <source type="image/webp" srcset="assets/samples/opt/process-layout-480.webp?v=20261009 480w, assets/samples/opt/process-layout-960.webp?v=20261009 960w, assets/samples/opt/process-layout-1174.webp?v=20261009 1174w" sizes="(max-width:720px) 92vw, 33vw">
+              <img class="shot" src="assets/samples/process-layout.jpg?v=20261009" width="1174" height="1064" loading="lazy" decoding="async"
                  alt="A technical floor plan for a grand ballroom: main stage and runway, four team seating blocks, green rooms, band and control platforms, and guest entrances">
+            </picture>
           </a>
           <figcaption class="plate-cap"><span class="dot" aria-hidden="true"></span>Layout &middot; Soul Events</figcaption>
         </figure>
@@ -1779,8 +1794,12 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
       <div class="g-tile rev-l" data-cat="wed" data-name="Weddings">
         <figure class="plate wipe">
           <span class="plate-ratio"></span>
-          <img class="shot" src="assets/gallery/wed-02.jpg?v=20261008" width="1720" height="916" decoding="async"
+          <picture>
+            <source type="image/avif" srcset="assets/gallery/opt/wed-02-480.avif?v=20261009 480w, assets/gallery/opt/wed-02-960.avif?v=20261009 960w, assets/gallery/opt/wed-02-1440.avif?v=20261009 1440w, assets/gallery/opt/wed-02-1720.avif?v=20261009 1720w" sizes="(max-width:599px) 92vw, (max-width:900px) 46vw, 60vw">
+            <source type="image/webp" srcset="assets/gallery/opt/wed-02-480.webp?v=20261009 480w, assets/gallery/opt/wed-02-960.webp?v=20261009 960w, assets/gallery/opt/wed-02-1440.webp?v=20261009 1440w, assets/gallery/opt/wed-02-1720.webp?v=20261009 1720w" sizes="(max-width:599px) 92vw, (max-width:900px) 46vw, 60vw">
+            <img class="shot" src="assets/gallery/wed-02.jpg?v=20261009" width="1720" height="916" decoding="async"
                alt="An ornate gold pavilion mandap with flower strands in a coconut garden">
+          </picture>
           <span class="plate-grain" aria-hidden="true"></span>
           <figcaption class="plate-cap"><span class="dot" aria-hidden="true"></span>Wedding · Soul Events</figcaption>
         </figure>
@@ -1793,8 +1812,12 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
       <div class="g-tile rev-l" style="--d:60ms" data-cat="recep" data-name="Receptions">
         <figure class="plate wipe">
           <span class="plate-ratio"></span>
-          <img class="shot" src="assets/gallery/recep-01.jpg?v=20261008" width="1720" height="979" loading="lazy" decoding="async"
+          <picture>
+            <source type="image/avif" srcset="assets/gallery/opt/recep-01-480.avif?v=20261009 480w, assets/gallery/opt/recep-01-960.avif?v=20261009 960w, assets/gallery/opt/recep-01-1440.avif?v=20261009 1440w, assets/gallery/opt/recep-01-1720.avif?v=20261009 1720w" sizes="(max-width:599px) 92vw, (max-width:900px) 46vw, 60vw">
+            <source type="image/webp" srcset="assets/gallery/opt/recep-01-480.webp?v=20261009 480w, assets/gallery/opt/recep-01-960.webp?v=20261009 960w, assets/gallery/opt/recep-01-1440.webp?v=20261009 1440w, assets/gallery/opt/recep-01-1720.webp?v=20261009 1720w" sizes="(max-width:599px) 92vw, (max-width:900px) 46vw, 60vw">
+            <img class="shot" src="assets/gallery/recep-01.jpg?v=20261009" width="1720" height="979" loading="lazy" decoding="async"
                alt="A reception bar under cascading crystal chandeliers at night">
+          </picture>
           <span class="plate-grain" aria-hidden="true"></span>
           <figcaption class="plate-cap"><span class="dot" aria-hidden="true"></span>Reception · Soul Events</figcaption>
         </figure>
@@ -1808,8 +1831,12 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
       <div class="g-tile rev-l" style="--d:180ms" data-cat="hm" data-name="Haldi &amp; Mehendi">
         <figure class="plate wipe">
           <span class="plate-ratio"></span>
-          <img class="shot" src="assets/gallery/mehendi-01.jpg?v=20261008" width="1720" height="1145" loading="lazy" decoding="async"
+          <picture>
+            <source type="image/avif" srcset="assets/gallery/opt/mehendi-01-480.avif?v=20261009 480w, assets/gallery/opt/mehendi-01-960.avif?v=20261009 960w, assets/gallery/opt/mehendi-01-1440.avif?v=20261009 1440w, assets/gallery/opt/mehendi-01-1720.avif?v=20261009 1720w" sizes="(max-width:599px) 92vw, (max-width:900px) 46vw, 60vw">
+            <source type="image/webp" srcset="assets/gallery/opt/mehendi-01-480.webp?v=20261009 480w, assets/gallery/opt/mehendi-01-960.webp?v=20261009 960w, assets/gallery/opt/mehendi-01-1440.webp?v=20261009 1440w, assets/gallery/opt/mehendi-01-1720.webp?v=20261009 1720w" sizes="(max-width:599px) 92vw, (max-width:900px) 46vw, 60vw">
+            <img class="shot" src="assets/gallery/mehendi-01.jpg?v=20261009" width="1720" height="1145" loading="lazy" decoding="async"
                alt="Rajasthani puppet couple in a marigold basket on a mandala floor">
+          </picture>
           <span class="plate-grain" aria-hidden="true"></span>
           <figcaption class="plate-cap"><span class="dot" aria-hidden="true"></span>Haldi &amp; Mehendi · Soul Events</figcaption>
         </figure>
@@ -1822,8 +1849,12 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
       <div class="g-tile rev-l" style="--d:240ms" data-cat="brunch" data-name="Brunches">
         <figure class="plate wipe">
           <span class="plate-ratio"></span>
-          <img class="shot" src="assets/gallery/brunch-01.jpg?v=20261008" width="1720" height="1020" loading="lazy" decoding="async"
+          <picture>
+            <source type="image/avif" srcset="assets/gallery/opt/brunch-01-480.avif?v=20261009 480w, assets/gallery/opt/brunch-01-960.avif?v=20261009 960w, assets/gallery/opt/brunch-01-1440.avif?v=20261009 1440w, assets/gallery/opt/brunch-01-1720.avif?v=20261009 1720w" sizes="(max-width:599px) 92vw, (max-width:900px) 46vw, 60vw">
+            <source type="image/webp" srcset="assets/gallery/opt/brunch-01-480.webp?v=20261009 480w, assets/gallery/opt/brunch-01-960.webp?v=20261009 960w, assets/gallery/opt/brunch-01-1440.webp?v=20261009 1440w, assets/gallery/opt/brunch-01-1720.webp?v=20261009 1720w" sizes="(max-width:599px) 92vw, (max-width:900px) 46vw, 60vw">
+            <img class="shot" src="assets/gallery/brunch-01.jpg?v=20261009" width="1720" height="1020" loading="lazy" decoding="async"
                alt="Courtyard brunch tables beneath palms and a striped canopy">
+          </picture>
           <span class="plate-grain" aria-hidden="true"></span>
           <figcaption class="plate-cap"><span class="dot" aria-hidden="true"></span>Brunch · Soul Events</figcaption>
         </figure>
@@ -1836,8 +1867,12 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
       <div class="g-tile rev-l" style="--d:300ms" data-cat="bday" data-name="Milestone Birthdays">
         <figure class="plate wipe">
           <span class="plate-ratio"></span>
-          <img class="shot" src="assets/gallery/bday-01.jpg?v=20261008" width="1290" height="1720" loading="lazy" decoding="async"
+          <picture>
+            <source type="image/avif" srcset="assets/gallery/opt/bday-01-480.avif?v=20261009 480w, assets/gallery/opt/bday-01-960.avif?v=20261009 960w, assets/gallery/opt/bday-01-1290.avif?v=20261009 1290w" sizes="(max-width:599px) 92vw, (max-width:900px) 46vw, 60vw">
+            <source type="image/webp" srcset="assets/gallery/opt/bday-01-480.webp?v=20261009 480w, assets/gallery/opt/bday-01-960.webp?v=20261009 960w, assets/gallery/opt/bday-01-1290.webp?v=20261009 1290w" sizes="(max-width:599px) 92vw, (max-width:900px) 46vw, 60vw">
+            <img class="shot" src="assets/gallery/bday-01.jpg?v=20261009" width="1290" height="1720" loading="lazy" decoding="async"
                alt="A Sweet 16 setup glowing in purple with balloons and blooms">
+          </picture>
           <span class="plate-grain" aria-hidden="true"></span>
           <figcaption class="plate-cap"><span class="dot" aria-hidden="true"></span>Birthday · Soul Events</figcaption>
         </figure>
@@ -1850,8 +1885,12 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
       <div class="g-tile rev-l" style="--d:360ms" data-cat="kids" data-name="Children&#x27;s Birthdays">
         <figure class="plate wipe">
           <span class="plate-ratio"></span>
-          <img class="shot" src="assets/gallery/kids-01.jpg?v=20261008" width="1720" height="1559" loading="lazy" decoding="async"
+          <picture>
+            <source type="image/avif" srcset="assets/gallery/opt/kids-01-480.avif?v=20261009 480w, assets/gallery/opt/kids-01-960.avif?v=20261009 960w, assets/gallery/opt/kids-01-1440.avif?v=20261009 1440w, assets/gallery/opt/kids-01-1720.avif?v=20261009 1720w" sizes="(max-width:599px) 92vw, (max-width:900px) 46vw, 60vw">
+            <source type="image/webp" srcset="assets/gallery/opt/kids-01-480.webp?v=20261009 480w, assets/gallery/opt/kids-01-960.webp?v=20261009 960w, assets/gallery/opt/kids-01-1440.webp?v=20261009 1440w, assets/gallery/opt/kids-01-1720.webp?v=20261009 1720w" sizes="(max-width:599px) 92vw, (max-width:900px) 46vw, 60vw">
+            <img class="shot" src="assets/gallery/kids-01.jpg?v=20261009" width="1720" height="1559" loading="lazy" decoding="async"
                alt="A pastel ribbon backdrop in pink, blue and lilac with paper flowers">
+          </picture>
           <span class="plate-grain" aria-hidden="true"></span>
           <figcaption class="plate-cap"><span class="dot" aria-hidden="true"></span>Birthday · Soul Events</figcaption>
         </figure>
@@ -1864,8 +1903,12 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
       <div class="g-tile rev-l" style="--d:420ms" data-cat="anniv" data-name="Anniversaries">
         <figure class="plate wipe">
           <span class="plate-ratio"></span>
-          <img class="shot" src="assets/gallery/anniv-01.jpg?v=20261008" width="1720" height="1463" loading="lazy" decoding="async"
+          <picture>
+            <source type="image/avif" srcset="assets/gallery/opt/anniv-01-480.avif?v=20261009 480w, assets/gallery/opt/anniv-01-960.avif?v=20261009 960w, assets/gallery/opt/anniv-01-1440.avif?v=20261009 1440w, assets/gallery/opt/anniv-01-1720.avif?v=20261009 1720w" sizes="(max-width:599px) 92vw, (max-width:900px) 46vw, 60vw">
+            <source type="image/webp" srcset="assets/gallery/opt/anniv-01-480.webp?v=20261009 480w, assets/gallery/opt/anniv-01-960.webp?v=20261009 960w, assets/gallery/opt/anniv-01-1440.webp?v=20261009 1440w, assets/gallery/opt/anniv-01-1720.webp?v=20261009 1720w" sizes="(max-width:599px) 92vw, (max-width:900px) 46vw, 60vw">
+            <img class="shot" src="assets/gallery/anniv-01.jpg?v=20261009" width="1720" height="1463" loading="lazy" decoding="async"
                alt="A tropical backdrop with pink flamingos, palms and paper parasols">
+          </picture>
           <span class="plate-grain" aria-hidden="true"></span>
           <figcaption class="plate-cap"><span class="dot" aria-hidden="true"></span>Anniversary · Soul Events</figcaption>
         </figure>
@@ -1878,8 +1921,12 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
       <div class="g-tile rev-l" style="--d:480ms" data-cat="corp" data-name="Corporate Events">
         <figure class="plate wipe">
           <span class="plate-ratio"></span>
-          <img class="shot" src="assets/gallery/corp-02.jpg?v=20261008" width="1720" height="826" loading="lazy" decoding="async"
+          <picture>
+            <source type="image/avif" srcset="assets/gallery/opt/corp-02-480.avif?v=20261009 480w, assets/gallery/opt/corp-02-960.avif?v=20261009 960w, assets/gallery/opt/corp-02-1440.avif?v=20261009 1440w, assets/gallery/opt/corp-02-1720.avif?v=20261009 1720w" sizes="(max-width:599px) 92vw, (max-width:900px) 46vw, 60vw">
+            <source type="image/webp" srcset="assets/gallery/opt/corp-02-480.webp?v=20261009 480w, assets/gallery/opt/corp-02-960.webp?v=20261009 960w, assets/gallery/opt/corp-02-1440.webp?v=20261009 1440w, assets/gallery/opt/corp-02-1720.webp?v=20261009 1720w" sizes="(max-width:599px) 92vw, (max-width:900px) 46vw, 60vw">
+            <img class="shot" src="assets/gallery/corp-02.jpg?v=20261009" width="1720" height="826" loading="lazy" decoding="async"
                alt="A diamond jubilee stage with LED screens, truss lighting and a live band set">
+          </picture>
           <span class="plate-grain" aria-hidden="true"></span>
           <figcaption class="plate-cap"><span class="dot" aria-hidden="true"></span>Corporate · Soul Events</figcaption>
         </figure>
@@ -1892,8 +1939,12 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
       <div class="g-tile rev-l" style="--d:540ms" data-cat="table" data-name="Table Decor">
         <figure class="plate wipe">
           <span class="plate-ratio"></span>
-          <img class="shot" src="assets/gallery/table-01.jpg?v=20261008" width="1720" height="1421" loading="lazy" decoding="async"
+          <picture>
+            <source type="image/avif" srcset="assets/gallery/opt/table-01-480.avif?v=20261009 480w, assets/gallery/opt/table-01-960.avif?v=20261009 960w, assets/gallery/opt/table-01-1440.avif?v=20261009 1440w, assets/gallery/opt/table-01-1720.avif?v=20261009 1720w" sizes="(max-width:599px) 92vw, (max-width:900px) 46vw, 60vw">
+            <source type="image/webp" srcset="assets/gallery/opt/table-01-480.webp?v=20261009 480w, assets/gallery/opt/table-01-960.webp?v=20261009 960w, assets/gallery/opt/table-01-1440.webp?v=20261009 1440w, assets/gallery/opt/table-01-1720.webp?v=20261009 1720w" sizes="(max-width:599px) 92vw, (max-width:900px) 46vw, 60vw">
+            <img class="shot" src="assets/gallery/table-01.jpg?v=20261009" width="1720" height="1421" loading="lazy" decoding="async"
                alt="A white table with a lilac floral runner and a potted posy">
+          </picture>
           <span class="plate-grain" aria-hidden="true"></span>
           <figcaption class="plate-cap"><span class="dot" aria-hidden="true"></span>Table · Soul Events</figcaption>
         </figure>
@@ -1906,8 +1957,12 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
       <div class="g-tile rev-l" style="--d:600ms" data-cat="baby" data-name="Baby Showers">
         <figure class="plate wipe">
           <span class="plate-ratio"></span>
-          <img class="shot" src="assets/gallery/baby-01.jpg?v=20261008" width="1720" height="1354" loading="lazy" decoding="async"
+          <picture>
+            <source type="image/avif" srcset="assets/gallery/opt/baby-01-480.avif?v=20261009 480w, assets/gallery/opt/baby-01-960.avif?v=20261009 960w, assets/gallery/opt/baby-01-1440.avif?v=20261009 1440w, assets/gallery/opt/baby-01-1720.avif?v=20261009 1720w" sizes="(max-width:599px) 92vw, (max-width:900px) 46vw, 60vw">
+            <source type="image/webp" srcset="assets/gallery/opt/baby-01-480.webp?v=20261009 480w, assets/gallery/opt/baby-01-960.webp?v=20261009 960w, assets/gallery/opt/baby-01-1440.webp?v=20261009 1440w, assets/gallery/opt/baby-01-1720.webp?v=20261009 1720w" sizes="(max-width:599px) 92vw, (max-width:900px) 46vw, 60vw">
+            <img class="shot" src="assets/gallery/baby-01.jpg?v=20261009" width="1720" height="1354" loading="lazy" decoding="async"
                alt="A boho backdrop of dried grasses, pampas and a sheer drape">
+          </picture>
           <span class="plate-grain" aria-hidden="true"></span>
           <figcaption class="plate-cap"><span class="dot" aria-hidden="true"></span>Baby Shower · Soul Events</figcaption>
         </figure>
@@ -2332,7 +2387,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 
     <div class="foot-brand">
       <a class="brand" href="#top" aria-label="Soul Events, back to top">
-        <img class="mark-brand" src="assets/brand/soul-mark-light.png" alt="" width="520" height="493" decoding="async">
+        <picture><source type="image/webp" srcset="assets/brand/opt/soul-mark-light-160.webp?v=20261009"><img class="mark-brand" src="assets/brand/opt/soul-mark-light-160.png?v=20261009" alt="" width="160" height="152" decoding="async"></picture>
         <span class="brand-word"><b>Soul</b><span>events</span></span>
       </a>
       <p class="foot-tag">Pouring our Heart &amp; Soul into turning your dreams to reality.</p>
@@ -2400,7 +2455,11 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
       <div class="lb-solo" id="lbSolo" hidden>
         <button type="button" class="lb-back" id="lbBack"><span aria-hidden="true">&larr;</span> Back to all frames</button>
         <figure class="lb-figure">
-          <img id="lbImg" src="" alt="" decoding="async">
+          <picture>
+            <source id="lbAvif" type="image/avif" sizes="min(1100px, 92vw)">
+            <source id="lbWebp" type="image/webp" sizes="min(1100px, 92vw)">
+            <img id="lbImg" src="" alt="" decoding="async">
+          </picture>
         </figure>
         <div class="lb-solo-nav">
           <button type="button" class="lb-nav" id="lbPrev" aria-label="Previous photograph">
@@ -2724,6 +2783,25 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 
   /* bump when gallery files are replaced under the same names */
   var GV = "?v=20261009";
+  /* responsive variants built by tools/optimize-images.py: AVIF and WebP at
+     480/960/1440 and the original width, in an opt/ folder beside the JPEG */
+  var WIDTHS = [480, 960, 1440];
+  function variants(s, ext){
+    var dir = (s.d || "assets/samples/") + "opt/", stem = s.f.replace(/\.jpg$/, "");
+    return WIDTHS.filter(function(w){ return w < s.w; }).concat([s.w])
+      .map(function(w){ return dir + stem + "-" + w + "." + ext + GV + " " + w + "w"; }).join(", ");
+  }
+  function picture(s, img){
+    var pic = document.createElement("picture"), srcs = [];
+    ["avif", "webp"].forEach(function(ext){
+      var src = document.createElement("source");
+      src.type = "image/" + ext;
+      src.srcset = variants(s, ext);
+      pic.appendChild(src); srcs.push(src);
+    });
+    pic.appendChild(img);
+    return { el: pic, sources: srcs };
+  }
   var GALLERY = {
     wed: [
       {d:"assets/gallery/", f:"wed-02.jpg", w:1720, h:916, a:"An ornate gold pavilion mandap with flower strands in a coconut garden", c:"Soul Events"},
@@ -2861,8 +2939,15 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
         el.className = "lb-row";
         var natural = sum * target + gap * (row.length - 1);
         // a short last row keeps the target height instead of stretching
-        if (last && natural < W && !isSmall()) el.style.width = natural + "px";
-        row.forEach(function(i){ el.appendChild(cellEls[i]); });
+        var held = last && natural < W && !isSmall();
+        if (held) el.style.width = natural + "px";
+        var rowW = (held ? natural : W) - gap * (row.length - 1);
+        row.forEach(function(i){
+          // tell the browser the frame's real width before it starts loading
+          var px = Math.ceil(rowW * (shots[i].w / shots[i].h) / sum) + "px";
+          cellEls[i]._sources.forEach(function(src){ src.sizes = px; });
+          el.appendChild(cellEls[i]);
+        });
         lbGrid.appendChild(el);
         row = []; sum = 0;
       }
@@ -2891,7 +2976,9 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
           img.loading = "lazy";
           img.decoding = "async";
           cell.style.setProperty("--r", (s.w / s.h).toFixed(4));
-          cell.appendChild(img);
+          var pic = picture(s, img);
+          cell._sources = pic.sources;
+          cell.appendChild(pic.el);
           cell.addEventListener("click", function(){ showSolo(i); });
           cellEls.push(cell);
         })(i);
@@ -2902,6 +2989,8 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
     function showSolo(i){
       solo = (i + shots.length) % shots.length;
       var s = shots[solo];
+      document.getElementById("lbAvif").srcset = variants(s, "avif");
+      document.getElementById("lbWebp").srcset = variants(s, "webp");
       lbImg.src = (s.d || "assets/samples/") + s.f + GV;
       lbImg.width = s.w; lbImg.height = s.h;
       lbImg.alt = s.a;
