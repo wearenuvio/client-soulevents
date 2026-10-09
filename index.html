@@ -76,7 +76,7 @@
   --wordmark:"Playfair Display", "Bodoni 72", Didot, Georgia, serif;   /* the logo lockup only */
 
   --gutter:clamp(20px, 5.4vw, 92px);
-  --lotus-lift:clamp(20px, 4vh, 48px);    /* sits low; the faded foot runs behind the scroll cue */
+  --lotus-lift:clamp(20px, 4vh, 48px);    /* sits low; the foot fades into the bottom edge */
   --gap:clamp(14px, 2.1vw, 30px);
   --sect:clamp(52px, 7.4vw, 100px);
   --measure:60ch;          /* one reading measure for every body paragraph */
@@ -479,17 +479,6 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 .hbtn--fill:hover{box-shadow:0 14px 30px -20px rgba(90,42,63,.75)}
 .hbtn--ghost{border-color:var(--hair); color:var(--ink); background:rgba(255,255,255,.4)}
 .hbtn--ghost:hover{border-color:var(--accent); color:var(--accent-deep); background:rgba(123,59,84,.08)}
-.scroll-cue{
-  flex:0 0 auto;
-  display:inline-flex; align-items:center; gap:10px; text-decoration:none; min-height:44px;
-  font-family:var(--mono); font-size:10.5px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-soft);
-}
-.scroll-cue .stem{width:1px; height:34px; background:var(--hair); position:relative; overflow:hidden}
-.scroll-cue .stem::after{
-  content:""; position:absolute; inset:0; background:var(--accent-deep);
-  transform:translateY(-100%); animation:drip 2600ms var(--ease) infinite;
-}
-@keyframes drip{0%{transform:translateY(-100%)}45%{transform:translateY(0)}100%{transform:translateY(100%)}}
 
 /* ============================================================
    MARQUEE STRIPS  (from "Soul on Stage", restyled to porcelain)
@@ -1306,7 +1295,6 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   .c-toggle .pm::after{transform:none !important; transition:none !important}
   .nav-links a::after{transition:none !important}
   #clients .c-roster{transition:none !important}
-  .scroll-cue .stem::after{display:none}
   .hbtn .arw,.btn .arw,.g-meta .view .arw{transition:none !important; transform:none !important}
 
   /* gallery popup: appears instantly, no fade, scale or hover lift */
@@ -1524,10 +1512,6 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
           <a class="hbtn hbtn--ghost" href="#gallery">Our work</a>
         </div>
       </div>
-      <a class="scroll-cue rev-l" href="#about" style="--d:720ms">
-        <span class="stem" aria-hidden="true"></span>
-        Scroll
-      </a>
     </div>
   </div>
 </section>
