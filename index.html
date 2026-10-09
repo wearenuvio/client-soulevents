@@ -868,13 +868,12 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 .card--feat .by{border-top-color:#3A3944; color:#B4B1BC}
 .card--feat .by b{color:#F4F2ED}
 .tm-static{display:none}
-/* Process and testimonials read in the About body face: one sans throughout,
-   with weight and size (not a change of family) carrying the hierarchy */
-#process .p-cell h3,#process .p-idx b,#process .p-meta,
+/* Process and testimonials read in the About body face; the stage titles keep
+   the display face so they match the service card titles */
+#process .p-idx b,#process .p-meta,
 #voices .card q,#voices .card .by,#voices .card--feat .kicker{
   font-family:var(--sans); font-style:normal;
 }
-#process .p-cell h3{font-weight:500; letter-spacing:-.005em}
 #process .p-idx b,#process .p-meta{letter-spacing:.04em}
 #voices .card .by{text-transform:none; font-size:12.5px; letter-spacing:.01em}
 #voices .card .by b{font-weight:500}
