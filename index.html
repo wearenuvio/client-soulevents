@@ -905,18 +905,27 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
    ============================================================ */
 #clients .c-head{grid-column:1 / span 12}
 
-/* ---------- monochrome logo wall ----------
-   Typographic wordmarks, hairline-separated like the stats grid. */
-.c-wall{
+/* ---------- client marquee ----------
+   The typographic wordmark boxes, run as two counter-moving rows. Each row
+   holds its set twice and slides by half its width, so the loop is seamless. */
+.c-rows{
   grid-column:1 / -1;
-  display:grid; grid-template-columns:repeat(5,minmax(0,1fr));
-  border-top:1px solid var(--hair); border-left:1px solid var(--hair);
-  margin-block:clamp(12px,1.8vw,24px) clamp(28px,3.6vw,52px);
+  margin-block:clamp(12px,1.8vw,24px) 0;
+  /* bleed to the screen edges so names enter and leave off-screen */
+  margin-inline:calc(50% - 50vw);
+  border-top:1px solid var(--hair);
 }
+.c-row{overflow:hidden; border-bottom:1px solid var(--hair); --speed:90s}
+.c-track{display:flex; width:max-content; animation:marq var(--speed) linear infinite}
+.c-row--rev .c-track{animation-direction:reverse}
+.c-row:hover .c-track{animation-play-state:paused}
+.c-seq{display:flex; flex:0 0 auto}
 .c-logo{
-  border-right:1px solid var(--hair); border-bottom:1px solid var(--hair);
+  flex:0 0 auto; width:clamp(190px,17vw,250px);
+  border-right:1px solid var(--hair);
   min-height:clamp(96px,9.4vw,128px);
   display:flex; flex-direction:column; align-items:center; justify-content:center;
+  text-wrap:balance;
   gap:6px; padding:clamp(16px,1.8vw,24px) clamp(10px,1.2vw,16px);
   text-align:center;
   /* one muted ink tone for the whole wall — a colour, not an opacity, so the
@@ -944,30 +953,6 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 .wm-dot{width:5px; height:5px; border-radius:50%; background:currentColor; display:block; flex:none; transition:background 420ms var(--ease)}
 .wm-rule{width:26px; height:1px; background:currentColor; display:block; flex:none; transition:background 420ms var(--ease)}
 .wm-ring{width:13px; height:13px; border-radius:50%; border:1px solid currentColor; display:block; flex:none; transition:border-color 420ms var(--ease)}
-#clients .c-toggle-row{grid-column:1 / -1; display:flex; align-items:center; gap:16px; border-top:1px solid var(--hair); padding-top:18px}
-.c-toggle{
-  display:inline-flex; align-items:center; gap:12px;
-  font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink);
-  border:1px solid var(--hair); border-radius:999px; padding:13px 22px; min-height:44px;
-  transition:background 420ms var(--ease), color 420ms var(--ease), border-color 420ms var(--ease),
-             opacity 620ms var(--ease) var(--d,0ms),
-             translate 620ms var(--ease) var(--d,0ms);
-}
-.c-toggle:hover{background:rgba(123,59,84,.07); border-color:var(--accent); color:var(--accent-deep)}
-.c-toggle .pm{width:11px; height:11px; position:relative; flex:none}
-.c-toggle .pm::before,.c-toggle .pm::after{content:""; position:absolute; background:currentColor}
-.c-toggle .pm::before{left:0; right:0; top:5px; height:1px}
-.c-toggle .pm::after{top:0; bottom:0; left:5px; width:1px; transition:transform 460ms var(--ease)}
-.c-toggle[aria-expanded="true"] .pm::after{transform:scaleY(0)}
-#clients .c-roster{grid-column:1 / -1; display:grid; grid-template-rows:0fr; transition:grid-template-rows 700ms var(--ease)}
-#clients .c-roster.open{grid-template-rows:1fr}
-.c-roster-inner{overflow:hidden; min-height:0}
-.c-roster ol{columns:3; column-gap:var(--gap); padding-top:clamp(24px,3.2vw,42px)}
-.c-roster li{
-  break-inside:avoid; padding-block:8px; border-bottom:1px solid var(--hair);
-  display:flex; gap:12px; align-items:baseline; font-size:.94rem; line-height:1.45;
-}
-.c-roster li .rn{font-family:var(--mono); font-size:9.5px; letter-spacing:.1em; color:var(--ink-soft); flex:none; width:2.2em}
 
 /* ============================================================
    CONTACT (09) — inverted
@@ -1222,8 +1207,6 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   #voices .v-aside{grid-column:1 / -1; margin-top:18px}
   #contact .k-lead{grid-column:1 / -1}
   #contact .k-info{grid-column:1 / -1; margin-top:clamp(38px,5vw,56px)}
-  .c-roster ol{columns:2}
-  .c-wall{grid-template-columns:repeat(4,minmax(0,1fr))}
 }
 @media (max-width:900px){
   .foot-tag{white-space:normal; max-width:34ch}
@@ -1249,13 +1232,11 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   .founder,.founder--b{grid-template-columns:repeat(12,minmax(0,1fr))}
   .f-plate,.founder--b .f-plate{grid-column:1 / -1; order:1; max-width:min(100%,420px)}
   .f-body,.founder--b .f-body{grid-column:1 / -1; order:2; margin-top:22px}
-  .c-wall{grid-template-columns:repeat(3,minmax(0,1fr))}
 }
 @media (max-width:820px){
   .stats-row{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (max-width:760px){
-  .c-wall{grid-template-columns:repeat(2,minmax(0,1fr))}
   .c-logo{min-height:104px}
 }
 @media (max-width:720px){
@@ -1263,7 +1244,6 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
      its own ratio instead of borrowing a row's height */
   .p-ledger{grid-template-columns:minmax(0,1fr)}
   .p-cell--shot{aspect-ratio:1174 / 1064; min-height:0; grid-row:auto}
-  .c-roster ol{columns:1}
   .k-line .who{min-width:0; width:100%}
   .nav-sheet a{padding-block:12px}
   .foot-cols{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -1310,10 +1290,8 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   .s-card:hover .s-ico,
   .stat::before,
   .card:hover,
-  .nav-toggle[aria-expanded="true"] .bars i,
-  .c-toggle .pm::after{transform:none !important; transition:none !important}
+  .nav-toggle[aria-expanded="true"] .bars i{transform:none !important; transition:none !important}
   .nav-links a::after{transition:none !important}
-  #clients .c-roster{transition:none !important}
   .hbtn .arw,.btn .arw,.g-meta .view .arw{transition:none !important; transform:none !important}
 
   /* gallery popup: appears instantly, no fade, scale or hover lift */
@@ -1331,6 +1309,9 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   .marq-track,.tm-track{animation:none !important; transform:none !important}
   .marq-seq:nth-child(2){display:none}
   .tm-rows{display:none}
+  .c-track{animation:none !important; width:auto}
+  .c-seq{flex-wrap:wrap; justify-content:center}
+  .c-seq[aria-hidden="true"]{display:none}
   .tm-static{
     display:grid; grid-template-columns:repeat(auto-fit,minmax(258px,1fr));
     gap:clamp(14px,1.6vw,24px); margin-top:clamp(28px,3.6vw,48px);
@@ -2241,115 +2222,401 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
          trademark. Swap each cell for the licensed SVG logo once
          the client supplies artwork and permission to use it.
          ============================================================ -->
-    <ul class="c-wall">
-      <li class="c-logo rev-l"><span class="wm-caps">McKinsey</span></li>
-      <li class="c-logo rev-l" style="--d:40ms">
-        <span class="wm-stack">Bank of<br>Baroda</span>
-      </li>
-      <li class="c-logo rev-l" style="--d:80ms">
-        <span class="wm-serif">Prestige</span>
-        <span class="wm-sub">Estates &amp; Projects</span>
-      </li>
-      <li class="c-logo rev-l" style="--d:120ms">
-        <span class="wm-mono">RMZ</span>
-        <span class="wm-rule" aria-hidden="true"></span>
-        <span class="wm-sub">Galleria</span>
-      </li>
-      <li class="c-logo rev-l" style="--d:160ms">
-        <span class="wm-ital">Zespri</span>
-        <span class="wm-dot" aria-hidden="true"></span>
-      </li>
-      <li class="c-logo rev-l" style="--d:200ms">
-        <span class="wm-ring" aria-hidden="true"></span>
-        <span class="wm-stack">Rotary Club<br>of Bangalore</span>
-      </li>
-      <li class="c-logo rev-l" style="--d:240ms">
-        <span class="wm-wide">YPO</span>
-        <span class="wm-rule" aria-hidden="true"></span>
-      </li>
-      <li class="c-logo rev-l" style="--d:280ms">
-        <span class="wm-mono">EO</span>
-        <span class="wm-ring" aria-hidden="true"></span>
-      </li>
-      <li class="c-logo rev-l" style="--d:320ms">
-        <span class="wm-serif">Atria</span>
-        <span class="wm-sub">Hotel</span>
-      </li>
-      <li class="c-logo rev-l" style="--d:360ms">
-        <span class="wm-ital">Anand</span>
-        <span class="wm-sub">Sweets</span>
-      </li>
-    </ul>
-
-    <div class="c-toggle-row">
-      <button class="c-toggle rev-l" id="rosterToggle" aria-expanded="false" aria-controls="roster">
-        <span class="pm" aria-hidden="true"></span>
-        <span id="rosterLabel">The full roster, 57 names</span>
-      </button>
-    </div>
-
-    <div class="c-roster" id="roster">
-      <div class="c-roster-inner">
-        <ol>
-          <li><span class="rn">01</span>Kalpana Rao, Dubai</li>
-          <li><span class="rn">02</span>Anil Jain, Nagaland</li>
-          <li><span class="rn">03</span>Jayalakshmi - Kochi, Trichy, and Trivandrum</li>
-          <li><span class="rn">04</span>Esteem Developers, Bangalore</li>
-          <li><span class="rn">05</span>Rotary Club of Bangalore</li>
-          <li><span class="rn">06</span>Shyam Sunder Goenka - Gogo Apparels</li>
-          <li><span class="rn">07</span>CMS College fest</li>
-          <li><span class="rn">08</span>Stag, Bangalore</li>
-          <li><span class="rn">09</span>Asha Bros, Bangalore</li>
-          <li><span class="rn">10</span>Sindhu Developers</li>
-          <li><span class="rn">11</span>Prestige Estates &amp; Projects Ltd</li>
-          <li><span class="rn">12</span>K R Pradeep</li>
-          <li><span class="rn">13</span>Nemchand Jhaveri, Mumbai</li>
-          <li><span class="rn">14</span>Lambert Jackson, Dubai and Toronto</li>
-          <li><span class="rn">15</span>Kynkyny Art</li>
-          <li><span class="rn">16</span>Bank of Baroda</li>
-          <li><span class="rn">17</span>Zafran Store Launch</li>
-          <li><span class="rn">18</span>Kaushal Mehta, Shan Parts, Mumbai</li>
-          <li><span class="rn">19</span>Rajesh Rajaram, 13th floor &amp; Ebony Restaurant</li>
-          <li><span class="rn">20</span>Pavan Kapoor - IIGM Bangalore, Delhi and Jaipur</li>
-          <li><span class="rn">21</span>Ratan Bagrodia, Assam</li>
-          <li><span class="rn">22</span>Rumana Ahmed, Bangalore</li>
-          <li><span class="rn">23</span>Vijay Gems, Bangalore and Dubai</li>
-          <li><span class="rn">24</span>Parimal Mandir - Agarbathi exporters</li>
-          <li><span class="rn">25</span>Anand Sweets, Bangalore</li>
-          <li><span class="rn">26</span>Maanglika</li>
-          <li><span class="rn">27</span>Vaishnavi builders, Bangalore</li>
-          <li><span class="rn">28</span>Kamal Bhandari - Bhandari industries</li>
-          <li><span class="rn">29</span>Aashirwad Aggarwal - Triveni steel</li>
-          <li><span class="rn">30</span>Ashish Vaswani - Win India Exports, Chennai</li>
-          <li><span class="rn">31</span>Rakesh Sharma - International Stones Pvt Ltd</li>
-          <li><span class="rn">32</span>Asmita Foundation, Mumbai</li>
-          <li><span class="rn">33</span>Prestige, The Man store, Chennai</li>
-          <li><span class="rn">34</span>Life is forever, Bangalore</li>
-          <li><span class="rn">35</span>EO</li>
-          <li><span class="rn">36</span>Minnie Menon, Chennai</li>
-          <li><span class="rn">37</span>The Label Bazaar, Anam Mirza</li>
-          <li><span class="rn">38</span>Shanghvi family, Hubli</li>
-          <li><span class="rn">39</span>Ajit Nebhwani, Madrid, Spain</li>
-          <li><span class="rn">40</span>Raju Baradia, Chennai</li>
-          <li><span class="rn">41</span>N.K. Rathi - Rathi Silks, Bangalore</li>
-          <li><span class="rn">42</span>RYA, Bangalore</li>
-          <li><span class="rn">43</span>Haresh Gokaldas, Nairobi, Kenya</li>
-          <li><span class="rn">44</span>Atria Hotel, Bangalore</li>
-          <li><span class="rn">45</span>YPO, Bangalore</li>
-          <li><span class="rn">46</span>Kejriwal family, Bangalore</li>
-          <li><span class="rn">47</span>Zarine and Nozer Kharas - Daddy’s Deli</li>
-          <li><span class="rn">48</span>McKinsey</li>
-          <li><span class="rn">49</span>Ashok Tekwani - Vineet Enterprises</li>
-          <li><span class="rn">50</span>Ritesh Goel - Architect</li>
-          <li><span class="rn">51</span>Harishankar Bhavsingka, Erode</li>
-          <li><span class="rn">52</span>Zespri kiwifruits India</li>
-          <li><span class="rn">53</span>Mysore saree udhyog, Bangalore</li>
-          <li><span class="rn">54</span>Arun Chamaria - Nandi Cards</li>
-          <li><span class="rn">55</span>Control S</li>
-          <li><span class="rn">56</span>RMZ Galleria - Standard Brick &amp; Tile Company</li>
-          <li><span class="rn">57</span>Mythili Iyer and Udayan Mittal, USA</li>
-        </ol>
+    <!-- ============================================================
+         CLIENT MARQUEE · TYPOGRAPHIC PLACEHOLDERS.
+         These are NOT the clients' logos. Each name is set as a
+         distinct type treatment in the page's own families so the
+         strip reads like a logo wall without reproducing any
+         trademark. Two rows run in opposite directions; the second
+         copy of each row exists only to make the loop seamless.
+         ============================================================ -->
+    <div class="c-rows rev-l">
+    <div class="c-row">
+      <div class="c-track">
+        <ul class="c-seq">
+          <li class="c-logo">
+            <span class="wm-caps">McKinsey</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-serif">Prestige</span>
+            <span class="wm-sub">Estates &amp; Projects Ltd</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-ital">Zespri</span>
+            <span class="wm-sub">Kiwifruits India</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-wide">YPO</span>
+            <span class="wm-rule" aria-hidden="true"></span>
+            <span class="wm-sub">Bangalore</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-serif">Atria</span>
+            <span class="wm-sub">Hotel, Bangalore</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-serif">Kalpana Rao</span>
+            <span class="wm-sub">Dubai</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-stack">Jayalakshmi</span>
+            <span class="wm-sub">Kochi, Trichy, and Trivandrum</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-ital">Shyam Sunder Goenka</span>
+            <span class="wm-sub">Gogo Apparels</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-serif">Stag</span>
+            <span class="wm-sub">Bangalore</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-stack">Sindhu Developers</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-ital">Lambert Jackson</span>
+            <span class="wm-sub">Dubai and Toronto</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-serif">Zafran Store Launch</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-stack">Rajesh Rajaram</span>
+            <span class="wm-sub">13th floor &amp; Ebony Restaurant</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-ital">Ratan Bagrodia</span>
+            <span class="wm-sub">Assam</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-serif">Parimal Mandir</span>
+            <span class="wm-sub">Agarbathi exporters</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-stack">Vaishnavi builders</span>
+            <span class="wm-sub">Bangalore</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-ital">Aashirwad Aggarwal</span>
+            <span class="wm-sub">Triveni steel</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-serif">Rakesh Sharma</span>
+            <span class="wm-sub">International Stones Pvt Ltd</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-serif">Prestige</span>
+            <span class="wm-sub">The Man store, Chennai</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-ital">Shanghvi family</span>
+            <span class="wm-sub">Hubli</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-caps">N.K. Rathi</span>
+            <span class="wm-sub">Rathi Silks, Bangalore</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-stack">Haresh Gokaldas</span>
+            <span class="wm-sub">Nairobi, Kenya</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-ital">Mysore saree udhyog</span>
+            <span class="wm-sub">Bangalore</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-serif">Control S</span>
+          </li>
+        </ul>
+        <ul class="c-seq" aria-hidden="true">
+          <li class="c-logo">
+            <span class="wm-caps">McKinsey</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-serif">Prestige</span>
+            <span class="wm-sub">Estates &amp; Projects Ltd</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-ital">Zespri</span>
+            <span class="wm-sub">Kiwifruits India</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-wide">YPO</span>
+            <span class="wm-rule" aria-hidden="true"></span>
+            <span class="wm-sub">Bangalore</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-serif">Atria</span>
+            <span class="wm-sub">Hotel, Bangalore</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-serif">Kalpana Rao</span>
+            <span class="wm-sub">Dubai</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-stack">Jayalakshmi</span>
+            <span class="wm-sub">Kochi, Trichy, and Trivandrum</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-ital">Shyam Sunder Goenka</span>
+            <span class="wm-sub">Gogo Apparels</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-serif">Stag</span>
+            <span class="wm-sub">Bangalore</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-stack">Sindhu Developers</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-ital">Lambert Jackson</span>
+            <span class="wm-sub">Dubai and Toronto</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-serif">Zafran Store Launch</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-stack">Rajesh Rajaram</span>
+            <span class="wm-sub">13th floor &amp; Ebony Restaurant</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-ital">Ratan Bagrodia</span>
+            <span class="wm-sub">Assam</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-serif">Parimal Mandir</span>
+            <span class="wm-sub">Agarbathi exporters</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-stack">Vaishnavi builders</span>
+            <span class="wm-sub">Bangalore</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-ital">Aashirwad Aggarwal</span>
+            <span class="wm-sub">Triveni steel</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-serif">Rakesh Sharma</span>
+            <span class="wm-sub">International Stones Pvt Ltd</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-serif">Prestige</span>
+            <span class="wm-sub">The Man store, Chennai</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-ital">Shanghvi family</span>
+            <span class="wm-sub">Hubli</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-caps">N.K. Rathi</span>
+            <span class="wm-sub">Rathi Silks, Bangalore</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-stack">Haresh Gokaldas</span>
+            <span class="wm-sub">Nairobi, Kenya</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-ital">Mysore saree udhyog</span>
+            <span class="wm-sub">Bangalore</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-serif">Control S</span>
+          </li>
+        </ul>
       </div>
+    </div>
+    <div class="c-row c-row--rev">
+      <div class="c-track">
+        <ul class="c-seq">
+          <li class="c-logo">
+            <span class="wm-stack">Bank of<br>Baroda</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-mono">RMZ</span>
+            <span class="wm-rule" aria-hidden="true"></span>
+            <span class="wm-sub">Galleria · Standard Brick &amp; Tile Company</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-ring" aria-hidden="true"></span>
+            <span class="wm-stack">Rotary Club<br>of Bangalore</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-mono">EO</span>
+            <span class="wm-ring" aria-hidden="true"></span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-ital">Anand</span>
+            <span class="wm-sub">Sweets, Bangalore</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-serif">Anil Jain</span>
+            <span class="wm-sub">Nagaland</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-serif">Esteem Developers</span>
+            <span class="wm-sub">Bangalore</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-stack">CMS College fest</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-mono">Asha Bros</span>
+            <span class="wm-sub">Bangalore</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-serif">K R Pradeep</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-stack">Kynkyny Art</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-ital">Kaushal Mehta</span>
+            <span class="wm-sub">Shan Parts, Mumbai</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-serif">Pavan Kapoor</span>
+            <span class="wm-sub">IIGM Bangalore, Delhi and Jaipur</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-mono">Vijay Gems</span>
+            <span class="wm-sub">Bangalore and Dubai</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-wide">Maanglika</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-serif">Kamal Bhandari</span>
+            <span class="wm-sub">Bhandari industries</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-stack">Ashish Vaswani</span>
+            <span class="wm-sub">Win India Exports, Chennai</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-ital">Asmita Foundation</span>
+            <span class="wm-sub">Mumbai</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-serif">The Label Bazaar</span>
+            <span class="wm-sub">Anam Mirza</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-stack">Ajit Nebhwani</span>
+            <span class="wm-sub">Madrid, Spain</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-serif">RYA</span>
+            <span class="wm-sub">Bangalore</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-serif">Ashok Tekwani</span>
+            <span class="wm-sub">Vineet Enterprises</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-stack">Arun Chamaria</span>
+            <span class="wm-sub">Nandi Cards</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-ital">Mythili Iyer and Udayan Mittal</span>
+            <span class="wm-sub">USA</span>
+          </li>
+        </ul>
+        <ul class="c-seq" aria-hidden="true">
+          <li class="c-logo">
+            <span class="wm-stack">Bank of<br>Baroda</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-mono">RMZ</span>
+            <span class="wm-rule" aria-hidden="true"></span>
+            <span class="wm-sub">Galleria · Standard Brick &amp; Tile Company</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-ring" aria-hidden="true"></span>
+            <span class="wm-stack">Rotary Club<br>of Bangalore</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-mono">EO</span>
+            <span class="wm-ring" aria-hidden="true"></span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-ital">Anand</span>
+            <span class="wm-sub">Sweets, Bangalore</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-serif">Anil Jain</span>
+            <span class="wm-sub">Nagaland</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-serif">Esteem Developers</span>
+            <span class="wm-sub">Bangalore</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-stack">CMS College fest</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-mono">Asha Bros</span>
+            <span class="wm-sub">Bangalore</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-serif">K R Pradeep</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-stack">Kynkyny Art</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-ital">Kaushal Mehta</span>
+            <span class="wm-sub">Shan Parts, Mumbai</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-serif">Pavan Kapoor</span>
+            <span class="wm-sub">IIGM Bangalore, Delhi and Jaipur</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-mono">Vijay Gems</span>
+            <span class="wm-sub">Bangalore and Dubai</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-wide">Maanglika</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-serif">Kamal Bhandari</span>
+            <span class="wm-sub">Bhandari industries</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-stack">Ashish Vaswani</span>
+            <span class="wm-sub">Win India Exports, Chennai</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-ital">Asmita Foundation</span>
+            <span class="wm-sub">Mumbai</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-serif">The Label Bazaar</span>
+            <span class="wm-sub">Anam Mirza</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-stack">Ajit Nebhwani</span>
+            <span class="wm-sub">Madrid, Spain</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-serif">RYA</span>
+            <span class="wm-sub">Bangalore</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-serif">Ashok Tekwani</span>
+            <span class="wm-sub">Vineet Enterprises</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-stack">Arun Chamaria</span>
+            <span class="wm-sub">Nandi Cards</span>
+          </li>
+          <li class="c-logo">
+            <span class="wm-ital">Mythili Iyer and Udayan Mittal</span>
+            <span class="wm-sub">USA</span>
+          </li>
+        </ul>
+      </div>
+    </div>
     </div>
   </div>
 </section>
@@ -2778,6 +3045,11 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
       var w = seq.getBoundingClientRect().width;
       if (w > 0) m.style.setProperty("--speed", Math.max(18, Math.round(w / 46)) + "s");
     });
+    Array.prototype.forEach.call(document.querySelectorAll(".c-row"), function(r){
+      var seq = r.querySelector(".c-seq");
+      var w = seq ? seq.getBoundingClientRect().width : 0;
+      if (w > 0) r.style.setProperty("--speed", Math.max(50, Math.round(w / 40)) + "s");
+    });
     Array.prototype.forEach.call(document.querySelectorAll(".tm-row"), function(r){
       var seq = r.querySelector(".tm-seq");
       if (!seq) return;
@@ -2794,19 +3066,6 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
     window.clearTimeout(rzt);
     rzt = window.setTimeout(function(){ tuneMarquees(); }, 220);
   }, {passive:true});
-
-  /* ---------- clients roster ---------- */
-  var rt = document.getElementById("rosterToggle");
-  var roster = document.getElementById("roster");
-  var rl = document.getElementById("rosterLabel");
-  if (rt && roster) {
-    rt.addEventListener("click", function(){
-      var open = rt.getAttribute("aria-expanded") === "true";
-      rt.setAttribute("aria-expanded", open ? "false" : "true");
-      roster.classList.toggle("open", !open);
-      if (rl) rl.textContent = open ? "The full roster, 57 names" : "Close the roster";
-    });
-  }
 
   /* ============================================================
      GALLERY POPUP
