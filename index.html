@@ -903,7 +903,6 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 /* ============================================================
    CLIENTS (08)
    ============================================================ */
-#clients .c-head{grid-column:1 / span 12}
 
 /* ---------- client marquee ----------
    The typographic wordmark boxes, run as two counter-moving rows. Each row
@@ -921,12 +920,11 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 .c-row:hover .c-track{animation-play-state:paused}
 .c-seq{display:flex; flex:0 0 auto}
 .c-logo{
-  flex:0 0 auto; width:clamp(190px,16vw,230px);
-  border-right:1px solid var(--hair);
-  height:clamp(104px,8.6vw,118px);
+  flex:0 0 auto; width:clamp(250px,22vw,330px); position:relative;
+  height:clamp(118px,9.6vw,138px);
   display:flex; flex-direction:column; align-items:center; justify-content:center;
   text-wrap:balance;
-  gap:6px; padding:clamp(16px,1.8vw,24px) clamp(10px,1.2vw,16px);
+  gap:8px; padding:clamp(18px,2vw,28px) clamp(22px,2.4vw,36px);
   text-align:center;
   /* one muted ink tone for the whole wall — a colour, not an opacity, so the
      reveal animation can own opacity and contrast stays predictable */
@@ -953,6 +951,11 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:2; overflow:hidden;
 }
 .c-logo:hover .cl-rule{background:var(--accent)}
+/* a short centred divider between names, not a full-height wall */
+.c-logo::after{
+  content:""; position:absolute; right:0; top:32%; bottom:32%;
+  width:1px; background:var(--hair);
+}
 
 /* ============================================================
    CONTACT (09) — inverted
@@ -1456,7 +1459,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
     <a href="#services">Services</a>
     <a href="#gallery">Gallery</a>
     <a href="#voices">Voices</a>
-    <a href="#clients">Clients</a>
+    <a href="#clients">Trusted by</a>
   </nav>
   <a class="nav-cta" href="#contact">Let’s talk</a>
   <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navSheet">
@@ -1473,7 +1476,7 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
   <a href="#services"><em>05</em>Services</a>
   <a href="#gallery"><em>06</em>Gallery</a>
   <a href="#voices"><em>07</em>Voices</a>
-  <a href="#clients"><em>08</em>Clients</a>
+  <a href="#clients"><em>08</em>Trusted by</a>
   <a href="#contact"><em>09</em>Contact</a>
   <div class="sheet-foot">
     <a href="tel:+919342283539">+91 93422 83539</a>
@@ -2202,14 +2205,11 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
 <section class="sect wrap" id="clients" aria-labelledby="clients-h">
   <div class="sect-head">
     <span class="sect-idx">08</span>
-    <span class="sect-name" id="clients-h">Clients</span>
+    <span class="sect-name" id="clients-h">Trusted by</span>
     <span class="rule" aria-hidden="true"></span>
   </div>
 
   <div class="grid">
-    <div class="c-head">
-      <p class="mono rev-l">Trusted by</p>
-    </div>
 
     <!-- ============================================================
          LOGO WALL · TYPOGRAPHIC PLACEHOLDERS.
@@ -3126,7 +3126,8 @@ p,li,q,blockquote,figcaption,address{text-wrap:pretty}
     Array.prototype.forEach.call(document.querySelectorAll(".c-row"), function(r){
       var seq = r.querySelector(".c-seq");
       var w = seq ? seq.getBoundingClientRect().width : 0;
-      if (w > 0) r.style.setProperty("--speed", Math.max(50, Math.round(w / 40)) + "s");
+      // same pace as the testimonial rows: about 34px a second
+      if (w > 0) r.style.setProperty("--speed", Math.max(40, Math.round(w / 34)) + "s");
     });
     Array.prototype.forEach.call(document.querySelectorAll(".tm-row"), function(r){
       var seq = r.querySelector(".tm-seq");
